@@ -1,0 +1,370 @@
+{
+  "cpu": {
+    "requested_cap": 24,
+    "effective_cap": 24,
+    "quota": null,
+    "selected_cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ]
+  },
+  "schedule": {
+    "mode": "extreme",
+    "initial_cpu_slots": 24,
+    "all_cases_concurrent": true,
+    "time_tight": {
+      "cases": 2,
+      "threads_initial": 4,
+      "threads_after_light": 6,
+      "groups_initial": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "groups_after_light": [
+        [
+          0,
+          1,
+          2,
+          3,
+          20,
+          21
+        ],
+        [
+          4,
+          5,
+          6,
+          7,
+          22,
+          23
+        ]
+      ]
+    },
+    "fine_regular": {
+      "cases": 4,
+      "threads": 3,
+      "groups": [
+        [
+          8,
+          9,
+          10
+        ],
+        [
+          11,
+          12,
+          13
+        ],
+        [
+          14,
+          15,
+          16
+        ],
+        [
+          17,
+          18,
+          19
+        ]
+      ]
+    },
+    "light": {
+      "cases": 4,
+      "threads": 1,
+      "groups": [
+        [
+          20
+        ],
+        [
+          21
+        ],
+        [
+          22
+        ],
+        [
+          23
+        ]
+      ]
+    }
+  },
+  "provenance": {
+    "source_sha256": "7c33ee47891e97d8cddaeced29226c98e79979a6ba705b3526a0918c33e01dd4",
+    "input_sha256": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+    "radius_sha256": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af",
+    "versions": {
+      "python": "3.10.20",
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "numba": "0.67.0"
+    }
+  },
+  "self_tests": {
+    "analytic_J_directional_relative_error": 6.829041053346254e-11,
+    "uniform_equilibrium_rhs": 0.0,
+    "positive_mass_sum": 1.0,
+    "polynomial_maximum_constant_test": true,
+    "Appendix_Kelvin": true
+  },
+  "specs": [
+    {
+      "q": 3,
+      "tag": "Q2-32x48-exposed",
+      "nr": 32,
+      "nz": 48,
+      "grade_r": 7.0,
+      "grade_z": 7.0,
+      "end": "exposed",
+      "resolution": 1536,
+      "role": "space",
+      "method": "BDF",
+      "rtol": 2e-09,
+      "atol_T": 1e-10,
+      "atol_C": 1e-11,
+      "max_step": 30.0,
+      "late_max_step": 300.0,
+      "jacobian_mode": "block"
+    },
+    {
+      "q": 3,
+      "tag": "Q2-48x72-exposed",
+      "nr": 48,
+      "nz": 72,
+      "grade_r": 7.0,
+      "grade_z": 7.0,
+      "end": "exposed",
+      "resolution": 3456,
+      "role": "space",
+      "method": "BDF",
+      "rtol": 2e-09,
+      "atol_T": 1e-10,
+      "atol_C": 1e-11,
+      "max_step": 30.0,
+      "late_max_step": 300.0,
+      "jacobian_mode": "block"
+    },
+    {
+      "q": 3,
+      "tag": "Q2-64x96-exposed",
+      "nr": 64,
+      "nz": 96,
+      "grade_r": 7.0,
+      "grade_z": 7.0,
+      "end": "exposed",
+      "resolution": 6144,
+      "role": "space",
+      "method": "BDF",
+      "rtol": 2e-09,
+      "atol_T": 1e-10,
+      "atol_C": 1e-11,
+      "max_step": 30.0,
+      "late_max_step": 300.0,
+      "jacobian_mode": "block"
+    },
+    {
+      "q": 3,
+      "tag": "Q2-64x96-exposed-time-tight",
+      "nr": 64,
+      "nz": 96,
+      "grade_r": 7.0,
+      "grade_z": 7.0,
+      "end": "exposed",
+      "resolution": 6144,
+      "role": "time",
+      "method": "BDF",
+      "rtol": 2.5e-10,
+      "atol_T": 1.25e-11,
+      "atol_C": 1.25e-12,
+      "max_step": 15.0,
+      "late_max_step": 150.0,
+      "jacobian_mode": "block"
+    },
+    {
+      "q": 3,
+      "tag": "Q2-64x96-insulated-control",
+      "nr": 64,
+      "nz": 96,
+      "grade_r": 7.0,
+      "grade_z": 7.0,
+      "end": "insulated",
+      "resolution": 6144,
+      "role": "end_control",
+      "method": "BDF",
+      "rtol": 2e-09,
+      "atol_T": 1e-10,
+      "atol_C": 1e-11,
+      "max_step": 30.0,
+      "late_max_step": 300.0,
+      "jacobian_mode": "block"
+    },
+    {
+      "q": 4,
+      "tag": "Q2-32x48-exposed",
+      "nr": 32,
+      "nz": 48,
+      "grade_r": 7.0,
+      "grade_z": 7.0,
+      "end": "exposed",
+      "resolution": 1536,
+      "role": "space",
+      "method": "BDF",
+      "rtol": 2e-09,
+      "atol_T": 1e-10,
+      "atol_C": 1e-11,
+      "max_step": 30.0,
+      "late_max_step": 300.0,
+      "jacobian_mode": "block"
+    },
+    {
+      "q": 4,
+      "tag": "Q2-48x72-exposed",
+      "nr": 48,
+      "nz": 72,
+      "grade_r": 7.0,
+      "grade_z": 7.0,
+      "end": "exposed",
+      "resolution": 3456,
+      "role": "space",
+      "method": "BDF",
+      "rtol": 2e-09,
+      "atol_T": 1e-10,
+      "atol_C": 1e-11,
+      "max_step": 30.0,
+      "late_max_step": 300.0,
+      "jacobian_mode": "block"
+    },
+    {
+      "q": 4,
+      "tag": "Q2-64x96-exposed",
+      "nr": 64,
+      "nz": 96,
+      "grade_r": 7.0,
+      "grade_z": 7.0,
+      "end": "exposed",
+      "resolution": 6144,
+      "role": "space",
+      "method": "BDF",
+      "rtol": 2e-09,
+      "atol_T": 1e-10,
+      "atol_C": 1e-11,
+      "max_step": 30.0,
+      "late_max_step": 300.0,
+      "jacobian_mode": "block"
+    },
+    {
+      "q": 4,
+      "tag": "Q2-64x96-exposed-time-tight",
+      "nr": 64,
+      "nz": 96,
+      "grade_r": 7.0,
+      "grade_z": 7.0,
+      "end": "exposed",
+      "resolution": 6144,
+      "role": "time",
+      "method": "BDF",
+      "rtol": 2.5e-10,
+      "atol_T": 1.25e-11,
+      "atol_C": 1.25e-12,
+      "max_step": 15.0,
+      "late_max_step": 150.0,
+      "jacobian_mode": "block"
+    },
+    {
+      "q": 4,
+      "tag": "Q2-64x96-insulated-control",
+      "nr": 64,
+      "nz": 96,
+      "grade_r": 7.0,
+      "grade_z": 7.0,
+      "end": "insulated",
+      "resolution": 6144,
+      "role": "end_control",
+      "method": "BDF",
+      "rtol": 2e-09,
+      "atol_T": 1e-10,
+      "atol_C": 1e-11,
+      "max_step": 30.0,
+      "late_max_step": 300.0,
+      "jacobian_mode": "block"
+    }
+  ],
+  "options": {
+    "questions": "3,4",
+    "input": "/home/zyf/CUMCM/problem/attachment/附件1.xlsx",
+    "radius_input": "/home/zyf/CUMCM/problem/attachment/附件2.xlsx",
+    "outdir": "/home/zyf/CUMCM/experiments_fem2d",
+    "workers": 24,
+    "jobs": 10,
+    "threads_per_case": 2,
+    "max_hours": 72.0,
+    "radius_tail": "error",
+    "air_temperature": 50.0,
+    "air_moisture": 0.05,
+    "tail_ramp": 60.0,
+    "axial_shrink": "fixed",
+    "heat_transfer": 25.0,
+    "mass_transfer": 8e-07,
+    "threshold": 0.15,
+    "rtol": 2e-09,
+    "atol_T": 1e-10,
+    "atol_C": 1e-11,
+    "max_step": 30.0,
+    "late_max_step": 300.0,
+    "jacobian_mode": "block",
+    "superlu_pivot": 0.01,
+    "superlu_ordering": "MMD_AT_PLUS_A",
+    "no_parallel_block_lu": false,
+    "event_tol": 0.0001,
+    "max_enclosure_tol": 2e-11,
+    "range_tolerance": 0.002,
+    "checkpoint_seconds": 0.0,
+    "log_seconds": 1800.0,
+    "startup_log_seconds": 60.0,
+    "startup_log_until": 600.0,
+    "knot_policy": "aligned",
+    "scheduler": "extreme",
+    "max_fine_concurrent": 2,
+    "fine_threads": 0,
+    "throughput_fine_threads": 3,
+    "throughput_light_threads": 2,
+    "throughput_min_memory_gb": 96.0,
+    "field_target": 2e-06,
+    "time_target": 0.05,
+    "no_time_check": false,
+    "no_cache": false,
+    "self_test_only": false,
+    "fem_meshes": "32x48,48x72,64x96",
+    "grade_r": 7.0,
+    "grade_z": 7.0,
+    "end_boundary": "exposed",
+    "no_end_control": false
+  }
+}

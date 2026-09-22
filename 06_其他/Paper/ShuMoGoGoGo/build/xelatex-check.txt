@@ -1,0 +1,26 @@
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./new.tex
+LaTeX2e <2020-02-02> patch level 2
+L3 programming layer <2020-02-14> (./cumcmthesis.cls
+Document Class: cumcmthesis 2025/08/09 v2.8 Standard LaTeX Template for CUMCM
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifxetex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty))
+
+! LaTeX Error: File `ctex.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+./cumcmthesis.cls:42: Emergency stop.
+<read *> 
+         
+l.42 \RequirePackage
+                    {geometry}^^M
+No pages of output.
+Transcript written on build/new.log.

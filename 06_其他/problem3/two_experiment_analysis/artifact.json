@@ -1,0 +1,438 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "第三问两次主实验差异诊断",
+    "description": "N=80、Δt=30 s 与 N=160、Δt=5 s 两次热湿演化实验的数值差异、来源分解与收敛判断。",
+    "generatedAt": "2026-09-10T13:40:31Z",
+    "charts": [
+      {
+        "id": "convergence_error_chart",
+        "title": "各离散配置相对 Richardson 外推值的烘干时间误差",
+        "subtitle": "外推基准 57.473986561 h；纵轴为正误差，单位 s。",
+        "type": "bar",
+        "dataset": "convergence_error",
+        "sourceId": "comparison_analysis",
+        "encodings": {
+          "x": {
+            "field": "configuration",
+            "type": "ordinal",
+            "label": "离散配置"
+          },
+          "y": {
+            "field": "error_seconds",
+            "type": "quantitative",
+            "label": "相对外推误差",
+            "format": "number",
+            "unit": "s"
+          }
+        },
+        "valueFormat": "number",
+        "unit": "s",
+        "layout": "full",
+        "palette": {
+          "kind": "sequential",
+          "name": "blue"
+        },
+        "settings": {
+          "orientation": "vertical",
+          "showValues": true,
+          "sort": "none"
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "difference_decomposition_table",
+        "title": "旧、新主实验的烘干时间差异分解",
+        "subtitle": "中间层保持 N=80，仅将 Δt 从 30 s 细化到 10 s，用于识别纯时间步影响。",
+        "dataset": "difference_decomposition",
+        "sourceId": "comparison_analysis",
+        "defaultSort": {
+          "field": "step",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "step",
+            "label": "序号",
+            "format": "number"
+          },
+          {
+            "field": "configuration",
+            "label": "配置",
+            "type": "text"
+          },
+          {
+            "field": "radial_step_cm",
+            "label": "Δr / cm",
+            "format": "number"
+          },
+          {
+            "field": "time_step_s",
+            "label": "Δt / s",
+            "format": "number"
+          },
+          {
+            "field": "drying_time_h",
+            "label": "烘干时间 / h",
+            "format": "number"
+          },
+          {
+            "field": "increment_from_previous_s",
+            "label": "相对上一步 / s",
+            "format": "number",
+            "movement": true
+          }
+        ]
+      },
+      {
+        "id": "profile_error_table",
+        "title": "公共 60 s 输出时刻的含水率剖面差异",
+        "subtitle": "比较 21 个输出半径；最大值给出对应时刻和半径。",
+        "dataset": "profile_error",
+        "sourceId": "comparison_analysis",
+        "defaultSort": {
+          "field": "max_abs_kg_kg",
+          "direction": "desc"
+        },
+        "columns": [
+          {
+            "field": "comparison",
+            "label": "比较",
+            "type": "text"
+          },
+          {
+            "field": "scope",
+            "label": "时间范围",
+            "type": "text"
+          },
+          {
+            "field": "max_abs_kg_kg",
+            "label": "最大绝对差 / kg·kg⁻¹",
+            "format": "number"
+          },
+          {
+            "field": "max_location",
+            "label": "最大差位置",
+            "type": "text"
+          },
+          {
+            "field": "rms_kg_kg",
+            "label": "RMS 差 / kg·kg⁻¹",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "convergence_error_table",
+        "title": "各离散配置相对 Richardson 外推值的误差",
+        "subtitle": "外推基准为 57.473986561 h；精确值便于成对核对两条细化序列。",
+        "dataset": "convergence_error",
+        "sourceId": "comparison_analysis",
+        "defaultSort": {
+          "field": "error_seconds",
+          "direction": "desc"
+        },
+        "columns": [
+          {
+            "field": "configuration",
+            "label": "离散配置",
+            "type": "text"
+          },
+          {
+            "field": "sequence",
+            "label": "细化序列",
+            "type": "text"
+          },
+          {
+            "field": "drying_time_h",
+            "label": "烘干时间 / h",
+            "format": "number"
+          },
+          {
+            "field": "error_seconds",
+            "label": "相对外推误差 / s",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "comparison_analysis",
+        "label": "两次主实验的归档结果与可复现对齐计算",
+        "path": "problem3/two_experiment_analysis/analysis_evidence.csv"
+      },
+      {
+        "id": "solver_implementation",
+        "label": "第三问守恒有限体积演化程序",
+        "path": "problem3/solve_problem3.py"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# 第三问两次主实验差异诊断"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "comparison_analysis",
+        "body": "## 结论：7.3474 s 的差异属于正常的离散收敛\n\n旧主实验为 N=80、Δr=0.025 cm、Δt=30 s，烘干时间为 **57.476752903 h**；新主实验为 N=160、Δr=0.0125 cm、Δt=5 s，烘干时间为 **57.474711960 h**。新结果早 **7.347395 s**，相对变化仅 **−0.003551%**。两次实验的输入文件哈希、物性参数和 4 h 后环境延拓完全相同，因此差异来自数值离散，而不是物理模型或环境边界变化。"
+      },
+      {
+        "id": "main_driver",
+        "type": "markdown",
+        "sourceId": "comparison_analysis",
+        "body": "## 主要驱动是空间细化，时间步影响只有 0.0628 s\n\n在同为 N=80 时，将 Δt 从 30 s 缩小到 10 s，烘干时间仅增加 **0.062804 s**；随后从 N=80、Δt=10 s 细化到 N=160、Δt=5 s，烘干时间减少 **7.410199 s**。两项相加严格回到净差 **−7.347395 s**。第二项同时改变了空间与时间，不能形式上称为纯空间误差；但固定网格时间试验表明时间贡献仅占净差量级的约 **0.85%**，所以它是空间主导的混合细化效应。"
+      },
+      {
+        "id": "difference_table_block",
+        "type": "table",
+        "tableId": "difference_decomposition_table",
+        "layout": "full"
+      },
+      {
+        "id": "convergence_finding",
+        "type": "markdown",
+        "sourceId": "comparison_analysis",
+        "body": "## 两条独立细化序列外推到同一个极限\n\n旧序列的观测收敛阶为 **1.9567**，新序列为 **1.9402**，均接近二阶；旧、新序列的 Richardson 外推烘干时间分别为 **57.474034224 h** 和 **57.473986561 h**，只差 **0.1716 s**。这比两次有限网格主结果之间的 7.3474 s 小约 43 倍，说明主结果的差异正沿同一离散极限收敛。新主网格的 Richardson 误差估计为 **2.6114 s**，小于旧主网格的 **9.7872 s**。"
+      },
+      {
+        "id": "convergence_chart_block",
+        "type": "chart",
+        "chartId": "convergence_error_chart",
+        "layout": "full"
+      },
+      {
+        "id": "profile_finding",
+        "type": "markdown",
+        "sourceId": "comparison_analysis",
+        "body": "## 剖面差异集中在启动初期的表面边界层\n\n对齐 3,448 个公共分钟时刻与 21 个半径，共比较 **72,408** 个含水率值。全时域最大差为 **0.00821547 kg/kg**，出现在 **60 s、r=2.0 cm** 的表面；这是环境边界刚施加时最陡的边界层位置。6 h 以后最大差降至 **4.4491×10⁻⁵ kg/kg**，RMS 差为 **4.7308×10⁻⁶ kg/kg**。因此首分钟局部数值差较醒目，但对 57 h 左右由中心节点控制的终止时间影响很小。"
+      },
+      {
+        "id": "profile_table_block",
+        "type": "table",
+        "tableId": "profile_error_table",
+        "layout": "full"
+      },
+      {
+        "id": "scope_definitions",
+        "type": "markdown",
+        "sourceId": "comparison_analysis",
+        "body": "## 比较口径与控制量\n\n比较对象是最近两次采用 `last_hour_mean` 环境延拓的主实验，即旧主归档与新主归档。指标为首次满足 maxᵣ C(r,t)=0.15 kg/kg 的连续事件时刻；公共剖面仅比较两个 CSV 中时间戳完全相同的 60 s 输出。两次实验共用同一附件 1 输入、相同物性、Robin 边界参数、Picard 容差与环境延拓。具体文件位置保存在报告的数据来源信息中。"
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "sourceId": "solver_implementation",
+        "body": "## 诊断方法对应真实 PDE 演化，不是线性拟合\n\n程序每个时间步求解圆柱径向热传导与水分扩散方程：空间采用守恒有限体积，时间首步后向 Euler、其后 BDF2，非线性物性通过 Picard 迭代更新；终止时刻只在跨过阈值的最后一个时间步内做线性事件插值。收敛阶按 `p = log₂(d₁/d₂)` 计算，细网格 Richardson 误差按 `eₕ ≈ d₂/(2ᵖ−1)` 估计。这里的线性插值只定位 5 s 内的阈值过零时刻，不替代前面约 41,382 步的 PDE 演化。"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "sourceId": "comparison_analysis",
+        "body": "## 精度边界：数值误差已小，模型边界不确定性更大\n\nRichardson 的 **2.61 s** 是在解已进入渐近二阶区、外推公式适用的条件下得到的离散误差估计，不是对真实烘干时间的绝对保证。作为尺度对照，仅把 4 h 后环境从末 1 h 均值改成末测点，旧网格结果就会提前 **1,096.73 s（约 18.28 min）**，远大于本次 7.35 s 的离散差异。新实验的最大热平衡相对残差由 **2.15×10⁻⁴** 增至 **6.46×10⁻⁴**，但对应绝对残差仍只有 **1.31×10⁻¹¹**；这是相对残差分母接近零时的放大，不表明守恒恶化。"
+      },
+      {
+        "id": "recommended_next_steps",
+        "type": "markdown",
+        "body": "## 建议采用新主实验作为第三问数值答案\n\n- 报告烘干时间使用 **57.474711960 h**；按合理有效数字可写 **57.4747 h**。\n- 数值离散不确定度可报告为约 **±2.6 s**（注明 Richardson 条件）。\n- 保留旧实验作收敛对照，不要把 7.35 s 解释成物理机理变化。\n- 若论文需要更严格地区分空间误差和时间误差，再补做 N=160、Δt=10 s 或 N=80、Δt=5 s 的正交对照。"
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## 尚待区分的问题\n\n现有证据足以判定差异由数值离散主导并且正在收敛，但由于 N=80、Δt=10 s 到 N=160、Δt=5 s 同时改变两个步长，尚不能无假设地给出纯空间误差的精确百分比。若只关心第三问最终表格与烘干时间，当前证据已经充分；若要写严格的空间—时间误差预算，需要上述正交对照。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-09-10T13:40:31Z",
+    "status": "ready",
+    "datasets": {
+      "difference_decomposition": [
+        {
+          "step": 1,
+          "configuration": "旧主实验 N80 / dt30",
+          "radial_cells": 80,
+          "radial_step_cm": 0.025,
+          "time_step_s": 30,
+          "drying_time_h": 57.476752903215946,
+          "increment_from_previous_s": 0,
+          "difference_from_old_s": 0
+        },
+        {
+          "step": 2,
+          "configuration": "时间对照 N80 / dt10",
+          "radial_cells": 80,
+          "radial_step_cm": 0.025,
+          "time_step_s": 10,
+          "drying_time_h": 57.47677034871884,
+          "increment_from_previous_s": 0.06280381040414795,
+          "difference_from_old_s": 0.06280381040414795
+        },
+        {
+          "step": 3,
+          "configuration": "新主实验 N160 / dt5",
+          "radial_cells": 160,
+          "radial_step_cm": 0.0125,
+          "time_step_s": 5,
+          "drying_time_h": 57.474711960104116,
+          "increment_from_previous_s": -7.41019901301479,
+          "difference_from_old_s": -7.347395202610642
+        }
+      ],
+      "convergence_error": [
+        {
+          "configuration": "N20 / dt120",
+          "radial_cells": 20,
+          "radial_step_cm": 0.1,
+          "time_step_s": 120,
+          "sequence": "旧序列",
+          "drying_time_h": 57.51499721908116,
+          "extrapolated_time_h": 57.47398656055047,
+          "error_seconds": 147.6383707104759
+        },
+        {
+          "configuration": "N40 / dt60",
+          "radial_cells": 40,
+          "radial_step_cm": 0.05,
+          "time_step_s": 60,
+          "sequence": "旧序列",
+          "drying_time_h": 57.48458719739434,
+          "extrapolated_time_h": 57.47398656055047,
+          "error_seconds": 38.1622926379265
+        },
+        {
+          "configuration": "N80 / dt30",
+          "radial_cells": 80,
+          "radial_step_cm": 0.025,
+          "time_step_s": 30,
+          "sequence": "旧序列",
+          "drying_time_h": 57.476752903215946,
+          "extrapolated_time_h": 57.47398656055047,
+          "error_seconds": 9.958833595706551
+        },
+        {
+          "configuration": "N40 / dt20",
+          "radial_cells": 40,
+          "radial_step_cm": 0.05,
+          "time_step_s": 20,
+          "sequence": "新序列",
+          "drying_time_h": 57.48466960622846,
+          "extrapolated_time_h": 57.47398656055047,
+          "error_seconds": 38.45896444074981
+        },
+        {
+          "configuration": "N80 / dt10",
+          "radial_cells": 80,
+          "radial_step_cm": 0.025,
+          "time_step_s": 10,
+          "sequence": "新序列",
+          "drying_time_h": 57.47677034871884,
+          "extrapolated_time_h": 57.47398656055047,
+          "error_seconds": 10.021637406114792
+        },
+        {
+          "configuration": "N160 / dt5",
+          "radial_cells": 160,
+          "radial_step_cm": 0.0125,
+          "time_step_s": 5,
+          "sequence": "新序列",
+          "drying_time_h": 57.474711960104116,
+          "extrapolated_time_h": 57.47398656055047,
+          "error_seconds": 2.6114383931201246
+        }
+      ],
+      "profile_error": [
+        {
+          "comparison": "旧主实验 → 新主实验",
+          "scope": "全时域公共分钟",
+          "samples": 72408,
+          "max_abs_kg_kg": 0.008215467644999919,
+          "max_time_h": 0.016666666666666666,
+          "max_radius_cm": 2,
+          "max_location": "0.0167 h，r=2.0 cm",
+          "rms_kg_kg": 0.000038224518692245505
+        },
+        {
+          "comparison": "旧主实验 → 新主实验",
+          "scope": "6 h 后公共分钟",
+          "samples": 64869,
+          "max_abs_kg_kg": 0.00004449122499999847,
+          "max_time_h": 15.266666666666667,
+          "max_radius_cm": 2,
+          "max_location": "15.2667 h，r=2.0 cm",
+          "rms_kg_kg": 0.000004730767894387402
+        },
+        {
+          "comparison": "N80/dt30 → N80/dt10",
+          "scope": "全时域公共分钟",
+          "samples": 72408,
+          "max_abs_kg_kg": 0.006366476023000001,
+          "max_time_h": 0.016666666666666666,
+          "max_radius_cm": 2,
+          "max_location": "0.0167 h，r=2.0 cm",
+          "rms_kg_kg": 0.000027768433215089543
+        },
+        {
+          "comparison": "N80/dt10 → N160/dt5",
+          "scope": "全时域公共分钟",
+          "samples": 72408,
+          "max_abs_kg_kg": 0.001848991621999918,
+          "max_time_h": 0.016666666666666666,
+          "max_radius_cm": 2,
+          "max_location": "0.0167 h，r=2.0 cm",
+          "rms_kg_kg": 0.000013567055858892277
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "comparison_analysis",
+      "label": "两次主实验的归档结果与可复现对齐计算",
+      "path": "problem3/two_experiment_analysis/analysis_evidence.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_csv_auto('problem3/two_experiment_analysis/analysis_evidence.csv', header = true)",
+        "description": "读取由 analyze_difference.py 从两次主实验、N80/dt10 中间层和边界敏感性归档计算得到的审阅证据表。",
+        "executed_at": "2026-09-10T13:40:31Z",
+        "tables_used": [
+          "problem3/two_experiment_analysis/analysis_evidence.csv",
+          "problem3/two_experiment_analysis/analyze_difference.py",
+          "problem3/run_metadata.json",
+          "problem3/moisture_full_precision.csv",
+          "problem3/experiments/N160_dt5_last_hour_mean/run_metadata.json",
+          "problem3/experiments/N160_dt5_last_hour_mean/moisture_full_precision.csv",
+          "problem3/experiments/N160_dt5_last_hour_mean/convergence_levels/N80_dt10s/moisture_full_precision.csv",
+          "problem3/last_point_experiment/run_metadata.json"
+        ],
+        "filters": [
+          "剖面对齐仅保留两个结果中共同存在的 60 s 整数倍时间戳",
+          "终止事件时刻直接读取未舍入的 run_metadata.json"
+        ],
+        "metric_definitions": [
+          "烘干时间：max_r C(r,t) 首次达到 0.15 kg/kg 的连续事件时刻",
+          "剖面 RMS：所有纳入的公共时间—半径点上含水率差的均方根",
+          "Richardson 误差：d2/(2^p-1)，其中 p=log2(d1/d2)"
+        ]
+      }
+    },
+    {
+      "id": "solver_implementation",
+      "label": "第三问守恒有限体积演化程序",
+      "path": "problem3/solve_problem3.py"
+    }
+  ],
+  "package_info": {
+    "root": "problem3/two_experiment_analysis",
+    "manifestPath": "problem3/two_experiment_analysis/artifact.json",
+    "snapshotPath": "problem3/two_experiment_analysis/artifact.json"
+  }
+}

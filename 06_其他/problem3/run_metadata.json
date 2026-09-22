@@ -1,0 +1,81 @@
+{
+  "generated_at_utc": "2026-09-10T13:06:05.546492+00:00",
+  "python": "3.10.16 (main, Jun 25 2026, 19:35:07) [GCC 9.4.0]",
+  "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+  "input_path": "/home/beihang/projects/Modex/A题/附件/附件1.xlsx",
+  "input_sha256": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+  "template_path": "/home/beihang/projects/Modex/A题/附件/附件3/result3.xlsx",
+  "template_sha256": "07e4793d620a7f899804c0298d49a16a197960440fd47f8bb780c57ec27e2859",
+  "physical_parameters": {
+    "radius_m": 0.02,
+    "initial_temperature_c": 28.0,
+    "initial_moisture_kg_kg": 2.55,
+    "heat_transfer_w_m2_k": 25.0,
+    "mass_transfer_m_s": 8e-07,
+    "moisture_threshold_kg_kg": 0.15
+  },
+  "main_config": {
+    "radial_cells": 80,
+    "time_step_s": 30.0,
+    "output_interval_s": 60.0,
+    "maximum_time_h": 96.0,
+    "plateau_start_h": 3.0,
+    "environment_extension": "last_hour_mean",
+    "picard_tolerance": 1e-10,
+    "picard_max_iterations": 40
+  },
+  "environment": {
+    "measured_end_s": 14400.0,
+    "extension_strategy": "last_hour_mean",
+    "plateau_start_s": 10800.0,
+    "plateau_temperature_c": 49.99893442622951,
+    "plateau_moisture_kg_kg": 0.04998754098360656
+  },
+  "drying_time_s": 206916.31045157742,
+  "drying_time_h": 57.476752903215946,
+  "diagnostics": {
+    "steps": 6898,
+    "max_picard_iterations": 6,
+    "total_picard_iterations": 32490,
+    "final_picard_update": 1.7073426006319892e-12,
+    "max_heat_balance_abs": 4.806210984753534e-12,
+    "max_heat_balance_rel": 0.00021462615559996386,
+    "max_moisture_balance_abs": 4.4700840302365616e-21,
+    "max_moisture_balance_rel": 1.7710518847339265e-12,
+    "max_radial_monotonicity_violation": 8.881784197001252e-16,
+    "min_temperature_c": 28.000014202685954,
+    "max_temperature_c": 50.03951906655901,
+    "min_moisture_kg_kg": 0.052640610650101956,
+    "max_moisture_kg_kg": 2.5500000000000003,
+    "mean_picard_iterations": 4.710060887213685
+  },
+  "convergence": [
+    {
+      "coarse_radial_cells": 20,
+      "coarse_time_step_s": 120.0,
+      "fine_radial_cells": 40,
+      "fine_time_step_s": 60.0,
+      "coarse_drying_time_h": 57.51499721908116,
+      "fine_drying_time_h": 57.48458719739434,
+      "drying_time_difference_h": 0.03041002168681492,
+      "max_common_6h_profile_difference": 0.0002578059129672017
+    },
+    {
+      "coarse_radial_cells": 40,
+      "coarse_time_step_s": 60.0,
+      "fine_radial_cells": 80,
+      "fine_time_step_s": 30.0,
+      "coarse_drying_time_h": 57.48458719739434,
+      "fine_drying_time_h": 57.476752903215946,
+      "drying_time_difference_h": 0.007834294178392156,
+      "max_common_6h_profile_difference": 7.629059804598048e-05
+    }
+  ],
+  "xlsx_validation": {
+    "zip_integrity": "ok",
+    "dimension": "A1:V3450",
+    "rows_including_header": 3450,
+    "columns": 22
+  },
+  "output_sha256": "222907997f75aa7a3bbeab2407e1b345946db8fb00da9c0313c29a4be065c725"
+}

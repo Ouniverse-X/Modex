@@ -1,0 +1,243 @@
+{
+  "elapsed_s": 780.517942657927,
+  "questions": [
+    {
+      "q": 3,
+      "solver": "spectral",
+      "main": {
+        "key": "fedabbfb4cac3a4d5d37cc90d757c13fe050df55476108b46737823379273a54",
+        "status": "DRIED",
+        "spec": {
+          "q": 3,
+          "tag": "Cheb-p64",
+          "degree": 64,
+          "breaks": [
+            0.0,
+            0.2,
+            0.4,
+            0.6,
+            0.8,
+            0.9,
+            0.96,
+            0.985,
+            0.997,
+            1.0
+          ],
+          "resolution": 576,
+          "role": "space",
+          "method": "Radau",
+          "rtol": 2e-09,
+          "atol_T": 1e-10,
+          "atol_C": 1e-11,
+          "max_step": 30.0
+        },
+        "t": 206900.21324345528,
+        "event": {
+          "lower_s": 206900.21318623482,
+          "upper_s": 206900.21324345528,
+          "width_s": 5.7220458984375e-05,
+          "time_h": 57.472281456515354,
+          "C_max_lower": 0.14999999998537739,
+          "C_max_upper": 0.14999999998538555,
+          "method": "All-element Chebyshev derivative-root extrema plus nodal checks; float64, not a certified interval bound",
+          "meaning": "Numerical-interpolant event bracket, NOT a PDE/model error bound"
+        },
+        "wall_s": 487.08180955890566,
+        "calls": {
+          "accepted_steps": 10181,
+          "nfev": 76657,
+          "njev": 384,
+          "nlu": 19002
+        },
+        "nodes_per_field": 577,
+        "ranges": [
+          0.05265903345971505,
+          2.550000190462232,
+          27.99999999999948,
+          50.03986654212016
+        ],
+        "maximum_nodal_range_overshoot": 1.9046223220797742e-07,
+        "mesh": {
+          "degree_per_element": 64,
+          "radial_subdomains_xi": [
+            0.0,
+            0.2,
+            0.4,
+            0.6,
+            0.8,
+            0.9,
+            0.96,
+            0.985,
+            0.997,
+            1.0
+          ],
+          "nodes_per_field": 577,
+          "initial_min_radial_gap_um": 0.036082141920967814,
+          "initial_max_radial_gap_um": 98.16491409164865,
+          "note": "Spectral polynomial order and DOF, not comparable to second-order FVM node count"
+        },
+        "method_detail": "Multi-domain Chebyshev-Lobatto nodal Galerkin spectral elements, Clenshaw-Curtis quadrature; s=(r/R)^2; Radau IIA(5)",
+        "model_validation": false,
+        "arrays_sha256": "f5dd3fd12f0902f242e6e4938eb838d4fc56d9ae1adb687e82e137775d7fd316"
+      },
+      "spatial_comparisons": [
+        {
+          "coarse": "Cheb-p24",
+          "fine": "Cheb-p40",
+          "max_T_difference_C": 1.0196373523285729e-08,
+          "max_C_difference_kg_kg": 1.9302041165403239e-07,
+          "drying_time_difference_s": 1.7084093997254968e-05,
+          "common_times": 3448,
+          "status": "COMPARED",
+          "meaning": "Observed differences only, not rigorous residual error estimates"
+        },
+        {
+          "coarse": "Cheb-p40",
+          "fine": "Cheb-p64",
+          "max_T_difference_C": 5.296200811244489e-09,
+          "max_C_difference_kg_kg": 2.677395105621372e-08,
+          "drying_time_difference_s": 1.0180636309087276e-05,
+          "common_times": 3448,
+          "status": "COMPARED",
+          "meaning": "Observed differences only, not rigorous residual error estimates"
+        }
+      ],
+      "temporal_comparison": {
+        "max_T_difference_C": 9.20694276373979e-09,
+        "max_C_difference_kg_kg": 1.5151879750874286e-11,
+        "drying_time_difference_s": 3.104409552179277e-05,
+        "common_times": 3448,
+        "status": "COMPARED",
+        "meaning": "Observed differences only, not rigorous residual error estimates"
+      },
+      "end_effect_comparison": null,
+      "verification": "OBSERVED_DIFFERENCE_PASS",
+      "model_validation": false,
+      "observed_envelope": {
+        "T": 2.9006287149968557e-08,
+        "C": 5.3578205871929185e-08,
+        "time_s": 0.0002824494636617601,
+        "is_error_bound": false
+      }
+    },
+    {
+      "q": 4,
+      "solver": "spectral",
+      "main": {
+        "key": "982389b01b1213903d685cbff0189bfd81668f1c831ec384a870810ad393232c",
+        "status": "DRIED",
+        "spec": {
+          "q": 4,
+          "tag": "Cheb-p64",
+          "degree": 64,
+          "breaks": [
+            0.0,
+            0.2,
+            0.4,
+            0.6,
+            0.8,
+            0.9,
+            0.96,
+            0.985,
+            0.997,
+            1.0
+          ],
+          "resolution": 576,
+          "role": "space",
+          "method": "Radau",
+          "rtol": 2e-09,
+          "atol_T": 1e-10,
+          "atol_C": 1e-11,
+          "max_step": 30.0
+        },
+        "t": 183925.975983402,
+        "event": {
+          "lower_s": 183925.97592618153,
+          "upper_s": 183925.975983402,
+          "width_s": 5.7220458984375e-05,
+          "time_h": 51.090548884278334,
+          "C_max_lower": 0.14999999998658164,
+          "C_max_upper": 0.1499999999865898,
+          "method": "All-element Chebyshev derivative-root extrema plus nodal checks; float64, not a certified interval bound",
+          "meaning": "Numerical-interpolant event bracket, NOT a PDE/model error bound"
+        },
+        "wall_s": 443.2909664900508,
+        "calls": {
+          "accepted_steps": 9796,
+          "nfev": 74248,
+          "njev": 411,
+          "nlu": 17876
+        },
+        "nodes_per_field": 577,
+        "ranges": [
+          0.052619106699430096,
+          2.550001098777298,
+          27.99999999999831,
+          50.050096010827005
+        ],
+        "maximum_nodal_range_overshoot": 1.098777298036424e-06,
+        "mesh": {
+          "degree_per_element": 64,
+          "radial_subdomains_xi": [
+            0.0,
+            0.2,
+            0.4,
+            0.6,
+            0.8,
+            0.9,
+            0.96,
+            0.985,
+            0.997,
+            1.0
+          ],
+          "nodes_per_field": 577,
+          "initial_min_radial_gap_um": 0.036082141920967814,
+          "initial_max_radial_gap_um": 98.16491409164865,
+          "note": "Spectral polynomial order and DOF, not comparable to second-order FVM node count"
+        },
+        "method_detail": "Multi-domain Chebyshev-Lobatto nodal Galerkin spectral elements, Clenshaw-Curtis quadrature; s=(r/R)^2; Radau IIA(5)",
+        "model_validation": false,
+        "arrays_sha256": "bd94009b835928ed56bd5580b86e516f404a211190d8bbd6d7c61b2c73f61af4"
+      },
+      "spatial_comparisons": [
+        {
+          "coarse": "Cheb-p24",
+          "fine": "Cheb-p40",
+          "max_T_difference_C": 2.9139812340872595e-08,
+          "max_C_difference_kg_kg": 6.523515061473972e-07,
+          "drying_time_difference_s": 6.634189048781991e-06,
+          "common_times": 3065,
+          "status": "COMPARED",
+          "meaning": "Observed differences only, not rigorous residual error estimates"
+        },
+        {
+          "coarse": "Cheb-p40",
+          "fine": "Cheb-p64",
+          "max_T_difference_C": 4.014758303583221e-09,
+          "max_C_difference_kg_kg": 9.24360401555191e-08,
+          "drying_time_difference_s": 1.9308790797367692e-05,
+          "common_times": 3065,
+          "status": "COMPARED",
+          "meaning": "Observed differences only, not rigorous residual error estimates"
+        }
+      ],
+      "temporal_comparison": {
+        "max_T_difference_C": 9.401340150816395e-09,
+        "max_C_difference_kg_kg": 1.2149309336351166e-10,
+        "drying_time_difference_s": 5.058449460193515e-06,
+        "common_times": 3065,
+        "status": "COMPARED",
+        "meaning": "Observed differences only, not rigorous residual error estimates"
+      },
+      "end_effect_comparison": null,
+      "verification": "OBSERVED_DIFFERENCE_PASS",
+      "model_validation": false,
+      "observed_envelope": {
+        "T": 2.6832196908799233e-08,
+        "C": 1.851150664977652e-07,
+        "time_s": 0.0002487344805151224,
+        "is_error_bound": false
+      }
+    }
+  ]
+}

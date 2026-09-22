@@ -1,0 +1,284 @@
+{
+  "task": "bessel",
+  "completed_at_utc": "2026-09-11T03:00:48.457538+00:00",
+  "runtime_s": 3.6720652119256556,
+  "python_version": "3.10.16 (main, Jun 25 2026, 19:35:07) [GCC 9.4.0]",
+  "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+  "numpy_version": "2.2.6",
+  "scipy_version": "1.15.3",
+  "input_hashes": {
+    "attachment1": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+    "attachment2": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af",
+    "this_script": "827f603cb1205cc9285fa6ee820a98a4abe08440855fe0eb4716aa2e27c6a7d6"
+  },
+  "status": "complete",
+  "description": "Single-mode Robin-Bessel exact solution on three FVM grids",
+  "cases": [
+    {
+      "field": "temperature",
+      "method": "BDF",
+      "radial_cells": 190,
+      "biot": 1.3888888888888888,
+      "lambda1": 1.418472518827063,
+      "eigen_residual": 0.0,
+      "max_abs_error": 7.7287152215888e-05,
+      "relative_cylindrical_l2_error": 4.055282948889192e-06,
+      "max_error_time_s": 375.0,
+      "max_error_radius_m": 0.018000000000000002,
+      "runtime_s": 0.12969523598439991,
+      "function_evaluations": 1181,
+      "jacobian_evaluations": 2,
+      "lu_decompositions": 70
+    },
+    {
+      "field": "temperature",
+      "method": "BDF",
+      "radial_cells": 380,
+      "biot": 1.3888888888888888,
+      "lambda1": 1.418472518827063,
+      "eigen_residual": 0.0,
+      "max_abs_error": 1.9321865060817345e-05,
+      "relative_cylindrical_l2_error": 1.0137405996644496e-06,
+      "max_error_time_s": 375.0,
+      "max_error_radius_m": 0.018000000000000002,
+      "runtime_s": 0.14789867005310953,
+      "function_evaluations": 1145,
+      "jacobian_evaluations": 2,
+      "lu_decompositions": 68
+    },
+    {
+      "field": "temperature",
+      "method": "BDF",
+      "radial_cells": 760,
+      "biot": 1.3888888888888888,
+      "lambda1": 1.418472518827063,
+      "eigen_residual": 0.0,
+      "max_abs_error": 4.830463218752357e-06,
+      "relative_cylindrical_l2_error": 2.5342978905203963e-07,
+      "max_error_time_s": 375.0,
+      "max_error_radius_m": 0.018000000000000002,
+      "runtime_s": 0.18852206994779408,
+      "function_evaluations": 1111,
+      "jacobian_evaluations": 2,
+      "lu_decompositions": 64
+    },
+    {
+      "field": "temperature",
+      "method": "Radau",
+      "radial_cells": 190,
+      "biot": 1.3888888888888888,
+      "lambda1": 1.418472518827063,
+      "eigen_residual": 0.0,
+      "max_abs_error": 7.728714872001774e-05,
+      "relative_cylindrical_l2_error": 4.0552827956528366e-06,
+      "max_error_time_s": 375.0,
+      "max_error_radius_m": 0.018000000000000002,
+      "runtime_s": 0.4983033100143075,
+      "function_evaluations": 3725,
+      "jacobian_evaluations": 1,
+      "lu_decompositions": 1044
+    },
+    {
+      "field": "temperature",
+      "method": "Radau",
+      "radial_cells": 380,
+      "biot": 1.3888888888888888,
+      "lambda1": 1.418472518827063,
+      "eigen_residual": 0.0,
+      "max_abs_error": 1.9321862417598368e-05,
+      "relative_cylindrical_l2_error": 1.0137404764304052e-06,
+      "max_error_time_s": 375.0,
+      "max_error_radius_m": 0.018000000000000002,
+      "runtime_s": 0.5773965769913048,
+      "function_evaluations": 3641,
+      "jacobian_evaluations": 1,
+      "lu_decompositions": 1032
+    },
+    {
+      "field": "temperature",
+      "method": "Radau",
+      "radial_cells": 760,
+      "biot": 1.3888888888888888,
+      "lambda1": 1.418472518827063,
+      "eigen_residual": 0.0,
+      "max_abs_error": 4.83046928678732e-06,
+      "relative_cylindrical_l2_error": 2.534301058325207e-07,
+      "max_error_time_s": 375.0,
+      "max_error_radius_m": 0.018000000000000002,
+      "runtime_s": 0.7653639998752624,
+      "function_evaluations": 3599,
+      "jacobian_evaluations": 1,
+      "lu_decompositions": 1026
+    },
+    {
+      "field": "moisture",
+      "method": "BDF",
+      "radial_cells": 190,
+      "biot": 3.2404045432170427,
+      "lambda1": 1.8220830482756623,
+      "eigen_residual": 2.220446049250313e-16,
+      "max_abs_error": 1.613753018814279e-05,
+      "relative_cylindrical_l2_error": 7.544847153735284e-06,
+      "max_error_time_s": 10500.0,
+      "max_error_radius_m": 0.0,
+      "runtime_s": 0.13793307496234775,
+      "function_evaluations": 1257,
+      "jacobian_evaluations": 2,
+      "lu_decompositions": 112
+    },
+    {
+      "field": "moisture",
+      "method": "BDF",
+      "radial_cells": 380,
+      "biot": 3.2404045432170427,
+      "lambda1": 1.8220830482756623,
+      "eigen_residual": 2.220446049250313e-16,
+      "max_abs_error": 4.035231929488958e-06,
+      "relative_cylindrical_l2_error": 1.8860333584026548e-06,
+      "max_error_time_s": 10500.0,
+      "max_error_radius_m": 0.0,
+      "runtime_s": 0.15799256996251643,
+      "function_evaluations": 1215,
+      "jacobian_evaluations": 2,
+      "lu_decompositions": 111
+    },
+    {
+      "field": "moisture",
+      "method": "BDF",
+      "radial_cells": 760,
+      "biot": 3.2404045432170427,
+      "lambda1": 1.8220830482756623,
+      "eigen_residual": 2.220446049250313e-16,
+      "max_abs_error": 1.0088636586136346e-06,
+      "relative_cylindrical_l2_error": 4.714970081203947e-07,
+      "max_error_time_s": 10500.0,
+      "max_error_radius_m": 0.0,
+      "runtime_s": 0.20060321711935103,
+      "function_evaluations": 1175,
+      "jacobian_evaluations": 2,
+      "lu_decompositions": 108
+    },
+    {
+      "field": "moisture",
+      "method": "Radau",
+      "radial_cells": 190,
+      "biot": 3.2404045432170427,
+      "lambda1": 1.8220830482756623,
+      "eigen_residual": 2.220446049250313e-16,
+      "max_abs_error": 1.6137529559978603e-05,
+      "relative_cylindrical_l2_error": 7.544847156735829e-06,
+      "max_error_time_s": 10500.0,
+      "max_error_radius_m": 0.0,
+      "runtime_s": 0.22044574981555343,
+      "function_evaluations": 4375,
+      "jacobian_evaluations": 2,
+      "lu_decompositions": 72
+    },
+    {
+      "field": "moisture",
+      "method": "Radau",
+      "radial_cells": 380,
+      "biot": 3.2404045432170427,
+      "lambda1": 1.8220830482756623,
+      "eigen_residual": 2.220446049250313e-16,
+      "max_abs_error": 4.035233356125545e-06,
+      "relative_cylindrical_l2_error": 1.8860333991949996e-06,
+      "max_error_time_s": 10500.0,
+      "max_error_radius_m": 0.0,
+      "runtime_s": 0.264595246873796,
+      "function_evaluations": 4270,
+      "jacobian_evaluations": 2,
+      "lu_decompositions": 70
+    },
+    {
+      "field": "moisture",
+      "method": "Radau",
+      "radial_cells": 760,
+      "biot": 3.2404045432170427,
+      "lambda1": 1.8220830482756623,
+      "eigen_residual": 2.220446049250313e-16,
+      "max_abs_error": 1.0088670607810712e-06,
+      "relative_cylindrical_l2_error": 4.7149719900057673e-07,
+      "max_error_time_s": 10500.0,
+      "max_error_radius_m": 0.0,
+      "runtime_s": 0.3461487090680748,
+      "function_evaluations": 4151,
+      "jacobian_evaluations": 2,
+      "lu_decompositions": 58
+    }
+  ],
+  "convergence": {
+    "temperature": {
+      "BDF": {
+        "levels": [
+          190,
+          380,
+          760
+        ],
+        "max_abs_errors": [
+          7.7287152215888e-05,
+          1.9321865060817345e-05,
+          4.830463218752357e-06
+        ],
+        "observed_orders": [
+          1.9999942501608965,
+          2.0000009098712854
+        ],
+        "fine_error": 4.830463218752357e-06
+      },
+      "Radau": {
+        "levels": [
+          190,
+          380,
+          760
+        ],
+        "max_abs_errors": [
+          7.728714872001774e-05,
+          1.9321862417598368e-05,
+          4.83046928678732e-06
+        ],
+        "observed_orders": [
+          1.9999943822643678,
+          1.9999989001970153
+        ],
+        "fine_error": 4.83046928678732e-06
+      }
+    },
+    "moisture": {
+      "BDF": {
+        "levels": [
+          190,
+          380,
+          760
+        ],
+        "max_abs_errors": [
+          1.613753018814279e-05,
+          4.035231929488958e-06,
+          1.0088636586136346e-06
+        ],
+        "observed_orders": [
+          1.9996962928374762,
+          1.9999203796735359
+        ],
+        "fine_error": 1.0088636586136346e-06
+      },
+      "Radau": {
+        "levels": [
+          190,
+          380,
+          760
+        ],
+        "max_abs_errors": [
+          1.6137529559978603e-05,
+          4.035233356125545e-06,
+          1.0088670607810712e-06
+        ],
+        "observed_orders": [
+          1.9996957266218913,
+          1.9999160245725407
+        ],
+        "fine_error": 1.0088670607810712e-06
+      }
+    }
+  }
+}

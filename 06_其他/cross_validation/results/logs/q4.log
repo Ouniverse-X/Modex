@@ -1,0 +1,10 @@
+[q4/Radau/N1520] 0.0–4.0 h, max_step=0.5 s
+[q4/Radau/N1520] 4.0–10.0 h, max_step=2.5 s
+[q4/Radau/N1520] 10.0–16.0 h, max_step=2.5 s
+[q4/Radau/N1520] 16.0–22.0 h, max_step=2.5 s
+[q4/Radau/N1520] 22.0–28.0 h, max_step=2.5 s
+[q4/Radau/N1520] 28.0–34.0 h, max_step=2.5 s
+[q4/Radau/N1520] 34.0–40.0 h, max_step=2.5 s
+[q4/Radau/N1520] 40.0–46.0 h, max_step=2.5 s
+[q4/Radau/N1520] 46.0–52.0 h, max_step=2.5 s
+[q4/Radau/N1520] crossing=51.090692 h, runtime=1758.51 s, nfev=740182, nlu=201518

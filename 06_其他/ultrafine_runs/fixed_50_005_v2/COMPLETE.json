@@ -1,0 +1,30 @@
+{
+  "completed_at_utc": "2026-09-13T01:25:48.868940+00:00",
+  "q3": {
+    "drying_time_h": 57.47230088699412,
+    "field_error_bound": 9.529933319014216e-07,
+    "drying_time_error_bound_s": 0.0036898583559044386
+  },
+  "q4": {
+    "drying_crossing_h": 51.09057623962191,
+    "safe_end_h": 51.13333333333333,
+    "field_error_bound": 1.81499393437878e-07
+  },
+  "artifact_sha256": {
+    "problem3_final/environment_input_used.csv": "734cc94c77eaf18b2e2f89f233c8235a88d06f78d1059d1012ff307eb8bf525b",
+    "problem3_final/moisture_full_precision.csv": "b5dc9f61b9797816a09e27e10225358a37eb27f7dcd88696e1f6766046ed7997",
+    "problem3_final/result3.xlsx": "462825eb88d99bf549a00bc56d7bf8bb120bd3b182de74f293f66bf4578429a3",
+    "problem3_final/run_metadata.json": "e8ec3f676f1fdaa633771a167067e374b2b3a0c13b9bd675d119151382fb6bcc",
+    "problem3_final/table5.csv": "77b9db02df1d281437a112381a944c28a108f6e154c9878615eb5c98995b6238",
+    "problem3_final/table5.md": "4681bcc71364f4a3663d68023ae204841643fcc97539d02edfef624b504ff05d",
+    "problem3_final/validation_report.md": "c7db60ab8a27195dc7d44d9f498826b714c113fe3a37088bce5b5f74041de661",
+    "problem4_final/moisture_material_coordinates_full_precision.csv": "b067c93770eab5303405c78e2170d55454eba2cd1e87acccda12a853568a526e",
+    "problem4_final/moisture_physical_full_precision.csv": "b2ed4b5a683db732de43870b026f16dc5b80c78c832274d210ed6b18f5cc49a9",
+    "problem4_final/result4.xlsx": "95dfa9a329401f029b2422d17a4a9f3e07788908ddaae668d95ae5abaf0ee335",
+    "problem4_final/run_metadata.json": "175a1599d743b39370d2107158260b7775512b92d510d2165f34a245e5d3494e",
+    "problem4_final/summary_tables.md": "ea3901a6a30605ca5be2e3d00ed5b97f85cfc2ac5bbbae1f79345e570fa58900",
+    "problem4_final/validation_report.md": "e9ec0b083e0e58cb3e5b831769eeec9a7e26b67026c00459eed68520686368a9",
+    "SUMMARY.md": "232e2062f215de8ce9fdb5f080f2b7b1d95ef486d110b4a1c40510d6a58b7994"
+  },
+  "manifest_sha256": "6a95eaf8f1ea3adb6516501ddd2fd71b2710758634c7daa1fff92f6ad524316f"
+}

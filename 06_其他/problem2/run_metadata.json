@@ -1,0 +1,177 @@
+{
+  "generated_at_utc": "2026-09-10T13:12:12.937202+00:00",
+  "python_version": "3.10.16 (main, Jun 25 2026, 19:35:07) [GCC 9.4.0]",
+  "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+  "numpy_version": "2.2.6",
+  "scipy_version": "1.15.3",
+  "input": {
+    "path": "/home/beihang/projects/Modex/A题/附件/附件1.xlsx",
+    "sha256": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7"
+  },
+  "template": {
+    "path": "/home/beihang/projects/Modex/A题/附件/附件3/result2.xlsx",
+    "sha256": "23b261b295c1b787d000eebbca6521c37075107b6fcf78724f8d395ce1798ff4"
+  },
+  "physical_parameters": {
+    "radius_m": 0.02,
+    "heat_transfer_w_m2_k": 25.0,
+    "mass_transfer_m_s": 8e-07,
+    "initial_temperature_c": 28.0,
+    "initial_moisture_kg_kg": 2.55,
+    "density_intercept_kg_m3": 650.0,
+    "density_moisture_slope_kg_m3": 128.0,
+    "heat_capacity_intercept_j_kg_k": 1450.0,
+    "heat_capacity_moisture_scale_j_kg_k": 2736.0,
+    "conductivity_intercept_w_m_k": 0.21,
+    "conductivity_moisture_scale_w_m_k": 0.38,
+    "diffusivity_prefactor_m2_s": 0.0024,
+    "diffusivity_moisture_exponent": 0.45,
+    "diffusivity_temperature_exponent_k": 3850.0
+  },
+  "run_configs": {
+    "fine_main": {
+      "radial_cells": 760,
+      "end_time_s": 10800.0,
+      "output_interval_s": 1.0,
+      "surface_layer_m": 0.002,
+      "surface_refinement_factor": 10,
+      "relative_tolerance": 2e-09,
+      "temperature_absolute_tolerance": 2e-09,
+      "moisture_absolute_tolerance": 2e-11,
+      "maximum_step_s": 5.0,
+      "first_step_s": 0.0001
+    },
+    "medium": {
+      "radial_cells": 380,
+      "end_time_s": 10800.0,
+      "output_interval_s": 1.0,
+      "surface_layer_m": 0.002,
+      "surface_refinement_factor": 10,
+      "relative_tolerance": 2e-09,
+      "temperature_absolute_tolerance": 2e-09,
+      "moisture_absolute_tolerance": 2e-11,
+      "maximum_step_s": 5.0,
+      "first_step_s": 0.0001
+    },
+    "coarse": {
+      "radial_cells": 190,
+      "end_time_s": 10800.0,
+      "output_interval_s": 1.0,
+      "surface_layer_m": 0.002,
+      "surface_refinement_factor": 10,
+      "relative_tolerance": 2e-09,
+      "temperature_absolute_tolerance": 2e-09,
+      "moisture_absolute_tolerance": 2e-11,
+      "maximum_step_s": 5.0,
+      "first_step_s": 0.0001
+    },
+    "fine_tight_time": {
+      "radial_cells": 760,
+      "end_time_s": 10800.0,
+      "output_interval_s": 1.0,
+      "surface_layer_m": 0.002,
+      "surface_refinement_factor": 10,
+      "relative_tolerance": 5e-10,
+      "temperature_absolute_tolerance": 5e-10,
+      "moisture_absolute_tolerance": 5e-12,
+      "maximum_step_s": 2.5,
+      "first_step_s": 5e-05
+    }
+  },
+  "main_diagnostics": {
+    "runtime_s": 13.537083831848577,
+    "success": true,
+    "message": "The solver successfully reached the end of the integration interval.",
+    "function_evaluations": 16626,
+    "jacobian_evaluations": 400,
+    "lu_decompositions": 1949,
+    "returned_time_points": 10801,
+    "min_temperature_c": 28.0,
+    "max_temperature_c": 49.96641288320846,
+    "min_moisture_kg_kg": 1.0081226636685672,
+    "max_moisture_kg_kg": 2.5500000000000007,
+    "min_density_kg_m3": 779.0397009495766,
+    "max_density_kg_m3": 976.4000000000001,
+    "min_heat_capacity_j_kg_k": 2823.533428858524,
+    "max_heat_capacity_j_kg_k": 3415.2957746478874,
+    "min_conductivity_w_m_k": 0.4007685317859061,
+    "max_conductivity_w_m_k": 0.48295774647887324,
+    "min_diffusivity_m2_s": 5.547360435230306e-09,
+    "max_diffusivity_m2_s": 1.2521860312445602e-08,
+    "max_one_second_moisture_balance_abs": 8.089287446770039e-11,
+    "max_one_second_moisture_balance_rel": 0.002010041775747432
+  },
+  "spatial_convergence": {
+    "temperature": {
+      "max_abs_difference": 9.995239917515164e-06,
+      "rms_difference": 2.3431261219820096e-06,
+      "max_location_time_s": 660,
+      "max_location_radius_cm": 2.0,
+      "four_decimal_agreement_count": 222850,
+      "comparison_count": 226800,
+      "four_decimal_agreement_fraction": 0.982583774250441,
+      "coarse_to_medium_max_abs_difference": 3.676414534936612e-05,
+      "observed_order_max_norm": 1.8789863454351992,
+      "estimated_fine_grid_max_error": 3.7321220048772297e-06,
+      "estimated_fine_grid_max_error_with_1p25_safety": 4.665152506096537e-06
+    },
+    "moisture": {
+      "max_abs_difference": 3.492218358180921e-05,
+      "rms_difference": 4.543621274191557e-06,
+      "max_location_time_s": 287,
+      "max_location_radius_cm": 1.8,
+      "four_decimal_agreement_count": 221281,
+      "comparison_count": 226800,
+      "four_decimal_agreement_fraction": 0.9756657848324515,
+      "coarse_to_medium_max_abs_difference": 0.00013968133079567124,
+      "observed_order_max_norm": 1.9999235348406244,
+      "estimated_fine_grid_max_error": 1.1641550533357232e-05,
+      "estimated_fine_grid_max_error_with_1p25_safety": 1.4551938166696539e-05
+    }
+  },
+  "temporal_check": {
+    "temperature": {
+      "max_abs_difference": 5.360041775759328e-06,
+      "rms_difference": 6.411865817575176e-08,
+      "max_location_time_s": 10380,
+      "max_location_radius_cm": 2.0,
+      "four_decimal_agreement_count": 226729,
+      "comparison_count": 226800,
+      "four_decimal_agreement_fraction": 0.9996869488536155
+    },
+    "moisture": {
+      "max_abs_difference": 4.3653908932128616e-08,
+      "rms_difference": 3.752948575286471e-10,
+      "max_location_time_s": 1,
+      "max_location_radius_cm": 2.0,
+      "four_decimal_agreement_count": 226799,
+      "comparison_count": 226800,
+      "four_decimal_agreement_fraction": 0.9999955908289242
+    }
+  },
+  "output_validation": {
+    "sheet_names": [
+      "温度",
+      "水分浓度"
+    ],
+    "worksheets": {
+      "温度": {
+        "rows": 10801,
+        "columns": 22,
+        "dimension": "A1:V10801",
+        "checked_numerical_values": 226800,
+        "max_error_against_rounded_solver_output": 0.0
+      },
+      "水分浓度": {
+        "rows": 10801,
+        "columns": 22,
+        "dimension": "A1:V10801",
+        "checked_numerical_values": 226800,
+        "max_error_against_rounded_solver_output": 0.0
+      }
+    }
+  },
+  "outputs": {
+    "result2_xlsx_sha256": "75a0ffe6f75bd84fc75f22d7efedb5124aeb4be4e146c925691df94f26e497eb"
+  }
+}

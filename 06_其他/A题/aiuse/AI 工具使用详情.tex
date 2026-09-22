@@ -1,0 +1,68 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
+\documentclass[UTF8,11pt,fontset=fandol]{ctexart}
+
+\usepackage[a4paper,top=1.7cm,bottom=1.7cm,left=2.2cm,right=2.2cm]{geometry}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.1em}
+\renewcommand{\arraystretch}{1.16}
+\setlist[itemize]{leftmargin=2em,itemsep=0.05em,topsep=0.1em,parsep=0pt}
+\setlist[enumerate]{leftmargin=2.2em,itemsep=0.08em,topsep=0.1em,parsep=0pt}
+\ctexset{section={format=\heiti\zihao{-4},beforeskip=0.55em,afterskip=0.2em}}
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+  {\heiti\zihao{3} AI 工具使用详情}
+\end{center}
+
+本参赛队在完成 A 题过程中使用了 AI 工具，主要用于模型讨论与检查、程序调试、结果核验及文字排版辅助。
+
+\section*{一、所用工具}
+
+\noindent\begin{tabularx}{\linewidth}{@{}p{2.7cm}X@{}}
+\toprule
+工具名称 & OpenAI Codex；DeepSeek \\
+版本或型号 & GPT-5 模型；DeepSeek-V4.1 模型 \\
+主要使用方式 & 结合题目附件、模型文档、Python 程序和计算结果进行自然语言交流 \\
+\bottomrule
+\end{tabularx}
+
+\section*{二、使用目的和环节}
+
+\begin{itemize}
+  \item \textbf{模型讨论与检查：}辅助梳理径向传热传质、变物性耦合、长期边界、收缩映射及干质量守恒，检查公式、边界条件和量纲。
+  \item \textbf{程序与计算辅助：}辅助编写和检查 Python 求解、数据整理及绘图程序，并按参赛队给定的模型、参数和精度要求开展数值计算。
+  \item \textbf{文字与排版：}辅助整理 LaTeX，精简文字并统一变量、公式、表格和图件格式。
+\end{itemize}
+
+\section*{三、提示方式与使用过程}
+
+提示通常包含具体任务、已有条件、输出要求和核验标准，并根据计算结果继续修正。以下为经过缩写的典型示例：
+
+\begin{enumerate}
+  \item \textbf{模型核查：}“根据题给圆柱尺寸和常物性假设，从 Fourier 导热定律、Fick 扩散定律及守恒关系检查一维径向控制方程、初始条件和第三类边界条件；逐项核对符号与量纲，并说明忽略轴向传递和热湿交叉项的适用范围，不补充题目未给出的参数。”
+  \item \textbf{收敛计算：}“保持现有模型和参数不变，检查 Python 离散实现；分别加密径向网格和收紧时间步，列出温度、含水率及临界时刻的相邻级差，并判断以小时表示的结果能否稳定到小数点后四位。”
+  \item \textbf{守恒检验：}“将附件2半径和附录4湿密度代入第四问模型，检查固定长度、均匀仿射收缩与干质量守恒是否相容；若存在矛盾，给出推导依据并设置对照模型，区分数值误差与模型假设造成的偏差。”
+  \item \textbf{论文整理：}“不改变已经核验的公式、参数和计算结果，将现有推导整理为简洁的 LaTeX 表述；统一变量和图表格式，对依据不足或尚未验证的结论予以保留说明。”
+\end{enumerate}
+
+\section*{四、采纳、修改与核验情况}
+
+AI 输出作为讨论和实现参考，主要采取以下人工核验措施：
+
+\begin{itemize}
+  \item 逐项检查控制方程、初始条件和边界条件，并以基本定律、守恒关系及参考文献为依据。
+  \item 人工审阅并试运行程序；关键结果通过网格加密、时间步收紧、独立复算或守恒检查验证，结果文件另作哈希校验。
+  \item 人工删改文字和 LaTeX 内容，统一符号与结论口径；未经核实的建议未予采用。
+\end{itemize}
+
+最终模型、程序、计算结果和论文内容均经参赛队审核确认。
+
+\end{document}

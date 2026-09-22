@@ -1,0 +1,115 @@
+{
+  "generated_at_utc": "2026-09-10T12:14:45.860753+00:00",
+  "python_version": "3.10.16 (main, Jun 25 2026, 19:35:07) [GCC 9.4.0]",
+  "input": {
+    "path": "/home/beihang/projects/Modex/A题/附件/附件1.xlsx",
+    "sha256": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+    "rows": 241
+  },
+  "template": {
+    "path": "/home/beihang/projects/Modex/A题/附件/附件3/result1.xlsx",
+    "sha256": "23b261b295c1b787d000eebbca6521c37075107b6fcf78724f8d395ce1798ff4"
+  },
+  "physical_parameters": {
+    "radius_m": 0.02,
+    "density_kg_m3": 820.0,
+    "heat_capacity_j_kg_k": 2600.0,
+    "conductivity_w_m_k": 0.36,
+    "heat_transfer_w_m2_k": 25.0,
+    "mass_transfer_m_s": 8e-07,
+    "initial_temperature_c": 28.0,
+    "initial_moisture_kg_kg": 2.55,
+    "diffusivity_prefactor_m2_s": 7e-09,
+    "diffusivity_exponent": 0.89
+  },
+  "main_numerical_config": {
+    "radial_cells": 760,
+    "time_step_s": 0.0625,
+    "end_time_s": 1800.0,
+    "output_interval_s": 1.0,
+    "surface_layer_m": 0.002,
+    "surface_refinement_factor": 10,
+    "picard_tolerance": 2e-12,
+    "picard_max_iterations": 40
+  },
+  "medium_numerical_config": {
+    "radial_cells": 380,
+    "time_step_s": 0.125,
+    "end_time_s": 1800.0,
+    "output_interval_s": 1.0,
+    "surface_layer_m": 0.002,
+    "surface_refinement_factor": 10,
+    "picard_tolerance": 2e-12,
+    "picard_max_iterations": 40
+  },
+  "coarse_numerical_config": {
+    "radial_cells": 190,
+    "time_step_s": 0.25,
+    "end_time_s": 1800.0,
+    "output_interval_s": 1.0,
+    "surface_layer_m": 0.002,
+    "surface_refinement_factor": 10,
+    "picard_tolerance": 2e-12,
+    "picard_max_iterations": 40
+  },
+  "main_runtime_s": 240.24595587910153,
+  "diagnostics": {
+    "max_picard_iterations": 4,
+    "total_picard_iterations": 115200,
+    "moisture_steps": 28800,
+    "max_picard_update": 3.6415315207705135e-14,
+    "max_heat_balance_abs": 1.277929676684643e-10,
+    "max_heat_balance_rel": 4.6802446436020963e-07,
+    "max_moisture_balance_abs": 7.946492534225422e-19,
+    "max_moisture_balance_rel": 2.4802854347595527e-11,
+    "min_temperature_c": 27.999999999999478,
+    "max_temperature_c": 36.78555956222617,
+    "min_moisture_kg_kg": 1.510241526264771,
+    "max_moisture_kg_kg": 2.550000000000013,
+    "mean_picard_iterations": 4.0
+  },
+  "convergence": {
+    "temperature": {
+      "max_abs_difference": 9.29866983412353e-06,
+      "rms_difference": 3.199333950950726e-06,
+      "max_location_time_s": 305,
+      "max_location_radius_cm": 1.8,
+      "four_decimal_agreement_count": 36889,
+      "comparison_count": 37800,
+      "four_decimal_agreement_fraction": 0.9758994708994709,
+      "coarse_to_medium_max_abs_difference": 3.7194353168956695e-05,
+      "observed_order_max_norm": 1.999987348664907,
+      "estimated_fine_grid_max_error": 3.0995928526357434e-06,
+      "estimated_fine_grid_max_error_with_1p25_safety": 3.8744910657946795e-06
+    },
+    "moisture": {
+      "max_abs_difference": 5.1688875521982425e-05,
+      "rms_difference": 1.0716104470789814e-05,
+      "max_location_time_s": 1,
+      "max_location_radius_cm": 2.0,
+      "four_decimal_agreement_count": 35731,
+      "comparison_count": 37800,
+      "four_decimal_agreement_fraction": 0.9452645502645503,
+      "coarse_to_medium_max_abs_difference": 0.00022132048112855074,
+      "observed_order_max_norm": 2.098211242887879,
+      "estimated_fine_grid_max_error": 1.575024797515411e-05,
+      "estimated_fine_grid_max_error_with_1p25_safety": 1.9687809968942638e-05
+    }
+  },
+  "xlsx_validation": {
+    "zip_integrity": "ok",
+    "sheet_names": [
+      "温度",
+      "水分浓度"
+    ],
+    "dimensions": [
+      "A1:V1801",
+      "A1:V1801"
+    ],
+    "row_counts_including_header": [
+      1801,
+      1801
+    ],
+    "columns": 22
+  }
+}

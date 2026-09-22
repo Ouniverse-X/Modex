@@ -1,0 +1,19 @@
+[space_n760_dt1] crossing=47.876600256241 h; runtime=44.89 s
+[space_n1520_dt1] crossing=47.876446187639 h; runtime=90.98 s
+[time_n3040_dt2] crossing=47.876372946850 h; runtime=99.83 s
+stage1_wall=100.79 stage1_cpu=254% stage1_rss=218080KB
+[reference_n3040_dt1] crossing=47.876372607560 h; runtime=177.71 s
+reference_wall=178.73 reference_cpu=107% reference_rss=163528KB
+[safety_n3040_dt1] crossing=47.908159155927 h; runtime=175.84 s
+safety_wall=176.83 safety_cpu=107% safety_rss=164616KB
+{
+  "numerical_target": 0.14994,
+  "field_error_bound": 2.7694794386967647e-07,
+  "upper_moisture_bound_at_target": 0.14994027694794387,
+  "display_limit": 0.14995,
+  "passes_four_decimal_guard": true,
+  "target_crossing_s": 172469.37296133794,
+  "safe_whole_minute_s": 172500.0,
+  "safe_whole_minute_h": 47.916666666666664,
+  "qualification": "conservative convergence estimate, not a rigorous a posteriori theorem"
+}

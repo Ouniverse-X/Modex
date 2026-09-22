@@ -1,0 +1,48 @@
+{
+  "task": "q1_radau",
+  "completed_at_utc": "2026-09-11T03:15:00.392561+00:00",
+  "runtime_s": 802.8921583800111,
+  "python_version": "3.10.16 (main, Jun 25 2026, 19:35:07) [GCC 9.4.0]",
+  "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+  "numpy_version": "2.2.6",
+  "scipy_version": "1.15.3",
+  "input_hashes": {
+    "attachment1": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+    "attachment2": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af",
+    "this_script": "827f603cb1205cc9285fa6ee820a98a4abe08440855fe0eb4716aa2e27c6a7d6"
+  },
+  "status": "complete",
+  "description": "N=1520 production FVM recomputed by Radau IIA",
+  "configuration": {
+    "radial_cells": 1520,
+    "rtol": 2e-10,
+    "temperature_atol": 2e-10,
+    "moisture_atol": 2e-12,
+    "max_step_s": 0.125,
+    "first_step_s": 1e-05
+  },
+  "radau_diagnostics": {
+    "runtime_s": 802.8268688120879,
+    "function_evaluations": 101435,
+    "jacobian_evaluations": 2,
+    "lu_decompositions": 28752
+  },
+  "temperature": {
+    "max_abs_difference": 1.211686502244902e-07,
+    "rms_difference": 2.9683814826615293e-09,
+    "max_location_time_s": 240.0,
+    "max_location_position": 2.0,
+    "four_decimal_agreement_count": 37799,
+    "comparison_count": 37800,
+    "four_decimal_agreement_fraction": 0.999973544973545
+  },
+  "moisture": {
+    "max_abs_difference": 1.947085063402909e-06,
+    "rms_difference": 1.1020104825393984e-08,
+    "max_location_time_s": 1.0,
+    "max_location_position": 2.0,
+    "four_decimal_agreement_count": 37800,
+    "comparison_count": 37800,
+    "four_decimal_agreement_fraction": 1.0
+  }
+}

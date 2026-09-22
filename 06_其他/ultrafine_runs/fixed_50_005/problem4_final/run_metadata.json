@@ -1,0 +1,110 @@
+{
+  "boundary_after_4h": {
+    "temperature_c": 50.0,
+    "moisture_kg_kg": 0.05
+  },
+  "fine_config": {
+    "radial_cells": 6080,
+    "output_interval_s": 60.0,
+    "reference_surface_layer": 0.1,
+    "surface_refinement_factor": 10,
+    "relative_tolerance": 5e-12,
+    "temperature_absolute_tolerance": 5e-12,
+    "moisture_absolute_tolerance": 4.9999999999999995e-14,
+    "initial_maximum_step_s": 0.5,
+    "drying_maximum_step_s": 2.5,
+    "first_step_s": 2.5e-05,
+    "environment_data_end_s": 14400.0,
+    "drying_segment_s": 21600.0,
+    "maximum_duration_s": 1209600.0
+  },
+  "drying_crossing_s": 183926.09436768366,
+  "drying_crossing_h": 51.090581768801016,
+  "safe_end_s": 184080,
+  "safe_end_h": 51.13333333333333,
+  "fine_runtime_s": 19721.34085387108,
+  "fine_diagnostics": {
+    "runtime_s": 19721.34085387108,
+    "function_evaluations": 228903,
+    "jacobian_evaluations": 809,
+    "lu_decompositions": 25794,
+    "integration_segments": 9,
+    "returned_time_points": 3121,
+    "min_temperature_c": 28.0,
+    "max_temperature_c": 50.050005474125236,
+    "min_moisture_kg_kg": 0.05251929524292893,
+    "max_moisture_kg_kg": 2.5500000000000025,
+    "min_density_kg_m3": 764.7267365718636,
+    "max_density_kg_m3": 989.5000000000002,
+    "min_heat_capacity_j_kg_k": 1957.282104264165,
+    "max_heat_capacity_j_kg_k": 3394.366197183099,
+    "min_conductivity_w_m_k": 0.12997973062922463,
+    "max_conductivity_w_m_k": 0.26366197183098594,
+    "min_diffusivity_m2_s": 9.296212937110228e-12,
+    "max_diffusivity_m2_s": 2.4771202415616174e-09,
+    "max_output_interval_balance_abs": 1.5987211554602254e-14,
+    "max_output_interval_balance_rel": 2.428242723857484e-13,
+    "maximum_location_was_center": true
+  },
+  "spatial": {
+    "coarse_to_medium": {
+      "max_abs_difference": 6.9457584146448426e-06,
+      "rms_difference": 2.943542396417553e-07,
+      "max_location_time_s": 900,
+      "max_location_xi": 0.9,
+      "common_end_time_s": 187200,
+      "drying_crossing_difference_s": 0.31834452744806185
+    },
+    "medium_to_fine": {
+      "max_abs_difference": 1.7364437230327212e-06,
+      "rms_difference": 7.358821222016543e-08,
+      "max_location_time_s": 900,
+      "max_location_xi": 0.9,
+      "common_end_time_s": 187200,
+      "drying_crossing_difference_s": 0.07958422577939928
+    },
+    "observed_order": 1.999996577485455,
+    "estimated_fine_grid_max_error": 5.788164051818138e-07,
+    "estimated_fine_grid_max_error_with_1p25_safety": 7.235205064772673e-07,
+    "crossing_times_s": {
+      "coarse": 183926.4922964369,
+      "medium": 183926.17395190944,
+      "fine": 183926.09436768366
+    }
+  },
+  "temporal": {
+    "coarse_to_medium": {
+      "max_abs_difference": 9.626127672746065e-10,
+      "rms_difference": 4.3428859073105075e-12,
+      "max_location_time_s": 13260,
+      "max_location_xi": 1.0,
+      "common_end_time_s": 187200,
+      "drying_crossing_difference_s": 7.760507287457585e-06
+    },
+    "medium_to_fine": {
+      "max_abs_difference": 5.733952757047689e-10,
+      "rms_difference": 3.422167788748555e-12,
+      "max_location_time_s": 19800,
+      "max_location_xi": 1.0,
+      "common_end_time_s": 187200,
+      "drying_crossing_difference_s": 5.474110366776586e-06
+    },
+    "richardson_field": {
+      "observed_order": 0.7474255400734324,
+      "estimated_fine_error": 8.447260190554777e-10,
+      "estimated_fine_error_with_1p25_safety": 1.055907523819347e-09
+    },
+    "richardson_drying_time": {
+      "observed_order": 0.5035264393031443,
+      "estimated_fine_error": 1.3106160193185354e-05,
+      "estimated_fine_error_with_1p25_safety": 1.6382700241481692e-05
+    }
+  },
+  "combined_field_error_bound_kg_kg": 7.245764140010866e-07,
+  "excel_validation": {
+    "sheet_name": "Sheet1",
+    "dimension": "A1:V3069",
+    "checked_numerical_values": 43346,
+    "max_error_against_rounded_solver_output": 0.0
+  }
+}

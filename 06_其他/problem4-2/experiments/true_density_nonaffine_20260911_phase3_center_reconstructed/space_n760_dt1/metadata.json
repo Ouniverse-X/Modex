@@ -1,0 +1,33 @@
+{
+  "case": "space_n760_dt1",
+  "config": {
+    "radial_cells": 760,
+    "time_step_s": 1.0,
+    "output_interval_s": 60.0,
+    "maximum_time_h": 60.0,
+    "surface_layer": 0.1,
+    "surface_refinement_factor": 10,
+    "picard_tolerance": 1e-10,
+    "picard_max_iterations": 40,
+    "drying_threshold_kg_kg": 0.15
+  },
+  "drying_crossing_s": 172355.76092246844,
+  "drying_crossing_h": 47.87660025624123,
+  "runtime_s": 44.887612676015124,
+  "diagnostics": {
+    "steps": 172356,
+    "max_picard_iterations": 5,
+    "mean_picard_iterations": 3.7978834505326184,
+    "max_water_balance_abs": 5.007875624601921e-15,
+    "max_water_balance_rel": 4.167615948096335e-10,
+    "max_local_dry_mass_relative_error": 2.4058532943627142e-12,
+    "minimum_length_ratio": 1.0000323447538362,
+    "maximum_length_ratio": 1.2954358388570664,
+    "max_radial_monotonicity_violation": 5.773159728050814e-15,
+    "maximum_moisture_at_center": true
+  },
+  "output_rows": 2874,
+  "inferred_length_min_m": 0.2499999999999955,
+  "inferred_length_max_m": 0.3238589597142666,
+  "inferred_length_at_crossing_m": 0.2807234794488323
+}

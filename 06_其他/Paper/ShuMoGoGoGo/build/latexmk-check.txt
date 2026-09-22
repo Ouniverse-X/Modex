@@ -1,0 +1,489 @@
+Latexmk: This is Latexmk, John Collins, 26 Dec. 2019, version: 4.67.
+Rule 'xelatex': The following rules & subrules became out-of-date:
+      'xelatex'
+------------
+Run number 1 of rule 'xelatex'
+------------
+------------
+Running 'xelatex -synctex=1 -interaction=nonstopmode -file-line-error -halt-on-error -no-pdf -synctex=1 -interaction=nonstopmode -file-line-error -recorder -output-directory="build"  "new.tex"'
+------------
+Latexmk: applying rule 'xelatex'...
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./new.tex
+LaTeX2e <2020-02-02> patch level 2
+L3 programming layer <2020-02-14> (./cumcmthesis.cls
+Document Class: cumcmthesis 2025/08/09 v2.8 Standard LaTeX Template for CUMCM
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifxetex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty))
+(/home/beihang/texmf/tex/latex/ctex/ctex.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xdvipdfmx.def))
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty)
+(/home/beihang/texmf/tex/latex/ctex/ctexhook.sty)
+(/home/beihang/texmf/tex/latex/ctex/ctexpatch.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fix-cm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everysel.sty)
+(/home/beihang/texmf/tex/latex/ctex/config/ctexopts.cfg)
+(/home/beihang/texmf/tex/latex/ctex/engine/ctex-engine-xetex.def
+(/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.sty
+(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
+(/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg))
+(/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJKfntef.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty)))
+(/home/beihang/texmf/tex/latex/zhnumber/zhnumber.sty
+(/home/beihang/texmf/tex/latex/zhnumber/zhnumber-utf8.cfg))
+(/home/beihang/texmf/tex/latex/ctex/scheme/ctex-scheme-chinese.def
+(/home/beihang/texmf/tex/latex/ctex/config/ctex-name-utf8.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/indentfirst.sty)
+(/home/beihang/texmf/tex/latex/ctex/ctex-c5size.clo)
+(/home/beihang/texmf/tex/latex/ctex/fontset/ctex-fontset-fandol.def
+
+Package fontspec Warning: Font "FandolSong-Regular" does not contain requested
+(fontspec)                Script "CJK".
+
+)) (/home/beihang/texmf/tex/latex/ctex/config/ctex.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)))
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/bigstrut.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/bigdelim.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/cprotect/cprotect.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/bigfoot/suffix.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/tocloft/tocloft.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/appendix/appendix.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty))
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hxetex.def
+(/usr/share/texlive/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texlive/texmf-dist/tex/latex/atveryend/atveryend.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/cleveref/cleveref.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/svg/svg.sty
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrbase.sty
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/transparent/transparent.sty
+
+Package transparent Warning: Loading aborted, because pdfTeX is not running in 
+PDF mode.
+
+) (/usr/share/texlive/texmf-dist/tex/latex/fvextra/fvextra.sty
+(/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty))kpathsea:make_tex: Invalid filename `Noto Sans SC', contains ' '
+
+
+Package xeCJK Warning: Redefining CJKfamily `\CJKttdefault'
+(xeCJK)                (FandolFang-Regular).
+
+(/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty)
+(build/new.aux) ABD: EverySelectfont initializing macros
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty))
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
+
+Package fontspec Warning: Font "FandolHei-Regular" does not contain requested
+(fontspec)                Script "CJK".
+
+[1] (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+Package fontspec Warning: Font "FandolSong-Regular" does not contain requested
+(fontspec)                Script "CJK".
+
+[2]
+
+LaTeX Warning: Reference `fig:q2-flowchart' on page 3 undefined on input line 1
+00.
+
+[3] [4] [5]
+
+LaTeX Warning: Reference `fig:q1-radial-process' on page 6 undefined on input l
+ine 192.
+
+[6]
+
+LaTeX Warning: Reference `fig:q1-control-volume' on page 7 undefined on input l
+ine 201.
+
+[7]
+
+LaTeX Warning: Citation `fick1855' on page 8 undefined on input line 242.
+
+[8]
+
+LaTeX Warning: Reference `eq:q1-unified-pde' on page 9 undefined on input line 
+305.
+
+
+LaTeX Warning: Reference `eq:q1-unified-parameters' on page 9 undefined on inpu
+t line 305.
+
+[9]
+
+LaTeX Warning: Reference `eq:q1-surface-heat-flux' on page 10 undefined on inpu
+t line 335.
+
+
+LaTeX Warning: Reference `eq:q1-surface-moisture-flux' on page 10 undefined on 
+input line 335.
+
+[10]
+
+Package fontspec Warning: Font "FandolFang-Regular" does not contain requested
+(fontspec)                Script "CJK".
+
+
+Underfull \hbox (badness 1048) in paragraph at lines 376--377
+\TU/FandolSong-Regular(0)/m/n/12.05 全 部 径 向 节 点，|  完 整 计 算 结 果 保 存 于 文 件 \TU/La
+tinModernMono(0)/m/n/12.05 result1.xlsx\TU/FandolSong-Regular(0)/m/n/12.05 。|  
+从 数 值 解 中 提 取 $\OML/cmm/m/it/12.05 t \OT1/cmr/m/n/12.05 =
+[11]
+
+LaTeX Warning: Reference `fig:q1-3d-surfaces' on page 12 undefined on input lin
+e 435.
+
+
+LaTeX Warning: Reference `fig:q1-clouds' on page 12 undefined on input line 435
+.
+
+[12] [13]
+
+LaTeX Warning: Reference `eq:q1-fvm-interior' on page 14 undefined on input lin
+e 563.
+
+
+LaTeX Warning: Reference `eq:q1-fvm-center' on page 14 undefined on input line 
+563.
+
+
+LaTeX Warning: Reference `eq:q1-fvm-interior' on page 14 undefined on input lin
+e 564.
+
+
+LaTeX Warning: Reference `eq:q1-fvm-center' on page 14 undefined on input line 
+564.
+
+[14]
+
+LaTeX Warning: Reference `fig:q2-results' on page 15 undefined on input line 58
+1.
+
+
+LaTeX Warning: Reference `tab:q2-temperature' on page 15 undefined on input lin
+e 581.
+
+
+LaTeX Warning: Reference `tab:q2-moisture' on page 15 undefined on input line 5
+81.
+
+[15] [16] (build/new.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
+(see the transcript file for additional information)
+Output written on build/new.xdv (16 pages, 170072 bytes).
+SyncTeX written on build/new.synctex.gz.
+Transcript written on build/new.log.
+Latexmk: References changed.
+Latexmk: References changed.
+Latexmk: Log file says output to 'build/new.xdv'
+Latexmk: List of undefined refs and citations:
+  Citation `fick1855' on page 8 undefined on input line 242
+  Reference `eq:q1-fvm-center' on page 14 undefined on input line 563
+  Reference `eq:q1-fvm-center' on page 14 undefined on input line 564
+  Reference `eq:q1-fvm-interior' on page 14 undefined on input line 563
+  Reference `eq:q1-fvm-interior' on page 14 undefined on input line 564
+  Reference `eq:q1-surface-heat-flux' on page 10 undefined on input line 335
+  Reference `eq:q1-surface-moisture-flux' on page 10 undefined on input line 335
+  Reference `eq:q1-unified-parameters' on page 9 undefined on input line 305
+  Reference `eq:q1-unified-pde' on page 9 undefined on input line 305
+  Reference `fig:q1-3d-surfaces' on page 12 undefined on input line 435
+  Reference `fig:q1-clouds' on page 12 undefined on input line 435
+  Reference `fig:q1-control-volume' on page 7 undefined on input line 201
+  Reference `fig:q1-radial-process' on page 6 undefined on input line 192
+  Reference `fig:q2-flowchart' on page 3 undefined on input line 100
+  Reference `fig:q2-results' on page 15 undefined on input line 581
+  Reference `tab:q2-moisture' on page 15 undefined on input line 581
+  Reference `tab:q2-temperature' on page 15 undefined on input line 581
+Rule 'xelatex': File changes, etc:
+   Changed files, or newly in use since previous run(s):
+      'build/new.aux'
+------------
+Run number 2 of rule 'xelatex'
+------------
+------------
+Running 'xelatex -synctex=1 -interaction=nonstopmode -file-line-error -halt-on-error -no-pdf -synctex=1 -interaction=nonstopmode -file-line-error -recorder -output-directory="build"  "new.tex"'
+------------
+=== TeX engine is 'XeTeX'
+Latexmk: applying rule 'xelatex'...
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./new.tex
+LaTeX2e <2020-02-02> patch level 2
+L3 programming layer <2020-02-14> (./cumcmthesis.cls
+Document Class: cumcmthesis 2025/08/09 v2.8 Standard LaTeX Template for CUMCM
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifxetex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty))
+(/home/beihang/texmf/tex/latex/ctex/ctex.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xdvipdfmx.def))
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty)
+(/home/beihang/texmf/tex/latex/ctex/ctexhook.sty)
+(/home/beihang/texmf/tex/latex/ctex/ctexpatch.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fix-cm.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def))
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everysel.sty)
+(/home/beihang/texmf/tex/latex/ctex/config/ctexopts.cfg)
+(/home/beihang/texmf/tex/latex/ctex/engine/ctex-engine-xetex.def
+(/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.sty
+(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
+(/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg))
+(/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJKfntef.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty)))
+(/home/beihang/texmf/tex/latex/zhnumber/zhnumber.sty
+(/home/beihang/texmf/tex/latex/zhnumber/zhnumber-utf8.cfg))
+(/home/beihang/texmf/tex/latex/ctex/scheme/ctex-scheme-chinese.def
+(/home/beihang/texmf/tex/latex/ctex/config/ctex-name-utf8.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/indentfirst.sty)
+(/home/beihang/texmf/tex/latex/ctex/ctex-c5size.clo)
+(/home/beihang/texmf/tex/latex/ctex/fontset/ctex-fontset-fandol.def
+
+Package fontspec Warning: Font "FandolSong-Regular" does not contain requested
+(fontspec)                Script "CJK".
+
+)) (/home/beihang/texmf/tex/latex/ctex/config/ctex.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)))
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/bigstrut.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/bigdelim.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/cprotect/cprotect.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/bigfoot/suffix.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/tocloft/tocloft.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/appendix/appendix.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty))
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hxetex.def
+(/usr/share/texlive/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texlive/texmf-dist/tex/latex/atveryend/atveryend.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/cleveref/cleveref.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/svg/svg.sty
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrbase.sty
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/transparent/transparent.sty
+
+Package transparent Warning: Loading aborted, because pdfTeX is not running in 
+PDF mode.
+
+) (/usr/share/texlive/texmf-dist/tex/latex/fvextra/fvextra.sty
+(/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty))kpathsea:make_tex: Invalid filename `Noto Sans SC', contains ' '
+
+
+Package xeCJK Warning: Redefining CJKfamily `\CJKttdefault'
+(xeCJK)                (FandolFang-Regular).
+
+(/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK-listings.sty)
+(build/new.aux) ABD: EverySelectfont initializing macros
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty))
+
+Package fontspec Warning: Font "FandolHei-Regular" does not contain requested
+(fontspec)                Script "CJK".
+
+[1] (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+Package fontspec Warning: Font "FandolSong-Regular" does not contain requested
+(fontspec)                Script "CJK".
+
+[2] [3] [4] [5] [6] [7]
+
+LaTeX Warning: Citation `fick1855' on page 8 undefined on input line 242.
+
+[8] [9] [10]
+
+Package fontspec Warning: Font "FandolFang-Regular" does not contain requested
+(fontspec)                Script "CJK".
+
+
+Underfull \hbox (badness 1048) in paragraph at lines 376--377
+\TU/FandolSong-Regular(0)/m/n/12.05 全 部 径 向 节 点，|  完 整 计 算 结 果 保 存 于 文 件 \TU/La
+tinModernMono(0)/m/n/12.05 result1.xlsx\TU/FandolSong-Regular(0)/m/n/12.05 。|  
+从 数 值 解 中 提 取 $\OML/cmm/m/it/12.05 t \OT1/cmr/m/n/12.05 =
+[11] [12] [13] [14] [15] [16] (build/new.aux)
+
+LaTeX Warning: There were undefined references.
+
+ )
+(see the transcript file for additional information)
+Output written on build/new.xdv (16 pages, 172056 bytes).
+SyncTeX written on build/new.synctex.gz.
+Transcript written on build/new.log.
+Latexmk: Log file says output to 'build/new.xdv'
+Latexmk: List of undefined refs and citations:
+  Citation `fick1855' on page 8 undefined on input line 242
+Rule 'xdvipdfmx': File changes, etc:
+   Changed files, or newly in use since previous run(s):
+      'build/new.xdv'
+   Rule(s) that have been run and require run of dependent rule:
+      'xelatex' which requires run of 'xdvipdfmx'
+------------
+Run number 1 of rule 'xdvipdfmx'
+------------
+------------
+Running 'xdvipdfmx -o "build/new.pdf"  "build/new.xdv"'
+------------
+=== TeX engine is 'XeTeX'
+Latexmk: applying rule 'xdvipdfmx'...
+For rule 'xdvipdfmx', running '&do_viewfile(  )' ...
+build/new.xdv -> new.pdf
+[1][2][3][4][5][6][7][8][9][10][11][12][13][14][15][16]
+12759862 bytes written
+Latexmk: Summary of warnings from last run of (pdf)latex:
+  Latex failed to resolve 1 citation(s)
+Latexmk: All targets () are up-to-date

@@ -1,0 +1,584 @@
+{
+  "status": "complete",
+  "completed_at_utc": "2026-09-11T03:31:09.043797+00:00",
+  "tasks": {
+    "q1_radau": {
+      "task": "q1_radau",
+      "completed_at_utc": "2026-09-11T03:15:00.392561+00:00",
+      "runtime_s": 802.8921583800111,
+      "python_version": "3.10.16 (main, Jun 25 2026, 19:35:07) [GCC 9.4.0]",
+      "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+      "numpy_version": "2.2.6",
+      "scipy_version": "1.15.3",
+      "input_hashes": {
+        "attachment1": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+        "attachment2": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af",
+        "this_script": "827f603cb1205cc9285fa6ee820a98a4abe08440855fe0eb4716aa2e27c6a7d6"
+      },
+      "status": "complete",
+      "description": "N=1520 production FVM recomputed by Radau IIA",
+      "configuration": {
+        "radial_cells": 1520,
+        "rtol": 2e-10,
+        "temperature_atol": 2e-10,
+        "moisture_atol": 2e-12,
+        "max_step_s": 0.125,
+        "first_step_s": 1e-05
+      },
+      "radau_diagnostics": {
+        "runtime_s": 802.8268688120879,
+        "function_evaluations": 101435,
+        "jacobian_evaluations": 2,
+        "lu_decompositions": 28752
+      },
+      "temperature": {
+        "max_abs_difference": 1.211686502244902e-07,
+        "rms_difference": 2.9683814826615293e-09,
+        "max_location_time_s": 240.0,
+        "max_location_position": 2.0,
+        "four_decimal_agreement_count": 37799,
+        "comparison_count": 37800,
+        "four_decimal_agreement_fraction": 0.999973544973545
+      },
+      "moisture": {
+        "max_abs_difference": 1.947085063402909e-06,
+        "rms_difference": 1.1020104825393984e-08,
+        "max_location_time_s": 1.0,
+        "max_location_position": 2.0,
+        "four_decimal_agreement_count": 37800,
+        "comparison_count": 37800,
+        "four_decimal_agreement_fraction": 1.0
+      }
+    },
+    "q2_radau": {
+      "task": "q2_radau",
+      "completed_at_utc": "2026-09-11T03:05:17.563547+00:00",
+      "runtime_s": 261.2869648670312,
+      "python_version": "3.10.16 (main, Jun 25 2026, 19:35:07) [GCC 9.4.0]",
+      "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+      "numpy_version": "2.2.6",
+      "scipy_version": "1.15.3",
+      "input_hashes": {
+        "attachment1": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+        "attachment2": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af",
+        "this_script": "827f603cb1205cc9285fa6ee820a98a4abe08440855fe0eb4716aa2e27c6a7d6"
+      },
+      "status": "complete",
+      "description": "N=760 identical semi-discrete system, tight BDF versus Radau",
+      "configuration": {
+        "radial_cells": 760,
+        "end_time_s": 10800.0,
+        "output_interval_s": 1.0,
+        "surface_layer_m": 0.002,
+        "surface_refinement_factor": 10,
+        "relative_tolerance": 5e-10,
+        "temperature_absolute_tolerance": 5e-10,
+        "moisture_absolute_tolerance": 5e-12,
+        "maximum_step_s": 2.5,
+        "first_step_s": 5e-05
+      },
+      "bdf_diagnostics": {
+        "runtime_s": 18.387138813035563,
+        "success": true,
+        "message": "The solver successfully reached the end of the integration interval.",
+        "function_evaluations": 23240,
+        "jacobian_evaluations": 486,
+        "lu_decompositions": 2639,
+        "returned_time_points": 10801,
+        "min_temperature_c": 27.999999999999996,
+        "max_temperature_c": 49.966412967430244,
+        "min_moisture_kg_kg": 1.0081226641429435,
+        "max_moisture_kg_kg": 2.5500000000000007,
+        "min_density_kg_m3": 779.0397010102968,
+        "max_density_kg_m3": 976.4000000000001,
+        "min_heat_capacity_j_kg_k": 2823.533429180378,
+        "max_heat_capacity_j_kg_k": 3415.2957746478874,
+        "min_conductivity_w_m_k": 0.400768531830608,
+        "max_conductivity_w_m_k": 0.48295774647887324,
+        "min_diffusivity_m2_s": 5.547360430190263e-09,
+        "max_diffusivity_m2_s": 1.2521860311897592e-08,
+        "max_one_second_moisture_balance_abs": 8.089340107444968e-11,
+        "max_one_second_moisture_balance_rel": 0.002010054843530909
+      },
+      "radau_diagnostics": {
+        "runtime_s": 240.48460067017004,
+        "success": true,
+        "message": "The solver successfully reached the end of the integration interval.",
+        "function_evaluations": 48716,
+        "jacobian_evaluations": 51,
+        "lu_decompositions": 12094,
+        "returned_time_points": 10801,
+        "min_temperature_c": 28.0,
+        "max_temperature_c": 49.96641296884792,
+        "min_moisture_kg_kg": 1.008122664101147,
+        "max_moisture_kg_kg": 2.55,
+        "min_density_kg_m3": 779.0397010049468,
+        "max_density_kg_m3": 976.4,
+        "min_heat_capacity_j_kg_k": 2823.5334291520203,
+        "max_heat_capacity_j_kg_k": 3415.295774647887,
+        "min_conductivity_w_m_k": 0.4007685318266695,
+        "max_conductivity_w_m_k": 0.48295774647887324,
+        "min_diffusivity_m2_s": 5.547360426824953e-09,
+        "max_diffusivity_m2_s": 1.2521860307163352e-08,
+        "max_one_second_moisture_balance_abs": 8.089331281423861e-11,
+        "max_one_second_moisture_balance_rel": 0.0020100526535111064
+      },
+      "temperature": {
+        "max_abs_difference": 1.646263733334763e-06,
+        "rms_difference": 1.494721059044829e-08,
+        "max_location_time_s": 5160.0,
+        "max_location_position": 2.0,
+        "four_decimal_agreement_count": 226775,
+        "comparison_count": 226800,
+        "four_decimal_agreement_fraction": 0.999889770723104
+      },
+      "moisture": {
+        "max_abs_difference": 1.8967863502084015e-08,
+        "rms_difference": 1.2498907231926913e-10,
+        "max_location_time_s": 6420.0,
+        "max_location_position": 2.0,
+        "four_decimal_agreement_count": 226800,
+        "comparison_count": 226800,
+        "four_decimal_agreement_fraction": 1.0
+      }
+    },
+    "q3_radau": {
+      "task": "q3_radau",
+      "completed_at_utc": "2026-09-11T03:22:24.938877+00:00",
+      "runtime_s": 1247.5208431258798,
+      "python_version": "3.10.16 (main, Jun 25 2026, 19:35:07) [GCC 9.4.0]",
+      "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+      "numpy_version": "2.2.6",
+      "scipy_version": "1.15.3",
+      "input_hashes": {
+        "attachment1": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+        "attachment2": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af",
+        "this_script": "827f603cb1205cc9285fa6ee820a98a4abe08440855fe0eb4716aa2e27c6a7d6"
+      },
+      "status": "complete",
+      "description": "N=2560 production Kirchhoff-FVM recomputed by Radau IIA",
+      "configuration": {
+        "radial_cells": 2560,
+        "rtol": 2e-10,
+        "temperature_atol": 2e-10,
+        "moisture_atol": 2e-12,
+        "initial_max_step_s": 5.0,
+        "drying_max_step_s": 30.0
+      },
+      "radau_diagnostics": {
+        "runtime_s": 1247.408655013889,
+        "function_evaluations": 106643,
+        "jacobian_evaluations": 94,
+        "lu_decompositions": 24678,
+        "integration_segments": 10
+      },
+      "moisture": {
+        "max_abs_difference": 1.0201257838460265e-06,
+        "rms_difference": 1.1565648339837225e-08,
+        "max_location_time_s": 60.0,
+        "max_location_position": 2.0,
+        "four_decimal_agreement_count": 72402,
+        "comparison_count": 72408,
+        "four_decimal_agreement_fraction": 0.9999171362280411
+      },
+      "bdf2_crossing_s": 206900.2913398705,
+      "radau_crossing_s": 206900.29080769926,
+      "crossing_difference_s": 0.0005321712524164468
+    },
+    "q4_radau": {
+      "task": "q4_radau",
+      "completed_at_utc": "2026-09-11T03:30:56.042570+00:00",
+      "runtime_s": 1758.5766803370789,
+      "python_version": "3.10.16 (main, Jun 25 2026, 19:35:07) [GCC 9.4.0]",
+      "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+      "numpy_version": "2.2.6",
+      "scipy_version": "1.15.3",
+      "input_hashes": {
+        "attachment1": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+        "attachment2": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af",
+        "this_script": "827f603cb1205cc9285fa6ee820a98a4abe08440855fe0eb4716aa2e27c6a7d6"
+      },
+      "status": "complete",
+      "description": "N=1520 moving-boundary FVM, identical BDF/Radau tolerances",
+      "configuration": {
+        "radial_cells": 1520,
+        "output_interval_s": 60.0,
+        "reference_surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "relative_tolerance": 5e-12,
+        "temperature_absolute_tolerance": 5e-12,
+        "moisture_absolute_tolerance": 4.9999999999999995e-14,
+        "initial_maximum_step_s": 0.5,
+        "drying_maximum_step_s": 2.5,
+        "first_step_s": 2.5e-05,
+        "environment_data_end_s": 14400.0,
+        "drying_segment_s": 21600.0,
+        "maximum_duration_s": 1209600.0
+      },
+      "bdf_diagnostics": {
+        "runtime_s": 184.18058713595383,
+        "function_evaluations": 228994,
+        "jacobian_evaluations": 831,
+        "lu_decompositions": 25709,
+        "integration_segments": 9,
+        "returned_time_points": 3121,
+        "min_temperature_c": 28.0,
+        "max_temperature_c": 50.0500054631621,
+        "min_moisture_kg_kg": 0.052519304144189455,
+        "max_moisture_kg_kg": 2.550000000000001,
+        "min_density_kg_m3": 764.726737372977,
+        "max_density_kg_m3": 989.5000000000001,
+        "min_heat_capacity_j_kg_k": 1957.2821215396334,
+        "max_heat_capacity_j_kg_k": 3394.366197183099,
+        "min_conductivity_w_m_k": 0.12997973223624495,
+        "max_conductivity_w_m_k": 0.26366197183098594,
+        "min_diffusivity_m2_s": 9.296221937082838e-12,
+        "max_diffusivity_m2_s": 2.477120134429978e-09,
+        "max_output_interval_balance_abs": 1.4210854715202004e-14,
+        "max_output_interval_balance_rel": 1.7637052477711103e-13,
+        "maximum_location_was_center": true
+      },
+      "radau_diagnostics": {
+        "runtime_s": 1758.51358040981,
+        "function_evaluations": 740182,
+        "jacobian_evaluations": 95,
+        "lu_decompositions": 201518,
+        "integration_segments": 9,
+        "returned_time_points": 3121,
+        "min_temperature_c": 28.0,
+        "max_temperature_c": 50.05000547658828,
+        "min_moisture_kg_kg": 0.05251930414406599,
+        "max_moisture_kg_kg": 2.55,
+        "min_density_kg_m3": 764.7267373729659,
+        "max_density_kg_m3": 989.5,
+        "min_heat_capacity_j_kg_k": 1957.2821215393938,
+        "max_heat_capacity_j_kg_k": 3394.3661971830984,
+        "min_conductivity_w_m_k": 0.12997973223622267,
+        "max_conductivity_w_m_k": 0.26366197183098594,
+        "min_diffusivity_m2_s": 9.296221936957996e-12,
+        "max_diffusivity_m2_s": 2.477120134429947e-09,
+        "max_output_interval_balance_abs": 1.5987211554602254e-14,
+        "max_output_interval_balance_rel": 5.174845480911101e-13,
+        "maximum_location_was_center": true
+      },
+      "temperature": {
+        "max_abs_difference": 3.29414220345825e-08,
+        "rms_difference": 2.164066243629646e-10,
+        "max_location_time_s": 9540.0,
+        "max_location_position": 1.0,
+        "four_decimal_agreement_count": 315220,
+        "comparison_count": 315221,
+        "four_decimal_agreement_fraction": 0.9999968276225252
+      },
+      "moisture": {
+        "max_abs_difference": 3.675909021616519e-10,
+        "rms_difference": 1.5853061125456028e-12,
+        "max_location_time_s": 18000.0,
+        "max_location_position": 1.0,
+        "four_decimal_agreement_count": 315221,
+        "comparison_count": 315221,
+        "four_decimal_agreement_fraction": 1.0
+      },
+      "bdf_crossing_s": 183926.4922964369,
+      "radau_crossing_s": 183926.49229213895,
+      "crossing_difference_s": 4.297937266528606e-06
+    },
+    "bessel": {
+      "task": "bessel",
+      "completed_at_utc": "2026-09-11T03:00:48.457538+00:00",
+      "runtime_s": 3.6720652119256556,
+      "python_version": "3.10.16 (main, Jun 25 2026, 19:35:07) [GCC 9.4.0]",
+      "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+      "numpy_version": "2.2.6",
+      "scipy_version": "1.15.3",
+      "input_hashes": {
+        "attachment1": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+        "attachment2": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af",
+        "this_script": "827f603cb1205cc9285fa6ee820a98a4abe08440855fe0eb4716aa2e27c6a7d6"
+      },
+      "status": "complete",
+      "description": "Single-mode Robin-Bessel exact solution on three FVM grids",
+      "cases": [
+        {
+          "field": "temperature",
+          "method": "BDF",
+          "radial_cells": 190,
+          "biot": 1.3888888888888888,
+          "lambda1": 1.418472518827063,
+          "eigen_residual": 0.0,
+          "max_abs_error": 7.7287152215888e-05,
+          "relative_cylindrical_l2_error": 4.055282948889192e-06,
+          "max_error_time_s": 375.0,
+          "max_error_radius_m": 0.018000000000000002,
+          "runtime_s": 0.12969523598439991,
+          "function_evaluations": 1181,
+          "jacobian_evaluations": 2,
+          "lu_decompositions": 70
+        },
+        {
+          "field": "temperature",
+          "method": "BDF",
+          "radial_cells": 380,
+          "biot": 1.3888888888888888,
+          "lambda1": 1.418472518827063,
+          "eigen_residual": 0.0,
+          "max_abs_error": 1.9321865060817345e-05,
+          "relative_cylindrical_l2_error": 1.0137405996644496e-06,
+          "max_error_time_s": 375.0,
+          "max_error_radius_m": 0.018000000000000002,
+          "runtime_s": 0.14789867005310953,
+          "function_evaluations": 1145,
+          "jacobian_evaluations": 2,
+          "lu_decompositions": 68
+        },
+        {
+          "field": "temperature",
+          "method": "BDF",
+          "radial_cells": 760,
+          "biot": 1.3888888888888888,
+          "lambda1": 1.418472518827063,
+          "eigen_residual": 0.0,
+          "max_abs_error": 4.830463218752357e-06,
+          "relative_cylindrical_l2_error": 2.5342978905203963e-07,
+          "max_error_time_s": 375.0,
+          "max_error_radius_m": 0.018000000000000002,
+          "runtime_s": 0.18852206994779408,
+          "function_evaluations": 1111,
+          "jacobian_evaluations": 2,
+          "lu_decompositions": 64
+        },
+        {
+          "field": "temperature",
+          "method": "Radau",
+          "radial_cells": 190,
+          "biot": 1.3888888888888888,
+          "lambda1": 1.418472518827063,
+          "eigen_residual": 0.0,
+          "max_abs_error": 7.728714872001774e-05,
+          "relative_cylindrical_l2_error": 4.0552827956528366e-06,
+          "max_error_time_s": 375.0,
+          "max_error_radius_m": 0.018000000000000002,
+          "runtime_s": 0.4983033100143075,
+          "function_evaluations": 3725,
+          "jacobian_evaluations": 1,
+          "lu_decompositions": 1044
+        },
+        {
+          "field": "temperature",
+          "method": "Radau",
+          "radial_cells": 380,
+          "biot": 1.3888888888888888,
+          "lambda1": 1.418472518827063,
+          "eigen_residual": 0.0,
+          "max_abs_error": 1.9321862417598368e-05,
+          "relative_cylindrical_l2_error": 1.0137404764304052e-06,
+          "max_error_time_s": 375.0,
+          "max_error_radius_m": 0.018000000000000002,
+          "runtime_s": 0.5773965769913048,
+          "function_evaluations": 3641,
+          "jacobian_evaluations": 1,
+          "lu_decompositions": 1032
+        },
+        {
+          "field": "temperature",
+          "method": "Radau",
+          "radial_cells": 760,
+          "biot": 1.3888888888888888,
+          "lambda1": 1.418472518827063,
+          "eigen_residual": 0.0,
+          "max_abs_error": 4.83046928678732e-06,
+          "relative_cylindrical_l2_error": 2.534301058325207e-07,
+          "max_error_time_s": 375.0,
+          "max_error_radius_m": 0.018000000000000002,
+          "runtime_s": 0.7653639998752624,
+          "function_evaluations": 3599,
+          "jacobian_evaluations": 1,
+          "lu_decompositions": 1026
+        },
+        {
+          "field": "moisture",
+          "method": "BDF",
+          "radial_cells": 190,
+          "biot": 3.2404045432170427,
+          "lambda1": 1.8220830482756623,
+          "eigen_residual": 2.220446049250313e-16,
+          "max_abs_error": 1.613753018814279e-05,
+          "relative_cylindrical_l2_error": 7.544847153735284e-06,
+          "max_error_time_s": 10500.0,
+          "max_error_radius_m": 0.0,
+          "runtime_s": 0.13793307496234775,
+          "function_evaluations": 1257,
+          "jacobian_evaluations": 2,
+          "lu_decompositions": 112
+        },
+        {
+          "field": "moisture",
+          "method": "BDF",
+          "radial_cells": 380,
+          "biot": 3.2404045432170427,
+          "lambda1": 1.8220830482756623,
+          "eigen_residual": 2.220446049250313e-16,
+          "max_abs_error": 4.035231929488958e-06,
+          "relative_cylindrical_l2_error": 1.8860333584026548e-06,
+          "max_error_time_s": 10500.0,
+          "max_error_radius_m": 0.0,
+          "runtime_s": 0.15799256996251643,
+          "function_evaluations": 1215,
+          "jacobian_evaluations": 2,
+          "lu_decompositions": 111
+        },
+        {
+          "field": "moisture",
+          "method": "BDF",
+          "radial_cells": 760,
+          "biot": 3.2404045432170427,
+          "lambda1": 1.8220830482756623,
+          "eigen_residual": 2.220446049250313e-16,
+          "max_abs_error": 1.0088636586136346e-06,
+          "relative_cylindrical_l2_error": 4.714970081203947e-07,
+          "max_error_time_s": 10500.0,
+          "max_error_radius_m": 0.0,
+          "runtime_s": 0.20060321711935103,
+          "function_evaluations": 1175,
+          "jacobian_evaluations": 2,
+          "lu_decompositions": 108
+        },
+        {
+          "field": "moisture",
+          "method": "Radau",
+          "radial_cells": 190,
+          "biot": 3.2404045432170427,
+          "lambda1": 1.8220830482756623,
+          "eigen_residual": 2.220446049250313e-16,
+          "max_abs_error": 1.6137529559978603e-05,
+          "relative_cylindrical_l2_error": 7.544847156735829e-06,
+          "max_error_time_s": 10500.0,
+          "max_error_radius_m": 0.0,
+          "runtime_s": 0.22044574981555343,
+          "function_evaluations": 4375,
+          "jacobian_evaluations": 2,
+          "lu_decompositions": 72
+        },
+        {
+          "field": "moisture",
+          "method": "Radau",
+          "radial_cells": 380,
+          "biot": 3.2404045432170427,
+          "lambda1": 1.8220830482756623,
+          "eigen_residual": 2.220446049250313e-16,
+          "max_abs_error": 4.035233356125545e-06,
+          "relative_cylindrical_l2_error": 1.8860333991949996e-06,
+          "max_error_time_s": 10500.0,
+          "max_error_radius_m": 0.0,
+          "runtime_s": 0.264595246873796,
+          "function_evaluations": 4270,
+          "jacobian_evaluations": 2,
+          "lu_decompositions": 70
+        },
+        {
+          "field": "moisture",
+          "method": "Radau",
+          "radial_cells": 760,
+          "biot": 3.2404045432170427,
+          "lambda1": 1.8220830482756623,
+          "eigen_residual": 2.220446049250313e-16,
+          "max_abs_error": 1.0088670607810712e-06,
+          "relative_cylindrical_l2_error": 4.7149719900057673e-07,
+          "max_error_time_s": 10500.0,
+          "max_error_radius_m": 0.0,
+          "runtime_s": 0.3461487090680748,
+          "function_evaluations": 4151,
+          "jacobian_evaluations": 2,
+          "lu_decompositions": 58
+        }
+      ],
+      "convergence": {
+        "temperature": {
+          "BDF": {
+            "levels": [
+              190,
+              380,
+              760
+            ],
+            "max_abs_errors": [
+              7.7287152215888e-05,
+              1.9321865060817345e-05,
+              4.830463218752357e-06
+            ],
+            "observed_orders": [
+              1.9999942501608965,
+              2.0000009098712854
+            ],
+            "fine_error": 4.830463218752357e-06
+          },
+          "Radau": {
+            "levels": [
+              190,
+              380,
+              760
+            ],
+            "max_abs_errors": [
+              7.728714872001774e-05,
+              1.9321862417598368e-05,
+              4.83046928678732e-06
+            ],
+            "observed_orders": [
+              1.9999943822643678,
+              1.9999989001970153
+            ],
+            "fine_error": 4.83046928678732e-06
+          }
+        },
+        "moisture": {
+          "BDF": {
+            "levels": [
+              190,
+              380,
+              760
+            ],
+            "max_abs_errors": [
+              1.613753018814279e-05,
+              4.035231929488958e-06,
+              1.0088636586136346e-06
+            ],
+            "observed_orders": [
+              1.9996962928374762,
+              1.9999203796735359
+            ],
+            "fine_error": 1.0088636586136346e-06
+          },
+          "Radau": {
+            "levels": [
+              190,
+              380,
+              760
+            ],
+            "max_abs_errors": [
+              1.6137529559978603e-05,
+              4.035233356125545e-06,
+              1.0088670607810712e-06
+            ],
+            "observed_orders": [
+              1.9996957266218913,
+              1.9999160245725407
+            ],
+            "fine_error": 1.0088670607810712e-06
+          }
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "bessel.json": "d758f593b0266ef5d56a326a3cd6ce54e05c28f64e635a7e5832f717ee61f7fe",
+    "bessel_cases.csv": "16f58dd098a406c570e1f8208796c5eace2eaaa73381581426ae4071cfebae04",
+    "q1_radau.json": "5e1db304c6307232cd53e094fef12c9eafe93bc195e529bc13a2bab4f7af5f62",
+    "q1_radau.npz": "df30a8b4554c598d556e7eeb42e273c60276e060f487c814b2361ef2e9fa9b24",
+    "q2_radau.json": "e44f031b8c90c4bab8c3fabd16c692386e0b44f8b20b5a027212d8ff5fd768b0",
+    "q2_radau.npz": "8ce4e5f57b1f5d84cb0af29511d006bd1b204a73f9573d185ae5c271e0509358",
+    "q3_radau.json": "adba6bc04da889ca9aa3329dddf7a892eb658b1f676ce02a129291a12b5b0503",
+    "q3_radau.npz": "f5b7c437ec3b55afee49953acd838a36f68f71413fd1893477d40fe46d59fcaf",
+    "q4_radau.json": "cd61beaf0baf0180167ce6c0ce092e77c331c14269ebb7e7ae753b05da11f3a7",
+    "q4_radau.npz": "2f160529cfeb9ee392229e4c83346865d4c158053a30a5958da376704145da03",
+    "validation_report.md": "5b68100a7a833ad7693b92741a408e4bf7a9ac1fc099156c50da4cc30fd79706"
+  }
+}

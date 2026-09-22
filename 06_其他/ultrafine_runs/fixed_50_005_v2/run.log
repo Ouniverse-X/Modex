@@ -1,0 +1,72 @@
+parallel_workers=10 logical_cpus=128
+START q3_n1280_dt0p25 cpus=0-0
+START q3_n5120_dt0p25 cpus=2-2
+START q3_n2560_dt0p25 cpus=1-1START q3_n5120_dt1 cpus=3-3
+
+START q3_n5120_dt0p5 cpus=4-4
+START q4_n12160_fine cpus=55-79START q4_n6080_fine cpus=30-54
+
+START q4_n3040_fine cpus=5-29
+START q4_n12160_time_medium cpus=104-127
+START q4_n12160_time_coarse cpus=80-103
+[q4_n3040_fine] 0.0–4.0 h, max_step=0.25 s
+[q4_n6080_fine] 0.0–4.0 h, max_step=0.25 s
+[q4_n12160_fine] 0.0–4.0 h, max_step=0.25 s
+[q4_n12160_time_medium] 0.0–4.0 h, max_step=0.5 s
+[q4_n12160_time_coarse] 0.0–4.0 h, max_step=1 s
+[q4_n3040_fine] 4.0–10.0 h, max_step=1.25 s
+DONE  q3_n1280_dt0p25 elapsed_s=228.429
+[q4_n3040_fine] 10.0–16.0 h, max_step=1.25 s
+[q4_n3040_fine] 16.0–22.0 h, max_step=1.25 s
+DONE  q3_n5120_dt1 elapsed_s=306.059
+[q4_n3040_fine] 22.0–28.0 h, max_step=1.25 s
+[q4_n6080_fine] 4.0–10.0 h, max_step=1.25 s
+[q4_n3040_fine] 28.0–34.0 h, max_step=1.25 s
+[q4_n12160_time_coarse] 4.0–10.0 h, max_step=5 s
+[q4_n3040_fine] 34.0–40.0 h, max_step=1.25 s
+[q4_n12160_time_coarse] 10.0–16.0 h, max_step=5 s
+[q4_n3040_fine] 40.0–46.0 h, max_step=1.25 s
+[q4_n6080_fine] 10.0–16.0 h, max_step=1.25 s
+[q4_n12160_time_medium] 4.0–10.0 h, max_step=2.5 s
+DONE  q3_n2560_dt0p25 elapsed_s=488.994
+[q4_n12160_time_coarse] 16.0–22.0 h, max_step=5 s
+[q4_n3040_fine] 46.0–52.0 h, max_step=1.25 s
+DONE  q3_n5120_dt0p5 elapsed_s=524.563
+[q4_n3040_fine] crossing=51.090604 h, runtime=536.73 s, nfev=426419, nlu=53067
+DONE  q4_n3040_fine elapsed_s=536.863
+[q4_n12160_time_coarse] 22.0–28.0 h, max_step=5 s
+[q4_n6080_fine] 16.0–22.0 h, max_step=1.25 s
+[q4_n12160_time_coarse] 28.0–34.0 h, max_step=5 s
+[q4_n12160_time_medium] 10.0–16.0 h, max_step=2.5 s
+[q4_n12160_time_coarse] 34.0–40.0 h, max_step=5 s
+[q4_n6080_fine] 22.0–28.0 h, max_step=1.25 s
+[q4_n12160_time_coarse] 40.0–46.0 h, max_step=5 s
+[q4_n12160_time_medium] 16.0–22.0 h, max_step=2.5 s
+[q4_n12160_time_coarse] 46.0–52.0 h, max_step=5 s
+[q4_n12160_time_coarse] crossing=51.090576 h, runtime=719.77 s, nfev=141870, nlu=15440
+DONE  q4_n12160_time_coarse elapsed_s=720.251
+[q4_n6080_fine] 28.0–34.0 h, max_step=1.25 s
+[q4_n12160_time_medium] 22.0–28.0 h, max_step=2.5 s
+[q4_n12160_fine] 4.0–10.0 h, max_step=1.25 s
+[q4_n6080_fine] 34.0–40.0 h, max_step=1.25 s
+[q4_n12160_time_medium] 28.0–34.0 h, max_step=2.5 s
+[q4_n6080_fine] 40.0–46.0 h, max_step=1.25 s
+[q4_n12160_time_medium] 34.0–40.0 h, max_step=2.5 s
+[q4_n6080_fine] 46.0–52.0 h, max_step=1.25 s
+[q4_n12160_fine] 10.0–16.0 h, max_step=1.25 s
+[q4_n12160_time_medium] 40.0–46.0 h, max_step=2.5 s
+DONE  q3_n5120_dt0p25 elapsed_s=981.108
+[q4_n6080_fine] crossing=51.090582 h, runtime=992.17 s, nfev=426603, nlu=53115
+DONE  q4_n6080_fine elapsed_s=992.520
+[q4_n12160_time_medium] 46.0–52.0 h, max_step=2.5 s
+[q4_n12160_time_medium] crossing=51.090576 h, runtime=1096.23 s, nfev=235651, nlu=26244
+DONE  q4_n12160_time_medium elapsed_s=1096.733
+[q4_n12160_fine] 16.0–22.0 h, max_step=1.25 s
+[q4_n12160_fine] 22.0–28.0 h, max_step=1.25 s
+[q4_n12160_fine] 28.0–34.0 h, max_step=1.25 s
+[q4_n12160_fine] 34.0–40.0 h, max_step=1.25 s
+[q4_n12160_fine] 40.0–46.0 h, max_step=1.25 s
+[q4_n12160_fine] 46.0–52.0 h, max_step=1.25 s
+[q4_n12160_fine] crossing=51.090576 h, runtime=1974.56 s, nfev=426700, nlu=53151
+DONE  q4_n12160_fine elapsed_s=1975.061
+ALL COMPLETE

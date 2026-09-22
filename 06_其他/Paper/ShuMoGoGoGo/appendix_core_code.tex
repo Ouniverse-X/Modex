@@ -1,0 +1,48 @@
+\clearpage
+\appendix
+\section{问题一及共用核心程序}
+
+第一至第四问共用径向有限体积空间离散。文件\texttt{1.txt}首先给出物性函数、表层加密网格、守恒通量、隐式时间推进、临界时刻定位和Richardson误差估计，随后给出问题一的常物性温度场与非线性水分扩散实现。附件读取、结果写入、日志和绘图程序从略，完整可执行程序见支撑材料。
+
+\VerbatimInput[
+  fontsize=\scriptsize,
+  numbers=left,
+  numbersep=8pt,
+  xleftmargin=1.8em,
+  breaklines=true,
+  breakanywhere=false,
+  breaksymbolleft={},
+  breaksymbolright={},
+  frame=single,
+  framesep=2mm
+]{code/1.txt}
+
+\section{问题二完整程序的关键实现}
+
+以下摘录给出表面加密网格、控制体权重、Jacobian稀疏结构、变物性耦合方程、自适应BDF求解及空间收敛计算。
+
+\VerbatimInput[
+  fontsize=\scriptsize,numbers=left,numbersep=8pt,xleftmargin=1.8em,
+  breaklines=true,breakanywhere=false,breaksymbolleft={},breaksymbolright={},
+  frame=single,framesep=2mm
+]{code/2.txt}
+
+\section{问题三完整程序的关键实现}
+
+以下摘录给出后向Euler启动、BDF2时间推进、Picard耦合迭代、全域阈值事件判断及临界时刻定位。
+
+\VerbatimInput[
+  fontsize=\scriptsize,numbers=left,numbersep=8pt,xleftmargin=1.8em,
+  breaklines=true,breakanywhere=false,breaksymbolleft={},breaksymbolright={},
+  frame=single,framesep=2mm
+]{code/3.txt}
+
+\section{问题四完整程序的关键实现}
+
+以下摘录给出时变半径下的固定域变换、移动边界热湿方程、连续临界时刻求解、干质量后验检验及三级网格收敛分析。
+
+\VerbatimInput[
+  fontsize=\scriptsize,numbers=left,numbersep=8pt,xleftmargin=1.8em,
+  breaklines=true,breakanywhere=false,breaksymbolleft={},breaksymbolright={},
+  frame=single,framesep=2mm
+]{code/4.txt}

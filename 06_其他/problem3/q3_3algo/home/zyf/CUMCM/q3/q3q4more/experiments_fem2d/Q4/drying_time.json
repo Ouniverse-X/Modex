@@ -1,0 +1,14 @@
+{
+  "event": {
+    "lower_s": 183925.90255773324,
+    "upper_s": 183925.9026292588,
+    "width_s": 7.152557373046875e-05,
+    "time_h": 51.09052850812745,
+    "C_max_lower": 0.14999999998095428,
+    "C_max_upper": 0.14999999998111194,
+    "method": "All Q2 elements: tensor Bernstein convex-hull enclosure with de Casteljau refinement; float64 roundoff allowance",
+    "meaning": "Numerical-interpolant event bracket, NOT a PDE/model error bound"
+  },
+  "verification": "NEEDS_REFINEMENT_OR_REVIEW",
+  "model_validation": false
+}

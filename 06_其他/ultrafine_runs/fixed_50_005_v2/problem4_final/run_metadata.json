@@ -1,0 +1,131 @@
+{
+  "boundary_after_4h": {
+    "temperature_c": 50.0,
+    "moisture_kg_kg": 0.05
+  },
+  "fine_config": {
+    "radial_cells": 12160,
+    "output_interval_s": 60.0,
+    "reference_surface_layer": 0.1,
+    "surface_refinement_factor": 10,
+    "relative_tolerance": 1e-12,
+    "temperature_absolute_tolerance": 1e-12,
+    "moisture_absolute_tolerance": 1e-14,
+    "initial_maximum_step_s": 0.25,
+    "drying_maximum_step_s": 1.25,
+    "first_step_s": 1.25e-05,
+    "environment_data_end_s": 14400.0,
+    "drying_segment_s": 21600.0,
+    "maximum_duration_s": 1209600.0
+  },
+  "drying_crossing_s": 183926.07446263888,
+  "drying_crossing_h": 51.09057623962191,
+  "safe_end_s": 184080,
+  "safe_end_h": 51.13333333333333,
+  "fine_runtime_s": 1974.562609870918,
+  "fine_diagnostics": {
+    "runtime_s": 1974.562609870918,
+    "function_evaluations": 426700,
+    "jacobian_evaluations": 756,
+    "lu_decompositions": 53151,
+    "integration_segments": 9,
+    "returned_time_points": 3121,
+    "min_temperature_c": 28.0,
+    "max_temperature_c": 50.05000548377123,
+    "min_moisture_kg_kg": 0.05251929479764706,
+    "max_moisture_kg_kg": 2.550000000000004,
+    "min_density_kg_m3": 764.7267365317882,
+    "max_density_kg_m3": 989.5000000000003,
+    "min_heat_capacity_j_kg_k": 1957.2821033999667,
+    "max_heat_capacity_j_kg_k": 3394.366197183099,
+    "min_conductivity_w_m_k": 0.1299797305488341,
+    "max_conductivity_w_m_k": 0.26366197183098594,
+    "min_diffusivity_m2_s": 9.296212486890489e-12,
+    "max_diffusivity_m2_s": 2.477120246920061e-09,
+    "max_output_interval_balance_abs": 2.375877272697835e-14,
+    "max_output_interval_balance_rel": 3.0928416106544834e-13,
+    "maximum_location_was_center": true
+  },
+  "spatial": {
+    "coarse_to_medium": {
+      "max_abs_difference": 1.7364437083777773e-06,
+      "rms_difference": 7.358788398275948e-08,
+      "max_location_time_s": 900,
+      "max_location_xi": 0.9,
+      "common_end_time_s": 187200,
+      "drying_crossing_difference_s": 0.0795839924539905
+    },
+    "medium_to_fine": {
+      "max_abs_difference": 4.3411110928204266e-07,
+      "rms_difference": 1.839692074185445e-08,
+      "max_location_time_s": 900,
+      "max_location_xi": 0.9,
+      "common_end_time_s": 187200,
+      "drying_crossing_difference_s": 0.019895897043170407
+    },
+    "observed_order": 1.9999993945301235,
+    "estimated_fine_grid_max_error": 1.4470378406632544e-07,
+    "estimated_fine_grid_max_error_with_1p25_safety": 1.808797300829068e-07,
+    "crossing_times_s": {
+      "coarse": 183926.17394252837,
+      "medium": 183926.09435853592,
+      "fine": 183926.07446263888
+    }
+  },
+  "temporal": {
+    "coarse_to_medium": {
+      "max_abs_difference": 1.4304890605387754e-10,
+      "rms_difference": 9.68993509342827e-13,
+      "max_location_time_s": 11160,
+      "max_location_xi": 1.0,
+      "common_end_time_s": 187200,
+      "drying_crossing_difference_s": 1.567997969686985e-06
+    },
+    "medium_to_fine": {
+      "max_abs_difference": 1.1593537241338936e-10,
+      "rms_difference": 1.5255299668004517e-12,
+      "max_location_time_s": 13260,
+      "max_location_xi": 1.0,
+      "common_end_time_s": 187200,
+      "drying_crossing_difference_s": 7.355032721534371e-06
+    },
+    "richardson_field": {
+      "observed_order": 0.30318765852310803,
+      "estimated_fine_error": 4.957306839769511e-10,
+      "estimated_fine_error_with_1p25_safety": 6.19663354971189e-10
+    },
+    "richardson_drying_time": {
+      "observed_order": -2.22980806845817,
+      "estimated_fine_error": 7.355032721534371e-06,
+      "estimated_fine_error_with_1p25_safety": 9.193790901917964e-06
+    }
+  },
+  "combined_field_error_bound_kg_kg": 1.81499393437878e-07,
+  "density_shrinkage_consistency_if_rho_is_wet_bulk": {
+    "interpretation": "appendix_4_density_as_actual_wet_bulk_density",
+    "status": "inconsistent_with_prescribed_affine_shrinkage",
+    "evaluation_time_s": 184080.0,
+    "cylinder_length_m": 0.25,
+    "initial_radius_m": 0.02,
+    "current_radius_m": 0.012,
+    "volume_jacobian": 0.36,
+    "initial_wet_bulk_density_kg_m3": 989.5,
+    "initial_dry_solid_density_proxy_kg_m3": 278.7323943661972,
+    "current_volume_averaged_dry_solid_density_proxy_kg_m3": 689.3659788044895,
+    "initial_dry_mass_proxy_kg": 0.0875663642458338,
+    "current_dry_mass_proxy_kg": 0.07796545540728916,
+    "dry_mass_proxy_ratio": 0.8903584850046868,
+    "dry_mass_proxy_relative_change": -0.10964151499531316,
+    "dry_mass_proxy_drop_percent": 10.964151499531315,
+    "local_dry_mass_jacobian_ratio_min": 0.8687670969776798,
+    "local_dry_mass_jacobian_ratio_max": 0.9383321809580082,
+    "dry_mass_conserving_radius_m": 0.012717413580819575,
+    "radius_difference_actual_minus_consistent_m": -0.0007174135808195748
+  },
+  "excel_validation": {
+    "sheet_name": "Sheet1",
+    "dimension": "A1:V3069",
+    "checked_numerical_values": 43346,
+    "max_error_against_rounded_solver_output": 0.0
+  }
+}

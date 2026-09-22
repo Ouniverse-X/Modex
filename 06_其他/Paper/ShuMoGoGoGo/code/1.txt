@@ -1,0 +1,668 @@
+# Question 1 and shared finite-volume core routines
+"""Core routines for Questions 1--4 (I/O, logging and plotting omitted)."""
+
+from __future__ import annotations
+
+from collections.abc import Callable
+import numpy as np
+from scipy.integrate import solve_ivp
+from scipy.optimize import brentq
+
+
+HEAT_TRANSFER = 25.0       # W/(m^2 K)
+MASS_TRANSFER = 8.0e-7     # m/s
+INITIAL_T = 28.0           # deg C
+INITIAL_C = 2.55           # kg/kg, dry basis
+DRY_LIMIT = 0.15           # kg/kg, dry basis
+
+
+def material_properties(
+    moisture: np.ndarray, temperature_c: np.ndarray, model: int
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """Return rho, cp, k and D for the selected appendix model."""
+    c = np.maximum(np.asarray(moisture, dtype=float), 1.0e-12)
+    tk = np.asarray(temperature_c, dtype=float) + 273.15
+    ratio = c / (1.0 + c)
+
+    if model == 1:  # Question 1: constant thermal properties
+        rho = np.full_like(c, 820.0)
+        cp = np.full_like(c, 2600.0)
+        k = np.full_like(c, 0.36)
+        diffusivity = 7.0e-9 * np.exp(-0.89 / c)
+    elif model == 3:  # Attachment 3, Questions 2 and 3
+        rho = 650.0 + 128.0 * c
+        cp = 1450.0 + 2736.0 * ratio
+        k = 0.21 + 0.38 * ratio
+        diffusivity = 2.4e-3 * np.exp(-0.45 / c - 3850.0 / tk)
+    elif model == 4:  # Attachment 4, Question 4
+        rho = 760.0 + 90.0 * c
+        cp = 1850.0 + 2150.0 * ratio
+        k = 0.12 + 0.20 * ratio
+        diffusivity = 4.2e-4 * np.exp(-0.30 / c - 3850.0 / tk)
+    else:
+        raise ValueError("model must be 1, 3 or 4")
+    return rho, cp, k, diffusivity
+
+
+def refined_grid(intervals: int, surface_fraction: float = 0.1) -> np.ndarray:
+    """Grid on x in [0,1], with a 10:1 refinement in the surface layer."""
+    ratio = 10
+    bulk_fraction = 1.0 - surface_fraction
+    bulk_intervals = round(
+        intervals * bulk_fraction / (bulk_fraction + ratio * surface_fraction)
+    )
+    surface_intervals = intervals - bulk_intervals
+    bulk = np.linspace(0.0, bulk_fraction, bulk_intervals + 1)
+    surface = np.linspace(
+        bulk_fraction, 1.0, surface_intervals + 1
+    )[1:]
+    return np.concatenate((bulk, surface))
+
+
+def storage_weights(x: np.ndarray) -> np.ndarray:
+    """Integral of x dx over every node-centred cylindrical control volume."""
+    faces = 0.5 * (x[:-1] + x[1:])
+    weights = np.empty_like(x)
+    weights[0] = 0.5 * faces[0] ** 2
+    weights[1:-1] = 0.5 * (faces[1:] ** 2 - faces[:-1] ** 2)
+    weights[-1] = 0.5 * (1.0 - faces[-1] ** 2)
+    return weights
+
+
+def harmonic_mean(left: np.ndarray, right: np.ndarray) -> np.ndarray:
+    return 2.0 * left * right / (left + right)
+
+
+def thomas_solve(
+    lower: np.ndarray, diagonal: np.ndarray,
+    upper: np.ndarray, right: np.ndarray,
+) -> np.ndarray:
+    """Solve a tridiagonal system (Thomas algorithm)."""
+    b, d = diagonal.copy(), right.copy()
+    for i in range(1, b.size):
+        factor = lower[i - 1] / b[i - 1]
+        b[i] -= factor * upper[i - 1]
+        d[i] -= factor * d[i - 1]
+    answer = np.empty_like(d)
+    answer[-1] = d[-1] / b[-1]
+    for i in range(b.size - 2, -1, -1):
+        answer[i] = (d[i] - upper[i] * answer[i + 1]) / b[i]
+    return answer
+
+
+def bdf_history(
+    old: np.ndarray,
+    previous: np.ndarray | None,
+    step_s: float,
+    previous_step_s: float | None = None,
+) -> tuple[float, np.ndarray]:
+    """Return a0 and the history term for BE/variable-step BDF2."""
+    if previous is None:
+        return 1.0 / step_s, old / step_s
+    previous_step_s = step_s if previous_step_s is None else previous_step_s
+    q = step_s / previous_step_s
+    a0 = (1.0 + 2.0 * q) / ((1.0 + q) * step_s)
+    history = ((1.0 + q) * old - q**2 * previous / (1.0 + q)) / step_s
+    return a0, history
+
+
+def implicit_fvm_step(
+    old: np.ndarray,
+    previous: np.ndarray | None,
+    step_s: float,
+    previous_step_s: float | None,
+    x: np.ndarray,
+    radius: float,
+    storage: np.ndarray,
+    coefficient: np.ndarray,
+    transfer: float,
+    ambient: float,
+) -> np.ndarray:
+    """One conservative BE/BDF2 step on the fixed reference interval."""
+    a0, history = bdf_history(old, previous, step_s, previous_step_s)
+    faces = 0.5 * (x[:-1] + x[1:])
+    conductance = (
+        faces * harmonic_mean(coefficient[:-1], coefficient[1:]) / np.diff(x)
+    )
+    capacity = radius**2 * storage_weights(x) * storage
+    diagonal = a0 * capacity
+    right = capacity * history
+    diagonal[:-1] += conductance
+    diagonal[1:] += conductance
+    diagonal[-1] += radius * transfer
+    right[-1] += radius * transfer * ambient
+    return thomas_solve(-conductance, diagonal, -conductance, right)
+
+
+def picard_bdf2_step(
+    old_t: np.ndarray,
+    old_c: np.ndarray,
+    previous_t: np.ndarray | None,
+    previous_c: np.ndarray | None,
+    step_s: float,
+    previous_step_s: float | None,
+    x: np.ndarray,
+    radius: float,
+    model: int,
+    ambient: tuple[float, float],
+    tolerance: float = 1.0e-10,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Coupled Picard update used by the fixed-step solvers in Q1 and Q3."""
+    temperature, moisture = old_t.copy(), old_c.copy()
+    for _ in range(50):
+        rho, cp, k, _ = material_properties(moisture, temperature, model)
+        new_t = implicit_fvm_step(
+            old_t, previous_t, step_s, previous_step_s, x, radius,
+            rho * cp, k, HEAT_TRANSFER, ambient[0],
+        )
+        _, _, _, diffusivity = material_properties(moisture, new_t, model)
+        new_c = implicit_fvm_step(
+            old_c, previous_c, step_s, previous_step_s, x, radius,
+            np.ones_like(moisture), diffusivity, MASS_TRANSFER, ambient[1],
+        )
+        change = max(
+            np.max(np.abs(new_t - temperature)),
+            np.max(np.abs(new_c - moisture)),
+        )
+        temperature, moisture = new_t, new_c
+        if change < tolerance:
+            return temperature, moisture
+    raise RuntimeError("Picard iteration did not converge")
+
+
+def transport_balance(
+    field: np.ndarray,
+    coefficient: np.ndarray,
+    x: np.ndarray,
+    radius: float,
+    transfer: float,
+    ambient: float,
+) -> np.ndarray:
+    """Conservative internal-face fluxes and the surface Robin flux."""
+    faces = 0.5 * (x[:-1] + x[1:])
+    face_coefficient = harmonic_mean(coefficient[:-1], coefficient[1:])
+    flux = faces * face_coefficient * np.diff(field) / np.diff(x)
+    balance = np.empty_like(field)
+    balance[0] = flux[0]
+    balance[1:-1] = flux[1:] - flux[:-1]
+    balance[-1] = radius * transfer * (ambient - field[-1]) - flux[-1]
+    return balance
+
+
+def build_rhs(
+    x: np.ndarray,
+    model: int,
+    radius_at: Callable[[float], float],
+    ambient_at: Callable[[float], tuple[float, float]],
+) -> Callable[[float, np.ndarray], np.ndarray]:
+    """Build the method-of-lines system for a fixed or shrinking cylinder."""
+    weights = storage_weights(x)
+    n = x.size
+
+    def rhs(time_s: float, state: np.ndarray) -> np.ndarray:
+        temperature = state[:n]
+        moisture = state[n:]
+        radius = float(radius_at(time_s))
+        ambient_t, ambient_c = ambient_at(time_s)
+        rho, cp, k, diffusivity = material_properties(
+            moisture, temperature, model
+        )
+        heat = transport_balance(
+            temperature, k, x, radius, HEAT_TRANSFER, ambient_t
+        )
+        mass = transport_balance(
+            moisture, diffusivity, x, radius, MASS_TRANSFER, ambient_c
+        )
+        scale = radius**2 * weights
+        return np.concatenate((heat / (scale * rho * cp), mass / scale))
+
+    return rhs
+
+
+def solve_adaptive_bdf(
+    intervals: int,
+    end_time_s: float,
+    model: int,
+    radius_at: Callable[[float], float],
+    ambient_at: Callable[[float], tuple[float, float]],
+    rtol: float = 1.0e-10,
+    atol_t: float = 1.0e-10,
+    atol_c: float = 1.0e-12,
+    max_step_s: float = 2.0,
+) -> tuple[object, float | None]:
+    """Adaptive BDF driver used by Q2/Q4; locate the drying event."""
+    x = refined_grid(intervals)
+    n = x.size
+    initial = np.r_[np.full(n, INITIAL_T), np.full(n, INITIAL_C)]
+    solution = solve_ivp(
+        build_rhs(x, model, radius_at, ambient_at),
+        (0.0, end_time_s),
+        initial,
+        method="BDF",
+        rtol=rtol,
+        atol=np.r_[np.full(n, atol_t), np.full(n, atol_c)],
+        dense_output=True,
+        max_step=max_step_s,
+    )
+    if not solution.success:
+        raise RuntimeError(solution.message)
+
+    maximum_c = np.max(solution.y[n:], axis=0)
+    crossing = np.flatnonzero(
+        (maximum_c[:-1] > DRY_LIMIT) & (maximum_c[1:] <= DRY_LIMIT)
+    )
+    if crossing.size == 0:
+        return solution, None
+    j = int(crossing[0])
+    event = lambda t: float(np.max(solution.sol(t)[n:]) - DRY_LIMIT)
+    dry_time = brentq(event, solution.t[j], solution.t[j + 1])
+    return solution, float(dry_time)
+
+
+def richardson_estimate(values: np.ndarray, safety: float = 1.5) -> tuple[float, float]:
+    """Observed order and fine-grid remainder for three 2:1 refinements."""
+    coarse, medium, fine = np.asarray(values, dtype=float)
+    order = np.log2(abs((coarse - medium) / (medium - fine)))
+    error = safety * abs(medium - fine) / (2.0**order - 1.0)
+    return float(order), float(error)
+
+
+def dry_mass_ratio(
+    x: np.ndarray,
+    moisture: np.ndarray,
+    radius: float,
+    initial_radius: float = 0.02,
+) -> float:
+    """Question 4 posterior dry-solid conservation diagnostic."""
+    weights = storage_weights(x)
+    dry_density = (760.0 + 90.0 * moisture) / (1.0 + moisture)
+    initial_dry_density = (760.0 + 90.0 * INITIAL_C) / (1.0 + INITIAL_C)
+    current = radius**2 * np.sum(weights * dry_density)
+    initial = initial_radius**2 * 0.5 * initial_dry_density
+    return float(current / initial)
+
+
+# Question 1 solver excerpt from the complete submitted program
+def solve_tridiagonal(
+    lower: Sequence[float],
+    diagonal: Sequence[float],
+    upper: Sequence[float],
+    rhs: Sequence[float],
+) -> list[float]:
+    """Thomas algorithm with pivot checks for a tridiagonal linear system."""
+    n = len(diagonal)
+    if n == 0 or len(rhs) != n or len(lower) != n - 1 or len(upper) != n - 1:
+        raise ValueError("invalid tridiagonal dimensions")
+
+    modified_upper = [0.0] * (n - 1)
+    modified_rhs = [0.0] * n
+    pivot = diagonal[0]
+    if not math.isfinite(pivot) or abs(pivot) < 1.0e-300:
+        raise ArithmeticError("zero or non-finite pivot at row 0")
+    if n > 1:
+        modified_upper[0] = upper[0] / pivot
+    modified_rhs[0] = rhs[0] / pivot
+
+    for i in range(1, n):
+        pivot = diagonal[i] - lower[i - 1] * modified_upper[i - 1]
+        if not math.isfinite(pivot) or abs(pivot) < 1.0e-300:
+            raise ArithmeticError(f"zero or non-finite pivot at row {i}")
+        if i < n - 1:
+            modified_upper[i] = upper[i] / pivot
+        modified_rhs[i] = (rhs[i] - lower[i - 1] * modified_rhs[i - 1]) / pivot
+
+    solution = [0.0] * n
+    solution[-1] = modified_rhs[-1]
+    for i in range(n - 2, -1, -1):
+        solution[i] = modified_rhs[i] - modified_upper[i] * solution[i + 1]
+    return solution
+
+
+def harmonic_mean(a: float, b: float) -> float:
+    denominator = a + b
+    if a <= 0.0 or b <= 0.0 or denominator <= 0.0:
+        raise ValueError("diffusion coefficients must be positive")
+    return 2.0 * a * b / denominator
+
+
+def make_radial_grid(
+    radius_m: float,
+    radial_cells: int,
+    surface_layer_m: float,
+    surface_refinement_factor: int,
+) -> list[float]:
+    """Create a two-zone grid refined near the convective surface.
+
+    The bulk cell width is ``surface_refinement_factor`` times the surface
+    cell width. Requested 0.1 cm output radii are nodes for all default
+    comparison grids.
+    """
+    bulk_length = radius_m - surface_layer_m
+    effective_length = bulk_length + surface_refinement_factor * surface_layer_m
+    bulk_step = effective_length / radial_cells
+    surface_step = bulk_step / surface_refinement_factor
+    bulk_cells_float = bulk_length / bulk_step
+    surface_cells_float = surface_layer_m / surface_step
+    bulk_cells = int(round(bulk_cells_float))
+    surface_cells = int(round(surface_cells_float))
+    if (
+        abs(bulk_cells_float - bulk_cells) > 1.0e-10
+        or abs(surface_cells_float - surface_cells) > 1.0e-10
+        or bulk_cells + surface_cells != radial_cells
+    ):
+        raise ValueError(
+            "radial_cells is incompatible with the two-zone grid; "
+            "use a multiple of 19 for the default 2 mm / factor-10 refinement"
+        )
+    grid = [i * bulk_step for i in range(bulk_cells + 1)]
+    interface = bulk_length
+    grid.extend(
+        interface + i * surface_step for i in range(1, surface_cells + 1)
+    )
+    grid[0] = 0.0
+    grid[-1] = radius_m
+    if any(b <= a for a, b in zip(grid, grid[1:])):
+        raise AssertionError("constructed radial grid is not strictly increasing")
+    return grid
+
+
+def make_time_coefficients(
+    old: Sequence[float], previous: Sequence[float] | None, dt: float
+) -> tuple[float, list[float]]:
+    if previous is None:
+        return 1.0 / dt, [value / dt for value in old]
+    factor = 1.0 / (2.0 * dt)
+    return 3.0 * factor, [
+        (4.0 * current - prior) * factor
+        for current, prior in zip(old, previous)
+    ]
+
+
+def implicit_fvm_step(
+    old: Sequence[float],
+    previous: Sequence[float] | None,
+    dt: float,
+    radii_m: Sequence[float],
+    storage: float,
+    gamma_nodes: Sequence[float],
+    boundary_transfer: float,
+    external_value: float,
+) -> list[float]:
+    """One BE/BDF2 step for the conservative radial diffusion equation."""
+    node_count = len(old)
+    if (
+        node_count < 2
+        or len(gamma_nodes) != node_count
+        or len(radii_m) != node_count
+    ):
+        raise ValueError("inconsistent spatial arrays")
+    radial_cells = node_count - 1
+    radius_m = radii_m[-1]
+    if radii_m[0] != 0.0 or any(b <= a for a, b in zip(radii_m, radii_m[1:])):
+        raise ValueError("invalid radial grid")
+    time_diagonal, history = make_time_coefficients(old, previous, dt)
+
+    lower = [0.0] * radial_cells
+    diagonal = [0.0] * node_count
+    upper = [0.0] * radial_cells
+    rhs = [0.0] * node_count
+
+    gamma_east = harmonic_mean(gamma_nodes[0], gamma_nodes[1])
+    r_east = 0.5 * (radii_m[0] + radii_m[1])
+    east_conductance = r_east * gamma_east / (radii_m[1] - radii_m[0])
+    center_weight = r_east * r_east / 2.0
+    diagonal[0] = storage * center_weight * time_diagonal + east_conductance
+    upper[0] = -east_conductance
+    rhs[0] = storage * center_weight * history[0]
+
+    for i in range(1, radial_cells):
+        r_i = radii_m[i]
+        r_west = 0.5 * (radii_m[i - 1] + r_i)
+        r_east = 0.5 * (r_i + radii_m[i + 1])
+        gamma_west = harmonic_mean(gamma_nodes[i - 1], gamma_nodes[i])
+        gamma_east = harmonic_mean(gamma_nodes[i], gamma_nodes[i + 1])
+        west_conductance = r_west * gamma_west / (r_i - radii_m[i - 1])
+        east_conductance = r_east * gamma_east / (radii_m[i + 1] - r_i)
+        volume_weight = (r_east * r_east - r_west * r_west) / 2.0
+        lower[i - 1] = -west_conductance
+        diagonal[i] = (
+            storage * volume_weight * time_diagonal
+            + west_conductance
+            + east_conductance
+        )
+        upper[i] = -east_conductance
+        rhs[i] = storage * volume_weight * history[i]
+
+    r_west = 0.5 * (radii_m[-2] + radius_m)
+    gamma_west = harmonic_mean(gamma_nodes[-2], gamma_nodes[-1])
+    west_conductance = r_west * gamma_west / (radius_m - radii_m[-2])
+    boundary_conductance = radius_m * boundary_transfer
+    surface_weight = (radius_m * radius_m - r_west * r_west) / 2.0
+    lower[-1] = -west_conductance
+    diagonal[-1] = (
+        storage * surface_weight * time_diagonal
+        + west_conductance
+        + boundary_conductance
+    )
+    rhs[-1] = (
+        storage * surface_weight * history[-1]
+        + boundary_conductance * external_value
+    )
+
+    return solve_tridiagonal(lower, diagonal, upper, rhs)
+
+
+def radial_storage_weights(radii_m: Sequence[float]) -> list[float]:
+    radial_cells = len(radii_m) - 1
+    radius_m = radii_m[-1]
+    weights = [0.0] * (radial_cells + 1)
+    first_face = 0.5 * (radii_m[0] + radii_m[1])
+    weights[0] = first_face * first_face / 2.0
+    for i in range(1, radial_cells):
+        west = 0.5 * (radii_m[i - 1] + radii_m[i])
+        east = 0.5 * (radii_m[i] + radii_m[i + 1])
+        weights[i] = (east * east - west * west) / 2.0
+    last_face = 0.5 * (radii_m[-2] + radius_m)
+    weights[-1] = (radius_m * radius_m - last_face * last_face) / 2.0
+    return weights
+
+
+def update_balance_diagnostic(
+    diagnostics: SolverDiagnostics,
+    field_name: str,
+    new: Sequence[float],
+    old: Sequence[float],
+    previous: Sequence[float] | None,
+    dt: float,
+    weights: Sequence[float],
+    storage: float,
+    radius_m: float,
+    boundary_transfer: float,
+    external_value: float,
+) -> None:
+    time_diagonal, history = make_time_coefficients(old, previous, dt)
+    storage_rate = sum(
+        storage * weight * (time_diagonal * value - hist)
+        for weight, value, hist in zip(weights, new, history)
+    )
+    boundary_rate = radius_m * boundary_transfer * (external_value - new[-1])
+    residual = abs(storage_rate - boundary_rate)
+    scale = max(abs(storage_rate), abs(boundary_rate), 1.0e-30)
+    relative = residual / scale
+    if field_name == "heat":
+        diagnostics.max_heat_balance_abs = max(
+            diagnostics.max_heat_balance_abs, residual
+        )
+        diagnostics.max_heat_balance_rel = max(
+            diagnostics.max_heat_balance_rel, relative
+        )
+    elif field_name == "moisture":
+        diagnostics.max_moisture_balance_abs = max(
+            diagnostics.max_moisture_balance_abs, residual
+        )
+        diagnostics.max_moisture_balance_rel = max(
+            diagnostics.max_moisture_balance_rel, relative
+        )
+    else:
+        raise ValueError(field_name)
+
+
+def solve_model(
+    environment: EnvironmentData,
+    parameters: PhysicalParameters,
+    config: NumericalConfig,
+    progress: bool = False,
+) -> SimulationResult:
+    config.validate()
+    environment.validate(config.end_time_s)
+    started = time.perf_counter()
+
+    n = config.radial_cells
+    dt = config.time_step_s
+    step_count = int(round(config.end_time_s / dt))
+    output_stride = int(round(config.output_interval_s / dt))
+    radii_m = make_radial_grid(
+        parameters.radius_m,
+        n,
+        config.surface_layer_m,
+        config.surface_refinement_factor,
+    )
+    radii_cm = [0.1 * i for i in range(21)]
+    requested_indices = []
+    for radius_cm in radii_cm:
+        target = radius_cm / 100.0
+        index = bisect.bisect_left(radii_m, target)
+        candidates = [j for j in (index - 1, index) if 0 <= j < len(radii_m)]
+        best = min(candidates, key=lambda j: abs(radii_m[j] - target))
+        if abs(radii_m[best] - target) > 1.0e-12:
+            raise ValueError(f"output radius {radius_cm} cm is not a grid node")
+        requested_indices.append(best)
+    weights = radial_storage_weights(radii_m)
+
+    temperature = [parameters.initial_temperature_c] * (n + 1)
+    moisture = [parameters.initial_moisture_kg_kg] * (n + 1)
+    previous_temperature: list[float] | None = None
+    previous_moisture: list[float] | None = None
+    constant_k = [parameters.conductivity_w_m_k] * (n + 1)
+
+    output_times: list[int] = []
+    temperature_output: list[list[float]] = []
+    moisture_output: list[list[float]] = []
+    diagnostics = SolverDiagnostics()
+
+    for step in range(1, step_count + 1):
+        t_new = step * dt
+        external_temperature, external_moisture = environment.interpolate(t_new)
+
+        new_temperature = implicit_fvm_step(
+            temperature,
+            previous_temperature,
+            dt,
+            radii_m,
+            parameters.volumetric_heat_capacity,
+            constant_k,
+            parameters.heat_transfer_w_m2_k,
+            external_temperature,
+        )
+
+        guess = moisture.copy()
+        final_update = math.inf
+        for iteration in range(1, config.picard_max_iterations + 1):
+            diffusivity = [parameters.moisture_diffusivity(value) for value in guess]
+            candidate = implicit_fvm_step(
+                moisture,
+                previous_moisture,
+                dt,
+                radii_m,
+                1.0,
+                diffusivity,
+                parameters.mass_transfer_m_s,
+                external_moisture,
+            )
+            final_update = max(abs(a - b) for a, b in zip(candidate, guess))
+            guess = candidate
+            if final_update < config.picard_tolerance:
+                break
+        else:
+            raise RuntimeError(
+                f"Picard iteration failed at t={t_new:.9g} s; "
+                f"last update={final_update:.3e}"
+            )
+        new_moisture = guess
+
+        diagnostics.moisture_steps += 1
+        diagnostics.total_picard_iterations += iteration
+        diagnostics.max_picard_iterations = max(
+            diagnostics.max_picard_iterations, iteration
+        )
+        diagnostics.max_picard_update = max(
+            diagnostics.max_picard_update, final_update
+        )
+
+        update_balance_diagnostic(
+            diagnostics,
+            "heat",
+            new_temperature,
+            temperature,
+            previous_temperature,
+            dt,
+            weights,
+            parameters.volumetric_heat_capacity,
+            parameters.radius_m,
+            parameters.heat_transfer_w_m2_k,
+            external_temperature,
+        )
+        update_balance_diagnostic(
+            diagnostics,
+            "moisture",
+            new_moisture,
+            moisture,
+            previous_moisture,
+            dt,
+            weights,
+            1.0,
+            parameters.radius_m,
+            parameters.mass_transfer_m_s,
+            external_moisture,
+        )
+
+        previous_temperature, temperature = temperature, new_temperature
+        previous_moisture, moisture = moisture, new_moisture
+
+        diagnostics.min_temperature_c = min(
+            diagnostics.min_temperature_c, min(temperature)
+        )
+        diagnostics.max_temperature_c = max(
+            diagnostics.max_temperature_c, max(temperature)
+        )
+        diagnostics.min_moisture_kg_kg = min(
+            diagnostics.min_moisture_kg_kg, min(moisture)
+        )
+        diagnostics.max_moisture_kg_kg = max(
+            diagnostics.max_moisture_kg_kg, max(moisture)
+        )
+
+        if step % output_stride == 0:
+            output_times.append(int(round(t_new)))
+            temperature_output.append([temperature[i] for i in requested_indices])
+            moisture_output.append([moisture[i] for i in requested_indices])
+
+        if progress and (step % max(1, step_count // 10) == 0):
+            print(
+                f"  {100.0 * step / step_count:5.1f}%  "
+                f"t={t_new:8.3f} s  Picard={iteration}",
+                flush=True,
+            )
+
+    if output_times != list(range(1, int(config.end_time_s) + 1)):
+        raise AssertionError("unexpected output time grid")
+    return SimulationResult(
+        times_s=output_times,
+        radii_cm=radii_cm,
+        temperatures_c=temperature_output,
+        moistures_kg_kg=moisture_output,
+        diagnostics=diagnostics,
+        runtime_s=time.perf_counter() - started,
+    )
+
+

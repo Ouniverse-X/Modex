@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="body" x1="0" x2="1">
+      <stop offset="0" stop-color="#f3dfb0"/>
+      <stop offset="0.55" stop-color="#dcb875"/>
+      <stop offset="1" stop-color="#bd8b45"/>
+    </linearGradient>
+    <radialGradient id="section" cx="42%" cy="38%" r="68%">
+      <stop offset="0" stop-color="#f7e9c6"/>
+      <stop offset="0.72" stop-color="#d7ad66"/>
+      <stop offset="1" stop-color="#a86d2d"/>
+    </radialGradient>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1769aa"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c62828"/>
+    </marker>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#455a64"/>
+    </marker>
+    <style>
+      .title { font: 700 30px "Noto Sans CJK SC","Microsoft YaHei",sans-serif; fill:#1f2937; }
+      .head { font: 700 22px "Noto Sans CJK SC","Microsoft YaHei",sans-serif; fill:#263238; }
+      .txt { font: 18px "Noto Sans CJK SC","Microsoft YaHei",sans-serif; fill:#263238; }
+      .small { font: 16px "Noto Sans CJK SC","Microsoft YaHei",sans-serif; fill:#455a64; }
+      .math { font: italic 20px "Times New Roman",serif; fill:#263238; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1280" height="720" fill="#fbfcfe"/>
+  <text x="640" y="48" text-anchor="middle" class="title">圆柱药材的一维径向传热—传质结构</text>
+
+  <g transform="translate(70,115)">
+    <path d="M120,110 L560,110 A90,150 0 0 1 560,410 L120,410 Z" fill="url(#body)" stroke="#6d4c2e" stroke-width="3"/>
+    <ellipse cx="120" cy="260" rx="90" ry="150" fill="url(#section)" stroke="#6d4c2e" stroke-width="3"/>
+    <ellipse cx="560" cy="260" rx="90" ry="150" fill="none" stroke="#6d4c2e" stroke-width="3"/>
+    <line x1="120" y1="260" x2="560" y2="260" stroke="#455a64" stroke-width="2" stroke-dasharray="8 6"/>
+    <line x1="120" y1="470" x2="560" y2="470" stroke="#455a64" stroke-width="2" marker-start="url(#arrowGray)" marker-end="url(#arrowGray)"/>
+    <line x1="120" y1="445" x2="120" y2="485" stroke="#455a64" stroke-width="2"/>
+    <line x1="560" y1="445" x2="560" y2="485" stroke="#455a64" stroke-width="2"/>
+    <text x="340" y="505" text-anchor="middle" class="math">L = 25 cm</text>
+
+    <line x1="120" y1="260" x2="120" y2="110" stroke="#455a64" stroke-width="2" marker-end="url(#arrowGray)"/>
+    <text x="140" y="175" class="math">R = 2 cm</text>
+    <text x="100" y="282" class="math">r = 0</text>
+
+    <line x1="310" y1="68" x2="310" y2="128" stroke="#c62828" stroke-width="4" marker-end="url(#arrowRed)"/>
+    <line x1="420" y1="68" x2="420" y2="128" stroke="#c62828" stroke-width="4" marker-end="url(#arrowRed)"/>
+    <line x1="310" y1="452" x2="310" y2="392" stroke="#1769aa" stroke-width="4" marker-end="url(#arrowBlue)"/>
+    <line x1="420" y1="452" x2="420" y2="392" stroke="#1769aa" stroke-width="4" marker-end="url(#arrowBlue)"/>
+    <text x="365" y="42" text-anchor="middle" class="txt" fill="#c62828">环境向表面输入热量</text>
+  </g>
+
+  <g transform="translate(800,120)">
+    <circle cx="205" cy="205" r="178" fill="url(#section)" stroke="#6d4c2e" stroke-width="3"/>
+    <circle cx="205" cy="205" r="120" fill="none" stroke="#8d6e63" stroke-width="2" stroke-dasharray="7 6"/>
+    <circle cx="205" cy="205" r="58" fill="none" stroke="#8d6e63" stroke-width="2" stroke-dasharray="7 6"/>
+    <circle cx="205" cy="205" r="5" fill="#263238"/>
+    <line x1="205" y1="205" x2="344" y2="94" stroke="#455a64" stroke-width="3" marker-end="url(#arrowGray)"/>
+    <text x="286" y="132" class="math">r</text>
+    <text x="213" y="230" class="math">0</text>
+    <text x="350" y="92" class="math">R(t)</text>
+
+    <line x1="408" y1="205" x2="348" y2="205" stroke="#c62828" stroke-width="4" marker-end="url(#arrowRed)"/>
+    <line x1="348" y1="246" x2="408" y2="246" stroke="#1769aa" stroke-width="4" marker-end="url(#arrowBlue)"/>
+    <text x="420" y="198" class="small">热流</text>
+    <text x="420" y="253" class="small">水分流</text>
+
+    <rect x="24" y="410" width="430" height="105" rx="14" fill="#edf4fa" stroke="#90a4ae"/>
+    <text x="239" y="443" text-anchor="middle" class="head">一维化的含义</text>
+    <text x="239" y="476" text-anchor="middle" class="txt">截面上仅保留半径 r 的变化</text>
+    <text x="239" y="505" text-anchor="middle" class="small">忽略周向变化与端部附近的轴向效应</text>
+  </g>
+
+  <rect x="70" y="650" width="1140" height="45" rx="10" fill="#fff4e5" stroke="#e0a24a"/>
+  <text x="640" y="680" text-anchor="middle" class="txt">依据：L/R = 12.5，端面总面积与侧面积之比为 R/L = 0.08；该几何判据支持主体区域的一维径向近似。</text>
+</svg>

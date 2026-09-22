@@ -1,0 +1,21 @@
+% Prefer existing PDF/PNG exports. Missing figures remain explicitly marked.
+\makeatletter
+\define@key{Gin}{inkscapelatex}{}
+\let\PaperOriginalGraphics\includegraphics
+\let\PaperOriginalSVG\includesvg
+\newcommand{\PaperMissingFigure}[1]{%
+  \PackageWarning{new1-graphics}{Missing figure: #1}%
+  \fbox{\parbox{0.85\linewidth}{\centering\small
+    \vspace{1em}插图文件缺失，待补齐\par
+    \detokenize{#1}\par\vspace{1em}}}}
+\renewcommand{\includegraphics}[2][]{%
+  \IfFileExists{#2}{\PaperOriginalGraphics[#1]{#2}}{%
+    \IfFileExists{#2.pdf}{\PaperOriginalGraphics[#1]{#2.pdf}}{%
+      \IfFileExists{#2.png}{\PaperOriginalGraphics[#1]{#2.png}}{%
+        \PaperMissingFigure{#2}}}}}
+\renewcommand{\includesvg}[2][]{%
+  \IfFileExists{#2.pdf}{\PaperOriginalGraphics[#1]{#2.pdf}}{%
+    \IfFileExists{#2.png}{\PaperOriginalGraphics[#1]{#2.png}}{%
+      \IfFileExists{#2.svg}{\PaperOriginalSVG[#1]{#2}}{%
+        \PaperMissingFigure{#2}}}}}
+\makeatother

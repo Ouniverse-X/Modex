@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "boundary_after_4h": {
+    "temperature_c": 50.0,
+    "moisture_kg_kg": 0.05
+  },
+  "tasks": [
+    {
+      "id": "q3_n1280_dt0p25",
+      "problem": 3,
+      "radial_cells": 1280,
+      "time_step_s": 0.25
+    },
+    {
+      "id": "q3_n2560_dt0p25",
+      "problem": 3,
+      "radial_cells": 2560,
+      "time_step_s": 0.25
+    },
+    {
+      "id": "q3_n5120_dt0p25",
+      "problem": 3,
+      "radial_cells": 5120,
+      "time_step_s": 0.25
+    },
+    {
+      "id": "q3_n5120_dt1",
+      "problem": 3,
+      "radial_cells": 5120,
+      "time_step_s": 1.0
+    },
+    {
+      "id": "q3_n5120_dt0p5",
+      "problem": 3,
+      "radial_cells": 5120,
+      "time_step_s": 0.5
+    },
+    {
+      "id": "q4_n3040_fine",
+      "problem": 4,
+      "radial_cells": 3040,
+      "rtol": 1e-12,
+      "initial_max_step_s": 0.25,
+      "drying_max_step_s": 1.25
+    },
+    {
+      "id": "q4_n6080_fine",
+      "problem": 4,
+      "radial_cells": 6080,
+      "rtol": 1e-12,
+      "initial_max_step_s": 0.25,
+      "drying_max_step_s": 1.25
+    },
+    {
+      "id": "q4_n12160_fine",
+      "problem": 4,
+      "radial_cells": 12160,
+      "rtol": 1e-12,
+      "initial_max_step_s": 0.25,
+      "drying_max_step_s": 1.25
+    },
+    {
+      "id": "q4_n12160_time_coarse",
+      "problem": 4,
+      "radial_cells": 12160,
+      "rtol": 4e-12,
+      "initial_max_step_s": 1.0,
+      "drying_max_step_s": 5.0
+    },
+    {
+      "id": "q4_n12160_time_medium",
+      "problem": 4,
+      "radial_cells": 12160,
+      "rtol": 2e-12,
+      "initial_max_step_s": 0.5,
+      "drying_max_step_s": 2.5
+    }
+  ],
+  "source_sha256": {
+    "problem3/solve_problem3.py": "fa73fefd7e08824ec2cc4c1ec0ef7583d93ccb467d833204fa930c8cc2fd405c",
+    "problem3/accelerated_problem3.py": "104c18853435e1d4acc83d547873fa7cf5d6ebb7f7a27d2d3ddeed775435c75e",
+    "problem4/solve_problem4.py": "20cb3854095dad3bd7fb52cf338143f6302d93bae4383ab2bc77be2c46f242e0",
+    "A题/附件/附件1.xlsx": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+    "A题/附件/附件2.xlsx": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af",
+    "A题/附件/附件3/result3.xlsx": "07e4793d620a7f899804c0298d49a16a197960440fd47f8bb780c57ec27e2859",
+    "A题/附件/附件3/result4.xlsx": "86e9300ffa3d30c43de895ea6723da943e85b8740b137bcae5af7107f076eeac"
+  },
+  "logical_cpus": 128,
+  "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+  "python": "3.10.18 (main, Sep  2 2025, 14:19:37) [Clang 20.1.4 ]"
+}

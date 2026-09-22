@@ -1,0 +1,114 @@
+{
+  "status": "accepted",
+  "generated_at_utc": "2026-09-11T07:50:04.910618+00:00",
+  "boundary_after_4h": {
+    "temperature_c": 50.0,
+    "moisture_kg_kg": 0.05
+  },
+  "criterion": {
+    "mathematical_threshold_exclusive": 0.15,
+    "four_decimal_upper_exclusive": 0.14995,
+    "solver_event_threshold": 0.14994,
+    "acceptance_expression": "solver_event_threshold + combined_field_error_bound < 0.14995"
+  },
+  "fine_config": {
+    "radial_cells": 2560,
+    "time_step_s": 0.5,
+    "output_interval_s": 60.0,
+    "maximum_time_h": 96.0,
+    "plateau_start_h": 3.0,
+    "environment_extension": "fixed",
+    "fixed_environment_temperature_c": 50.0,
+    "fixed_environment_moisture_kg_kg": 0.05,
+    "picard_tolerance": 1e-10,
+    "picard_max_iterations": 40
+  },
+  "fine_event_time_s": 207106.46909912815,
+  "fine_event_time_h": 57.52957474975782,
+  "fine_event_max_moisture": 0.14994,
+  "combined_field_error_bound_kg_kg": 3.813662409195817e-06,
+  "certified_moisture_upper_bound_kg_kg": 0.1499438136624092,
+  "combined_crossing_time_error_bound_s": 0.01417449546886903,
+  "certified_continuous_safe_time_s": 207106.48327362363,
+  "certified_continuous_safe_time_h": 57.52957868711768,
+  "engineering_safe_time_s": 207120.0,
+  "engineering_safe_time_h": 57.53333333333333,
+  "spatial": {
+    "coarse_to_medium": {
+      "max_abs_difference": 2.4263483990871748e-05,
+      "rms_difference": 2.1503156913004691e-07,
+      "max_location_time_s": 60.0,
+      "max_location_radius_cm": 2.0,
+      "common_regular_rows": 3451,
+      "drying_time_difference_s": 0.12463245281833224
+    },
+    "medium_to_fine": {
+      "max_abs_difference": 6.063901245134673e-06,
+      "rms_difference": 5.5480170511142944e-08,
+      "max_location_time_s": 60.0,
+      "max_location_radius_cm": 2.0,
+      "common_regular_rows": 3451,
+      "drying_time_difference_s": 0.031450150709133595
+    },
+    "richardson_field": {
+      "observed_order": 2.0004685582304,
+      "estimated_fine_error": 2.020425348452495e-06,
+      "estimated_fine_error_with_1p25_safety": 2.525531685565619e-06
+    },
+    "richardson_time": {
+      "observed_order": 1.986540942395242,
+      "estimated_fine_error": 0.010614805142591284,
+      "estimated_fine_error_with_1p25_safety": 0.013268506428239105
+    }
+  },
+  "temporal": {
+    "coarse_to_medium": {
+      "max_abs_difference": 1.1982797900156328e-05,
+      "rms_difference": 7.879589798965764e-08,
+      "max_location_time_s": 60.0,
+      "max_location_radius_cm": 2.0,
+      "common_regular_rows": 3451,
+      "drying_time_difference_s": 0.0007913805893622339
+    },
+    "medium_to_fine": {
+      "max_abs_difference": 3.0363407370614937e-06,
+      "rms_difference": 2.1260062650568936e-08,
+      "max_location_time_s": 60.0,
+      "max_location_radius_cm": 2.0,
+      "common_regular_rows": 3451,
+      "drying_time_difference_s": 0.0004771973181050271
+    },
+    "richardson_field": {
+      "observed_order": 1.980559203073064,
+      "estimated_fine_error": 1.0305045789041585e-06,
+      "estimated_fine_error_with_1p25_safety": 1.2881307236301982e-06
+    },
+    "richardson_time": {
+      "observed_order": 0.729785744979559,
+      "estimated_fine_error": 0.0007247912325039393,
+      "estimated_fine_error_with_1p25_safety": 0.0009059890406299242
+    }
+  },
+  "diagnostics": {
+    "steps": 414213,
+    "max_picard_iterations": 4,
+    "total_picard_iterations": 1446976,
+    "final_picard_update": 5.030940941619377e-12,
+    "max_heat_balance_abs": 8.743983315184778e-10,
+    "max_heat_balance_rel": 0.05323710364972007,
+    "max_moisture_balance_abs": 7.504645738224097e-19,
+    "max_moisture_balance_rel": 8.953823359151559e-11,
+    "max_radial_monotonicity_violation": 3.1086244689504383e-15,
+    "min_temperature_c": 27.999999999998586,
+    "max_temperature_c": 50.0398665090371,
+    "min_moisture_kg_kg": 0.05265459768184152,
+    "max_moisture_kg_kg": 2.5500000000000558,
+    "mean_picard_iterations": 3.4933138264612653
+  },
+  "excel_validation": {
+    "zip_integrity": "ok",
+    "dimension": "A1:V3453",
+    "rows_including_header": 3453,
+    "columns": 22
+  }
+}

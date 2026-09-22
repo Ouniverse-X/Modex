@@ -1,0 +1,3 @@
+﻿coarse_radial_cells,coarse_time_step_s,fine_radial_cells,fine_time_step_s,coarse_drying_time_h,fine_drying_time_h,drying_time_difference_h,max_common_6h_profile_difference
+20,120.0,40,60.0,57.51499721908116,57.48458719739434,0.03041002168681492,0.0002578059129672017
+40,60.0,80,30.0,57.48458719739434,57.476752903215946,0.007834294178392156,7.629059804598048e-05

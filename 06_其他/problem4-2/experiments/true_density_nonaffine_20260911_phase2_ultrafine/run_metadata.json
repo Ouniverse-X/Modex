@@ -1,0 +1,167 @@
+{
+  "model": "true wet density + measured outer radius + non-affine radial mapping",
+  "created_at_utc": "2026-09-11T09:51:31.551307+00:00",
+  "phase1_source": "/home/beihang/projects/Modex/problem4-2/experiments/true_density_nonaffine_20260911_phase1",
+  "inputs": {
+    "environment": {
+      "path": "/home/beihang/projects/Modex/A题/附件/附件1.xlsx",
+      "sha256": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7"
+    },
+    "radius": {
+      "path": "/home/beihang/projects/Modex/A题/附件/附件2.xlsx",
+      "sha256": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af"
+    },
+    "solver": {
+      "path": "/home/beihang/projects/Modex/problem4-2/true_density_nonaffine.py",
+      "sha256": "7d218144693805a98960d7633227729fd29310bcc1cc2395b6c15d22a6c4a22f"
+    },
+    "runner": {
+      "path": "/home/beihang/projects/Modex/problem4-2/run_ultrafine.py",
+      "sha256": "f705757ee1b5982def89be362b1449d9de4fde9dca7dd15308324b2b36bba8f4"
+    }
+  },
+  "cases": {
+    "reference_n3040_dt1": {
+      "case": "reference_n3040_dt1",
+      "config": {
+        "radial_cells": 3040,
+        "time_step_s": 1.0,
+        "output_interval_s": 60.0,
+        "maximum_time_h": 60.0,
+        "surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "picard_tolerance": 1e-10,
+        "picard_max_iterations": 40,
+        "drying_threshold_kg_kg": 0.15
+      },
+      "drying_crossing_s": 172324.63521914845,
+      "drying_crossing_h": 47.86795422754123,
+      "runtime_s": 307.56383283017203,
+      "diagnostics": {
+        "steps": 172325,
+        "max_picard_iterations": 5,
+        "mean_picard_iterations": 3.9785115334397214,
+        "max_water_balance_abs": 1.4216953352422235e-14,
+        "max_water_balance_rel": 1.6101183267680064e-10,
+        "max_local_dry_mass_relative_error": 9.66815516534325e-12,
+        "minimum_length_ratio": 1.000032331397261,
+        "maximum_length_ratio": 1.2954206055846473,
+        "max_radial_monotonicity_violation": 4.440892098500626e-15,
+        "maximum_moisture_at_center": true
+      },
+      "output_rows": 2874,
+      "inferred_length_min_m": 0.2500000000000257,
+      "inferred_length_max_m": 0.32385515139616183,
+      "inferred_length_at_crossing_m": 0.28072580169437444
+    },
+    "time_n3040_dt2": {
+      "case": "time_n3040_dt2",
+      "config": {
+        "radial_cells": 3040,
+        "time_step_s": 2.0,
+        "output_interval_s": 60.0,
+        "maximum_time_h": 60.0,
+        "surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "picard_tolerance": 1e-10,
+        "picard_max_iterations": 40,
+        "drying_threshold_kg_kg": 0.15
+      },
+      "drying_crossing_s": 172324.6364386118,
+      "drying_crossing_h": 47.86795456628106,
+      "runtime_s": 162.71241027116776,
+      "diagnostics": {
+        "steps": 86163,
+        "max_picard_iterations": 6,
+        "mean_picard_iterations": 4.416338799716816,
+        "max_water_balance_abs": 4.053745186749502e-14,
+        "max_water_balance_rel": 4.0142222597481227e-10,
+        "max_local_dry_mass_relative_error": 9.82747216937696e-12,
+        "minimum_length_ratio": 1.0000649767226952,
+        "maximum_length_ratio": 1.2954206399078325,
+        "max_radial_monotonicity_violation": 2.220446049250313e-15,
+        "maximum_moisture_at_center": true
+      },
+      "output_rows": 2874,
+      "inferred_length_min_m": 0.2500000000000257,
+      "inferred_length_max_m": 0.32385515997695813,
+      "inferred_length_at_crossing_m": 0.28072580169441563
+    },
+    "safety_n3040_dt1": {
+      "case": "safety_n3040_dt1",
+      "config": {
+        "radial_cells": 3040,
+        "time_step_s": 1.0,
+        "output_interval_s": 60.0,
+        "maximum_time_h": 60.0,
+        "surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "picard_tolerance": 1e-10,
+        "picard_max_iterations": 40,
+        "drying_threshold_kg_kg": 0.1499
+      },
+      "drying_crossing_s": 172515.40954187504,
+      "drying_crossing_h": 47.920947094965285,
+      "runtime_s": 183.08090612804517,
+      "diagnostics": {
+        "steps": 172516,
+        "max_picard_iterations": 5,
+        "mean_picard_iterations": 3.9774281805745555,
+        "max_water_balance_abs": 1.4216953352422235e-14,
+        "max_water_balance_rel": 1.6101183267680064e-10,
+        "max_local_dry_mass_relative_error": 9.66815516534325e-12,
+        "minimum_length_ratio": 1.000032331397261,
+        "maximum_length_ratio": 1.2954206055846473,
+        "max_radial_monotonicity_violation": 4.440892098500626e-15,
+        "maximum_moisture_at_center": true
+      },
+      "output_rows": 2877,
+      "inferred_length_min_m": 0.2500000000000257,
+      "inferred_length_max_m": 0.32385515139616183,
+      "inferred_length_at_crossing_m": 0.28071128449352334
+    }
+  },
+  "convergence": {
+    "comparisons": {
+      "space_760_vs_1520": {
+        "common_end_s": 172200.0,
+        "moisture_max_abs_all": 0.0015890177432069663,
+        "moisture_max_abs_last_6h": 3.655446849934463e-05,
+        "temperature_max_abs_c": 0.0033503552900526756,
+        "length_max_abs_m": 2.9561569049318948e-06,
+        "crossing_difference_s": 60.11577634970308
+      },
+      "space_1520_vs_3040": {
+        "common_end_s": 172260.0,
+        "moisture_max_abs_all": 0.000795401784386307,
+        "moisture_max_abs_last_6h": 1.8264864884376397e-05,
+        "temperature_max_abs_c": 0.001675310365200744,
+        "length_max_abs_m": 1.4503144866728768e-06,
+        "crossing_difference_s": 30.05287256441079
+      },
+      "time_2s_vs_1s_at_n3040": {
+        "common_end_s": 172320.0,
+        "moisture_max_abs_all": 2.3058709499146346e-05,
+        "moisture_max_abs_last_6h": 8.704358067657125e-10,
+        "temperature_max_abs_c": 0.0021082850364351202,
+        "length_max_abs_m": 1.5384034657284218e-08,
+        "crossing_difference_s": 0.001219463360030204
+      }
+    },
+    "orders": {
+      "space_moisture_last_6h": 1.0009766938996836,
+      "space_crossing": 1.0002407554400476
+    }
+  },
+  "safety": {
+    "numerical_target": 0.1499,
+    "field_error_bound": 2.7398602980274744e-05,
+    "upper_moisture_bound_at_target": 0.14992739860298027,
+    "display_limit": 0.14995,
+    "passes_four_decimal_guard": true,
+    "target_crossing_s": 172515.40954187504,
+    "safe_whole_minute_s": 172560.0,
+    "safe_whole_minute_h": 47.93333333333333,
+    "qualification": "conservative convergence estimate, not a rigorous a posteriori theorem"
+  }
+}

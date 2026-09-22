@@ -1,0 +1,101 @@
+{
+  "boundary_after_4h": {
+    "temperature_c": 50.0,
+    "moisture_kg_kg": 0.05
+  },
+  "fine_config": {
+    "radial_cells": 5120,
+    "time_step_s": 0.25,
+    "output_interval_s": 60.0,
+    "maximum_time_h": 96.0,
+    "plateau_start_h": 3.0,
+    "environment_extension": "fixed",
+    "fixed_environment_temperature_c": 50.0,
+    "fixed_environment_moisture_kg_kg": 0.05,
+    "picard_tolerance": 1e-10,
+    "picard_max_iterations": 40
+  },
+  "drying_time_s": 206900.28319317882,
+  "drying_time_h": 57.47230088699412,
+  "fine_runtime_s": 980.9493311678525,
+  "fine_diagnostics": {
+    "steps": 827602,
+    "max_picard_iterations": 4,
+    "total_picard_iterations": 2774268,
+    "final_picard_update": 2.322635139773155e-12,
+    "max_heat_balance_abs": 2.6443235379147723e-09,
+    "max_heat_balance_rel": 0.17061915960756252,
+    "max_moisture_balance_abs": 2.2640528935617406e-18,
+    "max_moisture_balance_rel": 2.2975925273920354e-10,
+    "max_radial_monotonicity_violation": 3.552713678800501e-15,
+    "min_temperature_c": 27.999999999986933,
+    "max_temperature_c": 50.03986653428548,
+    "min_moisture_kg_kg": 0.05265949173164474,
+    "max_moisture_kg_kg": 2.550000000000093,
+    "mean_picard_iterations": 3.3521765292978993
+  },
+  "spatial": {
+    "coarse_to_medium": {
+      "max_abs_difference": 6.063939563816234e-06,
+      "rms_difference": 5.5502691594506507e-08,
+      "max_location_time_s": 60,
+      "max_location_radius_cm": 2.0,
+      "common_regular_rows": 3448,
+      "drying_time_difference_s": 0.031415972916875035
+    },
+    "medium_to_fine": {
+      "max_abs_difference": 1.5158620003674628e-06,
+      "rms_difference": 1.4119594874184833e-08,
+      "max_location_time_s": 60,
+      "max_location_radius_cm": 2.0,
+      "common_regular_rows": 3448,
+      "drying_time_difference_s": 0.00788784772157669
+    },
+    "richardson_field": {
+      "observed_order": 2.000116954217219,
+      "estimated_fine_error": 5.052327213205249e-07,
+      "estimated_fine_error_with_1p25_safety": 6.315409016506562e-07
+    },
+    "richardson_drying_time": {
+      "observed_order": 1.9937946541717944,
+      "estimated_fine_error": 0.0026444156158781282,
+      "estimated_fine_error_with_1p25_safety": 0.0033055195198476604
+    }
+  },
+  "temporal": {
+    "coarse_to_medium": {
+      "max_abs_difference": 3.0363773539932026e-06,
+      "rms_difference": 2.1269553375542633e-08,
+      "max_location_time_s": 60,
+      "max_location_radius_cm": 2.0,
+      "common_regular_rows": 3448,
+      "drying_time_difference_s": 0.0004767932405229658
+    },
+    "medium_to_fine": {
+      "max_abs_difference": 7.643769048826243e-07,
+      "rms_difference": 6.734764939774998e-09,
+      "max_location_time_s": 60,
+      "max_location_radius_cm": 2.0,
+      "common_regular_rows": 3448,
+      "drying_time_difference_s": 0.0002588595962151885
+    },
+    "richardson_field": {
+      "observed_order": 1.9899950026589308,
+      "estimated_fine_error": 2.571619442006123e-07,
+      "estimated_fine_error_with_1p25_safety": 3.214524302507654e-07
+    },
+    "richardson_drying_time": {
+      "observed_order": 0.8811939814088413,
+      "estimated_fine_error": 0.0003074710688454226,
+      "estimated_fine_error_with_1p25_safety": 0.00038433883605677824
+    }
+  },
+  "combined_field_error_bound_kg_kg": 9.529933319014216e-07,
+  "combined_drying_time_error_bound_s": 0.0036898583559044386,
+  "excel_validation": {
+    "zip_integrity": "ok",
+    "dimension": "A1:V3450",
+    "rows_including_header": 3450,
+    "columns": 22
+  }
+}

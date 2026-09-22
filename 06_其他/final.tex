@@ -1,0 +1,3269 @@
+﻿% !TeX program = xelatex
+% Generated from the reference PDF text layer; full PDF pages are not embedded.
+\PassOptionsToPackage{bookmarks=false}{hyperref}
+\documentclass[withoutpreface,bwprint]{cumcmthesis}
+\usepackage{url}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage[inkscapeexe=inkscape.cmd,inkscapeversion=1,inkscapeformat=pdf]{svg}
+\usepackage{comment}
+\usepackage{fvextra}
+\newfontfamily\PDFTextFont[Path=C:/Windows/Fonts/]{NotoSansSC-Regular.ttf}
+\setmonofont{Latin Modern Mono}
+\setCJKmonofont[Path=C:/texlive/2025/texmf-dist/fonts/opentype/public/fandol/]{FandolFang-Regular.otf}
+\newcommand{\CodeTextSetup}{\xeCJKsetup{CJKecglue={},CJKglue={}}}
+\renewcommand{\theFancyVerbLine}{\normalfont\small\arabic{FancyVerbLine}}
+\DefineVerbatimEnvironment{CodeText}{Verbatim}{fontsize=\small,numbers=left,numbersep=10pt,xleftmargin=0pt,breaklines=true,breakanywhere=false,breaksymbolleft={},breaksymbolright={},formatcom=\CodeTextSetup,listparameters={\setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}\setlength{\parsep}{0pt}}}
+\definecolor{codeblue}{RGB}{35,58,205}
+\definecolor{codered}{RGB}{190,72,72}
+\definecolor{codegray}{RGB}{145,145,145}
+\lstdefinestyle{paperpython}{
+  language=Python,
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{codeblue}\bfseries,
+  stringstyle=\color{codered},
+  commentstyle=\color{codegray},
+  identifierstyle=\color{black},
+  numbers=left,
+  numberstyle=\scriptsize\color{codegray},
+  stepnumber=1,
+  numbersep=10pt,
+  frame=lr,
+  framerule=0.5pt,
+  rulecolor=\color{codegray},
+  backgroundcolor=\color{white},
+  xleftmargin=2.2em,
+  xrightmargin=0.6em,
+  framesep=6pt,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  breakatwhitespace=false,
+  tabsize=4,
+  aboveskip=0.6em,
+  belowskip=0.6em
+}
+\lstnewenvironment{PythonCode}[1][]
+  {\lstset{style=paperpython,#1}}
+  {}
+\setlength{\parskip}{0pt}
+\sloppy
+
+\makeatletter
+\renewenvironment{abstract}{%
+\if@twocolumn
+    \section*{\abstractname}%
+  \else
+   \begin{center}%
+  {\zihao{4}\bfseries \abstractname\vspace{-.5em}\vspace{\z@}}%
+   \end{center}%
+   \quotation
+  \fi}
+  {\if@twocolumn\else\endquotation\clearpage\fi}
+\makeatother
+
+\title{药材烘干的数理分析与数值仿真模型}
+\tihao{A}
+\baominghao{}
+\schoolname{}
+\membera{}
+\memberb{}
+\memberc{}
+\supervisor{}
+\yearinput{2024}
+\monthinput{9}
+\dayinput{8}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+热风烘干能够及时脱除中药材中的水分，提高其储藏稳定性并保持成品品质。本文针对圆柱形中药材的热风烘干过程开展研究，首先建立一维径向传热传质模型，描述药材内部温度与含水率的时空变化，同时考虑温度和含水率对物性参数的影响。此外，本文引入均匀仿射收缩模型描述失水引起的半径变化，并依据全域含水率阈值确定烘干时长。
+
+\textbf{针对问题一，}依据 Fourier 定律、Fick 定律和控制体平衡关系，建立\textbf{一维轴对称非稳态传热传质模型}，以分段线性插值处理实测环境边界。采用\textbf{径向有限体积法与后向 Euler 全隐式格式}离散方程，通过 Picard 迭代处理含水率相关扩散系数。$1800\,\mathrm{s}$ 时，中心与表面温度分别为 $33.5753\,{}^\circ\mathrm{C}$ 和 $36.7856\,{}^\circ\mathrm{C}$，含水率分别为 $2.5500\,\mathrm{kg/kg}$ 和 $1.5102\,\mathrm{kg/kg}$，呈现表层先升温、先失水的特征。
+
+\textbf{针对问题二，}引入密度、比热容、导热系数和扩散系数的状态相关关系，构建\textbf{变物性热湿双向耦合模型}。采用内部较疏、表层加密的非均匀有限体积网格，并以\textbf{自适应变阶隐式 BDF 方法}同步推进温度场与含水率场。$3\,\mathrm{h}$ 时，中心与表面温度分别为 $49.8495\,{}^\circ\mathrm{C}$ 和 $49.9664\,{}^\circ\mathrm{C}$，含水率分别为 $1.7662\,\mathrm{kg/kg}$ 和 $1.0081\,\mathrm{kg/kg}$，说明内部水分迁移明显滞后于温度均衡。
+
+\textbf{针对问题三，}沿用固定半径耦合模型，以第 $3\sim4\,\mathrm{h}$ 环境观测均值延拓后期边界，并以全域最大含水率低于 $0.15\,\mathrm{kg/kg}$ 为干燥判据。采用\textbf{表层加密有限体积法、可变步长 BDF2 和 Picard 迭代}求解，通过二次时间插值与二分搜索定位阈值，得到烘干时长为 $\mathbf{57.4724\,h}$。空间和时间加密检验呈近二阶收敛，\textbf{Chebyshev 谱元--Radau IIA 复算}与主方法的临界时刻差异为 $0.0234\,\mathrm{s}$。
+
+\textbf{针对问题四，}利用实测半径建立\textbf{均匀仿射收缩模型}，引入材料坐标 $\xi=r/R(t)$ 将移动区域映射为固定区间，结合附录 4 物性关系，以表层加密有限体积法和隐式 BDF 求解，得到烘干时长为 $\mathbf{51.0906\,h}$，终止半径约为 $1.2000\,\mathrm{cm}$。后验检验表明，临界时刻样品控制体内的有效干质量相对初始值下降约 $10.97\%$。进一步将干质量严格恒定作为反设，通过解析不等式证明其与题给条件不相容，并构造\textbf{实测半径--反演长度}守恒对照模型进行验证；对照模型要求药材产生显著轴向伸长，从几何合理性角度支持主模型的有效干质量非恒定结论。
+
+\keywords{热湿耦合\quad 可变步长BDF2\quad Picard 迭代\quad  后向 Euler 全隐式格式}
+\end{abstract}
+
+\section{问题重述}
+\subsection{问题背景}
+中药材在加工后需要及时脱除水分，以提高储藏稳定性并保持成品品质。热风烘干作为一种常见的干燥方式，利用空气与药材之间的温差和湿度差完成热量、水分交换，药材内部经历由外向内的升温过程，同时水分由内部逐步迁移至表面并逸出。整个过程可分为预热平衡阶段和恒温干燥阶段。
+
+干燥速率、能耗和最终品质受烘房温度、湿度及物性参数直接影响，单纯依靠反复试验难以系统考察这些因素的作用。为此，本文从连续介质传热与传质角度描述药材内部状态的时空变化，并通过数值仿真比较不同干燥阶段及尺寸变化对结果的影响，为干燥时间判定和工艺参数分析提供依据。
+
+\subsection{问题提出}
+如图2所示，研究对象为长度$25\,\mathrm{cm}$、半径$2\,\mathrm{cm}$的圆柱状药材。初始状态下，药材内部温度和干基含水率分别为$28\,{}^{\circ}\mathrm{C}$和$2.55\,\mathrm{kg/kg}$。同时已知烘房环境状态的时间序列以及干燥过程中药材半径变化等信息。本文据此建立模型并完成下列问题。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/圆柱.png}
+\caption{药材几何外形示意图}
+\end{figure}
+
+\textbf{问题一：}利用附件1的烘房环境数据和附录2给出的物性参数，研究干燥开始后$1800\,\mathrm{s}$预热阶段中药材内部温度和含水率随时间及径向位置的分布。
+
+\textbf{问题二：}在完整干燥过程中，采用附录3的统一经验关系所描述的物性参数随状态的变化，建立温度场与含水率场的耦合模型，求解药材内部温度和含水率随时间及径向位置的分布。
+
+\textbf{问题三：}在半径保持不变的条件下，将药材各处含水率均不超过$0.15\,\mathrm{kg/kg}$作为烘干完成判据，确定达到该判据所需的时间。
+
+\textbf{问题四：}进一步考虑药材失水后尺寸变化的情况，利用附件2的半径数据和附录4的经验关系重新计算达到$0.15\,\mathrm{kg/kg}$判据的烘干时长。
+
+\section{问题分析}
+\subsection{问题一}
+问题一要求刻画预热平衡阶段药材内部温度和水分浓度随时间及径向位置的变化规律。药材可近似为均质、各向同性的细长圆柱体，其长度与半径之比为$12.5$，两个端面的总面积仅为侧面积的$8\%$，因此可忽略轴向梯度和端部效应，将问题简化为固定半径圆柱内的一维轴对称非稳态传热与传质问题(如图2)，从而将温度场与水分场作为两个相互并行的偏微分方程分别求解。对于温度场，根据Fourier导热定律\upcite{bird2002}和能量守恒定律建立圆柱坐标下的一维径向非稳态热传导方程，在圆柱中心设置对称边界，在药材表面设置Newton对流换热边界。对于水分场，根据Fick扩散定律\upcite{fick1855,crank1975}和质量守恒建立径向扩散方程。为求解上述温度场和水分场的偏微分方程，本文采用径向有限体积法\upcite{patankar1980}进行空间离散，并采用后向Euler全隐式格式\upcite{hairer1996}进行时间离散与推进。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/问题重述热量水分.png}
+\caption{药材径向传热传质示意图}
+\end{figure}
+
+
+\subsection{问题二}
+问题二沿用问题一建立的一维径向“传热-传质”模型，但进一步考虑药材物性参数随温度和含水率变化的影响。如图\ref{fig:q2-flowchart}所示，本文依据物性参数的状态相关关系构建热湿耦合求解流程。其中，密度、比热容和导热系数由含水率决定，水分扩散系数则同时受含水率和绝对温度影响，因此温度场与水分场通过变物性参数形成双向耦合。模型从烘干初始状态开始计算，环境温度和水分浓度边界沿用分段线性插值结果。求解时采用内部较疏、表面加密的两区非均匀径向有限体积网格，空间离散后形成刚性非线性常微分方程组，然后采用自适应变阶隐式BDF方法\upcite{hairer1996}进行时间积分，不断同步更新各节点物性参数。
+
+\subsection{问题三}
+问题三沿用问题二的控制方程及初边值条件。由于附件1仅给出前$4\,\mathrm{h}$的环境数据，需在该时段内进行分段线性插值，并以第$3\sim4\,\mathrm{h}$环境数据的平均值对后续环境边界条件作常值延拓。本文以全域最大含水率作为状态指标，将其首次降至干燥阈值的时刻定义为烘干完成时刻。数值求解时对表层区域加密，空间方向采用径向有限体积法，时间方向首步采用后向Euler格式、后续采用可变步长BDF2格式，并在每个时间层内通过Picard迭代\upcite{kelley1995}更新温度场和含水率场，最后定位阈值穿越时刻，得到长期含水率分布和烘干时间。
+
+\subsection{问题四}
+
+问题四进一步考虑药材在干燥过程中的径向收缩，要求重新计算达到全域干燥判据所需的时间。在问题三长期热湿耦合模型的基础上，本文首先对附件2给出的离散半径数据做分段线性插值处理并采用均匀仿射收缩描述各层随半径同步缩放的运动。为便于处理移动边界，引入随材料骨架运动的无量纲坐标$\xi=r/R(t)$，将区域$0\le r\le R(t)$映射到固定区间$0\le\xi\le1$，再结合附录4的变物性关系，将温度场、水分场及移动表面边界统一变换到收缩坐标系中。空间方向采用表层加密的有限体积离散，时间方向采用自适应阶数与步长的隐式 BDF 方法推进热湿耦合状态，并以全域最大含水率首次达到阈值的时刻作为问题四的烘干完成时间。
+
+
+\section{建模假设}
+\begin{enumerate}[label=\arabic*.,leftmargin=2em,itemsep=0pt,topsep=0pt]
+  \item \textbf{连续、均质、各向同性：}在宏观尺度上，将药材等效为连续且各向同性的均匀介质，忽略纹理方向、孔隙结构及分层物性等信息以及各向异性的导热和扩散参数。
+  \item \textbf{一维径向近似：}药材长度远大于半径，端面相对于侧面的面积较小，因此忽略轴向变化和主体区域的轴向端部效应，只考虑径向传热与传质。
+  \item \textbf{忽略蒸发散热：}水分蒸发会带走汽化潜热，但题目未给出汽化潜热、蒸发速率及相变动力学参数，因此温度方程中不显式加入蒸发吸热项；由此产生的影响作为模型误差处理。同时忽略体热源、化学反应热、辐射换热和热扩散引起的直接水分通量。
+  \item \textbf{局部宏观平均：}将温度场 $T(r,t)$ 和干基含水率场 $C(r,t)$ 视为连续场变量，微观孔隙内的气液界面不单独解析，其影响等效包含在 $k$ 和 $D$ 中。
+  \item \textbf{4h后环境近似稳定：}假设$4\,\mathrm{h}$后的烘房温度和环境水分浓度可分别取第$3\sim4\,\mathrm{h}$环境数据的平均值，并作常值延拓。
+
+\end{enumerate}
+
+
+\section{符号说明}
+{\centering\textbf{符号说明}\par}
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{0.96\textwidth}{>{\centering\arraybackslash}p{0.18\textwidth}X>{\centering\arraybackslash}p{0.24\textwidth}}
+\toprule
+符号 & 含义 & SI单位 \\
+\midrule
+$L$ & 药材长度 & $\mathrm{m}$ \\
+$R_0$ & 药材初始半径 & $\mathrm{m}$ \\
+$r$ & 到圆柱中心轴的距离 & $\mathrm{m}$ \\
+$R(t)$ & 当前药材半径；前三问为 $R_0$ & $\mathrm{m}$ \\
+$t$ & 时间 & $\mathrm{s}$ \\
+$T(r,t)$ & 药材温度 & $^\circ\mathrm{C}$ \\
+$T_K(r,t)$ & 绝对温度，$T_K=T+273.15$ & $\mathrm{K}$ \\
+$C(r,t)$ & 干基含水率，即水质量与绝干物质量之比 & $\mathrm{kg/kg}$ \\
+$T_\infty(t)$ & 烘房环境温度 & $^\circ\mathrm{C}$ \\
+$C_\infty(t)$ & 与表面传质模型匹配的环境等效含水率 & $\mathrm{kg/kg}$ \\
+$\rho$ & 表观密度 & $\mathrm{kg/m^3}$ \\
+$c_p$ & 比热容 & $\mathrm{J/(kg\cdot K)}$ \\
+$k$ & 导热系数 & $\mathrm{W/(m\cdot K)}$ \\
+$D$ & 有效水分扩散系数 & $\mathrm{m^2/s}$ \\
+$h$ & 表面对流换热系数 & $\mathrm{W/(m^2\cdot K)}$ \\
+$h_m$ & 表面对流传质系数 & $\mathrm{m/s}$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+药材初始长度和半径分别为 $L=25\,\mathrm{cm}$、$R_0=2\,\mathrm{cm}$，初始状态为 $T(r,0)=28\,{}^\circ\mathrm{C}$、$C(r,0)=2.55\,\mathrm{kg/kg}$。
+其中 $C$ 为干基含水率，数值 $2.55$ 表示每 $1\,\mathrm{kg}$ 绝干药材含 $2.55\,\mathrm{kg}$ 水。
+
+
+\section{模型建立与求解}
+\subsection{问题一模型的建立与求解}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/问题一流程图.png}
+\caption{问题一流程图}
+\end{figure}
+
+\subsubsection{线性插值处理}
+附件1给出的烘房温度和水分浓度为时间间隔$60\,\mathrm{s}$的离散采样序列，而数值离散的时间层间隔为$1\,\mathrm{s}$。为获得各计算时间层对应的边界状态，本文对该采样序列进行分段线性插值。设相邻采样时刻为$t_j$和$t_{j+1}$，则当$t\in[t_j,t_{j+1}]$时，有
+\begin{equation}
+\left\{
+\begin{aligned}
+T_\infty(t)&=T_{\infty,j}
++\frac{t-t_j}{t_{j+1}-t_j}
+\left(T_{\infty,j+1}-T_{\infty,j}\right)\\
+C_\infty(t)&=C_{\infty,j}
++\frac{t-t_j}{t_{j+1}-t_j}
+\left(C_{\infty,j+1}-C_{\infty,j}\right)
+\end{aligned}
+\right.
+\label{eq:environment-interpolation}
+\end{equation}
+
+\subsubsection{温度场模型}
+
+如图\ref{fig:q1-radial-process}所示，本文采用一维径向模型表征药材内部的非稳态传热、传质过程及其边界交换关系。模型中，药材中心取轴对称条件作为内边界，药材表面与烘房环境之间分别以对流换热和对流传质进行热量与水分交换，温度场与水分场控制方程即基于此建立。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/一维径向非稳态热传导示意图.png}
+\caption{一维径向非稳态热传导和水分扩散示意图}
+\label{fig:q1-radial-process}
+\end{figure}
+
+根据 Fourier 导热定律\upcite{bird2002}，药材内部的径向热流密度 $q_r$ 为 $-k\frac{\partial T}{\partial r}$。如图\ref{fig:q1-control-volume}所示，本文取半径为 $r$、厚度为 $\mathrm{d}r$、长度为 $L$ 的圆柱薄壳作为控制体，其体积 $\mathrm{d}V$为$2\pi rL\,\mathrm{d}r$。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/dV.png}
+\caption{圆柱薄壳控制体示意图}
+\label{fig:q1-control-volume}
+\end{figure}
+
+薄壳单位时间内的显热积累量为 $\rho c_p\,\mathrm{d}V\frac{\partial T}{\partial t}$。薄壳的净导热输入量等于内侧流入与外侧流出之差，由径向热流密度 $q_r$ 可写为 $-2\pi L\frac{\partial(rq_r)}{\partial r}\,\mathrm{d}r$。
+根据能量守恒，显热积累量等于净导热输入量，约去公共因子 $2\pi L\,\mathrm{d}r$，得到圆柱坐标下的一维径向非稳态热传导方程：
+\begin{equation}
+\rho c_p\frac{\partial T}{\partial t}
+=
+\frac{1}{r}\frac{\partial}{\partial r}
+\left(rk\frac{\partial T}{\partial r}\right)
+\qquad 0<r<R,\quad 0<t\le1800\,\mathrm{s}.
+\label{eq:q1-energy-conservation}
+\end{equation}
+第一问中 $\rho$、$c_p$ 和 $k$ 均为常数，因此上式可写为：
+\begin{equation}
+\frac{\partial T}{\partial t}
+=\alpha\left(
+\frac{\partial^2T}{\partial r^2}
++\frac{1}{r}\frac{\partial T}{\partial r}
+\right),
+\qquad
+\alpha=\frac{k}{\rho c_p}.
+\end{equation}
+代入题目给定的物性参数，得到热扩散率 $\alpha=1.6886\times10^{-7}\,\mathrm{m^2/s}$。
+
+初始时刻，药材温度均匀分布，即$T(r,0)=28\,{}^\circ\mathrm{C}$。
+由于圆柱中心满足轴对称条件，有 $\left.\frac{\partial T}{\partial r}\right|_{r=0}=0$。
+令 $T_s=T(R,t)$，药材表面向外的导热通量$q_{\mathrm{out}}$为 $-k\left.\frac{\partial T}{\partial r}\right|_{r=R}$。
+根据 Newton 对流换热定律\upcite{bird2002}，环境向表面传出的热流为 $h(T_\infty-T_s)$。在药材与烘房气体的分界面上，根据能量守恒原理，药材内部导热通量与界面对流换热通量相等，得到表面对流换热边界条件：
+\begin{equation}
+-k\left.\frac{\partial T}{\partial r}\right|_{r=R}
+=h\left[T_s-T_\infty(t)\right].
+  \label{eq:q1-surface-heat-flux}
+\end{equation}
+
+\subsubsection{水分场模型}
+根据 Fick 第一定律\upcite{fick1855,crank1975}，药材内部的径向水分扩散通量 $J_r$ 为 $-D(C)\frac{\partial C}{\partial r}$。对同一圆柱薄壳控制体，含水率的积累量为 $2\pi rL\,\mathrm{d}r\frac{\partial C}{\partial t}$，水分的净扩散输入量为 $-2\pi L\frac{\partial(rJ_r)}{\partial r}\,\mathrm{d}r$。
+根据质量守恒定律，约去公共因子并代入$J_r$，得到含水率的一维径向扩散方程
+\begin{equation}
+\frac{\partial C}{\partial t}
+=
+\frac{1}{r}\frac{\partial}{\partial r}
+\left[rD(C)\frac{\partial C}{\partial r}\right]
+\qquad 0<r<R,\quad 0<t\le1800\,\mathrm{s},
+\label{eq:q1-mass-conservation}
+\end{equation}
+其中水分扩散系数采用题目给定的经验公式：
+\begin{equation}
+D(C)=7\times10^{-9}
+\exp\left(-\frac{0.89}{C}\right)
+\end{equation}
+
+初始时刻，药材含水率均匀分布，即$C(r,0)=2.55$。令 $C_s=C(R,t)$。药材表面向外的扩散通量 $J_{\mathrm{out}}$ 为 $J_{\mathrm{out}}=-D(C_s)\left.\frac{\partial C}{\partial r}\right|_{r=R}$。根据线性对流传质定律，表面向环境传出的水分通量为 $h_m(C_s-C_\infty)$，故表面传质边界为
+\begin{equation}
+-D(C_s)\left.\frac{\partial C}{\partial r}\right|_{r=R}
+=h_m\left[C_s-C_\infty(t)\right].
+  \label{eq:q1-surface-moisture-flux}
+\end{equation}
+
+\subsubsection{数值离散与求解}
+
+令径向步长为$\Delta r=0.1\,\mathrm{cm}$，时间步长为$\Delta t=1\,\mathrm{s}$，径向计算节点定义为：
+\begin{equation}
+\Delta r=0.1\,\mathrm{cm}=1.0\times10^{-3}\,\mathrm{m},
+\qquad
+r_i=i\Delta r,\quad i=0,1,\ldots,20
+\label{eq:q1-space-grid}
+\end{equation}
+
+时间层定义为：
+\begin{equation}
+\Delta t=1\,\mathrm{s},
+\qquad
+t_n=n\Delta t
+\label{eq:q1-time-grid}
+\end{equation}
+其中，$n$为时间层编号。
+
+
+温度场和水分场均采用径向有限体积法\upcite{patankar1980}离散，控制体取同心圆柱薄壳。为统一表示两个扩散方程，将其写为：
+\begin{equation}
+s\frac{\partial\phi}{\partial t}
+=
+\frac{1}{r}
+\frac{\partial}{\partial r}
+\left(
+r\Gamma\frac{\partial\phi}{\partial r}
+\right)
+\label{eq:q1-unified-pde}
+\end{equation}
+其中，变量和参数对应关系为：
+\begin{equation}
+(\phi,s,\Gamma)=
+\begin{cases}
+(T,\rho c_p,k),&\text{温度场},\\
+(C,1,D(C)),&\text{水分场}
+\end{cases}
+\label{eq:q1-unified-parameters}
+\end{equation}
+
+在每个时间层$t_n\rightarrow t_{n+1}$内，时间导数采用后向 Euler 全隐式离散，即$\partial\phi/\partial t\approx(\phi^{n+1}-\phi^n)/\Delta t$，离散方程中的未知量及传递系数均取$n+1$时刻。由式\eqref{eq:q1-unified-pde}和式\eqref{eq:q1-unified-parameters}在各径向控制体上的守恒积分，分别得到如下节点离散格式。
+
+\paragraph{内部节点离散}
+对内部节点$i=1,2,\ldots,N-1$，控制体的径向权重记为$M_i=r_i\Delta r$，并令$r_{i+\frac12}=r_i+\Delta r/2$。对统一控制方程进行积分并采用后向 Euler 格式，得到
+\begin{equation}
+s_iM_i\frac{\phi_i^{n+1}-\phi_i^n}{\Delta t}
+=
+r_{i+\frac12}\Gamma_{i+\frac12}^{n+1}
+\frac{\phi_{i+1}^{n+1}-\phi_i^{n+1}}{\Delta r}
+-r_{i-\frac12}\Gamma_{i-\frac12}^{n+1}
+\frac{\phi_i^{n+1}-\phi_{i-1}^{n+1}}{\Delta r}
+\label{eq:q1-fvm-interior}
+\end{equation}
+其中$N=20$，$s_i$为节点$r_i$处的储存系数，$\Gamma_{i+\frac12}^{n+1}$为界面$r_{i+\frac12}$处的传递系数。该式分别取$(\phi,s,\Gamma)=(T,\rho c_p,k)$和$(C,1,D(C))$时，对应温度场和水分场的内部节点离散方程。
+
+\paragraph{中心节点离散}
+中心控制体为$0\le r\le\Delta r/2$。利用圆柱中心的轴对称无通量条件，中心界面通量为零，从而避免直接计算统一控制方程中的$1/r$项，得到中心节点格式
+\begin{equation}
+s_0\frac{\phi_0^{n+1}-\phi_0^n}{\Delta t}
+=\frac{4\Gamma_{\frac12}^{n+1}}{\Delta r^2}
+\left(\phi_1^{n+1}-\phi_0^{n+1}\right)
+\label{eq:q1-fvm-center}
+\end{equation}
+
+\paragraph{表面节点离散}
+记表面节点为$N=20$，表面半控制体的径向权重为
+\begin{equation}
+M_N=\frac{R^2-(R-\Delta r/2)^2}{2}
+\label{eq:q1-surface-weight}
+\end{equation}
+将前文的表面 Robin 边界通量式\eqref{eq:q1-surface-heat-flux}和式\eqref{eq:q1-surface-moisture-flux}代入表面控制体守恒式，得到统一的表面节点离散方程
+\begin{equation}
+sM_N\frac{\phi_N^{n+1}-\phi_N^n}{\Delta t}
+=Rb\left(\phi_\infty^{n+1}-\phi_N^{n+1}\right)
+-r_{N-\frac12}\Gamma_{N-\frac12}^{n+1}
+\frac{\phi_N^{n+1}-\phi_{N-1}^{n+1}}{\Delta r}
+\label{eq:q1-fvm-surface}
+\end{equation}
+其中$\phi_\infty^{n+1}$表示相应的环境温度或环境含水率，比例系数$b$为
+\begin{equation}
+b=
+\begin{cases}
+h,&\phi=T,\\
+h_m,&\phi=C
+\end{cases}
+\label{eq:q1-surface-transfer-coefficient}
+\end{equation}
+
+
+\paragraph{非线性扩散系数处理}
+由于水分扩散系数$D(C)$随含水率$C$非线性变化，水分场控制方程为非线性偏微分方程，故采用 Picard 迭代\upcite{kelley1995}求解。温度方程中的$\rho$、$c_p$和$k$为常数，每个时间步可直接组装并求解一次线性三对角方程组。取上一时间层解$C^n$作为初始迭代值，在第$m$次迭代中根据$C_i^{(m)}$计算节点扩散系数
+\begin{equation}
+D_i^{(m)}=7\times10^{-9}\exp\left(-\frac{0.89}{C_i^{(m)}}\right)
+\label{eq:q1-picard-diffusivity}
+\end{equation}
+界面扩散系数采用相邻节点扩散系数的调和平均
+\begin{equation}
+D_{i+\frac12}^{(m)}
+=\frac{2D_i^{(m)}D_{i+1}^{(m)}}{D_i^{(m)}+D_{i+1}^{(m)}}
+\label{eq:q1-harmonic-diffusivity}
+\end{equation}
+在固定$D^{(m)}$的条件下求解线性离散方程，得到新的含水率场$C^{(m+1)}$。当相邻两次迭代的最大绝对增量满足
+\begin{equation}
+\max_i\left|C_i^{(m+1)}-C_i^{(m)}\right|<10^{-10}
+\label{eq:q1-picard-convergence}
+\end{equation}
+时，认为当前时间层收敛，并将收敛解作为下一时间层的初值。
+
+
+\subsubsection{模型计算结果}
+
+数值计算覆盖$t=0,1,\ldots,1800\,\mathrm{s}$的全部时间层和$r=0,0.1,\ldots,2.0\,\mathrm{cm}$的全部径向节点，完整计算结果保存于文件\texttt{result1.xlsx}。如图\ref{fig:q1-3d-surfaces}和图\ref{fig:q1-clouds}所示，本文基于全部时间层和全部径向节点的数值计算结果，分别绘制了温度场与水分浓度场的三维时空曲面和分时刻云图。
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/温度三维时空分布曲面图.png}
+\caption{温度三维时空分布曲面图}
+\label{fig:q1-temperature-surface}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/水分浓度三维时空分布曲面图.png}
+\caption{水分浓度三维时空分布曲面图}
+\label{fig:q1-moisture-surface}
+\end{subfigure}
+\caption{温度和水分浓度三维时空分布曲面图}
+\label{fig:q1-3d-surfaces}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includesvg[width=\linewidth,inkscapelatex=false]{figures/云A}
+\caption{$t=0\,\mathrm{s}$、$900\,\mathrm{s}$和$1800\,\mathrm{s}$时刻的温度分布云图}
+\label{fig:q1-temperature-clouds}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includesvg[width=\linewidth,inkscapelatex=false]{figures/云B}
+\caption{$t=0\,\mathrm{s}$、$900\,\mathrm{s}$和$1800\,\mathrm{s}$时刻的水分浓度分布云图}
+\label{fig:q1-moisture-clouds}
+\end{subfigure}
+\caption{不同时间的温度和水分浓度分布云图}
+\label{fig:q1-clouds}
+\end{figure}
+
+为定量比较不同时刻和径向位置处的计算结果，本文从数值解中提取$t=100,300,600,900,1200,1500,1800\,\mathrm{s}$时，$r=0,0.5,1.0,1.5,2.0\,\mathrm{cm}$处的温度和水分浓度，结果分别列于表\ref{tab:q1-temperature}和表\ref{tab:q1-moisture}，其中温度和水分浓度的单位分别为${}^\circ\mathrm C$和$\mathrm{kg/kg}$。
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.25}
+\caption{30 分钟内药材的温度}
+\label{tab:q1-temperature}
+\begin{tabularx}{0.9\textwidth}{|>{\centering\arraybackslash}p{0.20\textwidth}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+\multirow{2}{*}{时间/s} & \multicolumn{5}{c|}{到药材中心的距离/cm} \\
+\cline{2-6}
+& 0 & 0.5 & 1 & 1.5 & 2 \\
+\hline
+100  & 28.0001 & 28.0003 & 28.0040 & 28.0327 & 28.1801 \\
+\hline
+300  & 28.0408 & 28.0635 & 28.1514 & 28.3681 & 28.8489 \\
+\hline
+600  & 28.4533 & 28.5360 & 28.8039 & 29.3159 & 30.1652 \\
+\hline
+900  & 29.3243 & 29.4583 & 29.8755 & 30.6161 & 31.7304 \\
+\hline
+1200 & 30.5427 & 30.7098 & 31.2223 & 32.1126 & 33.4276 \\
+\hline
+1500 & 31.9957 & 32.1867 & 32.7660 & 33.7463 & 35.1203 \\
+\hline
+1800 & 33.5753 & 33.7720 & 34.3642 & 35.3621 & 36.7856 \\
+\hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.25}
+\caption{30 分钟内药材的水分浓度}
+\label{tab:q1-moisture}
+\begin{tabularx}{0.9\textwidth}{|>{\centering\arraybackslash}p{0.20\textwidth}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+\multirow{2}{*}{时间/s} & \multicolumn{5}{c|}{到药材中心的距离/cm} \\
+\cline{2-6}
+& 0 & 0.5 & 1 & 1.5 & 2 \\
+\hline
+100  & 2.5500 & 2.5500 & 2.5500 & 2.5500 & 2.2470 \\
+\hline
+300  & 2.5500 & 2.5500 & 2.5500 & 2.5492 & 2.0508 \\
+\hline
+600  & 2.5500 & 2.5500 & 2.5500 & 2.5353 & 1.8770 \\
+\hline
+900  & 2.5500 & 2.5500 & 2.5497 & 2.5045 & 1.7547 \\
+\hline
+1200 & 2.5500 & 2.5500 & 2.5482 & 2.4646 & 1.6586 \\
+\hline
+1500 & 2.5500 & 2.5499 & 2.5445 & 2.4206 & 1.5787 \\
+\hline
+1800 & 2.5500 & 2.5497 & 2.5383 & 2.3755 & 1.5102 \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{问题二模型的建立与求解}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/问题二流程图.png}
+\caption{问题二热湿耦合计算流程图}
+\label{fig:q2-flowchart}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/问题二流程图在正文.png}
+\caption{问题二流程图}
+\end{figure}
+
+\subsubsection{问题二模型的更新}
+
+问题二沿用问题一建立的一维径向非稳态“传热-传质”模型，进一步考虑药材物性参数随温度和含水率变化的影响。如图\ref{fig:q1-drying-process}所示，本文将研究过程扩展至完整烘干过程，并将其划分为预热平衡与恒温干燥两个阶段。其中，密度、比热容和导热系数随含水率变化，水分扩散系数同时受含水率和温度影响。因此，含水率场通过改变密度、比热容和导热系数影响温度场，温度场又通过扩散系数影响水分场，二者构成双向耦合的关系。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/药材烘干过程示意图.png}
+\caption{药材预热烘干过程示意图}
+\label{fig:q1-drying-process}
+\end{figure}
+
+\subsubsection{变物性热湿耦合方程}
+
+根据附录3，药材的变物性参数统一表示为
+\begin{equation}
+\left\{
+\begin{aligned}
+\rho(C)&=650+128C,\\
+c_p(C)&=1450+2736\frac{C}{C+1},\\
+k(C)&=0.21+0.38\frac{C}{C+1},\\
+D(C,T_K)&=2.4\times10^{-3}
+\exp\left(-\frac{0.45}{C}\right)
+\exp\left(-\frac{3850}{T_K}\right)
+\end{aligned}
+\right.
+\label{eq:q2-variable-properties}
+\end{equation}
+其中，$\rho$、$c_p$和$k$分别表示密度、比热容和导热系数，$D$表示水分扩散系数，$T_K$为绝对温度。
+将上述变物性关系分别代入问题一中的能量守恒方程式\eqref{eq:q1-energy-conservation}和质量守恒方程式\eqref{eq:q1-mass-conservation}，得到问题二的温度场控制方程：
+\begin{equation}
+\boxed{
+\rho(C)c_p(C)\frac{\partial T}{\partial t}
+=
+\frac{1}{r}
+\frac{\partial}{\partial r}
+\left[
+rk(C)\frac{\partial T}{\partial r}
+\right]
+}
+\label{eq:q2-variable-heat}
+\end{equation}
+以及水分场控制方程：
+\begin{equation}
+\boxed{
+\frac{\partial C}{\partial t}
+=
+\frac{1}{r}
+\frac{\partial}{\partial r}
+\left[
+rD(C,T_K)\frac{\partial C}{\partial r}
+\right]
+}
+\label{eq:q2-variable-moisture}
+\end{equation}
+
+含水率$C$决定药材的密度$\rho(C)$、比热容$c_p(C)$和导热系数$k(C)$，而温度$T$与含水率$C$共同决定扩散系数$D(C,T_K)$。因此，温度场和水分场需要在同一时间层内迭代求解。
+
+
+\subsubsection{数值离散与耦合求解}
+
+\paragraph{非均匀网格的构造思想}
+药材内部的温度和含水率主要通过表面与烘房交换。表面 Robin 边界直接施加热量和水分通量，烘干初期在表面附近形成比内部更陡的径向梯度。若全域采用能够分辨该边界层的均匀细网格，会在梯度较缓的内部区域产生大量冗余节点；若直接采用输出间距进行全域离散，又不足以准确计算表面梯度和边界通量。为兼顾表面分辨率与计算效率，本文采用“内部较疏、表面加密”的两区节点型有限体积网格。
+
+设表面加密层厚度为$\delta_s$，内部网格步长为$\Delta r_b$，表面网格步长为$\Delta r_s$，加密倍率定义为$q=\Delta r_b/\Delta r_s>1$。径向区间总数为$N$，并由两区的区间数之和满足$\frac{R-\delta_s}{\Delta r_b}+\frac{\delta_s}{\Delta r_s}=N$，得到
+\begin{equation}
+\left\{
+\begin{aligned}
+\Delta r_b
+&=\frac{(R-\delta_s)+q\delta_s}{N},\\
+\Delta r_s
+&=\frac{(R-\delta_s)+q\delta_s}{qN}.
+\end{aligned}
+\right.
+\label{eq:q2-grid-steps}
+\end{equation}
+令内部区域和表面加密层的区间数分别为$N_b=(R-\delta_s)/\Delta r_b$和$N_s=\delta_s/\Delta r_s$，则$N_b+N_s=N$。节点坐标写为
+\begin{equation}
+r_i=
+\begin{cases}
+i\Delta r_b,
+&0\le i\le N_b,\\
+R-\delta_s+(i-N_b)\Delta r_s,
+&N_b\le i\le N.
+\end{cases}
+\label{eq:q2-grid-nodes}
+\end{equation}
+该构造在表面区域提供较高的空间分辨率，同时避免对内部梯度较缓区域进行过度加密。
+
+\paragraph{非均匀网格上的有限体积离散}
+记相邻节点中点为控制面，即$r_{i+\frac12}=\frac{r_i+r_{i+1}}{2}$。
+约去所有控制体共有的$2\pi L$后，中心、内部和表面节点的径向体积权重分别为
+\begin{equation}
+M_0=\frac{r_{\frac12}^2}{2},
+\qquad
+M_i=\frac{r_{i+\frac12}^2-r_{i-\frac12}^2}{2},
+\qquad
+M_N=\frac{R^2-r_{N-\frac12}^2}{2}.
+\label{eq:q2-control-weights}
+\end{equation}
+为统一表示温度场和水分场，定义
+\begin{equation}
+(\phi,S_i,\Gamma_i,b)=
+\begin{cases}
+\bigl(T,\rho(C_i)c_p(C_i),k(C_i),h\bigr),
+&\text{温度场},\\
+\bigl(C,1,D(C_i,T_i+273.15),h_m\bigr),
+&\text{水分场}.
+\end{cases}
+\label{eq:q2-unified-parameters}
+\end{equation}
+界面传递系数采用相邻节点值的调和平均
+\begin{equation}
+\Gamma_{i+\frac12}
+=
+\frac{2\Gamma_i\Gamma_{i+1}}{\Gamma_i+\Gamma_{i+1}},
+\label{eq:q2-harmonic-coefficient}
+\end{equation}
+并定义界面导通系数
+\begin{equation}
+G_{i+\frac12}
+=
+\frac{r_{i+\frac12}\Gamma_{i+\frac12}}
+{r_{i+1}-r_i}.
+\label{eq:q2-face-conductance}
+\end{equation}
+由控制体守恒积分，内部节点$i=1,\ldots,N-1$满足
+\begin{equation}
+S_iM_i\frac{\mathrm d\phi_i}{\mathrm dt}
+=
+G_{i+\frac12}(\phi_{i+1}-\phi_i)
+-G_{i-\frac12}(\phi_i-\phi_{i-1}).
+\label{eq:q2-fvm-interior}
+\end{equation}
+圆心处利用轴对称无通量条件，得到
+\begin{equation}
+S_0M_0\frac{\mathrm d\phi_0}{\mathrm dt}
+=
+G_{\frac12}(\phi_1-\phi_0),
+\label{eq:q2-fvm-center}
+\end{equation}
+从而不需要在$r=0$处直接计算$1/r$。表面控制体计入 Robin 边界通量：
+\begin{equation}
+S_NM_N\frac{\mathrm d\phi_N}{\mathrm dt}
+=
+Rb\bigl(\phi_\infty(t)-\phi_N\bigr)
+-G_{N-\frac12}(\phi_N-\phi_{N-1}).
+\label{eq:q2-fvm-surface}
+\end{equation}
+上述形式在网格疏密交界面仍保持逐控制体守恒，非均匀间距通过$M_i$和$G_{i+\frac12}$直接进入离散方程。
+
+\paragraph{半离散耦合系统与自适应 BDF}
+将全部温度和含水率节点排列为
+\begin{equation}
+\boldsymbol y
+=
+\left(
+T_0,\ldots,T_N,
+C_0,\ldots,C_N
+\right)^{\mathsf T}
+\in\mathbb R^{1522},
+\label{eq:q2-state-vector}
+\end{equation}
+由式\eqref{eq:q2-fvm-interior}--\eqref{eq:q2-fvm-surface}得到刚性非线性常微分方程组
+\begin{equation}
+\frac{\mathrm d\boldsymbol y}{\mathrm dt}
+=
+\boldsymbol F(t,\boldsymbol y).
+\label{eq:q2-semidiscrete-system}
+\end{equation}
+每次计算$\boldsymbol F$时，由当前$\boldsymbol y$同步更新$\rho(C)$、$c_p(C)$、$k(C)$和$D(C,T_K)$，再计算热量与水分的界面净通量。因此，第二问是由隐式求解器对$1522$个未知量整体处理其非线性耦合。
+
+时间积分采用自适应变阶 BDF\upcite{hairer1996}。对第$n+1$个内部时间步，其一般形式可表示为
+\begin{equation}
+\sum_{j=0}^{q_n}
+\alpha_{j,n}\boldsymbol y_{n+1-j}
+=
+\Delta t_n\beta_n
+\boldsymbol F(t_{n+1},\boldsymbol y_{n+1}),
+\qquad
+1\le q_n\le5,
+\label{eq:q2-adaptive-bdf}
+\end{equation}
+其中阶数$q_n$和内部步长$\Delta t_n$由局部误差估计自动调整。温度和含水率量纲不同，故分别设置绝对容差；主计算参数为
+\begin{equation}
+\operatorname{rtol}=2\times10^{-9},
+\qquad
+\operatorname{atol}_T=2\times10^{-9},
+\qquad
+\operatorname{atol}_C=2\times10^{-11}.
+\label{eq:q2-bdf-tolerances}
+\end{equation}
+初始内部时间步取$10^{-4}\,\mathrm{s}$，最大内部时间步限制为$5\,\mathrm{s}$。求解器在相邻输出时刻之间可根据误差自动细分时间步。
+
+由于每个节点只与自身及相邻节点的温度、含水率有关，系统 Jacobian 呈块三对角稀疏结构。计算中预先提供这一稀疏结构，以降低数值 Jacobian 计算和隐式线性方程组分解的开销，但不改变控制方程和误差判据。
+
+\subsubsection{模型计算结果}
+
+问题二的数值计算覆盖全部时间层$t=0,1,\ldots,10800\,\mathrm{s}$和全部径向节点$r=0,0.1,\ldots,2.0\,\mathrm{cm}$，完整计算结果保存于文件\texttt{result2.xlsx}。如图\ref{fig:q2-results}所示，本文基于全部时间层和全部径向节点的数值计算结果，绘制了温度场和水分浓度场随时间和径向位置变化的时空分布图。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/问题二新结果展示.png}
+\caption{问题二温度场与水分浓度场计算结果}
+\label{fig:q2-results}
+\end{figure}
+
+为定量比较不同时刻和径向位置处的计算结果，本文提取$0.5,1.0,1.5,2.0,2.5,3.0\,\mathrm{h}$时，$r=0,0.5,1.0,1.5,2.0\,\mathrm{cm}$处的温度和水分浓度，结果分别列于表\ref{tab:q2-temperature}和表\ref{tab:q2-moisture}，其中温度和水分浓度的单位分别为${}^\circ\mathrm C$和$\mathrm{kg/kg}$。
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.25}
+\caption{3 小时内药材的温度}
+\label{tab:q2-temperature}
+\begin{tabularx}{0.9\textwidth}{|>{\centering\arraybackslash}p{0.20\textwidth}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+\multirow{2}{*}{时间/h} & \multicolumn{5}{c|}{到药材中心的距离/cm} \\
+\cline{2-6}
+& 0 & 0.5 & 1 & 1.5 & 2 \\
+\hline
+0.5 & 32.1892 & 32.3821 & 32.9659 & 33.9608 & 35.4130 \\
+\hline
+1.0 & 40.3816 & 40.5536 & 41.0605 & 41.8782 & 42.9976 \\
+\hline
+1.5 & 45.8468 & 45.9348 & 46.1930 & 46.6051 & 47.1401 \\
+\hline
+2.0 & 48.4502 & 48.4881 & 48.5984 & 48.7736 & 49.0033 \\
+\hline
+2.5 & 49.4670 & 49.4792 & 49.5136 & 49.5653 & 49.6609 \\
+\hline
+3.0 & 49.8495 & 49.8553 & 49.8746 & 49.9101 & 49.9664 \\
+\hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.25}
+\caption{3 小时内药材的水分浓度}
+\label{tab:q2-moisture}
+\begin{tabularx}{0.9\textwidth}{|>{\centering\arraybackslash}p{0.20\textwidth}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+\multirow{2}{*}{时间/h} & \multicolumn{5}{c|}{到药材中心的距离/cm} \\
+\cline{2-6}
+& 0 & 0.5 & 1 & 1.5 & 2 \\
+\hline
+0.5 & 2.5499 & 2.5489 & 2.5256 & 2.3257 & 1.6486 \\
+\hline
+1.0 & 2.5257 & 2.4948 & 2.3578 & 2.0230 & 1.4711 \\
+\hline
+1.5 & 2.3861 & 2.3256 & 2.1344 & 1.8020 & 1.3476 \\
+\hline
+2.0 & 2.1709 & 2.1084 & 1.9236 & 1.6259 & 1.2311 \\
+\hline
+2.5 & 1.9566 & 1.9006 & 1.7360 & 1.4720 & 1.1166 \\
+\hline
+3.0 & 1.7662 & 1.7165 & 1.5702 & 1.3333 & 1.0081 \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{问题三模型的建立与求解}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/问题三流程图.png}
+\caption{问题三流程图}
+\end{figure}
+
+\subsubsection{后期环境数据延拓与干燥判据}
+
+在$0\le t<4\,\mathrm{h}$内，环境温度和环境等效含水率仍沿用式\eqref{eq:environment-interpolation}。当$t\ge4\,\mathrm{h}$时，附件1未提供后续环境数据，本文将$3$--$4\,\mathrm{h}$区间内$61$个等间隔样本的算术平均值作为环境边界的常值延拓。令$t_j=10800+60j\,\mathrm{s}$，$j=0,1,\ldots,60$，则
+\begin{equation}
+\left\{
+\begin{aligned}
+\overline{T}_{\infty}&=\frac{1}{61}\sum_{j=0}^{60}T_{\infty}(t_j)=49.9989\,{}^{\circ}\mathrm{C} \\
+\overline{C}_{\infty}&=\frac{1}{61}\sum_{j=0}^{60}C_{\infty}(t_j)=0.04999\,\mathrm{kg/kg}
+\end{aligned}
+\right.
+\label{eq:q3-environment-mean}
+\end{equation}
+
+问题三要求药材内部所有位置的含水率均达到干燥阈值，取$C_{\mathrm{dry}}=0.15\,\mathrm{kg/kg}$，并以全域最大水分浓度确定最晚达到干燥要求的位置：
+\begin{equation}
+C_{\max}(t)=\max_{0\le r\le R}C(r,t)
+\label{eq:q3-cmax}
+\end{equation}
+因此，连续模型中的临界时刻定义为
+\begin{equation}
+t_*^{(3)}=\inf\left\{t>0:\ C_{\max}(t)< C_{\mathrm{dry}}\right\}
+\label{eq:q3-drying-time}
+\end{equation}
+\subsubsection{数值离散与临界时刻求解}
+
+固定半径下引入无量纲径向坐标$\xi=r/R\in[0,1]$，并将径向离散节点记为$\xi_j=r_j/R$。为同时分辨内部缓变区和表层陡峭梯度，本文使用$N=12160$个径向区间，其中$[0,0.9]$布置$5760$个等距区间，$[0.9,1]$布置$6400$个等距区间，即
+\begin{equation}
+\xi_j=
+\begin{cases}
+0.9j/5760, & 0\le j\le5760,\\
+0.9+0.1(j-5760)/6400, & 5760<j\le12160.
+\end{cases}
+\qquad
+\begin{aligned}
+\Delta r_{\mathrm{in}}&=3.125\,\mu\mathrm m,\\
+\Delta r_{\mathrm{surf}}&=0.3125\,\mu\mathrm m.
+\end{aligned}
+\label{eq:q3-space-grid}
+\end{equation}
+
+空间方向沿用式\eqref{eq:q2-fvm-interior}--\eqref{eq:q2-fvm-surface}的守恒有限体积格式。为了以单一导通系数计算同一控制面的守恒通量，并保持系数为正，界面导热系数与扩散系数采用正值调和平均
+\begin{equation}
+a_{i+\frac12}
+=\frac{2a_i a_{i+1}}{a_i+a_{i+1}},
+\qquad a\in\{k,D\},
+\label{eq:q3-face-harmonic}
+\end{equation}
+时间方向首步采用后向 Euler，随后采用可变步长 BDF2\upcite{hairer1996}。记当前步长$h_n=t_{n+1}-t_n$、步长比$q=h_n/h_{n-1}$，则
+\begin{equation}
+\left.\frac{\partial\phi}{\partial t}\right|_{t_{n+1}}
+\approx\frac{1}{h_n}
+\left[
+\frac{1+2q}{1+q}\phi^{n+1}
+-(1+q)\phi^n
++\frac{q^2}{1+q}\phi^{n-1}
+\right].
+\label{eq:q3-bdf2}
+\end{equation}
+
+温度和含水率在每个时间层内联合 Picard 迭代。第$m$次迭代由候选含水率更新$\rho,c_p,k$，求得温度后再更新$D(C,T_K)$并求含水率。更新量须满足
+\begin{equation}
+\left\{
+\begin{aligned}
+\left\|\Delta T^{(m+1)}-\Delta T^{(m)}\right\|_\infty
+&<2\times10^{-12},\\
+\left\|\Delta C^{(m+1)}-\Delta C^{(m)}\right\|_\infty
+&<2\times10^{-13}
+\end{aligned}
+\right.
+\label{eq:q3-picard-criterion}
+\end{equation}
+达到更新量阈值后，程序用最终候选状态重新计算全部物性和通量，并逐控制体核验离散平衡残差；相对残差阈值取$10^{-10}$，另显式计入双精度舍入容差。只有更新量与残差两项均通过时才接受该时间步。
+
+当相邻时间层满足$g(t_n)\ge0$且$g(t_{n+1})<0$时，对最近三个时间层的每个节点构造二次时间插值多项式$P_i(t)$，并定义离散事件函数$g_h(t)=\max_{0\le i\le N}P_i(t)-0.15$。
+在末个时间步内对$g_h$作二分搜索，直至严格下穿区间$[t_{h,-},t_{h,+}]$满足
+\begin{equation}
+g_h(t_{h,-})\ge0,
+\qquad
+g_h(t_{h,+})<0,
+\qquad
+t_{h,+}-t_{h,-}<10^{-4}\,\mathrm s.
+\label{eq:q3-event-bracket}
+\end{equation}
+温度场和含水率场的偏微分方程离散误差通过网格加密和时间步长加密检验。每个 Picard 子步分别为温度场和含水率场组装一个三对角线性方程组，并采用 Thomas 算法求解，以获得当前时间层的离散场解。
+
+
+
+\subsubsection{模型计算结果}
+
+如图\ref{fig:q3-results}所示，本文绘制了全域最大含水率$C_{\max}(t)$随时间的变化曲线，并对终止时刻附近的变化过程进行了局部放大。由图可见，$C_{\max}(t)$随时间持续下降，并在约$57.47\,\mathrm h$时降至干燥阈值$0.15\,\mathrm{kg/kg}$。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/问题三结果展示折线图.png}
+\caption{全域最大含水率变化图}
+\label{fig:q3-results}
+\end{figure}
+
+为进一步反映含水率随干燥时间和径向位置的整体演化规律，如图\ref{fig:q3-moisture-evolution}所示，本文分别绘制了水分浓度三维时空曲面和含水率时空等值线。图\ref{fig:q3-moisture-evolution}（a）叠加了干燥阈值平面$C_{\mathrm{dry}}=0.15\,\mathrm{kg/kg}$，其中红色虚线为水分浓度曲面与阈值平面的交线，表征各径向位置达到干燥要求的时刻；图\ref{fig:q3-moisture-evolution}（b）中的红色曲线为相应的干燥达标边界，曲线右侧的浅绿色区域表示含水率已达到干燥要求。
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/问题三三维曲面图.png}
+\caption{水分浓度三维时空演化}
+\label{fig:q3-moisture-surface}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/问题三等值线图.png}
+\caption{含水率等值线及干燥达标边界}
+\label{fig:q3-contour}
+\end{subfigure}
+\caption{问题三含水率场的时空演化与干燥达标过程}
+\label{fig:q3-moisture-evolution}
+\end{figure}
+
+由图\ref{fig:q3-moisture-evolution}可见，随着干燥过程进行，各径向位置的含水率持续下降，靠近药材表面的区域较早达到干燥阈值，干燥达标边界逐渐由表面向中心推进，圆心为药材内部最晚达到干燥要求的位置。
+
+如图\ref{fig:q3-cylinder}所示，本文选取若干典型时刻绘制圆柱剖面图，以直观展示药材内部含水率的三维空间分布。
+
+\begin{figure}[H]
+\centering
+\includesvg[width=\textwidth,inkscapelatex=false]{figures/问题三结果展示圆柱}
+\caption{六个时刻（{\mdseries 0h、0.5h、2h、5h、10h、57.47h}）的含水率三维分布图}
+\label{fig:q3-cylinder}
+\end{figure}
+
+
+数值计算覆盖完整干燥过程和全部径向区域，完整计算结果保存于文件\texttt{result3.xlsx}。根据全域干燥判据，连续临界时刻为$t_*^{(3)}=57.472300886994\,\mathrm{h}$。由于题目要求全域最大含水率严格低于$0.15\,\mathrm{kg/kg}$，故向上保留四位小数，将烘干时长取为$t_{\mathrm{rep}}^{(3)}=57.4724\,\mathrm{h}\approx2.40\,\mathrm{d}$。
+为定量比较长期干燥过程中不同时间和径向位置处的含水率，本文提取$6,12,\ldots,54\,\mathrm{h}$及报告终止时刻$t_{\mathrm{rep}}^{(3)}$时，$r=0,0.5,1.0,1.5,2.0\,\mathrm{cm}$处的含水率，结果见表\ref{tab:q3-moisture}，表中水分浓度单位为$\mathrm{kg/kg}$。
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\caption{药材烘干过程的水分浓度}
+\label{tab:q3-moisture}
+\begin{tabularx}{0.9\textwidth}{|>{\centering\arraybackslash}p{0.20\textwidth}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+\multirow{2}{*}{时间/h} & \multicolumn{5}{c|}{到药材中心的距离/cm} \\
+\cline{2-6}
+& 0 & 0.5 & 1 & 1.5 & 2 \\
+\hline
+6 & 1.0170 & 0.9881 & 0.9015 & 0.7550 & 0.5328 \\
+\hline
+12 & 0.4561 & 0.4432 & 0.4031 & 0.3297 & 0.1642 \\
+\hline
+18 & 0.2988 & 0.2915 & 0.2687 & 0.2253 & 0.0845 \\
+\hline
+24 & 0.2378 & 0.2327 & 0.2167 & 0.1855 & 0.0665 \\
+\hline
+30 & 0.2058 & 0.2018 & 0.1892 & 0.1641 & 0.0598 \\
+\hline
+36 & 0.1859 & 0.1825 & 0.1718 & 0.1504 & 0.0566 \\
+\hline
+42 & 0.1721 & 0.1691 & 0.1597 & 0.1407 & 0.0549 \\
+\hline
+48 & 0.1618 & 0.1592 & 0.1507 & 0.1334 & 0.0537 \\
+\hline
+54 & 0.1539 & 0.1514 & 0.1436 & 0.1277 & 0.0530 \\
+\hline
+烘干结束时间 & 0.1500 & 0.1477 & 0.1402 & 0.1249 & 0.0527 \\
+\hline
+\end{tabularx}
+\end{table}
+
+表\ref{tab:q3-moisture}中的“烘干结束时间”对应$t_{\mathrm{rep}}^{(3)}=57.4724\,\mathrm h$。末行中心水分浓度显示为$0.1500\,\mathrm{kg/kg}$是保留四位小数的结果，干燥判据采用未舍入数值检验。
+
+\subsection{问题四模型的建立与求解}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/问题四流程图.png}
+\caption{问题四流程图}
+\end{figure}
+
+\subsubsection{均匀仿射收缩与固定域变换}
+
+问题四仅考虑径向收缩，轴向长度保持$L(t)=L_0=25\,\mathrm{cm}$。设药材在时刻$t$的半径为$R(t)$，附件2相邻测点间作局部分段线性插值
+\begin{equation}
+R(t)=R_j+\frac{t-t_j}{t_{j+1}-t_j}\bigl(R_{j+1}-R_j\bigr),
+\qquad t_j\le t\le t_{j+1}.
+\label{eq:q4-main-radius}
+\end{equation}
+
+均匀仿射收缩是指每个材料层保持相同的径向缩放比。若材料层的初始半径为$r_0$，则
+
+\begin{equation}
+\xi=\frac{r}{R(t)}=\frac{r_0}{R_0},
+\qquad 0\le\xi\le1,
+\label{eq:q4-main-xi}
+\end{equation}
+
+并记$\Theta(\xi,t)=T(\xi R(t),t)$、$W(\xi,t)=C(\xi R(t),t)$。由式\eqref{eq:q4-main-xi}，材料骨架速度为$u_r=(\dot R/R)r$；对任意随骨架运动的场$f$，链式法则给出
+\typeout{CODEX-FRAC=\meaning\frac;CODEX-WIDEHAT=\meaning\widehat}
+\begin{equation}
+\frac{\mathrm Df}{\mathrm Dt}
+=\left.\frac{\partial f}{\partial t}\right|_r
++u_r\frac{\partial f}{\partial r}
+=\left.\frac{\partial \widehat f}{\partial t}\right|_\xi.
+\label{eq:q4-main-material-derivative}
+\end{equation}
+
+\subsubsection{收缩坐标下的热湿耦合模型}
+
+模型沿用前两问的一维径向传热传质结构。圆柱径向扩散算子在$r=\xi R(t)$下产生尺度因子$R(t)^{-2}$，故固定区间$\xi\in[0,1]$上的控制方程为
+\begin{equation}
+\boxed{
+\rho_w(W)c_p(W)\frac{\partial\Theta}{\partial t}
+=\frac{1}{R(t)^2\xi}
+\frac{\partial}{\partial\xi}
+\left[\xi k(W)\frac{\partial\Theta}{\partial\xi}\right],
+}
+\label{eq:q4-main-heat}
+\end{equation}
+\begin{equation}
+\boxed{
+\frac{\partial W}{\partial t}
+=\frac{1}{R(t)^2\xi}
+\frac{\partial}{\partial\xi}
+\left[\xi D(W,\Theta_K)\frac{\partial W}{\partial\xi}\right],
+}
+\label{eq:q4-main-moisture}
+\end{equation}
+其中$\Theta_K=\Theta+273.15$，且
+\begin{equation}
+\left\{
+\begin{aligned}
+\rho_w(W)&=760+90W,\\
+c_p(W)&=1850+2150\frac{W}{1+W},\\
+k(W)&=0.12+0.20\frac{W}{1+W},\\
+D(W,\Theta_K)&=4.2\times10^{-4}
+\exp\!\left(-\frac{0.30}{W}-\frac{3850}{\Theta_K}\right).
+\end{aligned}
+\right.
+\label{eq:q4-main-properties}
+\end{equation}
+初始条件为$\Theta(\xi,0)=28\,{}^\circ\mathrm C$、$W(\xi,0)=2.55$。圆心满足对称条件$\Theta_\xi(0,t)=W_\xi(0,t)=0$；移动表面的第三类边界条件为
+\begin{equation}
+\frac{k(W_s)}{R(t)}\Theta_\xi(1,t)
+=h\bigl(T_\infty-\Theta_s\bigr),
+\qquad
+\frac{D(W_s,\Theta_{K,s})}{R(t)}W_\xi(1,t)
+=h_m\bigl(C_\infty-W_s\bigr).
+\label{eq:q4-main-boundary}
+\end{equation}
+其中$h=25\,\mathrm{W/(m^2\cdot K)}$、$h_m=8\times10^{-7}\,\mathrm{m/s}$。环境过程沿用问题三的后期环境数据延拓方式。
+
+空间离散沿用前文的守恒有限体积思想，在$[0,0.9]$与$[0.9,1]$采用步长比为$10:1$的表层加密网格。正式计算取$N=12160$个径向区间，使用隐式BDF方法\upcite{hairer1996}推进温湿耦合状态；相对容差为$10^{-12}$，温度和含水率绝对容差分别为$10^{-12}$和$10^{-14}$。定义
+\begin{equation}
+C_{\max}^{(4)}(t)=\max_{0\le\xi\le1}W(\xi,t),
+\qquad
+t_*^{(4)}=\inf\{t>0:C_{\max}^{(4)}(t)<0.15\},
+\label{eq:q4-main-event}
+\end{equation}
+并利用稠密输出在相邻保存时刻之间定位$C_{\max}^{(4)}=0.15$的零点。全部输出时刻的最大含水率均位于圆柱中心。
+
+\subsubsection{模型计算结果}
+
+问题四的数值计算覆盖$0\le t\le t_*^{(4)}$的完整干燥过程和$0\le\xi\le1$的全部径向节点，完整计算结果保存于文件\texttt{result4.xlsx}。连续临界时刻为$t_*^{(4)}=51.090576239622\,\mathrm{h}$，按题意保留四位小数后，烘干时长为$t_{\mathrm{dry}}^{(4)}=51.0906\,\mathrm{h}$。该报告时长比连续临界时刻晚$0.085537\,\mathrm s$，大于空间与时间加密所得临界时刻合计经验误差$0.008300\,\mathrm s$，且临界区间内全域最大含水率单调下降，因而满足严格干燥判据。
+
+如图\ref{fig:q4-results}所示，本文基于全部时间层和径向节点的数值结果，选取$t=0,0.5,1.5,3,12\,\mathrm{h}$及终止时刻，绘制了药材温度场和含水率场的圆柱剖面及径向分布曲线。
+
+\begin{figure}[H]
+\centering
+\includesvg[width=\textwidth,inkscapelatex=false]{figures/问题四结果展示}
+\caption{问题四典型时刻的温度场与含水率场计算结果}
+\label{fig:q4-results}
+\end{figure}
+
+为定量比较收缩过程中不同时间和径向位置处的含水率，本文提取$6,12,\ldots,48\,\mathrm{h}$及报告终止时刻$51.0906\,\mathrm h$时，距药材中心$0,0.5,1.0\,\mathrm{cm}$及药材表面处的含水率，结果见表\ref{tab:q4-main-moisture}，表中水分浓度单位为$\mathrm{kg/kg}$。
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.16}
+\caption{药材烘干过程的水分浓度}
+\label{tab:q4-main-moisture}
+\begin{tabularx}{0.9\textwidth}{|>{\centering\arraybackslash}p{0.20\textwidth}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+时间/h&距中心 0 cm&距中心 0.5 cm&距中心 1 cm&药材表面\\
+\hline
+6&1.7196&1.5377&1.0226&0.4207\\
+\hline
+12&0.7377&0.6546&0.4083&0.1670\\
+\hline
+18&0.4087&0.3686&0.2397&0.0892\\
+\hline
+24&0.2851&0.2611&0.1790&0.0673\\
+\hline
+30&0.2263&0.2094&0.1493&0.0595\\
+\hline
+36&0.1928&0.1797&0.1317&0.0560\\
+\hline
+42&0.1712&0.1604&0.1200&0.0541\\
+\hline
+48&0.1561&0.1468&0.1116&0.0530\\
+\hline
+烘干结束时间&0.1500&0.1413&0.1081&0.0526\\
+\hline
+\end{tabularx}
+\end{table}
+
+表\ref{tab:q4-main-moisture}中的“药材表面”表示移动边界$r=R(t)$，“烘干结束时间”对应$t_{\mathrm{dry}}^{(4)}=51.0906\,\mathrm h$。在各列示时刻，当前半径依次为$1.3740,1.2480,1.2140,1.2040,1.2010,1.2000,1.2000,1.2000,1.2000\,\mathrm{cm}$。末行中心水分浓度的未舍入值约为$0.149999958948\,\mathrm{kg/kg}$，表中显示为$0.1500\,\mathrm{kg/kg}$仅由四位小数舍入造成。
+
+\section{模型检验及合理性分析}
+
+\subsection{第三问的模型检验}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/问题四流程图.png}
+\caption{问题四流程图}
+\end{figure}
+
+\subsubsection{空间网格收敛性检验}
+
+为检验空间离散结果的收敛性，本文在时间离散方案保持不变的条件下，分别采用径向区间数为$N=3040,6080,12160$的三套相似网格进行计算，每级网格均在前一级基础上加密一倍。分别比较三套网格下的温度场$T(r,t)$、含水率场$C(r,t)$和烘干完成时刻$t_*$。其中，场变量差异在$60\,\mathrm s$至$206880\,\mathrm s$的共同输出时段及281个共同随体位置上计算，烘干完成时刻单独比较。
+
+对三级网格所得结果$Q_h,Q_{h/2},Q_{h/4}$，采用 Richardson 外推\upcite{roache1998}计算观测收敛阶，并取$1.5$为安全系数估计细网格解的剩余误差：
+\begin{equation}
+\left\{
+\begin{aligned}
+p_{\mathrm{obs}}
+&=\log_2\frac{|Q_h-Q_{h/2}|}{|Q_{h/2}-Q_{h/4}|}\\
+\widehat\varepsilon_Q
+&=1.5\frac{|Q_{h/2}-Q_{h/4}|}{2^{p_{\mathrm{obs}}}-1}
+\end{aligned}
+\right.
+\label{eq:q3-richardson-estimate}
+\end{equation}
+其中，$p_{\mathrm{obs}}$为三级离散结果对应的观测收敛阶，$\widehat\varepsilon_Q$为最细一级数值解相对于连续极限解的剩余离散误差估计。
+表\ref{tab:q3-convergence}中的空间加密结果表明，随着网格加密，相邻两级计算结果之间的差异持续减小，说明数值解逐步趋于稳定；温度场、含水率场和烘干完成时刻的观测收敛阶均接近二阶，与有限体积空间离散的理论精度基本一致。
+
+\subsubsection{时间步长收敛性检验}
+
+为检验时间离散结果的收敛性，时间步长检验固定采用最细空间网格$N=12160$，仅逐级减小时间步长。三组检验中，初始阶段、烘干阶段和稳态阶段的最大时间步长分别取为$(0.03125,0.5,4)\,\mathrm s$、$(0.015625,0.25,2)\,\mathrm s$和$(0.0078125,0.125,1)\,\mathrm s$。比较各级时间步长下的温度场、含水率场和烘干完成时刻，所得结果见表\ref{tab:q3-convergence}。
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\caption{第三问空间网格与时间步长收敛性检验结果}
+\label{tab:q3-convergence}
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}p{0.17\textwidth} >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}p{0.12\textwidth} >{\centering\arraybackslash}X}
+\hline
+指标与加密方向 & 粗--中差异 & 中--细差异 & 观测收敛阶$p_{\mathrm{obs}}$ & 细解剩余误差估计\\
+\hline
+$T$，空间 & $1.42505\times10^{-7}\,{}^\circ\mathrm C$ & $3.56262\times10^{-8}\,{}^\circ\mathrm C$ & $2.000001$ & $1.78131\times10^{-8}\,{}^\circ\mathrm C$\\
+$T$，时间 & $5.19787\times10^{-7}\,{}^\circ\mathrm C$ & $1.29712\times10^{-7}\,{}^\circ\mathrm C$ & $2.002610$ & $6.48559\times10^{-8}\,{}^\circ\mathrm C$\\
+$C$，空间 & $5.17710\times10^{-6}$ & $1.29271\times10^{-6}$ & $2.001742$ & $6.46356\times10^{-7}$\\
+$C$，时间 & $4.12778\times10^{-8}$ & $1.03212\times10^{-8}$ & $1.999759$ & $5.16174\times10^{-9}$\\
+$t_*$，空间 & $0.282288\,\mathrm s$ & $0.0705566\,\mathrm s$ & $2.000312$ & $0.0352783\,\mathrm s$\\
+$t_*$，时间 & $1.15967\times10^{-3}\,\mathrm s$ & $3.05176\times10^{-4}\,\mathrm s$ & $1.925999$ & $1.63487\times10^{-4}\,\mathrm s$\\
+\hline
+\end{tabularx}
+\end{table}
+
+由表\ref{tab:q3-convergence}可知，时间步长逐级减半后各指标同样呈现接近二阶的收敛特征，其中烘干完成时刻的时间离散误差估计为$1.63487\times10^{-4}\,\mathrm s$，明显小于相应的空间离散误差估计$0.0352783\,\mathrm s$。烘干完成时刻的数值误差主要来源于空间离散。将空间和时间误差估计相加，得到温度场和含水率场在共同采样集上的综合经验误差估计：
+\begin{equation}
+\left\{
+\begin{aligned}
+\widehat\varepsilon_T&=8.26690\times10^{-8}\,{}^\circ\mathrm C\\
+\widehat\varepsilon_C&=6.51518\times10^{-7}\,\mathrm{kg/kg}
+\end{aligned}
+\right.
+\label{eq:q3-field-error-estimates}
+\end{equation}
+
+\subsubsection{临界时刻定位与离散残差检验}
+
+除检验场变量的收敛性外，还需检验临界时刻的定位精度。本文在发生阈值穿越的最后一个时间步内进行二分搜索，将临界时刻限定在宽度为$6.10352\times10^{-5}\,\mathrm s$的区间内，满足区间宽度小于$10^{-4}\,\mathrm s$的定位要求。
+
+将空间离散误差、时间离散误差和事件定位误差合并，得到烘干完成时刻的综合经验误差估计$\widehat\varepsilon_t=0.035503\,\mathrm s$。
+以小时为单位保留四位小数时，半个末位单位为$0.18\,\mathrm s$。
+由于$0.035503<0.18$，综合经验误差小于四位小数所允许的舍入范围，因而报告时长$57.4724\,\mathrm h$具有足够的数值稳定性。
+
+此外，本文在每个时间步检查离散热量和水分平衡残差，所得最大相对残差分别为
+\begin{equation}
+\left\{
+\begin{aligned}
+\varepsilon_{T,\mathrm{res}}&=1.52\times10^{-11}\\
+\varepsilon_{C,\mathrm{res}}&=2.03\times10^{-14}
+\end{aligned}
+\right.
+\label{eq:q3-discrete-residuals}
+\end{equation}
+上述结果表明，各时间步内的非线性迭代均已充分收敛，离散方程的热量与水分收支保持平衡。
+
+\subsubsection{跨算法一致性检验}
+
+上述空间网格和时间步长收敛性检验均基于有限体积离散框架，只能说明该方法在逐级加密时趋于稳定，尚不能检验主方法在空间离散、时间推进、边界通量处理和临界事件定位过程中可能产生的系统性数值偏差。为此，本文采用原理不同的数值方法进行独立复算，检验计算结果对特定算法的依赖程度。
+
+在保持物理模型、参数及初边界条件一致的前提下，本文采用 Chebyshev--Lobatto 谱元法\upcite{patera1984,trefethen2000}和五阶 Radau IIA 方法\upcite{hairer1996}进行独立复算。空间上，主方法采用有限体积法计算控制体界面通量，对照方法采用高阶多项式弱形式逼近；时间上，主方法采用BDF2格式和Picard迭代，对照方法采用五阶隐式配点格式。此外，同一Robin边界条件分别通过外层控制体通量和弱形式边界积分施加，临界时刻则分别通过离散节点插值和连续谱近似定位，从而对上述四个数值环节进行交叉检验。
+
+根据两种方法保存的全精度结果，在3448个共同时间节点和21个共同径向位置上比较温度场和含水率场，并比较各自确定的烘干完成时刻，所得最大差异为
+\begin{equation}
+\left\{
+\begin{aligned}
+E_T^{\mathrm{FVM,SEM}}&=4.57\times10^{-8}\,{}^\circ\mathrm C\\
+E_C^{\mathrm{FVM,SEM}}&=4.67\times10^{-8}\,\mathrm{kg/kg}\\
+E_t^{\mathrm{FVM,SEM}}&=0.0233898\,\mathrm s
+\end{aligned}
+\right.
+\label{eq:q3-cross-algorithm-differences}
+\end{equation}
+其中，烘干完成时刻的跨算法差异$0.0233898\,\mathrm s$小于前述综合经验误差$0.035503\,\mathrm s$，温度场和含水率场的差异也处于较低量级。这表明两种数值方法所得结果具有良好一致性，问题三的报告时长$57.4724\,\mathrm h$未表现出对某一种数值算法的明显依赖。
+
+
+
+\subsection{问题四模型的检验}
+
+\subsubsection{问题四模型的有效干质量计算}
+
+干基含水率以干物质质量为基准，干质量是联系含水率、湿密度与收缩体积的核心量。本文根据所得含水率场计算当前药材样品控制体内的有效干质量，并与其初始值进行比较。
+
+干基含水率的定义为$C=\mathrm dm_w/\mathrm dm_d$。结合附录4给出的真实湿密度关系$\rho_w(C)=760+90C$，单位当前体积内的有效干质量密度为
+\begin{equation}
+\boxed{
+\rho_d(C)=\frac{\rho_w(C)}{1+C}
+=\frac{760+90C}{1+C}.
+}
+\label{eq:q4-check-dry-density}
+\end{equation}
+
+由初始状态$C_0$、$R_0$和$L_0$，相应的初始有效干质量密度与初始有效干质量为
+\begin{equation}
+\left\{
+\begin{aligned}
+\rho_{d0}&=\frac{760+90C_0}{1+C_0}=278.7323944\,\mathrm{kg/m^3}\\
+M_{d0}&=\pi R_0^2L_0\rho_{d0}=0.08756636\,\mathrm{kg}
+\end{aligned}
+\right.
+\label{eq:q4-initial-dry-mass}
+\end{equation}
+
+把模型计算出的$W(\xi,t)$、实测半径$R(t)$和固定长度$L_0$代入真实密度定义，可得到后验干质量检验量
+\begin{equation}
+M_d^*(t)=2\pi L_0R(t)^2
+\int_0^1\frac{760+90W(\xi,t)}{1+W(\xi,t)}\,\xi\,\mathrm d\xi.
+\label{eq:q4-check-mass-proxy}
+\end{equation}
+在上述临界时刻，数值积分得到$M_d^*(t_*^{(4)})/M_{d0}\approx0.8903$，即样品控制体内有效干质量的后验相对降幅约为$10.97\%$。该结果表明，在模型采用实测收缩体积、固定长度和真实湿密度关系的条件下，留存在当前药材样品控制体内的有效干质量不能继续视为恒定值。为判断这一结论的合理性，下文先利用解析不等式进行数理证明，再构造严格守恒对照模型进行验证。
+
+\subsubsection{干质量减少的数理证明}
+
+由式\eqref{eq:q4-check-dry-density}，对$C\ge0$恒有$\rho_d(C)\le760\,\mathrm{kg/m^3}$。若总干质量守恒且长度不超过初始长度，则
+\begin{equation}
+M_{d0}=\int_{\Omega(t)}\rho_d\,\mathrm dV
+\le760\pi R(t)^2L(t)
+\le760\pi R(t)^2L_0,
+\end{equation}
+从而必须满足
+\begin{equation}
+\boxed{
+R(t)\ge R_0\sqrt{\frac{\rho_{d0}}{760}}
+=1.211203\,\mathrm{cm}.
+}
+\label{eq:q4-check-radius-lower-bound}
+\end{equation}
+然而，附件2给出的$R(24\,\mathrm h)=1.204\,\mathrm{cm}$和$R(72\,\mathrm h)=1.198\,\mathrm{cm}$均小于式\eqref{eq:q4-check-radius-lower-bound}的理论下界。因此，在题给真实密度关系、实测半径和问题四长度不增加的条件下，严格恒定干质量的反设不能成立。
+
+\subsubsection{严格守恒对照模型验证}
+
+为从几何层面进一步验证上述结论，本文构造非仿射严格守恒对照模型。令总干质量固定为$M_d=M_{d0}$，并采用归一化累计干质量坐标$\mu=m_d/M_d\in[0,1]$描述药材变形，使固定的$\mu$区间始终对应同一部分干固体，从而将总干质量和逐环干质量守恒直接纳入计算。模型沿用问题四的初始条件、环境过程和传热传质边界，保留附件2的实测半径$R(t)$，放开长度约束，并反演$L(t)$，得到
+\begin{equation}
+\boxed{
+L(t)=\frac{M_d}{\pi R(t)^2}
+\int_0^1\frac{1}{\rho_d(C(\mu,t))}\,\mathrm d\mu,
+}
+\label{eq:q4-inferred-length}
+\end{equation}
+以及非仿射径向映射
+\begin{equation}
+r^2(\mu,t)=R(t)^2
+\frac{\displaystyle\int_0^\mu\rho_d(C)^{-1}\,\mathrm d\eta}
+{\displaystyle\int_0^1\rho_d(C)^{-1}\,\mathrm d\eta}.
+\label{eq:q4-nonaffine-measured-radius}
+\end{equation}
+以$N=3040$、$\Delta t=1\,\mathrm s$计算得到临界时刻$47.8764\,\mathrm h$。如图\ref{fig:q4-inferred-length}所示，反演长度由$25\,\mathrm{cm}$最高增至$32.3855\,\mathrm{cm}$，最大轴向伸长率为$(32.3855-25)/25\times100\%\approx29.54\%$。该模型在数学上可以同时满足题给密度关系、实测半径和逐环干质量守恒，但必须产生显著的整体轴向伸长。药材未受到外部轴向拉伸作用，自由干燥过程通常以组织收缩、塌陷和翘曲为主，最高约$29.54\%$的整体轴向伸长明显违背客观规律，因此该结果从几何合理性角度支持问题四模型中有效干质量减少的结论。
+
+\begin{figure}[H]
+\centering
+\includesvg[width=0.76\textwidth,inkscapelatex=false]{figures/输入实测半径后由干质量守恒反演得到的长度及非仿射程度}
+\caption{严格守恒对照模型反演得到的长度及非仿射程度}
+\label{fig:q4-inferred-length}
+\end{figure}
+
+对于这一现象本文做出的解释如下：药材处于开放烘干环境中，留存在样品控制体内的有效干质量可用概念性质量平衡表示为
+
+\begin{equation}
+\frac{\mathrm dM_d}{\mathrm dt}
+=-\dot M_{\mathrm{vol}}
+-\dot M_{\mathrm{shed}}
+-\dot M_{\mathrm{exudate}}
+-\dot M_{\mathrm{gas}}
+\le0
+\label{eq:q4-effective-dry-mass-balance}
+\end{equation}
+其中，各项可能分别对应非水挥发性成分逸出、表层组织脆化后的粉末或碎屑脱落、可溶性固形物随水分迁移至表面并渗出，以及少量有机成分缓慢氧化形成气态产物。在本题约$50\,{}^\circ\mathrm C$的长期烘干环境中，更应优先考虑非水挥发性成分逸出以及表层碎屑或渗出固形物损失。
+
+
+
+\section{模型评价}
+
+\subsection{模型的优点}
+
+模型建立过程中，问题一通过一维轴对称假设简化药材内部的传热传质过程；问题二、问题三依次引入变物性耦合和长期环境延拓；问题四通过材料坐标变换将收缩区域映射为固定区间，降低了移动边界的处理难度，使各问模型在统一框架下逐步深入。
+
+模型求解过程中，采用有限体积法处理内部传递与表面对流交换，并根据不同问题分别采用后向 Euler、隐式 BDF 等时间积分方法，结合非线性迭代求解温湿场。对于表层梯度较陡的区域采用加密网格，兼顾了计算效率与空间分辨率。
+
+模型检验过程中，结合网格加密、时间加密和异构算法复算分析数值结果的稳定性，并通过干质量检验量、解析不等式及守恒对照模型，考察收缩假设与物性关系的相容性，使数值误差与模型结构局限得到充分讨论。
+
+\subsection{模型的缺点}
+
+在热湿传递模型中，忽略了蒸发吸热、辐射换热及温度梯度引起的直接水分迁移。
+
+在几何描述中，忽略了端面效应、轴向变化和组织各向异性，并采用均匀仿射收缩假设，对药材实际非均匀变形的刻画存在局限性。
+
+后期环境边界和收缩假设缺少完整实测数据的验证，所得烘干时长具有相应的适用条件。
+
+\section*{AI 工具使用声明}
+
+本参赛队在竞赛过程中使用了 AI 工具，主要用于模型讨论与检查、程序调试、结果核验及文字排版辅助，详细使用情况见支撑材料。
+
+
+\begin{thebibliography}{9}
+\bibitem{bird2002}
+Bird R B, Stewart W E, Lightfoot E N. Transport Phenomena[M]. 2nd ed. New York: John Wiley \& Sons, 2002.
+
+\bibitem{fick1855}
+Fick A. On liquid diffusion[J]. Philosophical Magazine, 1855, 10(63): 30--39. DOI: \url{https://doi.org/10.1080/14786445508641925}.
+
+\bibitem{crank1975}
+Crank J. The Mathematics of Diffusion[M]. 2nd ed. Oxford: Clarendon Press, 1975.
+
+\bibitem{patankar1980}
+Patankar S V. Numerical Heat Transfer and Fluid Flow[M]. New York: Hemisphere Publishing Corporation, 1980.
+
+\bibitem{hairer1996}
+Hairer E, Wanner G. Solving Ordinary Differential Equations II: Stiff and Differential-Algebraic Problems[M]. 2nd ed. Berlin: Springer, 1996. DOI: \url{https://doi.org/10.1007/978-3-642-05221-7}.
+
+\bibitem{kelley1995}
+Kelley C T. Iterative Methods for Linear and Nonlinear Equations[M]. Philadelphia: SIAM, 1995. DOI: \url{https://doi.org/10.1137/1.9781611970944}.
+
+\bibitem{roache1998}
+Roache P J. Verification and Validation in Computational Science and Engineering[M]. Albuquerque: Hermosa Publishers, 1998.
+
+\bibitem{patera1984}
+Patera A T. A spectral element method for fluid dynamics: Laminar flow in a channel expansion[J]. Journal of Computational Physics, 1984, 54(3): 468--488. DOI: \url{https://doi.org/10.1016/0021-9991(84)90128-1}.
+
+\bibitem{trefethen2000}
+Trefethen L N. Spectral Methods in MATLAB[M]. Philadelphia: SIAM, 2000. DOI: \url{https://doi.org/10.1137/1.9780898719598}.
+\end{thebibliography}
+
+\clearpage
+\appendix
+\section*{附录}
+\addcontentsline{toc}{section}{附录}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+
+\subsection*{\centering 支撑材料列表}
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{0.92\textwidth}{>{\raggedright\arraybackslash}p{0.56\textwidth}>{\raggedright\arraybackslash}X}
+\toprule
+文件名 & 功能描述 \\
+\midrule
+\texttt{result1.xlsx} & 问题一完整计算结果 \\
+\texttt{result2.xlsx} & 问题二完整计算结果 \\
+\texttt{result3.xlsx} & 问题三完整计算结果 \\
+\texttt{result4.xlsx} & 问题四完整计算结果 \\
+\texttt{问题一源代码.py} & 问题一程序代码 \\
+\texttt{问题二源代码.py} & 问题二程序代码 \\
+\texttt{问题三源代码.py} & 问题三程序代码 \\
+\texttt{问题四源代码.py} & 问题四程序代码 \\
+\texttt{问题重述热量水分.png} & 药材径向传热传质示意图 \\
+\texttt{一维径向非稳态热传导示意图.png} & 一维径向传热传质模型示意图 \\
+\texttt{药材烘干过程示意图.png} & 药材预热与恒温干燥阶段示意图 \\
+\texttt{温度三维时空分布曲面图.svg} & 问题一温度场结果图 \\
+\texttt{水分浓度三维时空分布曲面图.svg} & 问题一水分浓度场结果图 \\
+\texttt{云A.svg} & 问题一典型时刻温度分布图 \\
+\texttt{问题二新结果展示.svg} & 问题二温度场与水分浓度场结果图 \\
+\texttt{问题三结果展示折线图.png} & 问题三全域最大含水率变化图 \\
+\texttt{问题三三维曲面图.png} & 问题三水分浓度三维时空曲面图 \\
+\texttt{问题三等值线图.svg} & 问题三含水率时空等值线图 \\
+\texttt{问题三结果展示圆柱.svg} & 问题三典型时刻含水率分布图 \\
+\texttt{问题四结果展示.svg} & 问题四温度场与含水率场结果图 \\
+\texttt{输入实测半径后由干质量守恒反演得到的长度及非仿射程度.svg} & 问题四严格守恒对照模型结果图 \\
+\texttt{AI 工具使用详情.pdf} & AI 工具使用详情 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\clearpage
+\begingroup
+\setlength{\parindent}{0pt}
+\newcommand{\AppendixCodePage}[1]{%
+  \thispagestyle{plain}%
+  \noindent\makebox[\textwidth][c]{%
+    \includegraphics[width=\textwidth,height=0.985\textheight,keepaspectratio]{#1}%
+  }%
+  \clearpage
+}
+\AppendixCodePage{final_build/code_pages/code_page_01.png}
+\AppendixCodePage{final_build/code_pages/code_page_02.png}
+\AppendixCodePage{final_build/code_pages/code_page_03.png}
+\AppendixCodePage{final_build/code_pages/code_page_04.png}
+\AppendixCodePage{final_build/code_pages/code_page_05.png}
+\AppendixCodePage{final_build/code_pages/code_page_06.png}
+\AppendixCodePage{final_build/code_pages/code_page_07.png}
+\AppendixCodePage{final_build/code_pages/code_page_08.png}
+\AppendixCodePage{final_build/code_pages/code_page_09.png}
+\AppendixCodePage{final_build/code_pages/code_page_10.png}
+\AppendixCodePage{final_build/code_pages/code_page_11.png}
+\AppendixCodePage{final_build/code_pages/code_page_12.png}
+\AppendixCodePage{final_build/code_pages/code_page_13.png}
+\AppendixCodePage{final_build/code_pages/code_page_14.png}
+\AppendixCodePage{final_build/code_pages/code_page_15.png}
+\AppendixCodePage{final_build/code_pages/code_page_16.png}
+\AppendixCodePage{final_build/code_pages/code_page_17.png}
+\AppendixCodePage{final_build/code_pages/code_page_18.png}
+\AppendixCodePage{final_build/code_pages/code_page_19.png}
+\AppendixCodePage{final_build/code_pages/code_page_20.png}
+\AppendixCodePage{final_build/code_pages/code_page_21.png}
+\AppendixCodePage{final_build/code_pages/code_page_22.png}
+\AppendixCodePage{final_build/code_pages/code_page_23.png}
+\AppendixCodePage{final_build/code_pages/code_page_24.png}
+\AppendixCodePage{final_build/code_pages/code_page_25.png}
+\AppendixCodePage{final_build/code_pages/code_page_26.png}
+\AppendixCodePage{final_build/code_pages/code_page_27.png}
+\AppendixCodePage{final_build/code_pages/code_page_28.png}
+\AppendixCodePage{final_build/code_pages/code_page_29.png}
+\AppendixCodePage{final_build/code_pages/code_page_30.png}
+\AppendixCodePage{final_build/code_pages/code_page_31.png}
+\AppendixCodePage{final_build/code_pages/code_page_32.png}
+\AppendixCodePage{final_build/code_pages/code_page_33.png}
+\AppendixCodePage{final_build/code_pages/code_page_34.png}
+\AppendixCodePage{final_build/code_pages/code_page_35.png}
+\AppendixCodePage{final_build/code_pages/code_page_36.png}
+\AppendixCodePage{final_build/code_pages/code_page_37.png}
+\AppendixCodePage{final_build/code_pages/code_page_38.png}
+\AppendixCodePage{final_build/code_pages/code_page_39.png}
+\AppendixCodePage{final_build/code_pages/code_page_40.png}
+\endgroup
+
+% The original selectable code is retained below for maintenance,
+% but excluded from typesetting; the appendix uses the page images above.
+\begin{comment}
+\subsection*{\centering 代码（相似的代码未重复放入）}
+
+\subsubsection*{\centering 问题一：固定物性热湿传递模型}
+\begin{PythonCode}
+# Question 1 and shared finite-volume core routines
+"""Core routines for Questions 1--4 (I/O, logging and plotting omitted)."""
+
+from __future__ import annotations
+
+from collections.abc import Callable
+import numpy as np
+from scipy.integrate import solve_ivp
+from scipy.optimize import brentq
+
+
+HEAT_TRANSFER = 25.0       # W/(m^2 K)
+MASS_TRANSFER = 8.0e-7     # m/s
+INITIAL_T = 28.0           # deg C
+INITIAL_C = 2.55           # kg/kg, dry basis
+DRY_LIMIT = 0.15           # kg/kg, dry basis
+
+
+def material_properties(
+    moisture: np.ndarray, temperature_c: np.ndarray, model: int
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """Return rho, cp, k and D for the selected appendix model."""
+    c = np.maximum(np.asarray(moisture, dtype=float), 1.0e-12)
+    tk = np.asarray(temperature_c, dtype=float) + 273.15
+    ratio = c / (1.0 + c)
+
+    if model == 1:  # Question 1: constant thermal properties
+        rho = np.full_like(c, 820.0)
+        cp = np.full_like(c, 2600.0)
+        k = np.full_like(c, 0.36)
+        diffusivity = 7.0e-9 * np.exp(-0.89 / c)
+    elif model == 3:  # Attachment 3, Questions 2 and 3
+        rho = 650.0 + 128.0 * c
+        cp = 1450.0 + 2736.0 * ratio
+        k = 0.21 + 0.38 * ratio
+        diffusivity = 2.4e-3 * np.exp(-0.45 / c - 3850.0 / tk)
+    elif model == 4:  # Attachment 4, Question 4
+        rho = 760.0 + 90.0 * c
+        cp = 1850.0 + 2150.0 * ratio
+        k = 0.12 + 0.20 * ratio
+        diffusivity = 4.2e-4 * np.exp(-0.30 / c - 3850.0 / tk)
+    else:
+        raise ValueError("model must be 1, 3 or 4")
+    return rho, cp, k, diffusivity
+
+
+def refined_grid(intervals: int, surface_fraction: float = 0.1) -> np.ndarray:
+    """Grid on x in [0,1], with a 10:1 refinement in the surface layer."""
+    ratio = 10
+    bulk_fraction = 1.0 - surface_fraction
+    bulk_intervals = round(
+        intervals * bulk_fraction / (bulk_fraction + ratio * surface_fraction)
+    )
+    surface_intervals = intervals - bulk_intervals
+    bulk = np.linspace(0.0, bulk_fraction, bulk_intervals + 1)
+    surface = np.linspace(
+        bulk_fraction, 1.0, surface_intervals + 1
+    )[1:]
+    return np.concatenate((bulk, surface))
+
+
+def storage_weights(x: np.ndarray) -> np.ndarray:
+    """Integral of x dx over every node-centred cylindrical control volume."""
+    faces = 0.5 * (x[:-1] + x[1:])
+    weights = np.empty_like(x)
+    weights[0] = 0.5 * faces[0] ** 2
+    weights[1:-1] = 0.5 * (faces[1:] ** 2 - faces[:-1] ** 2)
+    weights[-1] = 0.5 * (1.0 - faces[-1] ** 2)
+    return weights
+
+
+def harmonic_mean(left: np.ndarray, right: np.ndarray) -> np.ndarray:
+    return 2.0 * left * right / (left + right)
+
+
+def thomas_solve(
+    lower: np.ndarray, diagonal: np.ndarray,
+    upper: np.ndarray, right: np.ndarray,
+) -> np.ndarray:
+    """Solve a tridiagonal system (Thomas algorithm)."""
+    b, d = diagonal.copy(), right.copy()
+    for i in range(1, b.size):
+        factor = lower[i - 1] / b[i - 1]
+        b[i] -= factor * upper[i - 1]
+        d[i] -= factor * d[i - 1]
+    answer = np.empty_like(d)
+    answer[-1] = d[-1] / b[-1]
+    for i in range(b.size - 2, -1, -1):
+        answer[i] = (d[i] - upper[i] * answer[i + 1]) / b[i]
+    return answer
+
+
+def bdf_history(
+    old: np.ndarray,
+    previous: np.ndarray | None,
+    step_s: float,
+    previous_step_s: float | None = None,
+) -> tuple[float, np.ndarray]:
+    """Return a0 and the history term for BE/variable-step BDF2."""
+    if previous is None:
+        return 1.0 / step_s, old / step_s
+    previous_step_s = step_s if previous_step_s is None else previous_step_s
+    q = step_s / previous_step_s
+    a0 = (1.0 + 2.0 * q) / ((1.0 + q) * step_s)
+    history = ((1.0 + q) * old - q**2 * previous / (1.0 + q)) / step_s
+    return a0, history
+
+
+def implicit_fvm_step(
+    old: np.ndarray,
+    previous: np.ndarray | None,
+    step_s: float,
+    previous_step_s: float | None,
+    x: np.ndarray,
+    radius: float,
+    storage: np.ndarray,
+    coefficient: np.ndarray,
+    transfer: float,
+    ambient: float,
+) -> np.ndarray:
+    """One conservative BE/BDF2 step on the fixed reference interval."""
+    a0, history = bdf_history(old, previous, step_s, previous_step_s)
+    faces = 0.5 * (x[:-1] + x[1:])
+    conductance = (
+        faces * harmonic_mean(coefficient[:-1], coefficient[1:]) / np.diff(x)
+    )
+    capacity = radius**2 * storage_weights(x) * storage
+    diagonal = a0 * capacity
+    right = capacity * history
+    diagonal[:-1] += conductance
+    diagonal[1:] += conductance
+    diagonal[-1] += radius * transfer
+    right[-1] += radius * transfer * ambient
+    return thomas_solve(-conductance, diagonal, -conductance, right)
+
+
+def picard_bdf2_step(
+    old_t: np.ndarray,
+    old_c: np.ndarray,
+    previous_t: np.ndarray | None,
+    previous_c: np.ndarray | None,
+    step_s: float,
+    previous_step_s: float | None,
+    x: np.ndarray,
+    radius: float,
+    model: int,
+    ambient: tuple[float, float],
+    tolerance: float = 1.0e-10,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Coupled Picard update used by the fixed-step solvers in Q1 and Q3."""
+    temperature, moisture = old_t.copy(), old_c.copy()
+    for _ in range(50):
+        rho, cp, k, _ = material_properties(moisture, temperature, model)
+        new_t = implicit_fvm_step(
+            old_t, previous_t, step_s, previous_step_s, x, radius,
+            rho * cp, k, HEAT_TRANSFER, ambient[0],
+        )
+        _, _, _, diffusivity = material_properties(moisture, new_t, model)
+        new_c = implicit_fvm_step(
+            old_c, previous_c, step_s, previous_step_s, x, radius,
+            np.ones_like(moisture), diffusivity, MASS_TRANSFER, ambient[1],
+        )
+        change = max(
+            np.max(np.abs(new_t - temperature)),
+            np.max(np.abs(new_c - moisture)),
+        )
+        temperature, moisture = new_t, new_c
+        if change < tolerance:
+            return temperature, moisture
+    raise RuntimeError("Picard iteration did not converge")
+
+
+def transport_balance(
+    field: np.ndarray,
+    coefficient: np.ndarray,
+    x: np.ndarray,
+    radius: float,
+    transfer: float,
+    ambient: float,
+) -> np.ndarray:
+    """Conservative internal-face fluxes and the surface Robin flux."""
+    faces = 0.5 * (x[:-1] + x[1:])
+    face_coefficient = harmonic_mean(coefficient[:-1], coefficient[1:])
+    flux = faces * face_coefficient * np.diff(field) / np.diff(x)
+    balance = np.empty_like(field)
+    balance[0] = flux[0]
+    balance[1:-1] = flux[1:] - flux[:-1]
+    balance[-1] = radius * transfer * (ambient - field[-1]) - flux[-1]
+    return balance
+
+
+def build_rhs(
+    x: np.ndarray,
+    model: int,
+    radius_at: Callable[[float], float],
+    ambient_at: Callable[[float], tuple[float, float]],
+) -> Callable[[float, np.ndarray], np.ndarray]:
+    """Build the method-of-lines system for a fixed or shrinking cylinder."""
+    weights = storage_weights(x)
+    n = x.size
+
+    def rhs(time_s: float, state: np.ndarray) -> np.ndarray:
+        temperature = state[:n]
+        moisture = state[n:]
+        radius = float(radius_at(time_s))
+        ambient_t, ambient_c = ambient_at(time_s)
+        rho, cp, k, diffusivity = material_properties(
+            moisture, temperature, model
+        )
+        heat = transport_balance(
+            temperature, k, x, radius, HEAT_TRANSFER, ambient_t
+        )
+        mass = transport_balance(
+            moisture, diffusivity, x, radius, MASS_TRANSFER, ambient_c
+        )
+        scale = radius**2 * weights
+        return np.concatenate((heat / (scale * rho * cp), mass / scale))
+
+    return rhs
+
+
+def solve_adaptive_bdf(
+    intervals: int,
+    end_time_s: float,
+    model: int,
+    radius_at: Callable[[float], float],
+    ambient_at: Callable[[float], tuple[float, float]],
+    rtol: float = 1.0e-10,
+    atol_t: float = 1.0e-10,
+    atol_c: float = 1.0e-12,
+    max_step_s: float = 2.0,
+) -> tuple[object, float | None]:
+    """Adaptive BDF driver used by Q2/Q4; locate the drying event."""
+    x = refined_grid(intervals)
+    n = x.size
+    initial = np.r_[np.full(n, INITIAL_T), np.full(n, INITIAL_C)]
+    solution = solve_ivp(
+        build_rhs(x, model, radius_at, ambient_at),
+        (0.0, end_time_s),
+        initial,
+        method="BDF",
+        rtol=rtol,
+        atol=np.r_[np.full(n, atol_t), np.full(n, atol_c)],
+        dense_output=True,
+        max_step=max_step_s,
+    )
+    if not solution.success:
+        raise RuntimeError(solution.message)
+
+    maximum_c = np.max(solution.y[n:], axis=0)
+    crossing = np.flatnonzero(
+        (maximum_c[:-1] > DRY_LIMIT) & (maximum_c[1:] <= DRY_LIMIT)
+    )
+    if crossing.size == 0:
+        return solution, None
+    j = int(crossing[0])
+    event = lambda t: float(np.max(solution.sol(t)[n:]) - DRY_LIMIT)
+    dry_time = brentq(event, solution.t[j], solution.t[j + 1])
+    return solution, float(dry_time)
+
+
+def richardson_estimate(values: np.ndarray, safety: float = 1.5) -> tuple[float, float]:
+    """Observed order and fine-grid remainder for three 2:1 refinements."""
+    coarse, medium, fine = np.asarray(values, dtype=float)
+    order = np.log2(abs((coarse - medium) / (medium - fine)))
+    error = safety * abs(medium - fine) / (2.0**order - 1.0)
+    return float(order), float(error)
+
+
+def dry_mass_ratio(
+    x: np.ndarray,
+    moisture: np.ndarray,
+    radius: float,
+    initial_radius: float = 0.02,
+) -> float:
+    """Question 4 posterior dry-solid conservation diagnostic."""
+    weights = storage_weights(x)
+    dry_density = (760.0 + 90.0 * moisture) / (1.0 + moisture)
+    initial_dry_density = (760.0 + 90.0 * INITIAL_C) / (1.0 + INITIAL_C)
+    current = radius**2 * np.sum(weights * dry_density)
+    initial = initial_radius**2 * 0.5 * initial_dry_density
+    return float(current / initial)
+
+
+# Question 1 solver excerpt from the complete submitted program
+def solve_tridiagonal(
+    lower: Sequence[float],
+    diagonal: Sequence[float],
+    upper: Sequence[float],
+    rhs: Sequence[float],
+) -> list[float]:
+    """Thomas algorithm with pivot checks for a tridiagonal linear system."""
+    n = len(diagonal)
+    if n == 0 or len(rhs) != n or len(lower) != n - 1 or len(upper) != n - 1:
+        raise ValueError("invalid tridiagonal dimensions")
+
+    modified_upper = [0.0] * (n - 1)
+    modified_rhs = [0.0] * n
+    pivot = diagonal[0]
+    if not math.isfinite(pivot) or abs(pivot) < 1.0e-300:
+        raise ArithmeticError("zero or non-finite pivot at row 0")
+    if n > 1:
+        modified_upper[0] = upper[0] / pivot
+    modified_rhs[0] = rhs[0] / pivot
+
+    for i in range(1, n):
+        pivot = diagonal[i] - lower[i - 1] * modified_upper[i - 1]
+        if not math.isfinite(pivot) or abs(pivot) < 1.0e-300:
+            raise ArithmeticError(f"zero or non-finite pivot at row {i}")
+        if i < n - 1:
+            modified_upper[i] = upper[i] / pivot
+        modified_rhs[i] = (rhs[i] - lower[i - 1] * modified_rhs[i - 1]) / pivot
+
+    solution = [0.0] * n
+    solution[-1] = modified_rhs[-1]
+    for i in range(n - 2, -1, -1):
+        solution[i] = modified_rhs[i] - modified_upper[i] * solution[i + 1]
+    return solution
+
+
+def harmonic_mean(a: float, b: float) -> float:
+    denominator = a + b
+    if a <= 0.0 or b <= 0.0 or denominator <= 0.0:
+        raise ValueError("diffusion coefficients must be positive")
+    return 2.0 * a * b / denominator
+
+
+def make_radial_grid(
+    radius_m: float,
+    radial_cells: int,
+    surface_layer_m: float,
+    surface_refinement_factor: int,
+) -> list[float]:
+    """Create a two-zone grid refined near the convective surface.
+
+    The bulk cell width is ``surface_refinement_factor`` times the surface
+    cell width. Requested 0.1 cm output radii are nodes for all default
+    comparison grids.
+    """
+    bulk_length = radius_m - surface_layer_m
+    effective_length = bulk_length + surface_refinement_factor * surface_layer_m
+    bulk_step = effective_length / radial_cells
+    surface_step = bulk_step / surface_refinement_factor
+    bulk_cells_float = bulk_length / bulk_step
+    surface_cells_float = surface_layer_m / surface_step
+    bulk_cells = int(round(bulk_cells_float))
+    surface_cells = int(round(surface_cells_float))
+    if (
+        abs(bulk_cells_float - bulk_cells) > 1.0e-10
+        or abs(surface_cells_float - surface_cells) > 1.0e-10
+        or bulk_cells + surface_cells != radial_cells
+    ):
+        raise ValueError(
+            "radial_cells is incompatible with the two-zone grid; "
+            "use a multiple of 19 for the default 2 mm / factor-10 refinement"
+        )
+    grid = [i * bulk_step for i in range(bulk_cells + 1)]
+    interface = bulk_length
+    grid.extend(
+        interface + i * surface_step for i in range(1, surface_cells + 1)
+    )
+    grid[0] = 0.0
+    grid[-1] = radius_m
+    if any(b <= a for a, b in zip(grid, grid[1:])):
+        raise AssertionError("constructed radial grid is not strictly increasing")
+    return grid
+
+
+def make_time_coefficients(
+    old: Sequence[float], previous: Sequence[float] | None, dt: float
+) -> tuple[float, list[float]]:
+    if previous is None:
+        return 1.0 / dt, [value / dt for value in old]
+    factor = 1.0 / (2.0 * dt)
+    return 3.0 * factor, [
+        (4.0 * current - prior) * factor
+        for current, prior in zip(old, previous)
+    ]
+
+
+def implicit_fvm_step(
+    old: Sequence[float],
+    previous: Sequence[float] | None,
+    dt: float,
+    radii_m: Sequence[float],
+    storage: float,
+    gamma_nodes: Sequence[float],
+    boundary_transfer: float,
+    external_value: float,
+) -> list[float]:
+    """One BE/BDF2 step for the conservative radial diffusion equation."""
+    node_count = len(old)
+    if (
+        node_count < 2
+        or len(gamma_nodes) != node_count
+        or len(radii_m) != node_count
+    ):
+        raise ValueError("inconsistent spatial arrays")
+    radial_cells = node_count - 1
+    radius_m = radii_m[-1]
+    if radii_m[0] != 0.0 or any(b <= a for a, b in zip(radii_m, radii_m[1:])):
+        raise ValueError("invalid radial grid")
+    time_diagonal, history = make_time_coefficients(old, previous, dt)
+
+    lower = [0.0] * radial_cells
+    diagonal = [0.0] * node_count
+    upper = [0.0] * radial_cells
+    rhs = [0.0] * node_count
+
+    gamma_east = harmonic_mean(gamma_nodes[0], gamma_nodes[1])
+    r_east = 0.5 * (radii_m[0] + radii_m[1])
+    east_conductance = r_east * gamma_east / (radii_m[1] - radii_m[0])
+    center_weight = r_east * r_east / 2.0
+    diagonal[0] = storage * center_weight * time_diagonal + east_conductance
+    upper[0] = -east_conductance
+    rhs[0] = storage * center_weight * history[0]
+
+    for i in range(1, radial_cells):
+        r_i = radii_m[i]
+        r_west = 0.5 * (radii_m[i - 1] + r_i)
+        r_east = 0.5 * (r_i + radii_m[i + 1])
+        gamma_west = harmonic_mean(gamma_nodes[i - 1], gamma_nodes[i])
+        gamma_east = harmonic_mean(gamma_nodes[i], gamma_nodes[i + 1])
+        west_conductance = r_west * gamma_west / (r_i - radii_m[i - 1])
+        east_conductance = r_east * gamma_east / (radii_m[i + 1] - r_i)
+        volume_weight = (r_east * r_east - r_west * r_west) / 2.0
+        lower[i - 1] = -west_conductance
+        diagonal[i] = (
+            storage * volume_weight * time_diagonal
+            + west_conductance
+            + east_conductance
+        )
+        upper[i] = -east_conductance
+        rhs[i] = storage * volume_weight * history[i]
+
+    r_west = 0.5 * (radii_m[-2] + radius_m)
+    gamma_west = harmonic_mean(gamma_nodes[-2], gamma_nodes[-1])
+    west_conductance = r_west * gamma_west / (radius_m - radii_m[-2])
+    boundary_conductance = radius_m * boundary_transfer
+    surface_weight = (radius_m * radius_m - r_west * r_west) / 2.0
+    lower[-1] = -west_conductance
+    diagonal[-1] = (
+        storage * surface_weight * time_diagonal
+        + west_conductance
+        + boundary_conductance
+    )
+    rhs[-1] = (
+        storage * surface_weight * history[-1]
+        + boundary_conductance * external_value
+    )
+
+    return solve_tridiagonal(lower, diagonal, upper, rhs)
+
+
+def radial_storage_weights(radii_m: Sequence[float]) -> list[float]:
+    radial_cells = len(radii_m) - 1
+    radius_m = radii_m[-1]
+    weights = [0.0] * (radial_cells + 1)
+    first_face = 0.5 * (radii_m[0] + radii_m[1])
+    weights[0] = first_face * first_face / 2.0
+    for i in range(1, radial_cells):
+        west = 0.5 * (radii_m[i - 1] + radii_m[i])
+        east = 0.5 * (radii_m[i] + radii_m[i + 1])
+        weights[i] = (east * east - west * west) / 2.0
+    last_face = 0.5 * (radii_m[-2] + radius_m)
+    weights[-1] = (radius_m * radius_m - last_face * last_face) / 2.0
+    return weights
+
+
+def update_balance_diagnostic(
+    diagnostics: SolverDiagnostics,
+    field_name: str,
+    new: Sequence[float],
+    old: Sequence[float],
+    previous: Sequence[float] | None,
+    dt: float,
+    weights: Sequence[float],
+    storage: float,
+    radius_m: float,
+    boundary_transfer: float,
+    external_value: float,
+) -> None:
+    time_diagonal, history = make_time_coefficients(old, previous, dt)
+    storage_rate = sum(
+        storage * weight * (time_diagonal * value - hist)
+        for weight, value, hist in zip(weights, new, history)
+    )
+    boundary_rate = radius_m * boundary_transfer * (external_value - new[-1])
+    residual = abs(storage_rate - boundary_rate)
+    scale = max(abs(storage_rate), abs(boundary_rate), 1.0e-30)
+    relative = residual / scale
+    if field_name == "heat":
+        diagnostics.max_heat_balance_abs = max(
+            diagnostics.max_heat_balance_abs, residual
+        )
+        diagnostics.max_heat_balance_rel = max(
+            diagnostics.max_heat_balance_rel, relative
+        )
+    elif field_name == "moisture":
+        diagnostics.max_moisture_balance_abs = max(
+            diagnostics.max_moisture_balance_abs, residual
+        )
+        diagnostics.max_moisture_balance_rel = max(
+            diagnostics.max_moisture_balance_rel, relative
+        )
+    else:
+        raise ValueError(field_name)
+
+
+def solve_model(
+    environment: EnvironmentData,
+    parameters: PhysicalParameters,
+    config: NumericalConfig,
+    progress: bool = False,
+) -> SimulationResult:
+    config.validate()
+    environment.validate(config.end_time_s)
+    started = time.perf_counter()
+
+    n = config.radial_cells
+    dt = config.time_step_s
+    step_count = int(round(config.end_time_s / dt))
+    output_stride = int(round(config.output_interval_s / dt))
+    radii_m = make_radial_grid(
+        parameters.radius_m,
+        n,
+        config.surface_layer_m,
+        config.surface_refinement_factor,
+    )
+    radii_cm = [0.1 * i for i in range(21)]
+    requested_indices = []
+    for radius_cm in radii_cm:
+        target = radius_cm / 100.0
+        index = bisect.bisect_left(radii_m, target)
+        candidates = [j for j in (index - 1, index) if 0 <= j < len(radii_m)]
+        best = min(candidates, key=lambda j: abs(radii_m[j] - target))
+        if abs(radii_m[best] - target) > 1.0e-12:
+            raise ValueError(f"output radius {radius_cm} cm is not a grid node")
+        requested_indices.append(best)
+    weights = radial_storage_weights(radii_m)
+
+    temperature = [parameters.initial_temperature_c] * (n + 1)
+    moisture = [parameters.initial_moisture_kg_kg] * (n + 1)
+    previous_temperature: list[float] | None = None
+    previous_moisture: list[float] | None = None
+    constant_k = [parameters.conductivity_w_m_k] * (n + 1)
+
+    output_times: list[int] = []
+    temperature_output: list[list[float]] = []
+    moisture_output: list[list[float]] = []
+    diagnostics = SolverDiagnostics()
+
+    for step in range(1, step_count + 1):
+        t_new = step * dt
+        external_temperature, external_moisture = environment.interpolate(t_new)
+
+        new_temperature = implicit_fvm_step(
+            temperature,
+            previous_temperature,
+            dt,
+            radii_m,
+            parameters.volumetric_heat_capacity,
+            constant_k,
+            parameters.heat_transfer_w_m2_k,
+            external_temperature,
+        )
+
+        guess = moisture.copy()
+        final_update = math.inf
+        for iteration in range(1, config.picard_max_iterations + 1):
+            diffusivity = [parameters.moisture_diffusivity(value) for value in guess]
+            candidate = implicit_fvm_step(
+                moisture,
+                previous_moisture,
+                dt,
+                radii_m,
+                1.0,
+                diffusivity,
+                parameters.mass_transfer_m_s,
+                external_moisture,
+            )
+            final_update = max(abs(a - b) for a, b in zip(candidate, guess))
+            guess = candidate
+            if final_update < config.picard_tolerance:
+                break
+        else:
+            raise RuntimeError(
+                f"Picard iteration failed at t={t_new:.9g} s; "
+                f"last update={final_update:.3e}"
+            )
+        new_moisture = guess
+
+        diagnostics.moisture_steps += 1
+        diagnostics.total_picard_iterations += iteration
+        diagnostics.max_picard_iterations = max(
+            diagnostics.max_picard_iterations, iteration
+        )
+        diagnostics.max_picard_update = max(
+            diagnostics.max_picard_update, final_update
+        )
+
+        update_balance_diagnostic(
+            diagnostics,
+            "heat",
+            new_temperature,
+            temperature,
+            previous_temperature,
+            dt,
+            weights,
+            parameters.volumetric_heat_capacity,
+            parameters.radius_m,
+            parameters.heat_transfer_w_m2_k,
+            external_temperature,
+        )
+        update_balance_diagnostic(
+            diagnostics,
+            "moisture",
+            new_moisture,
+            moisture,
+            previous_moisture,
+            dt,
+            weights,
+            1.0,
+            parameters.radius_m,
+            parameters.mass_transfer_m_s,
+            external_moisture,
+        )
+
+        previous_temperature, temperature = temperature, new_temperature
+        previous_moisture, moisture = moisture, new_moisture
+
+        diagnostics.min_temperature_c = min(
+            diagnostics.min_temperature_c, min(temperature)
+        )
+        diagnostics.max_temperature_c = max(
+            diagnostics.max_temperature_c, max(temperature)
+        )
+        diagnostics.min_moisture_kg_kg = min(
+            diagnostics.min_moisture_kg_kg, min(moisture)
+        )
+        diagnostics.max_moisture_kg_kg = max(
+            diagnostics.max_moisture_kg_kg, max(moisture)
+        )
+
+        if step % output_stride == 0:
+            output_times.append(int(round(t_new)))
+            temperature_output.append([temperature[i] for i in requested_indices])
+            moisture_output.append([moisture[i] for i in requested_indices])
+
+        if progress and (step % max(1, step_count // 10) == 0):
+            print(
+                f"  {100.0 * step / step_count:5.1f}%  "
+                f"t={t_new:8.3f} s  Picard={iteration}",
+                flush=True,
+            )
+
+    if output_times != list(range(1, int(config.end_time_s) + 1)):
+        raise AssertionError("unexpected output time grid")
+    return SimulationResult(
+        times_s=output_times,
+        radii_cm=radii_cm,
+        temperatures_c=temperature_output,
+        moistures_kg_kg=moisture_output,
+        diagnostics=diagnostics,
+        runtime_s=time.perf_counter() - started,
+    )
+\end{PythonCode}
+
+\subsubsection*{\centering 问题二：变物性热湿耦合模型}
+\begin{PythonCode}
+# Question 2 core routines
+def make_radial_grid(
+    radius_m: float,
+    radial_cells: int,
+    surface_layer_m: float,
+    surface_refinement_factor: int,
+) -> np.ndarray:
+    """Construct a two-zone grid refined in the outermost surface layer."""
+    bulk_length = radius_m - surface_layer_m
+    effective_length = bulk_length + surface_refinement_factor * surface_layer_m
+    bulk_step = effective_length / radial_cells
+    surface_step = bulk_step / surface_refinement_factor
+    bulk_cells_float = bulk_length / bulk_step
+    surface_cells_float = surface_layer_m / surface_step
+    bulk_cells = int(round(bulk_cells_float))
+    surface_cells = int(round(surface_cells_float))
+    if (
+        abs(bulk_cells_float - bulk_cells) > 1.0e-10
+        or abs(surface_cells_float - surface_cells) > 1.0e-10
+        or bulk_cells + surface_cells != radial_cells
+    ):
+        raise ValueError(
+            "radial_cells is incompatible with the two-zone grid; "
+            "use a multiple of 19 for the 2 mm / factor-10 refinement"
+        )
+    bulk = np.arange(bulk_cells + 1, dtype=float) * bulk_step
+    surface = bulk_length + np.arange(1, surface_cells + 1, dtype=float) * surface_step
+    radii = np.concatenate((bulk, surface))
+    radii[0] = 0.0
+    radii[-1] = radius_m
+    if radii.size != radial_cells + 1 or np.any(np.diff(radii) <= 0.0):
+        raise AssertionError("constructed radial grid is invalid")
+    return radii
+
+
+def radial_storage_weights(radii_m: np.ndarray) -> np.ndarray:
+    faces = 0.5 * (radii_m[:-1] + radii_m[1:])
+    weights = np.empty_like(radii_m)
+    weights[0] = 0.5 * faces[0] ** 2
+    weights[1:-1] = 0.5 * (faces[1:] ** 2 - faces[:-1] ** 2)
+    weights[-1] = 0.5 * (radii_m[-1] ** 2 - faces[-1] ** 2)
+    return weights
+
+
+def harmonic_mean(left: np.ndarray, right: np.ndarray) -> np.ndarray:
+    denominator = left + right
+    if np.any(left <= 0.0) or np.any(right <= 0.0) or np.any(denominator <= 0.0):
+        raise ValueError("interface transport coefficients must be positive")
+    return 2.0 * left * right / denominator
+
+
+def make_jacobian_sparsity(node_count: int) -> csr_matrix:
+    """Return the block-tridiagonal dependency pattern of the coupled system."""
+    pattern = lil_matrix((2 * node_count, 2 * node_count), dtype=np.int8)
+    for i in range(node_count):
+        neighbours = range(max(0, i - 1), min(node_count, i + 2))
+        for j in neighbours:
+            pattern[i, j] = 1
+            pattern[i, node_count + j] = 1
+            pattern[node_count + i, j] = 1
+            pattern[node_count + i, node_count + j] = 1
+    return pattern.tocsr()
+
+
+class CoupledRadialSystem:
+    def __init__(
+        self,
+        environment: EnvironmentData,
+        parameters: PhysicalParameters,
+        radii_m: np.ndarray,
+    ) -> None:
+        self.environment = environment
+        self.parameters = parameters
+        self.radii_m = radii_m
+        self.node_count = radii_m.size
+        self.radius_m = float(radii_m[-1])
+        self.faces_m = 0.5 * (radii_m[:-1] + radii_m[1:])
+        self.spacings_m = np.diff(radii_m)
+        self.weights_m2 = radial_storage_weights(radii_m)
+
+    def transport_net(
+        self,
+        field: np.ndarray,
+        gamma_nodes: np.ndarray,
+        boundary_transfer: float,
+        external_value: float,
+    ) -> np.ndarray:
+        gamma_faces = harmonic_mean(gamma_nodes[:-1], gamma_nodes[1:])
+        interface_flux = (
+            self.faces_m
+            * gamma_faces
+            * np.diff(field)
+            / self.spacings_m
+        )
+        net = np.empty_like(field)
+        net[0] = interface_flux[0]
+        net[1:-1] = interface_flux[1:] - interface_flux[:-1]
+        net[-1] = (
+            self.radius_m * boundary_transfer * (external_value - field[-1])
+            - interface_flux[-1]
+        )
+        return net
+
+    def __call__(self, t_s: float, state: np.ndarray) -> np.ndarray:
+        n = self.node_count
+        temperature_c = state[:n]
+        moisture = state[n:]
+        density, heat_capacity, conductivity, diffusivity = (
+            self.parameters.evaluate_properties(moisture, temperature_c)
+        )
+        external_temperature, external_moisture = self.environment.interpolate(t_s)
+        heat_net = self.transport_net(
+            temperature_c,
+            conductivity,
+            self.parameters.heat_transfer_w_m2_k,
+            external_temperature,
+        )
+        moisture_net = self.transport_net(
+            moisture,
+            diffusivity,
+            self.parameters.mass_transfer_m_s,
+            external_moisture,
+        )
+        temperature_rate = heat_net / (
+            self.weights_m2 * density * heat_capacity
+        )
+        moisture_rate = moisture_net / self.weights_m2
+        return np.concatenate((temperature_rate, moisture_rate))
+
+
+def requested_output_indices(radii_m: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    requested_cm = np.arange(21, dtype=float) * 0.1
+    indices = np.empty(requested_cm.size, dtype=int)
+    for j, radius_cm in enumerate(requested_cm):
+        target_m = radius_cm / 100.0
+        index = int(np.argmin(np.abs(radii_m - target_m)))
+        if abs(float(radii_m[index]) - target_m) > 1.0e-12:
+            raise ValueError(f"requested radius {radius_cm:g} cm is not a grid node")
+        indices[j] = index
+    return requested_cm, indices
+
+
+def moisture_balance_diagnostic(
+    environment: EnvironmentData,
+    parameters: PhysicalParameters,
+    weights: np.ndarray,
+    times_s: np.ndarray,
+    all_moistures: np.ndarray,
+) -> tuple[float, float]:
+    inventory = weights @ all_moistures
+    surface = all_moistures[-1, :]
+    external = np.interp(times_s, environment.times_s, environment.moistures_kg_kg)
+    boundary_rate = (
+        parameters.radius_m
+        * parameters.mass_transfer_m_s
+        * (external - surface)
+    )
+    dt = np.diff(times_s)
+    trapezoidal_change = 0.5 * (boundary_rate[:-1] + boundary_rate[1:]) * dt
+    residual = np.diff(inventory) - trapezoidal_change
+    scale = np.maximum.reduce(
+        (
+            np.abs(np.diff(inventory)),
+            np.abs(trapezoidal_change),
+            np.full_like(residual, 1.0e-30),
+        )
+    )
+    return float(np.max(np.abs(residual))), float(np.max(np.abs(residual) / scale))
+
+
+def solve_model(
+    environment: EnvironmentData,
+    parameters: PhysicalParameters,
+    config: NumericalConfig,
+    progress_label: str | None = None,
+    integration_method: str = "BDF",
+) -> SimulationResult:
+    if integration_method not in {"BDF", "Radau"}:
+        raise ValueError("integration_method must be 'BDF' or 'Radau'")
+    config.validate()
+    environment.validate(config.end_time_s)
+    radii_m = make_radial_grid(
+        parameters.radius_m,
+        config.radial_cells,
+        config.surface_layer_m,
+        config.surface_refinement_factor,
+    )
+    system = CoupledRadialSystem(environment, parameters, radii_m)
+    node_count = radii_m.size
+    state0 = np.concatenate(
+        (
+            np.full(node_count, parameters.initial_temperature_c, dtype=float),
+            np.full(node_count, parameters.initial_moisture_kg_kg, dtype=float),
+        )
+    )
+    output_times = np.arange(
+        0.0,
+        config.end_time_s + 0.5 * config.output_interval_s,
+        config.output_interval_s,
+        dtype=float,
+    )
+    absolute_tolerance = np.concatenate(
+        (
+            np.full(node_count, config.temperature_absolute_tolerance),
+            np.full(node_count, config.moisture_absolute_tolerance),
+        )
+    )
+    if progress_label:
+        print(
+            f"[{progress_label}] N={config.radial_cells}, "
+            f"rtol={config.relative_tolerance:.1e}, "
+            f"max_step={config.maximum_step_s:g} s",
+            flush=True,
+        )
+    started = time.perf_counter()
+    solution = solve_ivp(
+        system,
+        (0.0, config.end_time_s),
+        state0,
+        method=integration_method,
+        t_eval=output_times,
+        rtol=config.relative_tolerance,
+        atol=absolute_tolerance,
+        jac_sparsity=make_jacobian_sparsity(node_count),
+        max_step=config.maximum_step_s,
+        first_step=min(config.first_step_s, config.end_time_s),
+    )
+    runtime_s = time.perf_counter() - started
+    if not solution.success:
+        raise RuntimeError(
+            f"{integration_method} integration failed: {solution.message}"
+        )
+    if solution.t.size != output_times.size or not np.array_equal(
+        solution.t, output_times
+    ):
+        raise RuntimeError(
+            f"{integration_method} solver did not return the requested output time grid"
+        )
+    if not np.all(np.isfinite(solution.y)):
+        raise RuntimeError(f"{integration_method} solution contains non-finite values")
+
+    all_temperature = solution.y[:node_count, :]
+    all_moisture = solution.y[node_count:, :]
+    if np.min(all_moisture) <= 0.0:
+        raise RuntimeError("computed a non-positive moisture value")
+
+    density, heat_capacity, conductivity, diffusivity = parameters.evaluate_properties(
+        all_moisture.ravel(), all_temperature.ravel()
+    )
+    balance_abs, balance_rel = moisture_balance_diagnostic(
+        environment,
+        parameters,
+        system.weights_m2,
+        output_times,
+        all_moisture,
+    )
+    radii_cm, indices = requested_output_indices(radii_m)
+    result = SimulationResult(
+        times_s=output_times[1:].astype(int),
+        radii_cm=radii_cm,
+        temperatures_c=all_temperature[indices, 1:].T.copy(),
+        moistures_kg_kg=all_moisture[indices, 1:].T.copy(),
+        diagnostics=SolverDiagnostics(
+            runtime_s=runtime_s,
+            success=bool(solution.success),
+            message=str(solution.message),
+            function_evaluations=int(solution.nfev),
+            jacobian_evaluations=int(solution.njev),
+            lu_decompositions=int(solution.nlu),
+            returned_time_points=int(solution.t.size),
+            min_temperature_c=float(np.min(all_temperature)),
+            max_temperature_c=float(np.max(all_temperature)),
+            min_moisture_kg_kg=float(np.min(all_moisture)),
+            max_moisture_kg_kg=float(np.max(all_moisture)),
+            min_density_kg_m3=float(np.min(density)),
+            max_density_kg_m3=float(np.max(density)),
+            min_heat_capacity_j_kg_k=float(np.min(heat_capacity)),
+            max_heat_capacity_j_kg_k=float(np.max(heat_capacity)),
+            min_conductivity_w_m_k=float(np.min(conductivity)),
+            max_conductivity_w_m_k=float(np.max(conductivity)),
+            min_diffusivity_m2_s=float(np.min(diffusivity)),
+            max_diffusivity_m2_s=float(np.max(diffusivity)),
+            max_one_second_moisture_balance_abs=balance_abs,
+            max_one_second_moisture_balance_rel=balance_rel,
+        ),
+        config=config,
+    )
+    if progress_label:
+        print(
+            f"[{progress_label}] complete in {runtime_s:.2f} s; "
+            f"nfev={solution.nfev}, nlu={solution.nlu}",
+            flush=True,
+        )
+    return result
+\end{PythonCode}
+
+\subsubsection*{\centering 问题三：长期烘干时间与终止事件定位}
+\begin{PythonCode}
+# Question 3 core routines
+def time_coefficients(
+    old: Sequence[float], previous: Sequence[float] | None, dt_s: float
+) -> tuple[float, list[float]]:
+    """Return BE coefficients for step one and BDF2 thereafter."""
+    if previous is None:
+        return 1.0 / dt_s, [value / dt_s for value in old]
+    factor = 1.0 / (2.0 * dt_s)
+    return 3.0 * factor, [
+        (4.0 * current - prior) * factor
+        for current, prior in zip(old, previous)
+    ]
+
+
+def implicit_radial_step(
+    old: Sequence[float],
+    previous: Sequence[float] | None,
+    dt_s: float,
+    radii_m: Sequence[float],
+    storage_nodes: Sequence[float],
+    gamma_faces: Sequence[float],
+    boundary_transfer: float,
+    external_value: float,
+) -> list[float]:
+    """One conservative BE/BDF2 radial finite-volume step."""
+    node_count = len(old)
+    radial_cells = node_count - 1
+    if node_count < 2:
+        raise ValueError("at least two radial nodes are required")
+    if previous is not None and len(previous) != node_count:
+        raise ValueError("invalid history arrays")
+    if len(radii_m) != node_count or len(storage_nodes) != node_count:
+        raise ValueError("invalid nodal arrays")
+    if len(gamma_faces) != radial_cells:
+        raise ValueError("invalid face coefficient array")
+    if any(value <= 0.0 or not math.isfinite(value) for value in storage_nodes):
+        raise ValueError("storage coefficients must be positive")
+    if any(value <= 0.0 or not math.isfinite(value) for value in gamma_faces):
+        raise ValueError("face coefficients must be positive")
+
+    time_diagonal, history = time_coefficients(old, previous, dt_s)
+    lower = [0.0] * radial_cells
+    diagonal = [0.0] * node_count
+    upper = [0.0] * radial_cells
+    rhs = [0.0] * node_count
+
+    east = 0.5 * (radii_m[0] + radii_m[1])
+    east_conductance = east * gamma_faces[0] / (radii_m[1] - radii_m[0])
+    centre_weight = east**2 / 2.0
+    diagonal[0] = storage_nodes[0] * centre_weight * time_diagonal + east_conductance
+    upper[0] = -east_conductance
+    rhs[0] = storage_nodes[0] * centre_weight * history[0]
+
+    for i in range(1, radial_cells):
+        west = 0.5 * (radii_m[i - 1] + radii_m[i])
+        east = 0.5 * (radii_m[i] + radii_m[i + 1])
+        west_conductance = west * gamma_faces[i - 1] / (radii_m[i] - radii_m[i - 1])
+        east_conductance = east * gamma_faces[i] / (radii_m[i + 1] - radii_m[i])
+        weight = (east**2 - west**2) / 2.0
+        lower[i - 1] = -west_conductance
+        diagonal[i] = (
+            storage_nodes[i] * weight * time_diagonal
+            + west_conductance
+            + east_conductance
+        )
+        upper[i] = -east_conductance
+        rhs[i] = storage_nodes[i] * weight * history[i]
+
+    radius = radii_m[-1]
+    west = 0.5 * (radii_m[-2] + radius)
+    west_conductance = west * gamma_faces[-1] / (radius - radii_m[-2])
+    boundary_conductance = radius * boundary_transfer
+    surface_weight = (radius**2 - west**2) / 2.0
+    lower[-1] = -west_conductance
+    diagonal[-1] = (
+        storage_nodes[-1] * surface_weight * time_diagonal
+        + west_conductance
+        + boundary_conductance
+    )
+    rhs[-1] = (
+        storage_nodes[-1] * surface_weight * history[-1]
+        + boundary_conductance * external_value
+    )
+    return solve_tridiagonal(lower, diagonal, upper, rhs)
+
+
+def conductivity_faces(
+    moisture: Sequence[float], parameters: PhysicalParameters
+) -> list[float]:
+    return [
+        parameters.conductivity(0.5 * (left + right))
+        for left, right in zip(moisture, moisture[1:])
+    ]
+
+
+def integrated_face_diffusivity(
+    left_moisture: float,
+    right_moisture: float,
+    face_temperature_k: float,
+    parameters: PhysicalParameters,
+) -> float:
+    """Kirchhoff/secant mean of D across one moisture face."""
+    midpoint = 0.5 * (left_moisture + right_moisture)
+    half_span = 0.5 * (right_moisture - left_moisture)
+    # The temperature-dependent factor is constant across this face integral;
+    # evaluate it once instead of four times.  This matters for the N=160,
+    # dt=5 s production experiment, which evaluates millions of face fluxes.
+    thermal_factor = 2.4e-3 * math.exp(-3850.0 / face_temperature_k)
+    total = 0.0
+    for point, weight in zip(GAUSS_X, GAUSS_W):
+        moisture = midpoint + half_span * point
+        parameters._check_moisture(moisture)
+        total += weight * math.exp(-0.45 / moisture)
+    return 0.5 * thermal_factor * total
+
+
+def diffusivity_faces(
+    moisture: Sequence[float],
+    temperature_c: Sequence[float],
+    parameters: PhysicalParameters,
+) -> list[float]:
+    result = []
+    for c_left, c_right, t_left, t_right in zip(
+        moisture, moisture[1:], temperature_c, temperature_c[1:]
+    ):
+        face_temperature_k = 0.5 * (t_left + t_right) + 273.15
+        result.append(
+            integrated_face_diffusivity(
+                c_left, c_right, face_temperature_k, parameters
+            )
+        )
+    return result
+
+
+def requested_node_indices(radial_cells: int) -> tuple[list[float], list[int]]:
+    radii_cm = [0.1 * i for i in range(21)]
+    stride = radial_cells // 20
+    return radii_cm, [i * stride for i in range(21)]
+
+
+def interpolate_vector(
+    old: Sequence[float], new: Sequence[float], fraction: float
+) -> list[float]:
+    return [a + fraction * (b - a) for a, b in zip(old, new)]
+
+
+def balance_residual(
+    new: Sequence[float],
+    old: Sequence[float],
+    previous: Sequence[float] | None,
+    dt_s: float,
+    weights: Sequence[float],
+    storage_nodes: Sequence[float],
+    radius_m: float,
+    boundary_transfer: float,
+    external_value: float,
+    relative_scale_floor: float = 1.0e-10,
+) -> tuple[float, float]:
+    time_diagonal, history = time_coefficients(old, previous, dt_s)
+    storage_rate = sum(
+        storage * weight * (time_diagonal * value - hist)
+        for storage, weight, value, hist in zip(
+            storage_nodes, weights, new, history
+        )
+    )
+    boundary_rate = radius_m * boundary_transfer * (external_value - new[-1])
+    absolute = abs(storage_rate - boundary_rate)
+    # A relative residual is not informative after the field has equilibrated:
+    # both sides then approach roundoff and their quotient can be O(1) despite
+    # a tiny absolute residual.  Retain the absolute residual in all cases and
+    # evaluate the relative metric only while the balance has a useful scale.
+    scale = max(abs(storage_rate), abs(boundary_rate))
+    relative = 0.0 if scale < relative_scale_floor else absolute / scale
+    return absolute, relative
+
+
+def solve_model(
+    environment: EnvironmentData,
+    parameters: PhysicalParameters,
+    config: NumericalConfig,
+    progress: bool = False,
+) -> SimulationResult:
+    config.validate()
+    environment.validate()
+    started = time.perf_counter()
+    radii_m = make_uniform_grid(parameters.radius_m, config.radial_cells)
+    weights = radial_storage_weights(radii_m)
+    output_radii_cm, output_indices = requested_node_indices(config.radial_cells)
+    output_stride = int(round(config.output_interval_s / config.time_step_s))
+    maximum_steps = int(math.ceil(config.maximum_time_h * 3600.0 / config.time_step_s))
+
+    temperature = [parameters.initial_temperature_c] * (config.radial_cells + 1)
+    moisture = [parameters.initial_moisture_kg_kg] * (config.radial_cells + 1)
+    previous_temperature: list[float] | None = None
+    previous_moisture: list[float] | None = None
+    previous_gap = max(moisture) - parameters.moisture_threshold_kg_kg
+
+    output_times: list[float] = []
+    output_moistures: list[list[float]] = []
+    diagnostics = SolverDiagnostics()
+    next_progress_s = 6.0 * 3600.0
+
+    for step in range(1, maximum_steps + 1):
+        t_new = step * config.time_step_s
+        external_temperature, external_moisture = environment.value(t_new)
+        guess_temperature = temperature.copy()
+        guess_moisture = moisture.copy()
+
+        for iteration in range(1, config.picard_max_iterations + 1):
+            heat_storage = [
+                parameters.density(value) * parameters.heat_capacity(value)
+                for value in guess_moisture
+            ]
+            heat_faces = conductivity_faces(guess_moisture, parameters)
+            candidate_temperature = implicit_radial_step(
+                temperature,
+                previous_temperature,
+                config.time_step_s,
+                radii_m,
+                heat_storage,
+                heat_faces,
+                parameters.heat_transfer_w_m2_k,
+                external_temperature,
+            )
+            moisture_faces = diffusivity_faces(
+                guess_moisture, candidate_temperature, parameters
+            )
+            candidate_moisture = implicit_radial_step(
+                moisture,
+                previous_moisture,
+                config.time_step_s,
+                radii_m,
+                [1.0] * len(radii_m),
+                moisture_faces,
+                parameters.mass_transfer_m_s,
+                external_moisture,
+            )
+            temperature_update = max(
+                abs(a - b)
+                for a, b in zip(candidate_temperature, guess_temperature)
+            )
+            moisture_update = max(
+                abs(a - b) for a, b in zip(candidate_moisture, guess_moisture)
+            )
+            combined_update = max(temperature_update / 50.0, moisture_update)
+            guess_temperature = candidate_temperature
+            guess_moisture = candidate_moisture
+            if combined_update < config.picard_tolerance:
+                break
+        else:
+            raise RuntimeError(
+                f"Picard iteration failed at t={t_new:.3f} s; "
+                f"last scaled update={combined_update:.3e}"
+            )
+
+        new_temperature = guess_temperature
+        new_moisture = guess_moisture
+        final_heat_storage = [
+            parameters.density(value) * parameters.heat_capacity(value)
+            for value in new_moisture
+        ]
+        heat_abs, heat_rel = balance_residual(
+            new_temperature,
+            temperature,
+            previous_temperature,
+            config.time_step_s,
+            weights,
+            final_heat_storage,
+            parameters.radius_m,
+            parameters.heat_transfer_w_m2_k,
+            external_temperature,
+            relative_scale_floor=1.0e-8,
+        )
+        moisture_abs, moisture_rel = balance_residual(
+            new_moisture,
+            moisture,
+            previous_moisture,
+            config.time_step_s,
+            weights,
+            [1.0] * len(radii_m),
+            parameters.radius_m,
+            parameters.mass_transfer_m_s,
+            external_moisture,
+            relative_scale_floor=1.0e-14,
+        )
+
+        diagnostics.steps += 1
+        diagnostics.total_picard_iterations += iteration
+        diagnostics.max_picard_iterations = max(
+            diagnostics.max_picard_iterations, iteration
+        )
+        diagnostics.final_picard_update = combined_update
+        diagnostics.max_heat_balance_abs = max(diagnostics.max_heat_balance_abs, heat_abs)
+        diagnostics.max_heat_balance_rel = max(diagnostics.max_heat_balance_rel, heat_rel)
+        diagnostics.max_moisture_balance_abs = max(
+            diagnostics.max_moisture_balance_abs, moisture_abs
+        )
+        diagnostics.max_moisture_balance_rel = max(
+            diagnostics.max_moisture_balance_rel, moisture_rel
+        )
+        diagnostics.max_radial_monotonicity_violation = max(
+            diagnostics.max_radial_monotonicity_violation,
+            max(
+                (outer - inner for inner, outer in zip(new_moisture, new_moisture[1:])),
+                default=0.0,
+            ),
+        )
+        diagnostics.min_temperature_c = min(
+            diagnostics.min_temperature_c, min(new_temperature)
+        )
+        diagnostics.max_temperature_c = max(
+            diagnostics.max_temperature_c, max(new_temperature)
+        )
+        diagnostics.min_moisture_kg_kg = min(
+            diagnostics.min_moisture_kg_kg, min(new_moisture)
+        )
+        diagnostics.max_moisture_kg_kg = max(
+            diagnostics.max_moisture_kg_kg, max(new_moisture)
+        )
+
+        new_gap = max(new_moisture) - parameters.moisture_threshold_kg_kg
+        if new_gap < 0.0 <= previous_gap:
+            fraction = previous_gap / (previous_gap - new_gap)
+            fraction = min(1.0, max(0.0, fraction))
+            drying_time_s = t_new - config.time_step_s + fraction * config.time_step_s
+            drying_state = interpolate_vector(moisture, new_moisture, fraction)
+            requested_drying_state = [drying_state[i] for i in output_indices]
+            if not output_times or abs(output_times[-1] - drying_time_s) > 1.0e-9:
+                output_times.append(drying_time_s)
+                output_moistures.append(requested_drying_state)
+            return SimulationResult(
+                times_s=output_times,
+                radii_cm=output_radii_cm,
+                moistures_kg_kg=output_moistures,
+                drying_time_s=drying_time_s,
+                drying_moistures_kg_kg=requested_drying_state,
+                diagnostics=diagnostics,
+                runtime_s=time.perf_counter() - started,
+                config=config,
+            )
+
+        if step % output_stride == 0:
+            output_times.append(t_new)
+            output_moistures.append([new_moisture[i] for i in output_indices])
+
+        previous_temperature, temperature = temperature, new_temperature
+        previous_moisture, moisture = moisture, new_moisture
+        previous_gap = new_gap
+
+        if progress and t_new + 1.0e-9 >= next_progress_s:
+            print(
+                f"  t={t_new / 3600.0:7.2f} h  "
+                f"Cmax={max(moisture):.8f}  Csurf={moisture[-1]:.8f}  "
+                f"Picard={iteration}",
+                flush=True,
+            )
+            next_progress_s += 6.0 * 3600.0
+
+    raise RuntimeError(
+        f"drying criterion was not reached before {config.maximum_time_h:g} h; "
+        f"last maximum moisture={max(moisture):.9g}"
+    )
+\end{PythonCode}
+
+\subsubsection*{\centering 问题四：变半径计算域模型}
+\begin{PythonCode}
+# Question 4 core routines
+def make_reference_grid(
+    radial_cells: int,
+    surface_layer: float = 0.1,
+    refinement_factor: int = 10,
+) -> np.ndarray:
+    bulk_length = 1.0 - surface_layer
+    effective_length = bulk_length + refinement_factor * surface_layer
+    bulk_step = effective_length / radial_cells
+    surface_step = bulk_step / refinement_factor
+    bulk_cells_float = bulk_length / bulk_step
+    surface_cells_float = surface_layer / surface_step
+    bulk_cells = int(round(bulk_cells_float))
+    surface_cells = int(round(surface_cells_float))
+    if (
+        abs(bulk_cells_float - bulk_cells) > 1.0e-10
+        or abs(surface_cells_float - surface_cells) > 1.0e-10
+        or bulk_cells + surface_cells != radial_cells
+    ):
+        raise ValueError("radial_cells is incompatible with the two-zone grid")
+    bulk = np.arange(bulk_cells + 1, dtype=float) * bulk_step
+    surface = bulk_length + np.arange(1, surface_cells + 1, dtype=float) * surface_step
+    xi = np.concatenate((bulk, surface))
+    xi[0] = 0.0
+    xi[-1] = 1.0
+    if xi.size != radial_cells + 1 or np.any(np.diff(xi) <= 0.0):
+        raise AssertionError("invalid reference grid")
+    return xi
+
+
+def radial_storage_weights(xi: np.ndarray) -> np.ndarray:
+    faces = 0.5 * (xi[:-1] + xi[1:])
+    weights = np.empty_like(xi)
+    weights[0] = 0.5 * faces[0] ** 2
+    weights[1:-1] = 0.5 * (faces[1:] ** 2 - faces[:-1] ** 2)
+    weights[-1] = 0.5 * (1.0 - faces[-1] ** 2)
+    return weights
+
+
+def harmonic_mean(left: np.ndarray, right: np.ndarray) -> np.ndarray:
+    if np.any(left <= 0.0) or np.any(right <= 0.0):
+        raise ValueError("transport coefficient is non-positive")
+    return 2.0 * left * right / (left + right)
+
+
+def make_jacobian_sparsity(node_count: int) -> csr_matrix:
+    """Jacobian pattern for T, C and an auxiliary boundary-flux integral."""
+
+    state_size = 2 * node_count + 1
+    pattern = lil_matrix((state_size, state_size), dtype=np.int8)
+    for i in range(node_count):
+        for j in range(max(0, i - 1), min(node_count, i + 2)):
+            pattern[i, j] = 1
+            pattern[i, node_count + j] = 1
+            pattern[node_count + i, j] = 1
+            pattern[node_count + i, node_count + j] = 1
+    pattern[-1, 2 * node_count - 1] = 1
+    return pattern.tocsr()
+
+
+class MovingBoundarySystem:
+    def __init__(
+        self,
+        environment: EnvironmentData,
+        radius_data: RadiusData,
+        parameters: PhysicalParameters,
+        xi: np.ndarray,
+    ) -> None:
+        self.environment = environment
+        self.radius_data = radius_data
+        self.parameters = parameters
+        self.xi = xi
+        self.node_count = xi.size
+        self.faces = 0.5 * (xi[:-1] + xi[1:])
+        self.spacing = np.diff(xi)
+        self.weights = radial_storage_weights(xi)
+
+    def transport_net(
+        self,
+        field: np.ndarray,
+        gamma: np.ndarray,
+        radius_m: float,
+        boundary_transfer: float,
+        external_value: float,
+    ) -> np.ndarray:
+        gamma_faces = harmonic_mean(gamma[:-1], gamma[1:])
+        internal_flux = self.faces * gamma_faces * np.diff(field) / self.spacing
+        net = np.empty_like(field)
+        net[0] = internal_flux[0]
+        net[1:-1] = internal_flux[1:] - internal_flux[:-1]
+        net[-1] = (
+            radius_m * boundary_transfer * (external_value - field[-1])
+            - internal_flux[-1]
+        )
+        return net
+
+    def __call__(self, t_s: float, state: np.ndarray) -> np.ndarray:
+        n = self.node_count
+        temperature = state[:n]
+        moisture = state[n : 2 * n]
+        density, heat_capacity, conductivity, diffusivity = (
+            self.parameters.evaluate_properties(moisture, temperature)
+        )
+        ambient_temperature, ambient_moisture = self.environment.interpolate(t_s)
+        radius_m = float(self.radius_data.interpolate(t_s))
+        heat_net = self.transport_net(
+            temperature,
+            conductivity,
+            radius_m,
+            self.parameters.heat_transfer_w_m2_k,
+            float(ambient_temperature),
+        )
+        moisture_net = self.transport_net(
+            moisture,
+            diffusivity,
+            radius_m,
+            self.parameters.mass_transfer_m_s,
+            float(ambient_moisture),
+        )
+        radius_squared = radius_m * radius_m
+        temperature_rate = heat_net / (
+            radius_squared * self.weights * density * heat_capacity
+        )
+        moisture_rate = moisture_net / (radius_squared * self.weights)
+        boundary_inventory_rate = (
+            self.parameters.mass_transfer_m_s
+            / radius_m
+            * (float(ambient_moisture) - moisture[-1])
+        )
+        return np.concatenate(
+            (temperature_rate, moisture_rate, np.asarray([boundary_inventory_rate]))
+        )
+
+
+def interpolate_rows(
+    source_x: np.ndarray, rows: np.ndarray, target_x: np.ndarray
+) -> np.ndarray:
+    output = np.empty((rows.shape[0], target_x.size), dtype=float)
+    for i, row in enumerate(rows):
+        output[i] = np.interp(target_x, source_x, row)
+    return output
+
+
+def extract_physical_moistures(
+    xi: np.ndarray,
+    moisture_rows: np.ndarray,
+    radii_m: np.ndarray,
+    fixed_radii_cm: np.ndarray,
+) -> np.ndarray:
+    output = np.full((moisture_rows.shape[0], fixed_radii_cm.size), np.nan)
+    fixed_m = fixed_radii_cm * 0.01
+    for i, (row, radius_m) in enumerate(zip(moisture_rows, radii_m)):
+        valid = fixed_m < radius_m - 1.0e-13
+        output[i, valid] = np.interp(fixed_m[valid] / radius_m, xi, row)
+    return output
+
+
+def solve_until_dry(
+    environment: EnvironmentData,
+    radius_data: RadiusData,
+    parameters: PhysicalParameters,
+    config: NumericalConfig,
+    progress_label: str | None = None,
+    integration_method: str = "BDF",
+) -> SimulationResult:
+    if integration_method not in {"BDF", "Radau"}:
+        raise ValueError("integration_method must be 'BDF' or 'Radau'")
+    config.validate()
+    xi = make_reference_grid(
+        config.radial_cells,
+        config.reference_surface_layer,
+        config.surface_refinement_factor,
+    )
+    system = MovingBoundarySystem(environment, radius_data, parameters, xi)
+    node_count = xi.size
+    # The sparsity graph depends only on the fixed reference grid.  Construct
+    # it once; rebuilding the same matrix in every six-hour integration
+    # segment is pure overhead and changes no solver semantics.
+    jacobian_sparsity = make_jacobian_sparsity(node_count)
+    state = np.concatenate(
+        (
+            np.full(node_count, parameters.initial_temperature_c),
+            np.full(node_count, parameters.initial_moisture_kg_kg),
+            np.asarray([0.0]),
+        )
+    )
+    absolute_tolerance = np.concatenate(
+        (
+            np.full(node_count, config.temperature_absolute_tolerance),
+            np.full(node_count, config.moisture_absolute_tolerance),
+            np.asarray([config.moisture_absolute_tolerance]),
+        )
+    )
+    xi_samples = np.linspace(0.0, 1.0, 101)
+    physical_radii_cm = np.arange(20, dtype=float) * 0.1
+    time_chunks: list[np.ndarray] = []
+    temperature_chunks: list[np.ndarray] = []
+    moisture_chunks: list[np.ndarray] = []
+    physical_chunks: list[np.ndarray] = []
+    surface_chunks: list[np.ndarray] = []
+    maximum_chunks: list[np.ndarray] = []
+    radius_chunks: list[np.ndarray] = []
+    inventory_chunks: list[np.ndarray] = []
+    boundary_integral_chunks: list[np.ndarray] = []
+
+    minima = np.full(6, np.inf)
+    maxima = np.full(6, -np.inf)
+    nfev = njev = nlu = segments = 0
+    maximum_at_center = True
+    crossing_s: float | None = None
+    started = time.perf_counter()
+    current_time = 0.0
+
+    while current_time < config.maximum_duration_s and crossing_s is None:
+        if current_time < config.environment_data_end_s:
+            segment_end = min(config.environment_data_end_s, config.maximum_duration_s)
+            maximum_step = config.initial_maximum_step_s
+        else:
+            segment_end = min(
+                current_time + config.drying_segment_s,
+                config.maximum_duration_s,
+            )
+            maximum_step = config.drying_maximum_step_s
+        eval_times = np.arange(
+            current_time,
+            segment_end + 0.5 * config.output_interval_s,
+            config.output_interval_s,
+        )
+        if progress_label:
+            print(
+                f"[{progress_label}] {current_time / 3600:.1f}–"
+                f"{segment_end / 3600:.1f} h, max_step={maximum_step:g} s",
+                flush=True,
+            )
+        # The last state is a passive flux integral. Its Jacobian column is
+        # identically zero, so SciPy's finite-difference step controller can
+        # harmlessly overflow its unused perturbation factor. Suppress only
+        # those two narrowly scoped internal warnings.
+        with warnings.catch_warnings():
+            warnings.filterwarnings(
+                "ignore",
+                message="overflow encountered in multiply",
+                category=RuntimeWarning,
+                module=r"scipy\.integrate\._ivp\.common",
+            )
+            warnings.filterwarnings(
+                "ignore",
+                message="invalid value encountered in multiply",
+                category=RuntimeWarning,
+                module=r"scipy\.integrate\._ivp\.common",
+            )
+            solution = solve_ivp(
+                system,
+                (current_time, segment_end),
+                state,
+                method=integration_method,
+                t_eval=eval_times,
+                dense_output=True,
+                rtol=config.relative_tolerance,
+                atol=absolute_tolerance,
+                jac_sparsity=jacobian_sparsity,
+                max_step=maximum_step,
+                first_step=min(config.first_step_s, segment_end - current_time),
+            )
+        if not solution.success:
+            raise RuntimeError(
+                f"{integration_method} integration failed: {solution.message}"
+            )
+        if not np.all(np.isfinite(solution.y)):
+            raise RuntimeError(
+                f"{integration_method} solution contains non-finite values"
+            )
+        temperatures_nodes = solution.y[:node_count].T
+        moistures_nodes = solution.y[node_count : 2 * node_count].T
+        boundary_integral = solution.y[2 * node_count]
+        if np.min(moistures_nodes) <= 0.0:
+            raise RuntimeError("computed non-positive moisture")
+
+        densities, heat_capacities, conductivities, diffusivities = (
+            parameters.evaluate_properties(
+                moistures_nodes.ravel(), temperatures_nodes.ravel()
+            )
+        )
+        tracked = (
+            temperatures_nodes,
+            moistures_nodes,
+            densities,
+            heat_capacities,
+            conductivities,
+            diffusivities,
+        )
+        for j, values in enumerate(tracked):
+            minima[j] = min(minima[j], float(np.min(values)))
+            maxima[j] = max(maxima[j], float(np.max(values)))
+
+        local_maximum = np.max(moistures_nodes, axis=1)
+        maximum_at_center = maximum_at_center and bool(
+            np.all(local_maximum - moistures_nodes[:, 0] <= 1.0e-10)
+        )
+        crossing_candidates = np.flatnonzero(
+            (local_maximum[:-1] > parameters.drying_threshold_kg_kg)
+            & (local_maximum[1:] <= parameters.drying_threshold_kg_kg)
+        )
+        if crossing_candidates.size:
+            j = int(crossing_candidates[0])
+
+            def event_value(t_s: float) -> float:
+                dense_state = solution.sol(t_s)
+                return (
+                    float(np.max(dense_state[node_count : 2 * node_count]))
+                    - parameters.drying_threshold_kg_kg
+                )
+
+            crossing_s = float(
+                brentq(
+                    event_value,
+                    float(solution.t[j]),
+                    float(solution.t[j + 1]),
+                    xtol=1.0e-7,
+                    rtol=1.0e-13,
+                )
+            )
+
+        radii = radius_data.interpolate(solution.t)
+        sampled_temperature = interpolate_rows(xi, temperatures_nodes, xi_samples)
+        sampled_moisture = interpolate_rows(xi, moistures_nodes, xi_samples)
+        physical_moisture = extract_physical_moistures(
+            xi, moistures_nodes, radii, physical_radii_cm
+        )
+        inventory = moistures_nodes @ system.weights
+        start_index = 0 if segments == 0 else 1
+        sl = slice(start_index, None)
+        time_chunks.append(solution.t[sl].copy())
+        temperature_chunks.append(sampled_temperature[sl].copy())
+        moisture_chunks.append(sampled_moisture[sl].copy())
+        physical_chunks.append(physical_moisture[sl].copy())
+        surface_chunks.append(moistures_nodes[sl, -1].copy())
+        maximum_chunks.append(local_maximum[sl].copy())
+        radius_chunks.append(radii[sl].copy())
+        inventory_chunks.append(inventory[sl].copy())
+        boundary_integral_chunks.append(boundary_integral[sl].copy())
+
+        nfev += int(solution.nfev)
+        njev += int(solution.njev)
+        nlu += int(solution.nlu)
+        segments += 1
+        state = solution.y[:, -1].copy()
+        current_time = segment_end
+
+    runtime_s = time.perf_counter() - started
+    if crossing_s is None:
+        raise RuntimeError(
+            f"drying threshold was not reached within {config.maximum_duration_s / 3600:g} h"
+        )
+
+    times = np.concatenate(time_chunks)
+    temperatures = np.vstack(temperature_chunks)
+    moistures = np.vstack(moisture_chunks)
+    physical_moistures = np.vstack(physical_chunks)
+    surface_moistures = np.concatenate(surface_chunks)
+    maximum_moistures = np.concatenate(maximum_chunks)
+    radii = np.concatenate(radius_chunks)
+    inventories = np.concatenate(inventory_chunks)
+    boundary_integrals = np.concatenate(boundary_integral_chunks)
+    strict_indices = np.flatnonzero(
+        (times > 0.0)
+        & (maximum_moistures < parameters.drying_threshold_kg_kg)
+    )
+    if strict_indices.size == 0:
+        raise RuntimeError("post-crossing segment did not contain a strict output time")
+    first_strict_output_s = int(round(float(times[int(strict_indices[0])])))
+
+    residual = inventories - inventories[0] - boundary_integrals
+    residual_scale = np.maximum.reduce(
+        (
+            np.abs(inventories - inventories[0]),
+            np.abs(boundary_integrals),
+            np.full_like(residual, 1.0e-30),
+        )
+    )
+
+    diagnostics = SolverDiagnostics(
+        runtime_s=runtime_s,
+        function_evaluations=nfev,
+        jacobian_evaluations=njev,
+        lu_decompositions=nlu,
+        integration_segments=segments,
+        returned_time_points=int(times.size),
+        min_temperature_c=minima[0],
+        max_temperature_c=maxima[0],
+        min_moisture_kg_kg=minima[1],
+        max_moisture_kg_kg=maxima[1],
+        min_density_kg_m3=minima[2],
+        max_density_kg_m3=maxima[2],
+        min_heat_capacity_j_kg_k=minima[3],
+        max_heat_capacity_j_kg_k=maxima[3],
+        min_conductivity_w_m_k=minima[4],
+        max_conductivity_w_m_k=maxima[4],
+        min_diffusivity_m2_s=minima[5],
+        max_diffusivity_m2_s=maxima[5],
+        max_output_interval_balance_abs=float(np.max(np.abs(residual))),
+        max_output_interval_balance_rel=float(
+            np.max(np.abs(residual[1:]) / residual_scale[1:])
+        ),
+        maximum_location_was_center=maximum_at_center,
+    )
+    if progress_label:
+        print(
+            f"[{progress_label}] crossing={crossing_s / 3600:.6f} h, "
+            f"runtime={runtime_s:.2f} s, nfev={nfev}, nlu={nlu}",
+            flush=True,
+        )
+    return SimulationResult(
+        times_s=np.rint(times).astype(int),
+        xi_samples=xi_samples,
+        temperatures_c=temperatures,
+        moistures_kg_kg=moistures,
+        physical_radii_cm=physical_radii_cm,
+        physical_moistures_kg_kg=physical_moistures,
+        surface_moistures_kg_kg=surface_moistures,
+        maximum_moistures_kg_kg=maximum_moistures,
+        radii_m=radii,
+        drying_crossing_s=crossing_s,
+        first_strict_output_s=first_strict_output_s,
+        diagnostics=diagnostics,
+        config=config,
+    )
+
+
+def common_field_comparison(a: SimulationResult, b: SimulationResult) -> dict:
+    common_end = min(int(a.times_s[-1]), int(b.times_s[-1]))
+    count = common_end // int(a.config.output_interval_s) + 1
+    if not np.array_equal(a.times_s[:count], b.times_s[:count]):
+        raise ValueError("comparison time grids do not align")
+    difference = np.abs(a.moistures_kg_kg[:count] - b.moistures_kg_kg[:count])
+    flat_index = int(np.argmax(difference))
+    time_index, space_index = np.unravel_index(flat_index, difference.shape)
+    return {
+        "max_abs_difference": float(difference[time_index, space_index]),
+        "rms_difference": float(np.sqrt(np.mean(difference * difference))),
+        "max_location_time_s": int(a.times_s[time_index]),
+        "max_location_xi": float(a.xi_samples[space_index]),
+        "common_end_time_s": common_end,
+        "drying_crossing_difference_s": abs(a.drying_crossing_s - b.drying_crossing_s),
+    }
+
+
+def spatial_convergence(
+    coarse: SimulationResult,
+    medium: SimulationResult,
+    fine: SimulationResult,
+) -> dict:
+    cm = common_field_comparison(coarse, medium)
+    mf = common_field_comparison(medium, fine)
+    if cm["max_abs_difference"] > 0.0 and mf["max_abs_difference"] > 0.0:
+        order = math.log(cm["max_abs_difference"] / mf["max_abs_difference"], 2.)
+        if order > 0.0:
+            estimate = mf["max_abs_difference"] / (2.0**order - 1.0)
+        else:
+            estimate = math.inf
+    else:
+        order = math.nan
+        estimate = math.nan
+    return {
+        "coarse_to_medium": cm,
+        "medium_to_fine": mf,
+        "observed_order": order,
+        "estimated_fine_grid_max_error": estimate,
+        "estimated_fine_grid_max_error_with_1p25_safety": 1.25 * estimate,
+        "crossing_times_s": {
+            "coarse": coarse.drying_crossing_s,
+            "medium": medium.drying_crossing_s,
+            "fine": fine.drying_crossing_s,
+        },
+    }
+
+
+def choose_safe_end_time(
+    fine: SimulationResult,
+    numerical_error_bound: float,
+    threshold: float,
+) -> int:
+    # The extra half unit in the fourth decimal place ensures the submitted
+    # table visibly rounds below 0.1500 as well as satisfying the full-precision
+    # physical threshold after the numerical error allowance is added.
+    displayed_threshold = threshold - 0.5e-4
+    candidates = np.flatnonzero(
+        (fine.times_s > 0)
+        & (
+            fine.maximum_moistures_kg_kg + numerical_error_bound
+            < displayed_threshold
+        )
+    )
+    if candidates.size == 0:
+        raise RuntimeError("stored post-crossing interval is too short for safety margin")
+    return int(fine.times_s[int(candidates[0])])
+\end{PythonCode}
+
+\end{comment}
+\end{document}

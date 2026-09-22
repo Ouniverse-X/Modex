@@ -1,0 +1,15 @@
+[space_n380_dt1] crossing=47.809498549891 h; runtime=41.50 s
+[time_n1520_dt4] crossing=47.859607087048 h; runtime=50.14 s
+[space_n760_dt1] crossing=47.842907380621 h; runtime=84.70 s
+[time_n1520_dt2] crossing=47.859606546445 h; runtime=97.63 s
+[reference_n1520_dt1] crossing=47.859606207384 h; runtime=153.86 s
+{
+  "field_error_bound": 5.483301100930871e-05,
+  "display_limit": 0.14995,
+  "numerical_target": 0.1498951669889907,
+  "certified_target_crossing_s": 172494.54718868635,
+  "safe_whole_minute_s": 172500.0,
+  "safe_whole_minute_h": 47.916666666666664,
+  "qualification": "conservative convergence estimate, not a rigorous a posteriori theorem"
+}
+suite_wall=332.04 suite_cpu=168% suite_rss=392108KB

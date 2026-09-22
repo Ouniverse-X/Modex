@@ -1,0 +1,15 @@
+[time_n3040_dt2] crossing=47.867954566281 h; runtime=162.71 s
+[reference_n3040_dt1] crossing=47.867954227541 h; runtime=307.56 s
+[safety_n3040_dt1] crossing=47.920947094965 h; runtime=183.08 s
+{
+  "numerical_target": 0.1499,
+  "field_error_bound": 2.7398602980274744e-05,
+  "upper_moisture_bound_at_target": 0.14992739860298027,
+  "display_limit": 0.14995,
+  "passes_four_decimal_guard": true,
+  "target_crossing_s": 172515.40954187504,
+  "safe_whole_minute_s": 172560.0,
+  "safe_whole_minute_h": 47.93333333333333,
+  "qualification": "conservative convergence estimate, not a rigorous a posteriori theorem"
+}
+safety_wall=190.39 safety_cpu=110% safety_rss=334696KB

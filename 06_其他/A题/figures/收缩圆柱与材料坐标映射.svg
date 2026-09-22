@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="760" viewBox="0 0 1320 760">
+  <defs>
+    <radialGradient id="g0">
+      <stop offset="0" stop-color="#f8eac7"/>
+      <stop offset="1" stop-color="#bd8641"/>
+    </radialGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#37474f"/>
+    </marker>
+    <marker id="blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1565c0"/>
+    </marker>
+    <style>
+      .title { font:700 30px "Noto Sans CJK SC","Microsoft YaHei",sans-serif; fill:#1f2937; }
+      .head { font:700 21px "Noto Sans CJK SC","Microsoft YaHei",sans-serif; fill:#263238; }
+      .txt { font:18px "Noto Sans CJK SC","Microsoft YaHei",sans-serif; fill:#263238; }
+      .small { font:16px "Noto Sans CJK SC","Microsoft YaHei",sans-serif; fill:#455a64; }
+      .math { font:italic 22px "Times New Roman",serif; fill:#263238; }
+    </style>
+  </defs>
+  <rect width="1320" height="760" fill="#fbfcfe"/>
+  <text x="660" y="48" text-anchor="middle" class="title">第四问：收缩物理域与固定材料坐标的映射</text>
+
+  <g transform="translate(40,95)">
+    <text x="230" y="25" text-anchor="middle" class="head">初始截面 t = 0</text>
+    <circle cx="230" cy="250" r="185" fill="url(#g0)" stroke="#6d4c2e" stroke-width="3"/>
+    <circle cx="230" cy="250" r="8" fill="#263238"/>
+    <line x1="230" y1="250" x2="415" y2="250" stroke="#37474f" stroke-width="3" marker-end="url(#arr)"/>
+    <text x="315" y="235" class="math">R₀ = 2 cm</text>
+    <circle cx="359.5" cy="250" r="9" fill="#1565c0"/>
+    <text x="340" y="292" class="math">ξ = 0.70</text>
+    <text x="230" y="475" text-anchor="middle" class="small">蓝点表示同一个材料微元</text>
+  </g>
+
+  <line x1="500" y1="345" x2="685" y2="345" stroke="#37474f" stroke-width="4" marker-end="url(#arr)"/>
+  <text x="592" y="315" text-anchor="middle" class="head">均匀仿射收缩</text>
+  <text x="592" y="380" text-anchor="middle" class="math">r = R(t)ξ</text>
+
+  <g transform="translate(680,130)">
+    <text x="205" y="-10" text-anchor="middle" class="head">当前截面 t &gt; 0</text>
+    <circle cx="205" cy="215" r="145" fill="url(#g0)" stroke="#6d4c2e" stroke-width="3"/>
+    <circle cx="205" cy="215" r="8" fill="#263238"/>
+    <line x1="205" y1="215" x2="350" y2="215" stroke="#37474f" stroke-width="3" marker-end="url(#arr)"/>
+    <text x="265" y="199" class="math">R(t)</text>
+    <circle cx="306.5" cy="215" r="9" fill="#1565c0"/>
+    <text x="278" y="258" class="math">同一 ξ = 0.70</text>
+    <text x="205" y="400" text-anchor="middle" class="math">uᵣ = (Ṙ/R)r</text>
+  </g>
+
+  <g transform="translate(1050,108)">
+    <text x="115" y="15" text-anchor="middle" class="head">固定参考域</text>
+    <rect x="30" y="58" width="170" height="390" rx="16" fill="#eaf3fa" stroke="#1565c0" stroke-width="3"/>
+    <line x1="70" y1="410" x2="70" y2="92" stroke="#1565c0" stroke-width="3" marker-end="url(#blue)"/>
+    <line x1="58" y1="410" x2="83" y2="410" stroke="#1565c0" stroke-width="3"/>
+    <line x1="58" y1="251" x2="83" y2="251" stroke="#1565c0" stroke-width="3"/>
+    <line x1="58" y1="92" x2="83" y2="92" stroke="#1565c0" stroke-width="3"/>
+    <text x="92" y="417" class="math">0</text>
+    <text x="92" y="258" class="math">0.5</text>
+    <text x="92" y="100" class="math">1</text>
+    <text x="132" y="274" class="math">ξ</text>
+    <text x="115" y="455" text-anchor="middle" class="small">网格不随时间移动</text>
+  </g>
+
+  <rect x="75" y="590" width="1170" height="118" rx="16" fill="#f4f7fa" stroke="#90a4ae"/>
+  <text x="660" y="628" text-anchor="middle" class="math">D/Dt = ∂/∂t|r + uᵣ ∂/∂r = ∂/∂t|ξ</text>
+  <text x="660" y="669" text-anchor="middle" class="math">∂/∂r = (1/R)∂/∂ξ，故扩散算子整体乘 1/R²(t)</text>
+  <text x="660" y="699" text-anchor="middle" class="small">材料坐标已跟随固体运动，因此主模型中不再重复添加网格运动对流项。</text>
+</svg>

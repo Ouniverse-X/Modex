@@ -1,0 +1,119 @@
+{
+  "q": 3,
+  "solver": "spectral",
+  "main": {
+    "key": "fedabbfb4cac3a4d5d37cc90d757c13fe050df55476108b46737823379273a54",
+    "status": "DRIED",
+    "spec": {
+      "q": 3,
+      "tag": "Cheb-p64",
+      "degree": 64,
+      "breaks": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        0.9,
+        0.96,
+        0.985,
+        0.997,
+        1.0
+      ],
+      "resolution": 576,
+      "role": "space",
+      "method": "Radau",
+      "rtol": 2e-09,
+      "atol_T": 1e-10,
+      "atol_C": 1e-11,
+      "max_step": 30.0
+    },
+    "t": 206900.21324345528,
+    "event": {
+      "lower_s": 206900.21318623482,
+      "upper_s": 206900.21324345528,
+      "width_s": 5.7220458984375e-05,
+      "time_h": 57.472281456515354,
+      "C_max_lower": 0.14999999998537739,
+      "C_max_upper": 0.14999999998538555,
+      "method": "All-element Chebyshev derivative-root extrema plus nodal checks; float64, not a certified interval bound",
+      "meaning": "Numerical-interpolant event bracket, NOT a PDE/model error bound"
+    },
+    "wall_s": 487.08180955890566,
+    "calls": {
+      "accepted_steps": 10181,
+      "nfev": 76657,
+      "njev": 384,
+      "nlu": 19002
+    },
+    "nodes_per_field": 577,
+    "ranges": [
+      0.05265903345971505,
+      2.550000190462232,
+      27.99999999999948,
+      50.03986654212016
+    ],
+    "maximum_nodal_range_overshoot": 1.9046223220797742e-07,
+    "mesh": {
+      "degree_per_element": 64,
+      "radial_subdomains_xi": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        0.9,
+        0.96,
+        0.985,
+        0.997,
+        1.0
+      ],
+      "nodes_per_field": 577,
+      "initial_min_radial_gap_um": 0.036082141920967814,
+      "initial_max_radial_gap_um": 98.16491409164865,
+      "note": "Spectral polynomial order and DOF, not comparable to second-order FVM node count"
+    },
+    "method_detail": "Multi-domain Chebyshev-Lobatto nodal Galerkin spectral elements, Clenshaw-Curtis quadrature; s=(r/R)^2; Radau IIA(5)",
+    "model_validation": false,
+    "arrays_sha256": "f5dd3fd12f0902f242e6e4938eb838d4fc56d9ae1adb687e82e137775d7fd316"
+  },
+  "spatial_comparisons": [
+    {
+      "coarse": "Cheb-p24",
+      "fine": "Cheb-p40",
+      "max_T_difference_C": 1.0196373523285729e-08,
+      "max_C_difference_kg_kg": 1.9302041165403239e-07,
+      "drying_time_difference_s": 1.7084093997254968e-05,
+      "common_times": 3448,
+      "status": "COMPARED",
+      "meaning": "Observed differences only, not rigorous residual error estimates"
+    },
+    {
+      "coarse": "Cheb-p40",
+      "fine": "Cheb-p64",
+      "max_T_difference_C": 5.296200811244489e-09,
+      "max_C_difference_kg_kg": 2.677395105621372e-08,
+      "drying_time_difference_s": 1.0180636309087276e-05,
+      "common_times": 3448,
+      "status": "COMPARED",
+      "meaning": "Observed differences only, not rigorous residual error estimates"
+    }
+  ],
+  "temporal_comparison": {
+    "max_T_difference_C": 9.20694276373979e-09,
+    "max_C_difference_kg_kg": 1.5151879750874286e-11,
+    "drying_time_difference_s": 3.104409552179277e-05,
+    "common_times": 3448,
+    "status": "COMPARED",
+    "meaning": "Observed differences only, not rigorous residual error estimates"
+  },
+  "end_effect_comparison": null,
+  "verification": "OBSERVED_DIFFERENCE_PASS",
+  "model_validation": false,
+  "observed_envelope": {
+    "T": 2.9006287149968557e-08,
+    "C": 5.3578205871929185e-08,
+    "time_s": 0.0002824494636617601,
+    "is_error_bound": false
+  }
+}

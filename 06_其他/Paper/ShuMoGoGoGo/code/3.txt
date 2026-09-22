@@ -1,0 +1,364 @@
+# Question 3 core routines
+def time_coefficients(
+    old: Sequence[float], previous: Sequence[float] | None, dt_s: float
+) -> tuple[float, list[float]]:
+    """Return BE coefficients for step one and BDF2 thereafter."""
+    if previous is None:
+        return 1.0 / dt_s, [value / dt_s for value in old]
+    factor = 1.0 / (2.0 * dt_s)
+    return 3.0 * factor, [
+        (4.0 * current - prior) * factor
+        for current, prior in zip(old, previous)
+    ]
+
+
+def implicit_radial_step(
+    old: Sequence[float],
+    previous: Sequence[float] | None,
+    dt_s: float,
+    radii_m: Sequence[float],
+    storage_nodes: Sequence[float],
+    gamma_faces: Sequence[float],
+    boundary_transfer: float,
+    external_value: float,
+) -> list[float]:
+    """One conservative BE/BDF2 radial finite-volume step."""
+    node_count = len(old)
+    radial_cells = node_count - 1
+    if node_count < 2:
+        raise ValueError("at least two radial nodes are required")
+    if previous is not None and len(previous) != node_count:
+        raise ValueError("invalid history arrays")
+    if len(radii_m) != node_count or len(storage_nodes) != node_count:
+        raise ValueError("invalid nodal arrays")
+    if len(gamma_faces) != radial_cells:
+        raise ValueError("invalid face coefficient array")
+    if any(value <= 0.0 or not math.isfinite(value) for value in storage_nodes):
+        raise ValueError("storage coefficients must be positive")
+    if any(value <= 0.0 or not math.isfinite(value) for value in gamma_faces):
+        raise ValueError("face coefficients must be positive")
+
+    time_diagonal, history = time_coefficients(old, previous, dt_s)
+    lower = [0.0] * radial_cells
+    diagonal = [0.0] * node_count
+    upper = [0.0] * radial_cells
+    rhs = [0.0] * node_count
+
+    east = 0.5 * (radii_m[0] + radii_m[1])
+    east_conductance = east * gamma_faces[0] / (radii_m[1] - radii_m[0])
+    centre_weight = east**2 / 2.0
+    diagonal[0] = storage_nodes[0] * centre_weight * time_diagonal + east_conductance
+    upper[0] = -east_conductance
+    rhs[0] = storage_nodes[0] * centre_weight * history[0]
+
+    for i in range(1, radial_cells):
+        west = 0.5 * (radii_m[i - 1] + radii_m[i])
+        east = 0.5 * (radii_m[i] + radii_m[i + 1])
+        west_conductance = west * gamma_faces[i - 1] / (radii_m[i] - radii_m[i - 1])
+        east_conductance = east * gamma_faces[i] / (radii_m[i + 1] - radii_m[i])
+        weight = (east**2 - west**2) / 2.0
+        lower[i - 1] = -west_conductance
+        diagonal[i] = (
+            storage_nodes[i] * weight * time_diagonal
+            + west_conductance
+            + east_conductance
+        )
+        upper[i] = -east_conductance
+        rhs[i] = storage_nodes[i] * weight * history[i]
+
+    radius = radii_m[-1]
+    west = 0.5 * (radii_m[-2] + radius)
+    west_conductance = west * gamma_faces[-1] / (radius - radii_m[-2])
+    boundary_conductance = radius * boundary_transfer
+    surface_weight = (radius**2 - west**2) / 2.0
+    lower[-1] = -west_conductance
+    diagonal[-1] = (
+        storage_nodes[-1] * surface_weight * time_diagonal
+        + west_conductance
+        + boundary_conductance
+    )
+    rhs[-1] = (
+        storage_nodes[-1] * surface_weight * history[-1]
+        + boundary_conductance * external_value
+    )
+    return solve_tridiagonal(lower, diagonal, upper, rhs)
+
+
+def conductivity_faces(
+    moisture: Sequence[float], parameters: PhysicalParameters
+) -> list[float]:
+    return [
+        parameters.conductivity(0.5 * (left + right))
+        for left, right in zip(moisture, moisture[1:])
+    ]
+
+
+def integrated_face_diffusivity(
+    left_moisture: float,
+    right_moisture: float,
+    face_temperature_k: float,
+    parameters: PhysicalParameters,
+) -> float:
+    """Kirchhoff/secant mean of D across one moisture face."""
+    midpoint = 0.5 * (left_moisture + right_moisture)
+    half_span = 0.5 * (right_moisture - left_moisture)
+    # The temperature-dependent factor is constant across this face integral;
+    # evaluate it once instead of four times.  This matters for the N=160,
+    # dt=5 s production experiment, which evaluates millions of face fluxes.
+    thermal_factor = 2.4e-3 * math.exp(-3850.0 / face_temperature_k)
+    total = 0.0
+    for point, weight in zip(GAUSS_X, GAUSS_W):
+        moisture = midpoint + half_span * point
+        parameters._check_moisture(moisture)
+        total += weight * math.exp(-0.45 / moisture)
+    return 0.5 * thermal_factor * total
+
+
+def diffusivity_faces(
+    moisture: Sequence[float],
+    temperature_c: Sequence[float],
+    parameters: PhysicalParameters,
+) -> list[float]:
+    result = []
+    for c_left, c_right, t_left, t_right in zip(
+        moisture, moisture[1:], temperature_c, temperature_c[1:]
+    ):
+        face_temperature_k = 0.5 * (t_left + t_right) + 273.15
+        result.append(
+            integrated_face_diffusivity(
+                c_left, c_right, face_temperature_k, parameters
+            )
+        )
+    return result
+
+
+def requested_node_indices(radial_cells: int) -> tuple[list[float], list[int]]:
+    radii_cm = [0.1 * i for i in range(21)]
+    stride = radial_cells // 20
+    return radii_cm, [i * stride for i in range(21)]
+
+
+def interpolate_vector(
+    old: Sequence[float], new: Sequence[float], fraction: float
+) -> list[float]:
+    return [a + fraction * (b - a) for a, b in zip(old, new)]
+
+
+def balance_residual(
+    new: Sequence[float],
+    old: Sequence[float],
+    previous: Sequence[float] | None,
+    dt_s: float,
+    weights: Sequence[float],
+    storage_nodes: Sequence[float],
+    radius_m: float,
+    boundary_transfer: float,
+    external_value: float,
+    relative_scale_floor: float = 1.0e-10,
+) -> tuple[float, float]:
+    time_diagonal, history = time_coefficients(old, previous, dt_s)
+    storage_rate = sum(
+        storage * weight * (time_diagonal * value - hist)
+        for storage, weight, value, hist in zip(
+            storage_nodes, weights, new, history
+        )
+    )
+    boundary_rate = radius_m * boundary_transfer * (external_value - new[-1])
+    absolute = abs(storage_rate - boundary_rate)
+    # A relative residual is not informative after the field has equilibrated:
+    # both sides then approach roundoff and their quotient can be O(1) despite
+    # a tiny absolute residual.  Retain the absolute residual in all cases and
+    # evaluate the relative metric only while the balance has a useful scale.
+    scale = max(abs(storage_rate), abs(boundary_rate))
+    relative = 0.0 if scale < relative_scale_floor else absolute / scale
+    return absolute, relative
+
+
+def solve_model(
+    environment: EnvironmentData,
+    parameters: PhysicalParameters,
+    config: NumericalConfig,
+    progress: bool = False,
+) -> SimulationResult:
+    config.validate()
+    environment.validate()
+    started = time.perf_counter()
+    radii_m = make_uniform_grid(parameters.radius_m, config.radial_cells)
+    weights = radial_storage_weights(radii_m)
+    output_radii_cm, output_indices = requested_node_indices(config.radial_cells)
+    output_stride = int(round(config.output_interval_s / config.time_step_s))
+    maximum_steps = int(math.ceil(config.maximum_time_h * 3600.0 / config.time_step_s))
+
+    temperature = [parameters.initial_temperature_c] * (config.radial_cells + 1)
+    moisture = [parameters.initial_moisture_kg_kg] * (config.radial_cells + 1)
+    previous_temperature: list[float] | None = None
+    previous_moisture: list[float] | None = None
+    previous_gap = max(moisture) - parameters.moisture_threshold_kg_kg
+
+    output_times: list[float] = []
+    output_moistures: list[list[float]] = []
+    diagnostics = SolverDiagnostics()
+    next_progress_s = 6.0 * 3600.0
+
+    for step in range(1, maximum_steps + 1):
+        t_new = step * config.time_step_s
+        external_temperature, external_moisture = environment.value(t_new)
+        guess_temperature = temperature.copy()
+        guess_moisture = moisture.copy()
+
+        for iteration in range(1, config.picard_max_iterations + 1):
+            heat_storage = [
+                parameters.density(value) * parameters.heat_capacity(value)
+                for value in guess_moisture
+            ]
+            heat_faces = conductivity_faces(guess_moisture, parameters)
+            candidate_temperature = implicit_radial_step(
+                temperature,
+                previous_temperature,
+                config.time_step_s,
+                radii_m,
+                heat_storage,
+                heat_faces,
+                parameters.heat_transfer_w_m2_k,
+                external_temperature,
+            )
+            moisture_faces = diffusivity_faces(
+                guess_moisture, candidate_temperature, parameters
+            )
+            candidate_moisture = implicit_radial_step(
+                moisture,
+                previous_moisture,
+                config.time_step_s,
+                radii_m,
+                [1.0] * len(radii_m),
+                moisture_faces,
+                parameters.mass_transfer_m_s,
+                external_moisture,
+            )
+            temperature_update = max(
+                abs(a - b)
+                for a, b in zip(candidate_temperature, guess_temperature)
+            )
+            moisture_update = max(
+                abs(a - b) for a, b in zip(candidate_moisture, guess_moisture)
+            )
+            combined_update = max(temperature_update / 50.0, moisture_update)
+            guess_temperature = candidate_temperature
+            guess_moisture = candidate_moisture
+            if combined_update < config.picard_tolerance:
+                break
+        else:
+            raise RuntimeError(
+                f"Picard iteration failed at t={t_new:.3f} s; "
+                f"last scaled update={combined_update:.3e}"
+            )
+
+        new_temperature = guess_temperature
+        new_moisture = guess_moisture
+        final_heat_storage = [
+            parameters.density(value) * parameters.heat_capacity(value)
+            for value in new_moisture
+        ]
+        heat_abs, heat_rel = balance_residual(
+            new_temperature,
+            temperature,
+            previous_temperature,
+            config.time_step_s,
+            weights,
+            final_heat_storage,
+            parameters.radius_m,
+            parameters.heat_transfer_w_m2_k,
+            external_temperature,
+            relative_scale_floor=1.0e-8,
+        )
+        moisture_abs, moisture_rel = balance_residual(
+            new_moisture,
+            moisture,
+            previous_moisture,
+            config.time_step_s,
+            weights,
+            [1.0] * len(radii_m),
+            parameters.radius_m,
+            parameters.mass_transfer_m_s,
+            external_moisture,
+            relative_scale_floor=1.0e-14,
+        )
+
+        diagnostics.steps += 1
+        diagnostics.total_picard_iterations += iteration
+        diagnostics.max_picard_iterations = max(
+            diagnostics.max_picard_iterations, iteration
+        )
+        diagnostics.final_picard_update = combined_update
+        diagnostics.max_heat_balance_abs = max(diagnostics.max_heat_balance_abs, heat_abs)
+        diagnostics.max_heat_balance_rel = max(diagnostics.max_heat_balance_rel, heat_rel)
+        diagnostics.max_moisture_balance_abs = max(
+            diagnostics.max_moisture_balance_abs, moisture_abs
+        )
+        diagnostics.max_moisture_balance_rel = max(
+            diagnostics.max_moisture_balance_rel, moisture_rel
+        )
+        diagnostics.max_radial_monotonicity_violation = max(
+            diagnostics.max_radial_monotonicity_violation,
+            max(
+                (outer - inner for inner, outer in zip(new_moisture, new_moisture[1:])),
+                default=0.0,
+            ),
+        )
+        diagnostics.min_temperature_c = min(
+            diagnostics.min_temperature_c, min(new_temperature)
+        )
+        diagnostics.max_temperature_c = max(
+            diagnostics.max_temperature_c, max(new_temperature)
+        )
+        diagnostics.min_moisture_kg_kg = min(
+            diagnostics.min_moisture_kg_kg, min(new_moisture)
+        )
+        diagnostics.max_moisture_kg_kg = max(
+            diagnostics.max_moisture_kg_kg, max(new_moisture)
+        )
+
+        new_gap = max(new_moisture) - parameters.moisture_threshold_kg_kg
+        if new_gap < 0.0 <= previous_gap:
+            fraction = previous_gap / (previous_gap - new_gap)
+            fraction = min(1.0, max(0.0, fraction))
+            drying_time_s = t_new - config.time_step_s + fraction * config.time_step_s
+            drying_state = interpolate_vector(moisture, new_moisture, fraction)
+            requested_drying_state = [drying_state[i] for i in output_indices]
+            if not output_times or abs(output_times[-1] - drying_time_s) > 1.0e-9:
+                output_times.append(drying_time_s)
+                output_moistures.append(requested_drying_state)
+            return SimulationResult(
+                times_s=output_times,
+                radii_cm=output_radii_cm,
+                moistures_kg_kg=output_moistures,
+                drying_time_s=drying_time_s,
+                drying_moistures_kg_kg=requested_drying_state,
+                diagnostics=diagnostics,
+                runtime_s=time.perf_counter() - started,
+                config=config,
+            )
+
+        if step % output_stride == 0:
+            output_times.append(t_new)
+            output_moistures.append([new_moisture[i] for i in output_indices])
+
+        previous_temperature, temperature = temperature, new_temperature
+        previous_moisture, moisture = moisture, new_moisture
+        previous_gap = new_gap
+
+        if progress and t_new + 1.0e-9 >= next_progress_s:
+            print(
+                f"  t={t_new / 3600.0:7.2f} h  "
+                f"Cmax={max(moisture):.8f}  Csurf={moisture[-1]:.8f}  "
+                f"Picard={iteration}",
+                flush=True,
+            )
+            next_progress_s += 6.0 * 3600.0
+
+    raise RuntimeError(
+        f"drying criterion was not reached before {config.maximum_time_h:g} h; "
+        f"last maximum moisture={max(moisture):.9g}"
+    )
+
+

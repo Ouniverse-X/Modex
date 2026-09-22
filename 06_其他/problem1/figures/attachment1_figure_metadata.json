@@ -1,0 +1,38 @@
+{
+  "source": {
+    "path": "/home/beihang/projects/Modex/A题/附件/附件1.xlsx",
+    "sha256": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7"
+  },
+  "row_count": 241,
+  "time_range_s": [
+    0.0,
+    14400.0
+  ],
+  "sampling_interval_s": 60.0,
+  "temperature_c": {
+    "start": 28.0,
+    "at_30_min": 41.513,
+    "end": 50.165,
+    "minimum": 28.0,
+    "maximum": 50.246,
+    "maximum_time_min": 177.0
+  },
+  "moisture_kg_kg": {
+    "start": 0.01963,
+    "at_30_min": 0.03307,
+    "end": 0.04986,
+    "minimum": 0.01963,
+    "maximum": 0.05025,
+    "maximum_time_min": 163.0
+  },
+  "outputs": [
+    {
+      "svg": "/home/beihang/projects/Modex/problem1/figures/attachment1_full_process.svg",
+      "png": "/home/beihang/projects/Modex/problem1/figures/attachment1_full_process.png"
+    },
+    {
+      "svg": "/home/beihang/projects/Modex/problem1/figures/attachment1_first_30min.svg",
+      "png": "/home/beihang/projects/Modex/problem1/figures/attachment1_first_30min.png"
+    }
+  ]
+}

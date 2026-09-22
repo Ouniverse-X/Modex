@@ -1,0 +1,122 @@
+{
+  "q": 3,
+  "solver": "axisymmetric_fem",
+  "main": {
+    "key": "31eaf72b82ace86a31a0c55f95c9275087cf6ec72f784b2d2fbf82fb560b591a",
+    "status": "DRIED",
+    "spec": {
+      "q": 3,
+      "tag": "Q2-64x96-exposed",
+      "nr": 64,
+      "nz": 96,
+      "grade_r": 7.0,
+      "grade_z": 7.0,
+      "end": "exposed",
+      "resolution": 6144,
+      "role": "space",
+      "method": "BDF",
+      "rtol": 2e-09,
+      "atol_T": 1e-10,
+      "atol_C": 1e-11,
+      "max_step": 30.0,
+      "late_max_step": 300.0,
+      "jacobian_mode": "block"
+    },
+    "t": 206892.65132699348,
+    "event": {
+      "lower_s": 206892.6512554679,
+      "upper_s": 206892.65132699348,
+      "width_s": 7.152557373046875e-05,
+      "time_h": 57.47018092416486,
+      "C_max_lower": 0.1499999999736604,
+      "C_max_upper": 0.14999999999367675,
+      "method": "All Q2 elements: tensor Bernstein convex-hull enclosure with de Casteljau refinement; float64 roundoff allowance",
+      "meaning": "Numerical-interpolant event bracket, NOT a PDE/model error bound"
+    },
+    "wall_s": 1664.5195052600466,
+    "calls": {
+      "accepted_steps": 12465,
+      "nfev": 35289,
+      "njev": 461,
+      "nlu": 3508
+    },
+    "nodes_per_field": 24897,
+    "ranges": [
+      0.05000079946292946,
+      2.550003675969532,
+      27.999999999995296,
+      50.093900334548394
+    ],
+    "maximum_nodal_range_overshoot": 3.675969532324075e-06,
+    "mesh": {
+      "radial_Q2_elements": 64,
+      "axial_Q2_elements_half_length": 96,
+      "nodes_per_field": 24897,
+      "full_coupled_DOF": 49794,
+      "radial_grade_beta": 7.0,
+      "axial_grade_beta": 7.0,
+      "radial_outer_band_fraction": 0.1,
+      "axial_end_band_fraction": 0.25,
+      "elements_allocated_to_each_band_fraction": 0.5,
+      "initial_radial_node_gap_um": [
+        0.22317574234431703,
+        397.74756441743295
+      ],
+      "initial_axial_node_gap_um": [
+        2.2390497574770185,
+        2122.2205041145776
+      ],
+      "domain": "s in [0,1], eta in [0,1] symmetric half-cylinder; Lobatto-integrated Q2, not Q1/FVM"
+    },
+    "method_detail": "2D axisymmetric tensor Q2 continuous finite elements, positive Lobatto quadrature mass; s=(r/R)^2, eta=z/H; adaptive variable-order BDF",
+    "knot_policy": "aligned",
+    "model_validation": false,
+    "arrays_sha256": "a9a2406c6fa1fc905207c57754e904aef7345f0973e79edf2c5254f00ac5874f"
+  },
+  "spatial_comparisons": [
+    {
+      "coarse": "Q2-32x48-exposed",
+      "fine": "Q2-48x72-exposed",
+      "max_T_difference_C": 0.00030448825366846677,
+      "max_C_difference_kg_kg": 0.00047235365155229303,
+      "drying_time_difference_s": 1.2455844939104281,
+      "common_times": 3448,
+      "status": "COMPARED",
+      "meaning": "Observed differences only, not rigorous residual error estimates"
+    },
+    {
+      "coarse": "Q2-48x72-exposed",
+      "fine": "Q2-64x96-exposed",
+      "max_T_difference_C": 6.100621092741676e-06,
+      "max_C_difference_kg_kg": 0.0001644829427220884,
+      "drying_time_difference_s": 0.213627068529604,
+      "common_times": 3448,
+      "status": "COMPARED",
+      "meaning": "Observed differences only, not rigorous residual error estimates"
+    }
+  ],
+  "temporal_comparison": {
+    "max_T_difference_C": 1.5507128381386792e-07,
+    "max_C_difference_kg_kg": 8.54467785416091e-09,
+    "drying_time_difference_s": 2.331187715753913e-06,
+    "common_times": 3448,
+    "status": "COMPARED",
+    "meaning": "Observed differences only, not rigorous residual error estimates"
+  },
+  "end_effect_comparison": {
+    "max_T_difference_C": 4.094033848097304,
+    "max_C_difference_kg_kg": 0.9755426408773376,
+    "drying_time_difference_s": 7.4619381137308665,
+    "common_times": 3448,
+    "status": "COMPARED",
+    "meaning": "Observed differences only, not rigorous residual error estimates"
+  },
+  "verification": "NEEDS_REFINEMENT_OR_REVIEW",
+  "model_validation": false,
+  "observed_envelope": {
+    "T": 1.2511384753111088e-05,
+    "C": 0.00032898297479988514,
+    "time_s": 0.4274587994346395,
+    "is_error_bound": false
+  }
+}

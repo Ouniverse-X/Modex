@@ -1,0 +1,497 @@
+# Question 4 core routines
+def make_reference_grid(
+    radial_cells: int,
+    surface_layer: float = 0.1,
+    refinement_factor: int = 10,
+) -> np.ndarray:
+    bulk_length = 1.0 - surface_layer
+    effective_length = bulk_length + refinement_factor * surface_layer
+    bulk_step = effective_length / radial_cells
+    surface_step = bulk_step / refinement_factor
+    bulk_cells_float = bulk_length / bulk_step
+    surface_cells_float = surface_layer / surface_step
+    bulk_cells = int(round(bulk_cells_float))
+    surface_cells = int(round(surface_cells_float))
+    if (
+        abs(bulk_cells_float - bulk_cells) > 1.0e-10
+        or abs(surface_cells_float - surface_cells) > 1.0e-10
+        or bulk_cells + surface_cells != radial_cells
+    ):
+        raise ValueError("radial_cells is incompatible with the two-zone grid")
+    bulk = np.arange(bulk_cells + 1, dtype=float) * bulk_step
+    surface = bulk_length + np.arange(1, surface_cells + 1, dtype=float) * surface_step
+    xi = np.concatenate((bulk, surface))
+    xi[0] = 0.0
+    xi[-1] = 1.0
+    if xi.size != radial_cells + 1 or np.any(np.diff(xi) <= 0.0):
+        raise AssertionError("invalid reference grid")
+    return xi
+
+
+def radial_storage_weights(xi: np.ndarray) -> np.ndarray:
+    faces = 0.5 * (xi[:-1] + xi[1:])
+    weights = np.empty_like(xi)
+    weights[0] = 0.5 * faces[0] ** 2
+    weights[1:-1] = 0.5 * (faces[1:] ** 2 - faces[:-1] ** 2)
+    weights[-1] = 0.5 * (1.0 - faces[-1] ** 2)
+    return weights
+
+
+def harmonic_mean(left: np.ndarray, right: np.ndarray) -> np.ndarray:
+    if np.any(left <= 0.0) or np.any(right <= 0.0):
+        raise ValueError("transport coefficient is non-positive")
+    return 2.0 * left * right / (left + right)
+
+
+def make_jacobian_sparsity(node_count: int) -> csr_matrix:
+    """Jacobian pattern for T, C and an auxiliary boundary-flux integral."""
+
+    state_size = 2 * node_count + 1
+    pattern = lil_matrix((state_size, state_size), dtype=np.int8)
+    for i in range(node_count):
+        for j in range(max(0, i - 1), min(node_count, i + 2)):
+            pattern[i, j] = 1
+            pattern[i, node_count + j] = 1
+            pattern[node_count + i, j] = 1
+            pattern[node_count + i, node_count + j] = 1
+    pattern[-1, 2 * node_count - 1] = 1
+    return pattern.tocsr()
+
+
+class MovingBoundarySystem:
+    def __init__(
+        self,
+        environment: EnvironmentData,
+        radius_data: RadiusData,
+        parameters: PhysicalParameters,
+        xi: np.ndarray,
+    ) -> None:
+        self.environment = environment
+        self.radius_data = radius_data
+        self.parameters = parameters
+        self.xi = xi
+        self.node_count = xi.size
+        self.faces = 0.5 * (xi[:-1] + xi[1:])
+        self.spacing = np.diff(xi)
+        self.weights = radial_storage_weights(xi)
+
+    def transport_net(
+        self,
+        field: np.ndarray,
+        gamma: np.ndarray,
+        radius_m: float,
+        boundary_transfer: float,
+        external_value: float,
+    ) -> np.ndarray:
+        gamma_faces = harmonic_mean(gamma[:-1], gamma[1:])
+        internal_flux = self.faces * gamma_faces * np.diff(field) / self.spacing
+        net = np.empty_like(field)
+        net[0] = internal_flux[0]
+        net[1:-1] = internal_flux[1:] - internal_flux[:-1]
+        net[-1] = (
+            radius_m * boundary_transfer * (external_value - field[-1])
+            - internal_flux[-1]
+        )
+        return net
+
+    def __call__(self, t_s: float, state: np.ndarray) -> np.ndarray:
+        n = self.node_count
+        temperature = state[:n]
+        moisture = state[n : 2 * n]
+        density, heat_capacity, conductivity, diffusivity = (
+            self.parameters.evaluate_properties(moisture, temperature)
+        )
+        ambient_temperature, ambient_moisture = self.environment.interpolate(t_s)
+        radius_m = float(self.radius_data.interpolate(t_s))
+        heat_net = self.transport_net(
+            temperature,
+            conductivity,
+            radius_m,
+            self.parameters.heat_transfer_w_m2_k,
+            float(ambient_temperature),
+        )
+        moisture_net = self.transport_net(
+            moisture,
+            diffusivity,
+            radius_m,
+            self.parameters.mass_transfer_m_s,
+            float(ambient_moisture),
+        )
+        radius_squared = radius_m * radius_m
+        temperature_rate = heat_net / (
+            radius_squared * self.weights * density * heat_capacity
+        )
+        moisture_rate = moisture_net / (radius_squared * self.weights)
+        boundary_inventory_rate = (
+            self.parameters.mass_transfer_m_s
+            / radius_m
+            * (float(ambient_moisture) - moisture[-1])
+        )
+        return np.concatenate(
+            (temperature_rate, moisture_rate, np.asarray([boundary_inventory_rate]))
+        )
+
+
+def interpolate_rows(
+    source_x: np.ndarray, rows: np.ndarray, target_x: np.ndarray
+) -> np.ndarray:
+    output = np.empty((rows.shape[0], target_x.size), dtype=float)
+    for i, row in enumerate(rows):
+        output[i] = np.interp(target_x, source_x, row)
+    return output
+
+
+def extract_physical_moistures(
+    xi: np.ndarray,
+    moisture_rows: np.ndarray,
+    radii_m: np.ndarray,
+    fixed_radii_cm: np.ndarray,
+) -> np.ndarray:
+    output = np.full((moisture_rows.shape[0], fixed_radii_cm.size), np.nan)
+    fixed_m = fixed_radii_cm * 0.01
+    for i, (row, radius_m) in enumerate(zip(moisture_rows, radii_m)):
+        valid = fixed_m < radius_m - 1.0e-13
+        output[i, valid] = np.interp(fixed_m[valid] / radius_m, xi, row)
+    return output
+
+
+def solve_until_dry(
+    environment: EnvironmentData,
+    radius_data: RadiusData,
+    parameters: PhysicalParameters,
+    config: NumericalConfig,
+    progress_label: str | None = None,
+    integration_method: str = "BDF",
+) -> SimulationResult:
+    if integration_method not in {"BDF", "Radau"}:
+        raise ValueError("integration_method must be 'BDF' or 'Radau'")
+    config.validate()
+    xi = make_reference_grid(
+        config.radial_cells,
+        config.reference_surface_layer,
+        config.surface_refinement_factor,
+    )
+    system = MovingBoundarySystem(environment, radius_data, parameters, xi)
+    node_count = xi.size
+    # The sparsity graph depends only on the fixed reference grid.  Construct
+    # it once; rebuilding the same matrix in every six-hour integration
+    # segment is pure overhead and changes no solver semantics.
+    jacobian_sparsity = make_jacobian_sparsity(node_count)
+    state = np.concatenate(
+        (
+            np.full(node_count, parameters.initial_temperature_c),
+            np.full(node_count, parameters.initial_moisture_kg_kg),
+            np.asarray([0.0]),
+        )
+    )
+    absolute_tolerance = np.concatenate(
+        (
+            np.full(node_count, config.temperature_absolute_tolerance),
+            np.full(node_count, config.moisture_absolute_tolerance),
+            np.asarray([config.moisture_absolute_tolerance]),
+        )
+    )
+    xi_samples = np.linspace(0.0, 1.0, 101)
+    physical_radii_cm = np.arange(20, dtype=float) * 0.1
+    time_chunks: list[np.ndarray] = []
+    temperature_chunks: list[np.ndarray] = []
+    moisture_chunks: list[np.ndarray] = []
+    physical_chunks: list[np.ndarray] = []
+    surface_chunks: list[np.ndarray] = []
+    maximum_chunks: list[np.ndarray] = []
+    radius_chunks: list[np.ndarray] = []
+    inventory_chunks: list[np.ndarray] = []
+    boundary_integral_chunks: list[np.ndarray] = []
+
+    minima = np.full(6, np.inf)
+    maxima = np.full(6, -np.inf)
+    nfev = njev = nlu = segments = 0
+    maximum_at_center = True
+    crossing_s: float | None = None
+    started = time.perf_counter()
+    current_time = 0.0
+
+    while current_time < config.maximum_duration_s and crossing_s is None:
+        if current_time < config.environment_data_end_s:
+            segment_end = min(config.environment_data_end_s, config.maximum_duration_s)
+            maximum_step = config.initial_maximum_step_s
+        else:
+            segment_end = min(
+                current_time + config.drying_segment_s,
+                config.maximum_duration_s,
+            )
+            maximum_step = config.drying_maximum_step_s
+        eval_times = np.arange(
+            current_time,
+            segment_end + 0.5 * config.output_interval_s,
+            config.output_interval_s,
+        )
+        if progress_label:
+            print(
+                f"[{progress_label}] {current_time / 3600:.1f}–"
+                f"{segment_end / 3600:.1f} h, max_step={maximum_step:g} s",
+                flush=True,
+            )
+        # The last state is a passive flux integral. Its Jacobian column is
+        # identically zero, so SciPy's finite-difference step controller can
+        # harmlessly overflow its unused perturbation factor. Suppress only
+        # those two narrowly scoped internal warnings.
+        with warnings.catch_warnings():
+            warnings.filterwarnings(
+                "ignore",
+                message="overflow encountered in multiply",
+                category=RuntimeWarning,
+                module=r"scipy\.integrate\._ivp\.common",
+            )
+            warnings.filterwarnings(
+                "ignore",
+                message="invalid value encountered in multiply",
+                category=RuntimeWarning,
+                module=r"scipy\.integrate\._ivp\.common",
+            )
+            solution = solve_ivp(
+                system,
+                (current_time, segment_end),
+                state,
+                method=integration_method,
+                t_eval=eval_times,
+                dense_output=True,
+                rtol=config.relative_tolerance,
+                atol=absolute_tolerance,
+                jac_sparsity=jacobian_sparsity,
+                max_step=maximum_step,
+                first_step=min(config.first_step_s, segment_end - current_time),
+            )
+        if not solution.success:
+            raise RuntimeError(
+                f"{integration_method} integration failed: {solution.message}"
+            )
+        if not np.all(np.isfinite(solution.y)):
+            raise RuntimeError(
+                f"{integration_method} solution contains non-finite values"
+            )
+        temperatures_nodes = solution.y[:node_count].T
+        moistures_nodes = solution.y[node_count : 2 * node_count].T
+        boundary_integral = solution.y[2 * node_count]
+        if np.min(moistures_nodes) <= 0.0:
+            raise RuntimeError("computed non-positive moisture")
+
+        densities, heat_capacities, conductivities, diffusivities = (
+            parameters.evaluate_properties(
+                moistures_nodes.ravel(), temperatures_nodes.ravel()
+            )
+        )
+        tracked = (
+            temperatures_nodes,
+            moistures_nodes,
+            densities,
+            heat_capacities,
+            conductivities,
+            diffusivities,
+        )
+        for j, values in enumerate(tracked):
+            minima[j] = min(minima[j], float(np.min(values)))
+            maxima[j] = max(maxima[j], float(np.max(values)))
+
+        local_maximum = np.max(moistures_nodes, axis=1)
+        maximum_at_center = maximum_at_center and bool(
+            np.all(local_maximum - moistures_nodes[:, 0] <= 1.0e-10)
+        )
+        crossing_candidates = np.flatnonzero(
+            (local_maximum[:-1] > parameters.drying_threshold_kg_kg)
+            & (local_maximum[1:] <= parameters.drying_threshold_kg_kg)
+        )
+        if crossing_candidates.size:
+            j = int(crossing_candidates[0])
+
+            def event_value(t_s: float) -> float:
+                dense_state = solution.sol(t_s)
+                return (
+                    float(np.max(dense_state[node_count : 2 * node_count]))
+                    - parameters.drying_threshold_kg_kg
+                )
+
+            crossing_s = float(
+                brentq(
+                    event_value,
+                    float(solution.t[j]),
+                    float(solution.t[j + 1]),
+                    xtol=1.0e-7,
+                    rtol=1.0e-13,
+                )
+            )
+
+        radii = radius_data.interpolate(solution.t)
+        sampled_temperature = interpolate_rows(xi, temperatures_nodes, xi_samples)
+        sampled_moisture = interpolate_rows(xi, moistures_nodes, xi_samples)
+        physical_moisture = extract_physical_moistures(
+            xi, moistures_nodes, radii, physical_radii_cm
+        )
+        inventory = moistures_nodes @ system.weights
+        start_index = 0 if segments == 0 else 1
+        sl = slice(start_index, None)
+        time_chunks.append(solution.t[sl].copy())
+        temperature_chunks.append(sampled_temperature[sl].copy())
+        moisture_chunks.append(sampled_moisture[sl].copy())
+        physical_chunks.append(physical_moisture[sl].copy())
+        surface_chunks.append(moistures_nodes[sl, -1].copy())
+        maximum_chunks.append(local_maximum[sl].copy())
+        radius_chunks.append(radii[sl].copy())
+        inventory_chunks.append(inventory[sl].copy())
+        boundary_integral_chunks.append(boundary_integral[sl].copy())
+
+        nfev += int(solution.nfev)
+        njev += int(solution.njev)
+        nlu += int(solution.nlu)
+        segments += 1
+        state = solution.y[:, -1].copy()
+        current_time = segment_end
+
+    runtime_s = time.perf_counter() - started
+    if crossing_s is None:
+        raise RuntimeError(
+            f"drying threshold was not reached within {config.maximum_duration_s / 3600:g} h"
+        )
+
+    times = np.concatenate(time_chunks)
+    temperatures = np.vstack(temperature_chunks)
+    moistures = np.vstack(moisture_chunks)
+    physical_moistures = np.vstack(physical_chunks)
+    surface_moistures = np.concatenate(surface_chunks)
+    maximum_moistures = np.concatenate(maximum_chunks)
+    radii = np.concatenate(radius_chunks)
+    inventories = np.concatenate(inventory_chunks)
+    boundary_integrals = np.concatenate(boundary_integral_chunks)
+    strict_indices = np.flatnonzero(
+        (times > 0.0)
+        & (maximum_moistures < parameters.drying_threshold_kg_kg)
+    )
+    if strict_indices.size == 0:
+        raise RuntimeError("post-crossing segment did not contain a strict output time")
+    first_strict_output_s = int(round(float(times[int(strict_indices[0])])))
+
+    residual = inventories - inventories[0] - boundary_integrals
+    residual_scale = np.maximum.reduce(
+        (
+            np.abs(inventories - inventories[0]),
+            np.abs(boundary_integrals),
+            np.full_like(residual, 1.0e-30),
+        )
+    )
+
+    diagnostics = SolverDiagnostics(
+        runtime_s=runtime_s,
+        function_evaluations=nfev,
+        jacobian_evaluations=njev,
+        lu_decompositions=nlu,
+        integration_segments=segments,
+        returned_time_points=int(times.size),
+        min_temperature_c=minima[0],
+        max_temperature_c=maxima[0],
+        min_moisture_kg_kg=minima[1],
+        max_moisture_kg_kg=maxima[1],
+        min_density_kg_m3=minima[2],
+        max_density_kg_m3=maxima[2],
+        min_heat_capacity_j_kg_k=minima[3],
+        max_heat_capacity_j_kg_k=maxima[3],
+        min_conductivity_w_m_k=minima[4],
+        max_conductivity_w_m_k=maxima[4],
+        min_diffusivity_m2_s=minima[5],
+        max_diffusivity_m2_s=maxima[5],
+        max_output_interval_balance_abs=float(np.max(np.abs(residual))),
+        max_output_interval_balance_rel=float(
+            np.max(np.abs(residual[1:]) / residual_scale[1:])
+        ),
+        maximum_location_was_center=maximum_at_center,
+    )
+    if progress_label:
+        print(
+            f"[{progress_label}] crossing={crossing_s / 3600:.6f} h, "
+            f"runtime={runtime_s:.2f} s, nfev={nfev}, nlu={nlu}",
+            flush=True,
+        )
+    return SimulationResult(
+        times_s=np.rint(times).astype(int),
+        xi_samples=xi_samples,
+        temperatures_c=temperatures,
+        moistures_kg_kg=moistures,
+        physical_radii_cm=physical_radii_cm,
+        physical_moistures_kg_kg=physical_moistures,
+        surface_moistures_kg_kg=surface_moistures,
+        maximum_moistures_kg_kg=maximum_moistures,
+        radii_m=radii,
+        drying_crossing_s=crossing_s,
+        first_strict_output_s=first_strict_output_s,
+        diagnostics=diagnostics,
+        config=config,
+    )
+
+
+def common_field_comparison(a: SimulationResult, b: SimulationResult) -> dict:
+    common_end = min(int(a.times_s[-1]), int(b.times_s[-1]))
+    count = common_end // int(a.config.output_interval_s) + 1
+    if not np.array_equal(a.times_s[:count], b.times_s[:count]):
+        raise ValueError("comparison time grids do not align")
+    difference = np.abs(a.moistures_kg_kg[:count] - b.moistures_kg_kg[:count])
+    flat_index = int(np.argmax(difference))
+    time_index, space_index = np.unravel_index(flat_index, difference.shape)
+    return {
+        "max_abs_difference": float(difference[time_index, space_index]),
+        "rms_difference": float(np.sqrt(np.mean(difference * difference))),
+        "max_location_time_s": int(a.times_s[time_index]),
+        "max_location_xi": float(a.xi_samples[space_index]),
+        "common_end_time_s": common_end,
+        "drying_crossing_difference_s": abs(a.drying_crossing_s - b.drying_crossing_s),
+    }
+
+
+def spatial_convergence(
+    coarse: SimulationResult,
+    medium: SimulationResult,
+    fine: SimulationResult,
+) -> dict:
+    cm = common_field_comparison(coarse, medium)
+    mf = common_field_comparison(medium, fine)
+    if cm["max_abs_difference"] > 0.0 and mf["max_abs_difference"] > 0.0:
+        order = math.log(cm["max_abs_difference"] / mf["max_abs_difference"], 2.)
+        if order > 0.0:
+            estimate = mf["max_abs_difference"] / (2.0**order - 1.0)
+        else:
+            estimate = math.inf
+    else:
+        order = math.nan
+        estimate = math.nan
+    return {
+        "coarse_to_medium": cm,
+        "medium_to_fine": mf,
+        "observed_order": order,
+        "estimated_fine_grid_max_error": estimate,
+        "estimated_fine_grid_max_error_with_1p25_safety": 1.25 * estimate,
+        "crossing_times_s": {
+            "coarse": coarse.drying_crossing_s,
+            "medium": medium.drying_crossing_s,
+            "fine": fine.drying_crossing_s,
+        },
+    }
+
+
+def choose_safe_end_time(
+    fine: SimulationResult,
+    numerical_error_bound: float,
+    threshold: float,
+) -> int:
+    # The extra half unit in the fourth decimal place ensures the submitted
+    # table visibly rounds below 0.1500 as well as satisfying the full-precision
+    # physical threshold after the numerical error allowance is added.
+    displayed_threshold = threshold - 0.5e-4
+    candidates = np.flatnonzero(
+        (fine.times_s > 0)
+        & (
+            fine.maximum_moistures_kg_kg + numerical_error_bound
+            < displayed_threshold
+        )
+    )
+    if candidates.size == 0:
+        raise RuntimeError("stored post-crossing interval is too short for safety margin")
+    return int(fine.times_s[int(candidates[0])])
+

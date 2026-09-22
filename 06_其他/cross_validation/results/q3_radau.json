@@ -1,0 +1,43 @@
+{
+  "task": "q3_radau",
+  "completed_at_utc": "2026-09-11T03:22:24.938877+00:00",
+  "runtime_s": 1247.5208431258798,
+  "python_version": "3.10.16 (main, Jun 25 2026, 19:35:07) [GCC 9.4.0]",
+  "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+  "numpy_version": "2.2.6",
+  "scipy_version": "1.15.3",
+  "input_hashes": {
+    "attachment1": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7",
+    "attachment2": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af",
+    "this_script": "827f603cb1205cc9285fa6ee820a98a4abe08440855fe0eb4716aa2e27c6a7d6"
+  },
+  "status": "complete",
+  "description": "N=2560 production Kirchhoff-FVM recomputed by Radau IIA",
+  "configuration": {
+    "radial_cells": 2560,
+    "rtol": 2e-10,
+    "temperature_atol": 2e-10,
+    "moisture_atol": 2e-12,
+    "initial_max_step_s": 5.0,
+    "drying_max_step_s": 30.0
+  },
+  "radau_diagnostics": {
+    "runtime_s": 1247.408655013889,
+    "function_evaluations": 106643,
+    "jacobian_evaluations": 94,
+    "lu_decompositions": 24678,
+    "integration_segments": 10
+  },
+  "moisture": {
+    "max_abs_difference": 1.0201257838460265e-06,
+    "rms_difference": 1.1565648339837225e-08,
+    "max_location_time_s": 60.0,
+    "max_location_position": 2.0,
+    "four_decimal_agreement_count": 72402,
+    "comparison_count": 72408,
+    "four_decimal_agreement_fraction": 0.9999171362280411
+  },
+  "bdf2_crossing_s": 206900.2913398705,
+  "radau_crossing_s": 206900.29080769926,
+  "crossing_difference_s": 0.0005321712524164468
+}

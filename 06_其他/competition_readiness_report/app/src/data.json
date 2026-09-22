@@ -1,0 +1,322 @@
+{
+  "surface": "report",
+  "title": "数值求解已扎实，但参赛论文尚未形成闭环",
+  "generatedAt": "2026-09-11T03:46:18Z",
+  "buildStatus": "complete",
+  "status": "reviewed",
+  "report": {
+    "asOf": "2026-09-11"
+  },
+  "queries": {
+    "readiness_findings": {
+      "rows": [
+        {
+          "priority": "P0",
+          "area": "竞赛合规",
+          "status": "缺失",
+          "finding": "未见 AI 工具使用声明和 AI工具使用详情.pdf",
+          "evidence": "全目录检索无对应文件；2026 官方规则要求使用 AI 的队伍在论文参考文献前声明，并在支撑材料提交详情 PDF。",
+          "impact": "可能直接影响评奖资格",
+          "nextStep": "由参赛队逐项人工核验 AI 参与内容，补写声明和详情 PDF。"
+        },
+        {
+          "priority": "P0",
+          "area": "论文成品",
+          "status": "缺失",
+          "finding": "没有可提交的 PDF 或 Word 论文",
+          "evidence": "当前只有 3406 行、约 83 KB 的四问推导 Markdown；无摘要专用页，且包含目录。",
+          "impact": "不符合 2026 正文不要目录、正文不超过 30 页等格式要求",
+          "nextStep": "压缩为答案优先的正式论文，生成并检查最终 PDF。"
+        },
+        {
+          "priority": "P0",
+          "area": "结果口径",
+          "status": "冲突",
+          "finding": "同一问题存在多套结果和长期边界口径",
+          "evidence": "Q3/Q4 根目录结果使用末小时均值或末点延拓；综合文档使用 4 h 后固定 50 °C、0.05 kg/kg 的超精细结果。",
+          "impact": "论文、代码、结果文件可能互相矛盾",
+          "nextStep": "冻结唯一口径并建立 result1.xlsx–result4.xlsx 的提交清单。"
+        },
+        {
+          "priority": "P0",
+          "area": "第三问判据",
+          "status": "需修正",
+          "finding": "把等于 0.15 的连续临界时刻写成烘干结束结果",
+          "evidence": "超精细 result3 的末行 206900.2913 s，中心含水率为 0.150000000000；题目要求各处严格低于 0.15。",
+          "impact": "形式上未满足严格不等式，四位小数显示仍为 0.1500",
+          "nextStep": "像第四问一样计算含数值误差和显示裕量的下一安全时刻。"
+        },
+        {
+          "priority": "P0",
+          "area": "第四问物理一致性",
+          "status": "未闭合",
+          "finding": "半径收缩、密度经验式和干基含水率守恒尚未统一",
+          "evidence": "按 rho/(1+C) 解释干固体体积密度时，使用最终场和 R=1.2 cm 得到的干质量代理量比初始低约 10.96%。",
+          "impact": "移动边界模型可能在热容量或质量守恒意义上不自洽",
+          "nextStep": "明确 rho 的物理定义，推导 Jacobian 下的干固体守恒并做一致性检验。"
+        },
+        {
+          "priority": "P1",
+          "area": "模型验证",
+          "status": "不足",
+          "finding": "已有 verification，缺少现实 validation",
+          "evidence": "Bessel 与 Radau 验证了数值内核；没有药材温度/含水率实测数据用于校准或外部验证。",
+          "impact": "亚秒和 1e-6 级数值误差不能代表真实预测误差",
+          "nextStep": "用文献范围、可获得实验数据或参数区间给出外部有效性证据。"
+        },
+        {
+          "priority": "P1",
+          "area": "敏感性",
+          "status": "不足",
+          "finding": "关键模型误差未量化",
+          "evidence": "长期边界选择已造成 Q3 约 18.28 min、Q4 约 15.98 min 差异，远大于数值时刻误差；h、hm、潜热、端面交换和收缩方式尚无系统敏感性。",
+          "impact": "不能说明结论对主要假设是否稳健",
+          "nextStep": "做局部敏感性或情景矩阵，并以烘干时长和中心含水率为响应。"
+        },
+        {
+          "priority": "P1",
+          "area": "第四问验证",
+          "status": "不足",
+          "finding": "缺少时变半径制造解或独立 ALE 对照",
+          "evidence": "现有 Bessel 解覆盖固定域；Q4 的 Radau 对照复用同一移动域半离散系统。",
+          "impact": "无法独立排除材料坐标变换中的共同错误",
+          "nextStep": "增加时变 R(t) 制造解，并验证空间阶、边界尺度和守恒。"
+        },
+        {
+          "priority": "P1",
+          "area": "结果解释",
+          "status": "不足",
+          "finding": "Q3 与 Q4 的时长差没有做因素分解",
+          "evidence": "Q4 同时改变物性和半径，当前只能说二者共同作用。",
+          "impact": "论文缺少有辨识力的创新结论",
+          "nextStep": "构造固定/收缩 × 附录3/附录4的 2×2 反事实实验。"
+        },
+        {
+          "priority": "P1",
+          "area": "图表表达",
+          "status": "缺失",
+          "finding": "没有温度场、含水率场和收敛结果的论文图",
+          "evidence": "现有图仅包括 3 张模型示意图和 2 张附件1环境曲线。",
+          "impact": "评委无法快速看到时空规律、中心控制和收缩效应",
+          "nextStep": "补充时空热图、径向剖面、中心/表面曲线、收缩曲线和收敛图。"
+        },
+        {
+          "priority": "P1",
+          "area": "可复现与匿名",
+          "status": "需修正",
+          "finding": "支撑材料尚未整理且含机器路径",
+          "evidence": "工作区约 94 MB；多份 metadata/report 含 /home/beihang 路径；官方支撑材料上限 20 MB 且不得显示学校/身份信息。",
+          "impact": "直接打包目录既超量又有匿名风险",
+          "nextStep": "生成小于 20 MB 的匿名支撑包，移除缓存、检查点、重复结果和绝对路径。"
+        },
+        {
+          "priority": "P2",
+          "area": "数值报告",
+          "status": "需清理",
+          "finding": "完整性与报告字段有小缺陷",
+          "evidence": "超精细 COMPLETE.json 对 problem4_final/validation_report.md 的哈希失配；交叉验证表的“四位小数一致率”只读取含水率，掩盖温度的少量末位差异。",
+          "impact": "不改变主结果，但削弱审计可信度",
+          "nextStep": "重建哈希清单并拆分温度/含水率一致率。"
+        }
+      ],
+      "source": {
+        "label": "本地项目完整审计",
+        "files": [
+          "A题/A题四问完整建模过程与公式推导.md",
+          "problem1/solve_problem1.py",
+          "problem2/solve_problem2.py",
+          "problem3/solve_problem3.py",
+          "problem3/accelerated_problem3.py",
+          "problem4/solve_problem4.py",
+          "cross_validation/results/COMPLETE.json",
+          "ultrafine_runs/fixed_50_005/COMPLETE.json"
+        ],
+        "evidenceFlow": [
+          {
+            "title": "代码与测试",
+            "detail": "运行全部单元测试、compileall，检查求解器、验证程序和输出路径。"
+          },
+          {
+            "title": "模型与结果",
+            "detail": "逐节核对四问推导、元数据、验证报告和最终 Excel。"
+          },
+          {
+            "title": "竞赛规范",
+            "detail": "核对 2026 官方论文格式规范与 AI 工具使用规定。"
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "label": "P0/P1/P2",
+            "definition": "P0 为提交或核心结论阻断项；P1 为显著影响国赛竞争力的证据缺口；P2 为不改变主结论但应清理的质量项。",
+            "componentIds": [
+              "readiness-matrix",
+              "priority-summary"
+            ]
+          }
+        ]
+      }
+    },
+    "numerical_headroom": {
+      "rows": [
+        {
+          "question": "问题1",
+          "field": "含水率",
+          "errorBound": 0.0000065673043864,
+          "fourDecimalHalfUnit": 0.00005,
+          "thresholdUsedPct": 13.1346
+        },
+        {
+          "question": "问题2",
+          "field": "含水率",
+          "errorBound": 0.00001455194,
+          "fourDecimalHalfUnit": 0.00005,
+          "thresholdUsedPct": 29.1039
+        },
+        {
+          "question": "问题3",
+          "field": "含水率",
+          "errorBound": 0.0000038136624092,
+          "fourDecimalHalfUnit": 0.00005,
+          "thresholdUsedPct": 7.6273
+        },
+        {
+          "question": "问题4",
+          "field": "含水率",
+          "errorBound": 7.24576414e-7,
+          "fourDecimalHalfUnit": 0.00005,
+          "thresholdUsedPct": 1.4492
+        }
+      ],
+      "source": {
+        "label": "四问数值验证结果",
+        "files": [
+          "problem1/separate_convergence_refined.json",
+          "problem2/run_metadata.json",
+          "ultrafine_runs/fixed_50_005/problem3_final/run_metadata.json",
+          "ultrafine_runs/fixed_50_005/problem4_final/run_metadata.json"
+        ],
+        "assumptions": [
+          "问题2取报告的含水率空间 Richardson 1.25 安全上界；同网格时间复算差为 4.37e-8，未改变主导项。",
+          "阈值占用率只衡量离散误差尺度，不代表物理模型误差或每个单元格最后一位都被严格锁定。"
+        ],
+        "metricDefinitions": [
+          {
+            "label": "阈值占用率",
+            "definition": "报告的主导场值误差上界除以四位小数半个末位单位 5e-5。数值越低，离散精度余量越大。",
+            "formula": "errorBound / fourDecimalHalfUnit × 100%",
+            "componentIds": [
+              "numerical-headroom-chart",
+              "numerical-summary"
+            ]
+          }
+        ]
+      }
+    },
+    "scenario_sensitivity": {
+      "rows": [
+        {
+          "question": "问题3",
+          "assumption": "4 h 后环境：末1 h均值 vs 最后测点",
+          "timeDifferenceMinutes": 18.2788,
+          "numericalTimeUncertaintySeconds": 0.0141598,
+          "ratioToNumericalUncertainty": 77452.8
+        },
+        {
+          "question": "问题4",
+          "assumption": "4 h 后环境：固定50/0.05 vs 最后测点",
+          "timeDifferenceMinutes": 15.9824,
+          "numericalTimeUncertaintySeconds": 0.0331754,
+          "ratioToNumericalUncertainty": 28903.5
+        }
+      ],
+      "source": {
+        "label": "长期边界情景与超精细时刻误差",
+        "files": [
+          "problem3/environment_sensitivity.md",
+          "problem3/run_metadata.json",
+          "problem3/last_point_experiment/run_metadata.json",
+          "problem4/run_metadata.json",
+          "problem4/experiments/fixed_50_005/run_metadata.json",
+          "ultrafine_runs/fixed_50_005/problem3_final/run_metadata.json",
+          "ultrafine_runs/fixed_50_005/problem4_final/run_metadata.json"
+        ],
+        "assumptions": [
+          "问题3比较使用相同 N=80、dt=30 s 的末1 h均值与最后测点实验。",
+          "问题4比较使用相同 N=760 BDF 配置的固定50/0.05与最后测点实验。",
+          "问题4数值时刻不确定度由三层空间 Richardson 安全估计与时间 Richardson 安全估计相加得到。"
+        ],
+        "metricDefinitions": [
+          {
+            "label": "情景时长差",
+            "definition": "只改变 4 h 后环境延拓口径时得到的连续临界时刻绝对差。",
+            "componentIds": [
+              "sensitivity-table",
+              "model-risk-summary"
+            ]
+          }
+        ]
+      }
+    },
+    "verification_checks": {
+      "rows": [
+        {
+          "check": "单元测试",
+          "result": "通过",
+          "value": "27/27"
+        },
+        {
+          "check": "Python 编译检查",
+          "result": "通过",
+          "value": "全部求解与验证脚本"
+        },
+        {
+          "check": "Bessel 固定域空间阶",
+          "result": "通过",
+          "value": "约 2.000"
+        },
+        {
+          "check": "BDF–Radau 场值对照",
+          "result": "通过但范围有限",
+          "value": "最大差均小于 2e-6"
+        },
+        {
+          "check": "最终 Excel 逐格核验",
+          "result": "通过",
+          "value": "报告值与四舍五入内存结果一致"
+        },
+        {
+          "check": "超精细清单哈希",
+          "result": "未完全通过",
+          "value": "13/14"
+        }
+      ],
+      "source": {
+        "label": "复现实测与验证报告",
+        "files": [
+          "problem1/test_problem1.py",
+          "problem2/test_problem2.py",
+          "problem3/test_problem3.py",
+          "problem4/test_problem4.py",
+          "cross_validation/results/validation_report.md",
+          "ultrafine_runs/fixed_50_005/COMPLETE.json"
+        ],
+        "evidenceFlow": [
+          {
+            "title": "测试命令",
+            "detail": "/home/beihang/anaconda3/bin/python -m pytest -q；27 passed。"
+          },
+          {
+            "title": "编译命令",
+            "detail": "python3 -m compileall -q problem1 problem2 problem3 problem4 cross_validation run_ultrafine_fixed_boundary.py。"
+          },
+          {
+            "title": "哈希复核",
+            "detail": "独立重算 COMPLETE.json 所列 SHA-256；problem4_final/validation_report.md 与清单不一致。"
+          }
+        ]
+      }
+    }
+  },
+  "id": "report:409a20c2-428b-4a6d-af6f-c51970e9f0dd"
+}

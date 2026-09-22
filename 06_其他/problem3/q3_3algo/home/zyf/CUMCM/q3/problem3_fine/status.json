@@ -1,0 +1,8 @@
+{
+  "status": "COMPLETED",
+  "pid": 860280,
+  "problem": 3,
+  "started_utc": "2026-09-11T01:44:00.008803+00:00",
+  "numerical_verification": "NUMERICAL_ESTIMATE_PASS",
+  "wall_s": 719.5585666911211
+}

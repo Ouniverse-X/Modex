@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1250" viewBox="0 0 1800 1250">
+<rect width="1800" height="1250" fill="#FAFBFD"/>
+<text x="120.00" y="82.00" font-family="Noto Sans CJK SC" font-size="44" font-weight="700" fill="#172033" text-anchor="start" >附件 1：烘房环境数据随时间变化</text>
+<text x="120.00" y="126.00" font-family="Noto Sans CJK SC" font-size="23" font-weight="400" fill="#667085" text-anchor="start" >采样间隔 60 s · 全过程 0–240 min · 淡蓝区域为第一问 0–30 min</text>
+<rect x="145.00" y="205.00" width="1550.00" height="385.00" fill="#FFFFFF"/>
+<rect x="145.00" y="205.00" width="193.75" height="385.00" fill="#EAF2FF" opacity="0.72"/>
+<line x1="145.00" y1="574.29" x2="1695.00" y2="574.29" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="581.29" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >28</text>
+<line x1="145.00" y1="511.43" x2="1695.00" y2="511.43" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="518.43" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >32</text>
+<line x1="145.00" y1="448.57" x2="1695.00" y2="448.57" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="455.57" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >36</text>
+<line x1="145.00" y1="385.71" x2="1695.00" y2="385.71" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="392.71" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >40</text>
+<line x1="145.00" y1="322.86" x2="1695.00" y2="322.86" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="329.86" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >44</text>
+<line x1="145.00" y1="260.00" x2="1695.00" y2="260.00" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="267.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >48</text>
+<line x1="145.00" y1="197.14" x2="1695.00" y2="197.14" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="204.14" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >52</text>
+<line x1="145.00" y1="590.00" x2="145.00" y2="598.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="145.00" y="630.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >0</text>
+<line x1="338.75" y1="590.00" x2="338.75" y2="598.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="338.75" y="630.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >30</text>
+<line x1="532.50" y1="590.00" x2="532.50" y2="598.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="532.50" y="630.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >60</text>
+<line x1="726.25" y1="590.00" x2="726.25" y2="598.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="726.25" y="630.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >90</text>
+<line x1="920.00" y1="590.00" x2="920.00" y2="598.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="920.00" y="630.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >120</text>
+<line x1="1113.75" y1="590.00" x2="1113.75" y2="598.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="1113.75" y="630.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >150</text>
+<line x1="1307.50" y1="590.00" x2="1307.50" y2="598.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="1307.50" y="630.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >180</text>
+<line x1="1501.25" y1="590.00" x2="1501.25" y2="598.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="1501.25" y="630.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >210</text>
+<line x1="1695.00" y1="590.00" x2="1695.00" y2="598.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="1695.00" y="630.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >240</text>
+<line x1="145.00" y1="205.00" x2="145.00" y2="590.00" stroke="#8B95A5" stroke-width="2"/>
+<line x1="145.00" y1="590.00" x2="1695.00" y2="590.00" stroke="#8B95A5" stroke-width="2"/>
+<text x="145.00" y="177.00" font-family="Noto Sans CJK SC" font-size="31" font-weight="650" fill="#172033" text-anchor="start" >烘房温度</text>
+<text x="1695.00" y="177.00" font-family="Noto Sans CJK SC" font-size="21" font-weight="400" fill="#667085" text-anchor="end" >温度 / °C</text>
+<path d="M 145.000 574.286 L 151.458 565.989 L 157.917 555.554 L 164.375 547.823 L 170.833 542.276 L 177.292 529.751 L 183.750 522.539 L 190.208 514.257 L 196.667 509.527 L 203.125 499.957 L 209.583 492.540 L 216.042 481.901 L 222.500 475.789 L 228.958 467.334 L 235.417 462.054 L 241.875 456.051 L 248.333 447.141 L 254.792 443.009 L 261.250 431.804 L 267.708 426.273 L 274.167 418.997 L 280.625 415.037 L 287.083 405.090 L 293.542 399.464 L 300.000 394.231 L 306.458 392.079 L 312.917 384.756 L 319.375 381.974 L 325.833 375.956 L 332.292 367.391 L 338.750 361.939 L 345.208 355.574 L 351.667 355.040 L 358.125 350.153 L 364.583 345.030 L 371.042 342.579 L 377.500 338.807 L 383.958 332.396 L 390.417 330.180 L 396.875 323.329 L 403.333 321.254 L 409.792 314.953 L 416.250 312.439 L 422.708 311.841 L 429.167 304.974 L 435.625 302.067 L 442.083 302.051 L 448.542 299.883 L 455.000 294.289 L 461.458 295.530 L 467.917 292.529 L 474.375 291.444 L 480.833 283.383 L 487.292 281.969 L 493.750 279.470 L 500.208 276.767 L 506.667 277.097 L 513.125 274.316 L 519.583 275.589 L 526.042 273.970 L 532.500 268.093 L 538.958 267.889 L 545.417 265.563 L 551.875 262.514 L 558.333 261.996 L 564.792 261.163 L 571.250 259.749 L 577.708 260.361 L 584.167 261.163 L 590.625 256.873 L 597.083 257.391 L 603.542 254.799 L 610.000 250.336 L 616.458 254.029 L 622.917 254.390 L 629.375 251.734 L 635.833 250.729 L 642.292 247.036 L 648.750 247.004 L 655.208 244.474 L 661.667 244.616 L 668.125 245.857 L 674.583 242.023 L 681.042 246.329 L 687.500 246.800 L 693.958 245.653 L 700.417 240.184 L 706.875 241.630 L 713.333 243.406 L 719.792 240.247 L 726.250 242.463 L 732.708 237.764 L 739.167 239.241 L 745.625 239.304 L 752.083 239.509 L 758.542 236.554 L 765.000 238.251 L 771.458 240.011 L 777.917 239.414 L 784.375 232.516 L 790.833 232.610 L 797.292 233.914 L 803.750 237.010 L 810.208 231.243 L 816.667 232.453 L 823.125 232.673 L 829.583 234.511 L 836.042 235.643 L 842.500 236.790 L 848.958 230.284 L 855.417 233.553 L 861.875 235.344 L 868.333 234.339 L 874.792 232.013 L 881.250 234.983 L 887.708 229.499 L 894.167 230.111 L 900.625 230.269 L 907.083 232.359 L 913.542 230.693 L 920.000 230.897 L 926.458 230.253 L 932.917 234.559 L 939.375 231.840 L 945.833 234.669 L 952.292 231.007 L 958.750 232.186 L 965.208 233.553 L 971.667 233.773 L 978.125 229.891 L 984.583 233.066 L 991.042 227.079 L 997.500 229.687 L 1003.958 231.447 L 1010.417 229.467 L 1016.875 233.851 L 1023.333 226.450 L 1029.792 230.111 L 1036.250 227.691 L 1042.708 233.129 L 1049.167 229.907 L 1055.625 229.829 L 1062.083 226.261 L 1068.542 229.090 L 1075.000 229.813 L 1081.458 231.384 L 1087.917 230.834 L 1094.375 229.310 L 1100.833 229.907 L 1107.292 233.160 L 1113.750 226.010 L 1120.208 225.460 L 1126.667 231.400 L 1133.125 228.147 L 1139.583 231.651 L 1146.042 227.220 L 1152.500 230.284 L 1158.958 227.314 L 1165.417 226.796 L 1171.875 226.466 L 1178.333 231.651 L 1184.792 225.303 L 1191.250 230.693 L 1197.708 232.201 L 1204.167 228.147 L 1210.625 229.593 L 1217.083 225.979 L 1223.542 226.151 L 1230.000 230.001 L 1236.458 225.020 L 1242.917 230.221 L 1249.375 228.446 L 1255.833 230.489 L 1262.292 225.146 L 1268.750 231.211 L 1275.208 232.154 L 1281.667 229.074 L 1288.125 224.706 L 1294.583 225.491 L 1301.042 226.623 L 1307.500 225.507 L 1313.958 225.476 L 1320.417 228.430 L 1326.875 230.017 L 1333.333 226.434 L 1339.792 227.299 L 1346.250 229.561 L 1352.708 231.761 L 1359.167 226.639 L 1365.625 230.441 L 1372.083 225.146 L 1378.542 230.614 L 1385.000 231.541 L 1391.458 225.963 L 1397.917 231.290 L 1404.375 231.086 L 1410.833 227.786 L 1417.292 225.633 L 1423.750 230.960 L 1430.208 230.064 L 1436.667 226.387 L 1443.125 224.863 L 1449.583 228.571 L 1456.042 231.369 L 1462.500 232.390 L 1468.958 230.693 L 1475.417 231.463 L 1481.875 227.173 L 1488.333 231.541 L 1494.792 228.524 L 1501.250 227.047 L 1507.708 227.927 L 1514.167 230.929 L 1520.625 226.183 L 1527.083 226.874 L 1533.542 226.701 L 1540.000 231.463 L 1546.458 231.526 L 1552.917 225.209 L 1559.375 229.373 L 1565.833 230.143 L 1572.292 228.666 L 1578.750 227.299 L 1585.208 224.989 L 1591.667 230.253 L 1598.125 225.240 L 1604.583 232.311 L 1611.042 228.131 L 1617.500 227.519 L 1623.958 231.667 L 1630.417 231.400 L 1636.875 229.200 L 1643.333 224.910 L 1649.792 227.817 L 1656.250 225.161 L 1662.708 226.183 L 1669.167 228.823 L 1675.625 226.340 L 1682.083 232.359 L 1688.542 231.636 L 1695.000 225.979" fill="none" stroke="#2563EB" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="145.00" cy="574.29" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="241.88" cy="456.05" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="338.75" cy="361.94" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="435.62" cy="302.07" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="532.50" cy="268.09" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="629.38" cy="251.73" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="726.25" cy="242.46" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="823.12" cy="232.67" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="920.00" cy="230.90" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="1016.88" cy="233.85" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="1113.75" cy="226.01" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="1210.62" cy="229.59" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="1307.50" cy="225.51" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="1404.38" cy="231.09" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="1501.25" cy="227.05" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="1598.12" cy="225.24" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="1695.00" cy="225.98" r="4.5" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.6"/>
+<circle cx="1288.12" cy="224.71" r="6" fill="#2563EB" stroke="#FFFFFF" stroke-width="2.5"/>
+<text x="1685.00" y="233.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="650" fill="#2563EB" text-anchor="end" >50.165</text>
+<rect x="145.00" y="745.00" width="1550.00" height="385.00" fill="#FFFFFF"/>
+<rect x="145.00" y="745.00" width="193.75" height="385.00" fill="#EAF2FF" opacity="0.72"/>
+<line x1="145.00" y1="1107.35" x2="1695.00" y2="1107.35" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="1114.35" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >0.020</text>
+<line x1="145.00" y1="1050.74" x2="1695.00" y2="1050.74" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="1057.74" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >0.025</text>
+<line x1="145.00" y1="994.12" x2="1695.00" y2="994.12" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="1001.12" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >0.030</text>
+<line x1="145.00" y1="937.50" x2="1695.00" y2="937.50" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="944.50" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >0.035</text>
+<line x1="145.00" y1="880.88" x2="1695.00" y2="880.88" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="887.88" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >0.040</text>
+<line x1="145.00" y1="824.26" x2="1695.00" y2="824.26" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="831.26" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >0.045</text>
+<line x1="145.00" y1="767.65" x2="1695.00" y2="767.65" stroke="#DCE2EA" stroke-width="1.4"/>
+<text x="125.00" y="774.65" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="end" >0.050</text>
+<line x1="145.00" y1="1130.00" x2="145.00" y2="1138.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="145.00" y="1170.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >0</text>
+<line x1="338.75" y1="1130.00" x2="338.75" y2="1138.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="338.75" y="1170.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >30</text>
+<line x1="532.50" y1="1130.00" x2="532.50" y2="1138.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="532.50" y="1170.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >60</text>
+<line x1="726.25" y1="1130.00" x2="726.25" y2="1138.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="726.25" y="1170.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >90</text>
+<line x1="920.00" y1="1130.00" x2="920.00" y2="1138.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="920.00" y="1170.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >120</text>
+<line x1="1113.75" y1="1130.00" x2="1113.75" y2="1138.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="1113.75" y="1170.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >150</text>
+<line x1="1307.50" y1="1130.00" x2="1307.50" y2="1138.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="1307.50" y="1170.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >180</text>
+<line x1="1501.25" y1="1130.00" x2="1501.25" y2="1138.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="1501.25" y="1170.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >210</text>
+<line x1="1695.00" y1="1130.00" x2="1695.00" y2="1138.00" stroke="#8B95A5" stroke-width="1.8"/>
+<text x="1695.00" y="1170.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="400" fill="#667085" text-anchor="middle" >240</text>
+<line x1="145.00" y1="745.00" x2="145.00" y2="1130.00" stroke="#8B95A5" stroke-width="2"/>
+<line x1="145.00" y1="1130.00" x2="1695.00" y2="1130.00" stroke="#8B95A5" stroke-width="2"/>
+<text x="145.00" y="717.00" font-family="Noto Sans CJK SC" font-size="31" font-weight="650" fill="#172033" text-anchor="start" >环境水分浓度</text>
+<text x="1695.00" y="717.00" font-family="Noto Sans CJK SC" font-size="21" font-weight="400" fill="#667085" text-anchor="end" >水分浓度 / (kg/kg)</text>
+<path d="M 145.000 1111.543 L 151.458 1107.126 L 157.917 1101.351 L 164.375 1096.029 L 170.833 1090.254 L 177.292 1085.725 L 183.750 1080.969 L 190.208 1075.874 L 196.667 1070.551 L 203.125 1064.663 L 209.583 1058.888 L 216.042 1054.699 L 222.500 1050.056 L 228.958 1044.847 L 235.417 1038.053 L 241.875 1032.618 L 248.333 1029.560 L 254.792 1024.465 L 261.250 1017.557 L 267.708 1013.821 L 274.167 1006.460 L 280.625 1003.063 L 287.083 998.534 L 293.542 990.834 L 300.000 988.343 L 306.458 983.021 L 312.917 978.604 L 319.375 973.849 L 325.833 969.319 L 332.292 964.450 L 338.750 959.354 L 345.208 955.051 L 351.667 948.484 L 358.125 943.501 L 364.583 940.218 L 371.042 936.028 L 377.500 930.932 L 383.958 925.157 L 390.417 920.968 L 396.875 920.175 L 403.333 915.532 L 409.792 911.343 L 416.250 907.379 L 422.708 902.171 L 429.167 899.000 L 435.625 896.962 L 442.083 891.866 L 448.542 887.676 L 455.000 886.091 L 461.458 879.410 L 467.917 879.637 L 474.375 872.276 L 480.833 872.956 L 487.292 866.388 L 493.750 863.104 L 500.208 859.707 L 506.667 857.669 L 513.125 854.951 L 519.583 852.913 L 526.042 849.516 L 532.500 850.082 L 538.958 845.553 L 545.417 843.175 L 551.875 839.099 L 558.333 838.646 L 564.792 836.834 L 571.250 833.324 L 577.708 833.097 L 584.167 831.625 L 590.625 827.888 L 597.083 826.190 L 603.542 825.284 L 610.000 822.679 L 616.458 820.868 L 622.917 819.396 L 629.375 817.357 L 635.833 814.187 L 642.292 814.640 L 648.750 809.657 L 655.208 808.299 L 661.667 809.204 L 668.125 808.525 L 674.583 806.147 L 681.042 803.090 L 687.500 802.863 L 693.958 800.825 L 700.417 801.051 L 706.875 799.353 L 713.333 800.146 L 719.792 796.635 L 726.250 798.447 L 732.708 794.824 L 739.167 792.899 L 745.625 795.843 L 752.083 792.332 L 758.542 794.257 L 765.000 790.068 L 771.458 792.672 L 777.917 787.237 L 784.375 790.860 L 790.833 785.651 L 797.292 785.765 L 803.750 786.218 L 810.208 784.519 L 816.667 783.726 L 823.125 782.254 L 829.583 785.538 L 836.042 783.047 L 842.500 785.199 L 848.958 781.801 L 855.417 783.726 L 861.875 781.009 L 868.333 780.556 L 874.792 780.669 L 881.250 779.876 L 887.708 778.065 L 894.167 777.499 L 900.625 778.744 L 907.083 777.725 L 913.542 775.574 L 920.000 779.650 L 926.458 779.310 L 932.917 779.197 L 939.375 775.687 L 945.833 776.706 L 952.292 774.328 L 958.750 774.668 L 965.208 776.253 L 971.667 772.856 L 978.125 773.309 L 984.583 775.800 L 991.042 775.007 L 997.500 775.121 L 1003.958 775.687 L 1010.417 775.574 L 1016.875 770.931 L 1023.333 773.535 L 1029.792 773.649 L 1036.250 771.497 L 1042.708 772.290 L 1049.167 769.912 L 1055.625 770.704 L 1062.083 772.176 L 1068.542 772.629 L 1075.000 769.006 L 1081.458 770.365 L 1087.917 768.893 L 1094.375 773.422 L 1100.833 769.232 L 1107.292 770.251 L 1113.750 769.799 L 1120.208 767.194 L 1126.667 766.628 L 1133.125 770.365 L 1139.583 767.874 L 1146.042 765.835 L 1152.500 768.779 L 1158.958 767.874 L 1165.417 767.987 L 1171.875 768.779 L 1178.333 765.269 L 1184.792 766.062 L 1191.250 769.799 L 1197.708 764.816 L 1204.167 765.496 L 1210.625 768.893 L 1217.083 765.722 L 1223.542 769.912 L 1230.000 764.816 L 1236.458 766.741 L 1242.917 766.741 L 1249.375 769.912 L 1255.833 765.382 L 1262.292 770.365 L 1268.750 769.119 L 1275.208 769.685 L 1281.667 766.062 L 1288.125 769.346 L 1294.583 765.269 L 1301.042 766.741 L 1307.500 770.251 L 1313.958 770.478 L 1320.417 770.138 L 1326.875 767.081 L 1333.333 765.949 L 1339.792 769.119 L 1346.250 765.722 L 1352.708 770.138 L 1359.167 765.949 L 1365.625 765.269 L 1372.083 766.062 L 1378.542 766.515 L 1385.000 765.722 L 1391.458 770.251 L 1397.917 769.346 L 1404.375 769.799 L 1410.833 767.647 L 1417.292 766.288 L 1423.750 766.854 L 1430.208 765.609 L 1436.667 769.572 L 1443.125 766.288 L 1449.583 769.346 L 1456.042 768.893 L 1462.500 766.515 L 1468.958 764.929 L 1475.417 766.968 L 1481.875 770.138 L 1488.333 766.968 L 1494.792 770.251 L 1501.250 765.496 L 1507.708 766.515 L 1514.167 769.459 L 1520.625 769.912 L 1527.083 769.459 L 1533.542 764.929 L 1540.000 767.874 L 1546.458 766.062 L 1552.917 766.854 L 1559.375 767.194 L 1565.833 769.685 L 1572.292 765.156 L 1578.750 768.779 L 1585.208 767.194 L 1591.667 766.515 L 1598.125 766.854 L 1604.583 765.156 L 1611.042 769.685 L 1617.500 767.647 L 1623.958 768.213 L 1630.417 767.760 L 1636.875 769.799 L 1643.333 769.685 L 1649.792 768.893 L 1656.250 768.779 L 1662.708 768.100 L 1669.167 766.968 L 1675.625 766.854 L 1682.083 768.100 L 1688.542 768.213 L 1695.000 769.232" fill="none" stroke="#D97706" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="145.00" cy="1111.54" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="241.88" cy="1032.62" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="338.75" cy="959.35" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="435.62" cy="896.96" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="532.50" cy="850.08" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="629.38" cy="817.36" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="726.25" cy="798.45" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="823.12" cy="782.25" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="920.00" cy="779.65" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="1016.88" cy="770.93" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="1113.75" cy="769.80" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="1210.62" cy="768.89" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="1307.50" cy="770.25" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="1404.38" cy="769.80" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="1501.25" cy="765.50" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="1598.12" cy="766.85" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="1695.00" cy="769.23" r="4.5" fill="#FFFFFF" stroke="#D97706" stroke-width="2.6"/>
+<circle cx="1197.71" cy="764.82" r="6" fill="#D97706" stroke="#FFFFFF" stroke-width="2.5"/>
+<text x="1685.00" y="773.00" font-family="Noto Sans CJK SC" font-size="22" font-weight="650" fill="#D97706" text-anchor="end" >0.04986</text>
+<text x="920.00" y="1203.00" font-family="Noto Sans CJK SC" font-size="25" font-weight="400" fill="#667085" text-anchor="middle" >时间 / min</text>
+<text x="1695.00" y="1210.00" font-family="Noto Sans CJK SC" font-size="18" font-weight="400" fill="#667085" text-anchor="end" >源数据：A题/附件/附件1.xlsx</text>
+<text x="241.88" y="239.00" font-family="Noto Sans CJK SC" font-size="19" font-weight="650" fill="#2563EB" text-anchor="middle" >第一问区间</text>
+</svg>

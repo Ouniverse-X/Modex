@@ -1,0 +1,14 @@
+{
+  "event": {
+    "lower_s": 206900.21318623482,
+    "upper_s": 206900.21324345528,
+    "width_s": 5.7220458984375e-05,
+    "time_h": 57.472281456515354,
+    "C_max_lower": 0.14999999998537739,
+    "C_max_upper": 0.14999999998538555,
+    "method": "All-element Chebyshev derivative-root extrema plus nodal checks; float64, not a certified interval bound",
+    "meaning": "Numerical-interpolant event bracket, NOT a PDE/model error bound"
+  },
+  "verification": "OBSERVED_DIFFERENCE_PASS",
+  "model_validation": false
+}

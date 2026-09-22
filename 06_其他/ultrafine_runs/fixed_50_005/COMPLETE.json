@@ -1,0 +1,30 @@
+{
+  "completed_at_utc": "2026-09-10T20:56:36.784313+00:00",
+  "q3": {
+    "drying_time_h": 57.472303149964034,
+    "field_error_bound": 3.813662409195817e-06,
+    "drying_time_error_bound_s": 0.014159767384547845
+  },
+  "q4": {
+    "drying_crossing_h": 51.090581768801016,
+    "safe_end_h": 51.13333333333333,
+    "field_error_bound": 7.245764140010866e-07
+  },
+  "artifact_sha256": {
+    "problem3_final/environment_input_used.csv": "734cc94c77eaf18b2e2f89f233c8235a88d06f78d1059d1012ff307eb8bf525b",
+    "problem3_final/moisture_full_precision.csv": "51c8fd0a1620453ccdac89d0c28d0160698caaf3f1f6a7008d18899661539303",
+    "problem3_final/result3.xlsx": "b658507926aa9a60ca2e24e62c5b867c9feb9e9090078cd42a720cee9153ab38",
+    "problem3_final/run_metadata.json": "13ed17376739fc526f2082711d321babeb1883aa82353105b0debb89f5aa4144",
+    "problem3_final/table5.csv": "77b9db02df1d281437a112381a944c28a108f6e154c9878615eb5c98995b6238",
+    "problem3_final/table5.md": "3606b813cabf82d9feb290d44c2764e710c743f8d6d86181fcc7836a18645de4",
+    "problem3_final/validation_report.md": "7b02204fa37112279cb915a7ed10b89eb02f92f5adf2afe7e40aa42ff380f9fb",
+    "problem4_final/moisture_material_coordinates_full_precision.csv": "51efcebd224870820515146507254f7355c003f1d5017a2fdde3115faa0d0e36",
+    "problem4_final/moisture_physical_full_precision.csv": "c82a9b2255a954c36b9450ade1297b519584ede341aca60b6f9575a21041ffde",
+    "problem4_final/result4.xlsx": "fdef6238be7e8fd96d25f534f14e21f923ae351abed6bfbdd41acb11b4255746",
+    "problem4_final/run_metadata.json": "2b4fe38c515791eef00c4d6eb378a90d04fcbdc611d597be3a995ae699dba487",
+    "problem4_final/summary_tables.md": "65b5e31340c4f98bde5129d4c10047ef4f71cf61a9889cbe1562aa5418044e1f",
+    "problem4_final/validation_report.md": "47ef6d51a0deeb35297990458288f9f47d85a2fda5a249a6e8e5f924a795d6d9",
+    "SUMMARY.md": "2f30a02709c7acc539cba6b09b53be1a0bca9087df59ee722478c4ae393f8bac"
+  },
+  "manifest_sha256": "9f07984f18f0c71e5a707b9455253cbf0447a000c63f3e93456611090fbc558f"
+}

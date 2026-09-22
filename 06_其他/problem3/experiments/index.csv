@@ -1,0 +1,4 @@
+﻿completed_at,experiment_directory,radial_cells,radial_step_cm,time_step_s,environment_extension,plateau_temperature_c,plateau_moisture_kg_kg,drying_time_h,result3_sha256
+2026-09-10T21:25:53.042815+08:00,/home/beihang/projects/Modex/problem3/experiments/N160_dt5_last_hour_mean,160,0.0125,5,last_hour_mean,49.9989344262,0.0499875409836,57.4747119601,c0e79a6b26092cd2f5d79342492ff7bb24541087cdb6abe07d95f1ba1cca5a5a
+2026-09-10T23:08:06.403053+08:00,/home/beihang/projects/Modex/problem3/experiments/N160_dt5_fixed_50_005,160,0.0125,5,fixed,50,0.05,57.4730147314,7b586d297443dde2e138c30ccd964ed388c793b362bd52524c617e917d449626
+2026-09-11T21:50:35.348706+08:00,/tmp/modex-q3-audit-Aj6HCs,2560,0.00078125,0.5,fixed,50,0.05,57.47230315,b658507926aa9a60ca2e24e62c5b867c9feb9e9090078cd42a720cee9153ab38

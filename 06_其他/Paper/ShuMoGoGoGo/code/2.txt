@@ -1,0 +1,297 @@
+# Question 2 core routines
+def make_radial_grid(
+    radius_m: float,
+    radial_cells: int,
+    surface_layer_m: float,
+    surface_refinement_factor: int,
+) -> np.ndarray:
+    """Construct a two-zone grid refined in the outermost surface layer."""
+    bulk_length = radius_m - surface_layer_m
+    effective_length = bulk_length + surface_refinement_factor * surface_layer_m
+    bulk_step = effective_length / radial_cells
+    surface_step = bulk_step / surface_refinement_factor
+    bulk_cells_float = bulk_length / bulk_step
+    surface_cells_float = surface_layer_m / surface_step
+    bulk_cells = int(round(bulk_cells_float))
+    surface_cells = int(round(surface_cells_float))
+    if (
+        abs(bulk_cells_float - bulk_cells) > 1.0e-10
+        or abs(surface_cells_float - surface_cells) > 1.0e-10
+        or bulk_cells + surface_cells != radial_cells
+    ):
+        raise ValueError(
+            "radial_cells is incompatible with the two-zone grid; "
+            "use a multiple of 19 for the 2 mm / factor-10 refinement"
+        )
+    bulk = np.arange(bulk_cells + 1, dtype=float) * bulk_step
+    surface = bulk_length + np.arange(1, surface_cells + 1, dtype=float) * surface_step
+    radii = np.concatenate((bulk, surface))
+    radii[0] = 0.0
+    radii[-1] = radius_m
+    if radii.size != radial_cells + 1 or np.any(np.diff(radii) <= 0.0):
+        raise AssertionError("constructed radial grid is invalid")
+    return radii
+
+
+def radial_storage_weights(radii_m: np.ndarray) -> np.ndarray:
+    faces = 0.5 * (radii_m[:-1] + radii_m[1:])
+    weights = np.empty_like(radii_m)
+    weights[0] = 0.5 * faces[0] ** 2
+    weights[1:-1] = 0.5 * (faces[1:] ** 2 - faces[:-1] ** 2)
+    weights[-1] = 0.5 * (radii_m[-1] ** 2 - faces[-1] ** 2)
+    return weights
+
+
+def harmonic_mean(left: np.ndarray, right: np.ndarray) -> np.ndarray:
+    denominator = left + right
+    if np.any(left <= 0.0) or np.any(right <= 0.0) or np.any(denominator <= 0.0):
+        raise ValueError("interface transport coefficients must be positive")
+    return 2.0 * left * right / denominator
+
+
+def make_jacobian_sparsity(node_count: int) -> csr_matrix:
+    """Return the block-tridiagonal dependency pattern of the coupled system."""
+    pattern = lil_matrix((2 * node_count, 2 * node_count), dtype=np.int8)
+    for i in range(node_count):
+        neighbours = range(max(0, i - 1), min(node_count, i + 2))
+        for j in neighbours:
+            pattern[i, j] = 1
+            pattern[i, node_count + j] = 1
+            pattern[node_count + i, j] = 1
+            pattern[node_count + i, node_count + j] = 1
+    return pattern.tocsr()
+
+
+class CoupledRadialSystem:
+    def __init__(
+        self,
+        environment: EnvironmentData,
+        parameters: PhysicalParameters,
+        radii_m: np.ndarray,
+    ) -> None:
+        self.environment = environment
+        self.parameters = parameters
+        self.radii_m = radii_m
+        self.node_count = radii_m.size
+        self.radius_m = float(radii_m[-1])
+        self.faces_m = 0.5 * (radii_m[:-1] + radii_m[1:])
+        self.spacings_m = np.diff(radii_m)
+        self.weights_m2 = radial_storage_weights(radii_m)
+
+    def transport_net(
+        self,
+        field: np.ndarray,
+        gamma_nodes: np.ndarray,
+        boundary_transfer: float,
+        external_value: float,
+    ) -> np.ndarray:
+        gamma_faces = harmonic_mean(gamma_nodes[:-1], gamma_nodes[1:])
+        interface_flux = (
+            self.faces_m
+            * gamma_faces
+            * np.diff(field)
+            / self.spacings_m
+        )
+        net = np.empty_like(field)
+        net[0] = interface_flux[0]
+        net[1:-1] = interface_flux[1:] - interface_flux[:-1]
+        net[-1] = (
+            self.radius_m * boundary_transfer * (external_value - field[-1])
+            - interface_flux[-1]
+        )
+        return net
+
+    def __call__(self, t_s: float, state: np.ndarray) -> np.ndarray:
+        n = self.node_count
+        temperature_c = state[:n]
+        moisture = state[n:]
+        density, heat_capacity, conductivity, diffusivity = (
+            self.parameters.evaluate_properties(moisture, temperature_c)
+        )
+        external_temperature, external_moisture = self.environment.interpolate(t_s)
+        heat_net = self.transport_net(
+            temperature_c,
+            conductivity,
+            self.parameters.heat_transfer_w_m2_k,
+            external_temperature,
+        )
+        moisture_net = self.transport_net(
+            moisture,
+            diffusivity,
+            self.parameters.mass_transfer_m_s,
+            external_moisture,
+        )
+        temperature_rate = heat_net / (
+            self.weights_m2 * density * heat_capacity
+        )
+        moisture_rate = moisture_net / self.weights_m2
+        return np.concatenate((temperature_rate, moisture_rate))
+
+
+def requested_output_indices(radii_m: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    requested_cm = np.arange(21, dtype=float) * 0.1
+    indices = np.empty(requested_cm.size, dtype=int)
+    for j, radius_cm in enumerate(requested_cm):
+        target_m = radius_cm / 100.0
+        index = int(np.argmin(np.abs(radii_m - target_m)))
+        if abs(float(radii_m[index]) - target_m) > 1.0e-12:
+            raise ValueError(f"requested radius {radius_cm:g} cm is not a grid node")
+        indices[j] = index
+    return requested_cm, indices
+
+
+def moisture_balance_diagnostic(
+    environment: EnvironmentData,
+    parameters: PhysicalParameters,
+    weights: np.ndarray,
+    times_s: np.ndarray,
+    all_moistures: np.ndarray,
+) -> tuple[float, float]:
+    inventory = weights @ all_moistures
+    surface = all_moistures[-1, :]
+    external = np.interp(times_s, environment.times_s, environment.moistures_kg_kg)
+    boundary_rate = (
+        parameters.radius_m
+        * parameters.mass_transfer_m_s
+        * (external - surface)
+    )
+    dt = np.diff(times_s)
+    trapezoidal_change = 0.5 * (boundary_rate[:-1] + boundary_rate[1:]) * dt
+    residual = np.diff(inventory) - trapezoidal_change
+    scale = np.maximum.reduce(
+        (
+            np.abs(np.diff(inventory)),
+            np.abs(trapezoidal_change),
+            np.full_like(residual, 1.0e-30),
+        )
+    )
+    return float(np.max(np.abs(residual))), float(np.max(np.abs(residual) / scale))
+
+
+def solve_model(
+    environment: EnvironmentData,
+    parameters: PhysicalParameters,
+    config: NumericalConfig,
+    progress_label: str | None = None,
+    integration_method: str = "BDF",
+) -> SimulationResult:
+    if integration_method not in {"BDF", "Radau"}:
+        raise ValueError("integration_method must be 'BDF' or 'Radau'")
+    config.validate()
+    environment.validate(config.end_time_s)
+    radii_m = make_radial_grid(
+        parameters.radius_m,
+        config.radial_cells,
+        config.surface_layer_m,
+        config.surface_refinement_factor,
+    )
+    system = CoupledRadialSystem(environment, parameters, radii_m)
+    node_count = radii_m.size
+    state0 = np.concatenate(
+        (
+            np.full(node_count, parameters.initial_temperature_c, dtype=float),
+            np.full(node_count, parameters.initial_moisture_kg_kg, dtype=float),
+        )
+    )
+    output_times = np.arange(
+        0.0,
+        config.end_time_s + 0.5 * config.output_interval_s,
+        config.output_interval_s,
+        dtype=float,
+    )
+    absolute_tolerance = np.concatenate(
+        (
+            np.full(node_count, config.temperature_absolute_tolerance),
+            np.full(node_count, config.moisture_absolute_tolerance),
+        )
+    )
+    if progress_label:
+        print(
+            f"[{progress_label}] N={config.radial_cells}, "
+            f"rtol={config.relative_tolerance:.1e}, "
+            f"max_step={config.maximum_step_s:g} s",
+            flush=True,
+        )
+    started = time.perf_counter()
+    solution = solve_ivp(
+        system,
+        (0.0, config.end_time_s),
+        state0,
+        method=integration_method,
+        t_eval=output_times,
+        rtol=config.relative_tolerance,
+        atol=absolute_tolerance,
+        jac_sparsity=make_jacobian_sparsity(node_count),
+        max_step=config.maximum_step_s,
+        first_step=min(config.first_step_s, config.end_time_s),
+    )
+    runtime_s = time.perf_counter() - started
+    if not solution.success:
+        raise RuntimeError(
+            f"{integration_method} integration failed: {solution.message}"
+        )
+    if solution.t.size != output_times.size or not np.array_equal(
+        solution.t, output_times
+    ):
+        raise RuntimeError(
+            f"{integration_method} solver did not return the requested output time grid"
+        )
+    if not np.all(np.isfinite(solution.y)):
+        raise RuntimeError(f"{integration_method} solution contains non-finite values")
+
+    all_temperature = solution.y[:node_count, :]
+    all_moisture = solution.y[node_count:, :]
+    if np.min(all_moisture) <= 0.0:
+        raise RuntimeError("computed a non-positive moisture value")
+
+    density, heat_capacity, conductivity, diffusivity = parameters.evaluate_properties(
+        all_moisture.ravel(), all_temperature.ravel()
+    )
+    balance_abs, balance_rel = moisture_balance_diagnostic(
+        environment,
+        parameters,
+        system.weights_m2,
+        output_times,
+        all_moisture,
+    )
+    radii_cm, indices = requested_output_indices(radii_m)
+    result = SimulationResult(
+        times_s=output_times[1:].astype(int),
+        radii_cm=radii_cm,
+        temperatures_c=all_temperature[indices, 1:].T.copy(),
+        moistures_kg_kg=all_moisture[indices, 1:].T.copy(),
+        diagnostics=SolverDiagnostics(
+            runtime_s=runtime_s,
+            success=bool(solution.success),
+            message=str(solution.message),
+            function_evaluations=int(solution.nfev),
+            jacobian_evaluations=int(solution.njev),
+            lu_decompositions=int(solution.nlu),
+            returned_time_points=int(solution.t.size),
+            min_temperature_c=float(np.min(all_temperature)),
+            max_temperature_c=float(np.max(all_temperature)),
+            min_moisture_kg_kg=float(np.min(all_moisture)),
+            max_moisture_kg_kg=float(np.max(all_moisture)),
+            min_density_kg_m3=float(np.min(density)),
+            max_density_kg_m3=float(np.max(density)),
+            min_heat_capacity_j_kg_k=float(np.min(heat_capacity)),
+            max_heat_capacity_j_kg_k=float(np.max(heat_capacity)),
+            min_conductivity_w_m_k=float(np.min(conductivity)),
+            max_conductivity_w_m_k=float(np.max(conductivity)),
+            min_diffusivity_m2_s=float(np.min(diffusivity)),
+            max_diffusivity_m2_s=float(np.max(diffusivity)),
+            max_one_second_moisture_balance_abs=balance_abs,
+            max_one_second_moisture_balance_rel=balance_rel,
+        ),
+        config=config,
+    )
+    if progress_label:
+        print(
+            f"[{progress_label}] complete in {runtime_s:.2f} s; "
+            f"nfev={solution.nfev}, nlu={solution.nlu}",
+            flush=True,
+        )
+    return result
+
+
+

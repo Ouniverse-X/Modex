@@ -1,0 +1,13 @@
+{
+  "status": "complete",
+  "generated_at_utc": "2026-09-11T07:50:04.911073+00:00",
+  "files": {
+    "final/environment_input_used.csv": "734cc94c77eaf18b2e2f89f233c8235a88d06f78d1059d1012ff307eb8bf525b",
+    "final/moisture_full_precision.csv": "7d098bf8ab1c4afcddbcfeee1b54e26007dddd9fad10b6ca7a95338fb3f1418f",
+    "final/result3_strict_safe.xlsx": "b52071011ccd25b0b5fb47fd9581260db883cf600353da81a83500f3f82dcc26",
+    "final/run_metadata.json": "38833c2d48ce1d8a11ee12709057370f595571ee961eb23233e6a51ae5a6a9fa",
+    "final/table5.csv": "2bd380ce46f1667cbf52fb80661cd644e9106768f452568f8033f82a6bb6c90e",
+    "final/table5.md": "e334eda5d605c6ff23c102325e5b3a0a892469dfc819ce9cab84c08d4b5d700b",
+    "final/validation_report.md": "81dc42aa9e1b23235c15ef9d11fe8c7ccf46cd0226ce08bd9c4be8dbe5bfa178"
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "model": "true wet density + local dry-mass conservation + fixed length + predicted free radius",
+  "created_at_utc": "2026-09-11T12:30:44.882020+00:00",
+  "independent_validation": "Attachment 2 radius is excluded from forward solve and used only for comparison",
+  "inputs": {
+    "environment": {
+      "path": "/home/beihang/projects/Modex/A题/附件/附件1.xlsx",
+      "sha256": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7"
+    },
+    "validation_radius": {
+      "path": "/home/beihang/projects/Modex/A题/附件/附件2.xlsx",
+      "sha256": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af"
+    },
+    "solver": {
+      "path": "/home/beihang/projects/Modex/problem4-3/fixed_length_free_radius.py",
+      "sha256": "4a48e2c4509c3735553dd59e1179f38a91d03dfb656035c4eb8d5b09acdb2c26"
+    },
+    "shared_numerical_core": {
+      "path": "/home/beihang/projects/Modex/problem4-2/true_density_nonaffine.py",
+      "sha256": "1fa4e825d38271ba1574141c3f015c9aba559289ce95af9cfd2cf0ca569513a0"
+    },
+    "runner": {
+      "path": "/home/beihang/projects/Modex/problem4-3/run_experiment.py",
+      "sha256": "4cfcfdea17381e9183c5df497941db7e8410e87300920c18e2f5d636ac777fdc"
+    }
+  },
+  "environment": {
+    "python": "3.11.13 | packaged by conda-forge | (main, Jun  4 2025, 14:48:23) [GCC 13.3.0]",
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+    "cpu_count": 128
+  },
+  "cases": {
+    "space_n760_dt1": {
+      "case": "space_n760_dt1",
+      "config": {
+        "radial_cells": 760,
+        "time_step_s": 1.0,
+        "output_interval_s": 60.0,
+        "maximum_time_h": 72.0,
+        "surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "picard_tolerance": 1e-10,
+        "picard_max_iterations": 40,
+        "drying_threshold_kg_kg": 0.15
+      },
+      "drying_crossing_s": 202358.5684519315,
+      "drying_crossing_h": 56.21071345886986,
+      "runtime_s": 57.19318523700349,
+      "diagnostics": {
+        "steps": 259200,
+        "max_picard_iterations": 5,
+        "mean_picard_iterations": 3.5948611111111113,
+        "max_water_balance_abs": 4.9046324727269885e-15,
+        "max_water_balance_rel": 4.2720438772917704e-10,
+        "max_local_dry_mass_relative_error": 1.6924239787385886e-12,
+        "max_single_step_radius_increase_m": 0.0,
+        "minimum_predicted_radius_m": 0.012648612715681566,
+        "maximum_predicted_radius_m": 0.02,
+        "maximum_moisture_at_center": true
+      },
+      "output_rows": 4321,
+      "predicted_radius_initial_cm": 1.999999999999982,
+      "predicted_radius_final_cm": 1.2648612715681566,
+      "predicted_radius_min_cm": 1.2648612715681566,
+      "predicted_radius_max_cm": 1.999999999999982
+    },
+    "space_n1520_dt1": {
+      "case": "space_n1520_dt1",
+      "config": {
+        "radial_cells": 1520,
+        "time_step_s": 1.0,
+        "output_interval_s": 60.0,
+        "maximum_time_h": 72.0,
+        "surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "picard_tolerance": 1e-10,
+        "picard_max_iterations": 40,
+        "drying_threshold_kg_kg": 0.15
+      },
+      "drying_crossing_s": 202357.61426947816,
+      "drying_crossing_h": 56.21044840818838,
+      "runtime_s": 115.30551299685612,
+      "diagnostics": {
+        "steps": 259200,
+        "max_picard_iterations": 5,
+        "mean_picard_iterations": 3.622854938271605,
+        "max_water_balance_abs": 5.343544617203433e-15,
+        "max_water_balance_rel": 2.193577017003522e-10,
+        "max_local_dry_mass_relative_error": 3.3852920466870273e-12,
+        "max_single_step_radius_increase_m": 0.0,
+        "minimum_predicted_radius_m": 0.012648612037361588,
+        "maximum_predicted_radius_m": 0.02,
+        "maximum_moisture_at_center": true
+      },
+      "output_rows": 4321,
+      "predicted_radius_initial_cm": 1.9999999999999907,
+      "predicted_radius_final_cm": 1.2648612037361588,
+      "predicted_radius_min_cm": 1.2648612037361588,
+      "predicted_radius_max_cm": 1.9999999999999907
+    },
+    "reference_n3040_dt1": {
+      "case": "reference_n3040_dt1",
+      "config": {
+        "radial_cells": 3040,
+        "time_step_s": 1.0,
+        "output_interval_s": 60.0,
+        "maximum_time_h": 72.0,
+        "surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "picard_tolerance": 1e-10,
+        "picard_max_iterations": 40,
+        "drying_threshold_kg_kg": 0.15
+      },
+      "drying_crossing_s": 202357.15051759846,
+      "drying_crossing_h": 56.21031958822179,
+      "runtime_s": 227.43587919906713,
+      "diagnostics": {
+        "steps": 259200,
+        "max_picard_iterations": 5,
+        "mean_picard_iterations": 3.6376658950617284,
+        "max_water_balance_abs": 1.123638671256949e-14,
+        "max_water_balance_rel": 1.6932768974387298e-10,
+        "max_local_dry_mass_relative_error": 6.827649556839788e-12,
+        "max_single_step_radius_increase_m": 0.0,
+        "minimum_predicted_radius_m": 0.012648611652954618,
+        "maximum_predicted_radius_m": 0.02,
+        "maximum_moisture_at_center": true
+      },
+      "output_rows": 4321,
+      "predicted_radius_initial_cm": 2.0000000000001026,
+      "predicted_radius_final_cm": 1.2648611652954618,
+      "predicted_radius_min_cm": 1.2648611652954618,
+      "predicted_radius_max_cm": 2.0000000000001026
+    },
+    "time_n3040_dt2": {
+      "case": "time_n3040_dt2",
+      "config": {
+        "radial_cells": 3040,
+        "time_step_s": 2.0,
+        "output_interval_s": 60.0,
+        "maximum_time_h": 72.0,
+        "surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "picard_tolerance": 1e-10,
+        "picard_max_iterations": 40,
+        "drying_threshold_kg_kg": 0.15
+      },
+      "drying_crossing_s": 202357.15240185626,
+      "drying_crossing_h": 56.21032011162674,
+      "runtime_s": 127.00553102698177,
+      "diagnostics": {
+        "steps": 129600,
+        "max_picard_iterations": 6,
+        "mean_picard_iterations": 4.089475308641975,
+        "max_water_balance_abs": 3.907598799656603e-14,
+        "max_water_balance_rel": 4.1711305732141733e-10,
+        "max_local_dry_mass_relative_error": 6.7266192615988984e-12,
+        "max_single_step_radius_increase_m": 0.0,
+        "minimum_predicted_radius_m": 0.012648611654672326,
+        "maximum_predicted_radius_m": 0.02,
+        "maximum_moisture_at_center": true
+      },
+      "output_rows": 4321,
+      "predicted_radius_initial_cm": 2.0000000000001026,
+      "predicted_radius_final_cm": 1.2648611654672326,
+      "predicted_radius_min_cm": 1.2648611654672326,
+      "predicted_radius_max_cm": 2.0000000000001026
+    }
+  },
+  "convergence": {
+    "comparisons": {
+      "space_760_vs_1520": {
+        "radius_max_abs_cm": 9.204215925540105e-06,
+        "radius_final_abs_cm": 6.783199783116922e-08,
+        "moisture_max_abs": 0.0012065321235916748,
+        "temperature_max_abs_c": 5.029564088232519e-05,
+        "crossing_difference_s": 0.9541824533371255
+      },
+      "space_1520_vs_3040": {
+        "radius_max_abs_cm": 4.506096232259615e-06,
+        "radius_final_abs_cm": 3.844069697972463e-08,
+        "moisture_max_abs": 0.0006036980513255408,
+        "temperature_max_abs_c": 2.4339365438663663e-05,
+        "crossing_difference_s": 0.46375187969533727
+      },
+      "time_2s_vs_1s_at_n3040": {
+        "radius_max_abs_cm": 6.279833111855204e-08,
+        "radius_final_abs_cm": 1.7177075734009506e-10,
+        "moisture_max_abs": 2.316051370376826e-05,
+        "temperature_max_abs_c": 0.002096004971235743,
+        "crossing_difference_s": 0.0018842577992472798
+      }
+    },
+    "orders": {
+      "space_radius_max": 1.0304167046240973,
+      "space_moisture_max": 0.9989672780291377,
+      "space_crossing": 1.04091202721473
+    }
+  },
+  "numerical_accuracy": {
+    "radius_conservative_difference_bound_cm": 6.853341845067251e-06,
+    "four_decimal_half_unit_cm": 5e-05,
+    "passes_four_decimal_radius_guard": true,
+    "qualification": "conservative grid-difference estimate, not a rigorous a posteriori theorem"
+  },
+  "attachment2_comparison": {
+    "sample_count": 145,
+    "bias_cm": 0.10978217323670907,
+    "mae_cm": 0.10978217323670907,
+    "rmse_cm": 0.1205370427237764,
+    "mape_percent": 8.741116781310954,
+    "maximum_absolute_error_cm": 0.22916545479545714,
+    "maximum_absolute_error_time_h": 6.0,
+    "r_squared": 0.09360275318142341,
+    "observed_final_radius_cm": 1.198,
+    "predicted_final_radius_cm": 1.2648611652954618,
+    "final_residual_cm": 0.06686116529546188,
+    "all_noninitial_residuals_positive": true
+  }
+}

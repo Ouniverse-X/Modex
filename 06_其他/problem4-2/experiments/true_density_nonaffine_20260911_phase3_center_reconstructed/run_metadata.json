@@ -1,0 +1,232 @@
+{
+  "model": "true wet density + measured radius + non-affine mapping + center reconstruction",
+  "created_at_utc": "2026-09-11T10:10:37.113599+00:00",
+  "inputs": {
+    "environment": {
+      "path": "/home/beihang/projects/Modex/A题/附件/附件1.xlsx",
+      "sha256": "7ef32870abeef420b89560b2530ff60dfe4255917805151d89988d0311af9dd7"
+    },
+    "radius": {
+      "path": "/home/beihang/projects/Modex/A题/附件/附件2.xlsx",
+      "sha256": "5563acbfa4b4afb10cc6c03e2207e5369bf39da27576672aff14cc5c32e704af"
+    },
+    "solver": {
+      "path": "/home/beihang/projects/Modex/problem4-2/true_density_nonaffine.py",
+      "sha256": "1fa4e825d38271ba1574141c3f015c9aba559289ce95af9cfd2cf0ca569513a0"
+    },
+    "runner": {
+      "path": "/home/beihang/projects/Modex/problem4-2/run_final_refined.py",
+      "sha256": "a50e21792db8e98c3fa8d5bb3b4379de7472435ea61fe6b57cdcadcca13e2a31"
+    }
+  },
+  "cases": {
+    "space_n760_dt1": {
+      "case": "space_n760_dt1",
+      "config": {
+        "radial_cells": 760,
+        "time_step_s": 1.0,
+        "output_interval_s": 60.0,
+        "maximum_time_h": 60.0,
+        "surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "picard_tolerance": 1e-10,
+        "picard_max_iterations": 40,
+        "drying_threshold_kg_kg": 0.15
+      },
+      "drying_crossing_s": 172355.76092246844,
+      "drying_crossing_h": 47.87660025624123,
+      "runtime_s": 44.887612676015124,
+      "diagnostics": {
+        "steps": 172356,
+        "max_picard_iterations": 5,
+        "mean_picard_iterations": 3.7978834505326184,
+        "max_water_balance_abs": 5.007875624601921e-15,
+        "max_water_balance_rel": 4.167615948096335e-10,
+        "max_local_dry_mass_relative_error": 2.4058532943627142e-12,
+        "minimum_length_ratio": 1.0000323447538362,
+        "maximum_length_ratio": 1.2954358388570664,
+        "max_radial_monotonicity_violation": 5.773159728050814e-15,
+        "maximum_moisture_at_center": true
+      },
+      "output_rows": 2874,
+      "inferred_length_min_m": 0.2499999999999955,
+      "inferred_length_max_m": 0.3238589597142666,
+      "inferred_length_at_crossing_m": 0.2807234794488323
+    },
+    "space_n1520_dt1": {
+      "case": "space_n1520_dt1",
+      "config": {
+        "radial_cells": 1520,
+        "time_step_s": 1.0,
+        "output_interval_s": 60.0,
+        "maximum_time_h": 60.0,
+        "surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "picard_tolerance": 1e-10,
+        "picard_max_iterations": 40,
+        "drying_threshold_kg_kg": 0.15
+      },
+      "drying_crossing_s": 172355.20627550027,
+      "drying_crossing_h": 47.87644618763896,
+      "runtime_s": 90.98409046698362,
+      "diagnostics": {
+        "steps": 172356,
+        "max_picard_iterations": 5,
+        "mean_picard_iterations": 3.92104133305484,
+        "max_water_balance_abs": 5.223469226600663e-15,
+        "max_water_balance_rel": 2.160147135972345e-10,
+        "max_local_dry_mass_relative_error": 4.778955009498986e-12,
+        "minimum_length_ratio": 1.0000323357951912,
+        "maximum_length_ratio": 1.2954256364839531,
+        "max_radial_monotonicity_violation": 6.661338147750939e-15,
+        "maximum_moisture_at_center": true
+      },
+      "output_rows": 2874,
+      "inferred_length_min_m": 0.24999999999999767,
+      "inferred_length_max_m": 0.3238564091209883,
+      "inferred_length_at_crossing_m": 0.28072349094090504
+    },
+    "reference_n3040_dt1": {
+      "case": "reference_n3040_dt1",
+      "config": {
+        "radial_cells": 3040,
+        "time_step_s": 1.0,
+        "output_interval_s": 60.0,
+        "maximum_time_h": 60.0,
+        "surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "picard_tolerance": 1e-10,
+        "picard_max_iterations": 40,
+        "drying_threshold_kg_kg": 0.15
+      },
+      "drying_crossing_s": 172354.9413872172,
+      "drying_crossing_h": 47.876372607560334,
+      "runtime_s": 177.7089977990836,
+      "diagnostics": {
+        "steps": 172355,
+        "max_picard_iterations": 5,
+        "mean_picard_iterations": 3.978341214354095,
+        "max_water_balance_abs": 1.4216953352422235e-14,
+        "max_water_balance_rel": 1.6101183267680064e-10,
+        "max_local_dry_mass_relative_error": 9.66815516534325e-12,
+        "minimum_length_ratio": 1.000032331397261,
+        "maximum_length_ratio": 1.2954206055846473,
+        "max_radial_monotonicity_violation": 4.440892098500626e-15,
+        "maximum_moisture_at_center": true
+      },
+      "output_rows": 2874,
+      "inferred_length_min_m": 0.2500000000000257,
+      "inferred_length_max_m": 0.32385515139616183,
+      "inferred_length_at_crossing_m": 0.280723493239228
+    },
+    "time_n3040_dt2": {
+      "case": "time_n3040_dt2",
+      "config": {
+        "radial_cells": 3040,
+        "time_step_s": 2.0,
+        "output_interval_s": 60.0,
+        "maximum_time_h": 60.0,
+        "surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "picard_tolerance": 1e-10,
+        "picard_max_iterations": 40,
+        "drying_threshold_kg_kg": 0.15
+      },
+      "drying_crossing_s": 172354.94260866093,
+      "drying_crossing_h": 47.87637294685026,
+      "runtime_s": 99.82637309399433,
+      "diagnostics": {
+        "steps": 86178,
+        "max_picard_iterations": 6,
+        "mean_picard_iterations": 4.416266332474645,
+        "max_water_balance_abs": 4.053745186749502e-14,
+        "max_water_balance_rel": 4.0142222597481227e-10,
+        "max_local_dry_mass_relative_error": 9.82747216937696e-12,
+        "minimum_length_ratio": 1.0000649767226952,
+        "maximum_length_ratio": 1.2954206399078325,
+        "max_radial_monotonicity_violation": 2.220446049250313e-15,
+        "maximum_moisture_at_center": true
+      },
+      "output_rows": 2874,
+      "inferred_length_min_m": 0.2500000000000257,
+      "inferred_length_max_m": 0.32385515997695813,
+      "inferred_length_at_crossing_m": 0.28072349323926116
+    },
+    "safety_n3040_dt1": {
+      "case": "safety_n3040_dt1",
+      "config": {
+        "radial_cells": 3040,
+        "time_step_s": 1.0,
+        "output_interval_s": 60.0,
+        "maximum_time_h": 60.0,
+        "surface_layer": 0.1,
+        "surface_refinement_factor": 10,
+        "picard_tolerance": 1e-10,
+        "picard_max_iterations": 40,
+        "drying_threshold_kg_kg": 0.14994
+      },
+      "drying_crossing_s": 172469.37296133794,
+      "drying_crossing_h": 47.90815915592721,
+      "runtime_s": 175.8401286401786,
+      "diagnostics": {
+        "steps": 172470,
+        "max_picard_iterations": 5,
+        "mean_picard_iterations": 3.9776888734272626,
+        "max_water_balance_abs": 1.4216953352422235e-14,
+        "max_water_balance_rel": 1.6101183267680064e-10,
+        "max_local_dry_mass_relative_error": 9.66815516534325e-12,
+        "minimum_length_ratio": 1.000032331397261,
+        "maximum_length_ratio": 1.2954206055846473,
+        "max_radial_monotonicity_violation": 4.440892098500626e-15,
+        "maximum_moisture_at_center": true
+      },
+      "output_rows": 2876,
+      "inferred_length_min_m": 0.2500000000000257,
+      "inferred_length_max_m": 0.32385515139616183,
+      "inferred_length_at_crossing_m": 0.28071478459323196
+    }
+  },
+  "convergence": {
+    "comparisons": {
+      "space_760_vs_1520": {
+        "common_end_s": 172320.0,
+        "moisture_max_abs_all": 0.001206532123592119,
+        "moisture_max_abs_last_6h": 4.926202734206742e-07,
+        "temperature_max_abs_c": 2.862137257153563e-05,
+        "length_max_abs_m": 2.9561569049318948e-06,
+        "crossing_difference_s": 0.5546469681721646
+      },
+      "space_1520_vs_3040": {
+        "common_end_s": 172320.0,
+        "moisture_max_abs_all": 0.0006036980513255408,
+        "moisture_max_abs_last_6h": 1.8376135571540608e-07,
+        "temperature_max_abs_c": 1.3302838624440483e-05,
+        "length_max_abs_m": 1.4503144866728768e-06,
+        "crossing_difference_s": 0.2648882830690127
+      },
+      "time_2s_vs_1s_at_n3040": {
+        "common_end_s": 172320.0,
+        "moisture_max_abs_all": 2.3058709499146346e-05,
+        "moisture_max_abs_last_6h": 8.706068643782316e-10,
+        "temperature_max_abs_c": 0.0021082850364351202,
+        "length_max_abs_m": 1.5384034657284218e-08,
+        "crossing_difference_s": 0.0012214437301736325
+      }
+    },
+    "orders": {
+      "space_moisture_last_6h": 1.4226425966231326,
+      "space_crossing": 1.066185761006758
+    }
+  },
+  "safety": {
+    "numerical_target": 0.14994,
+    "field_error_bound": 2.7694794386967647e-07,
+    "upper_moisture_bound_at_target": 0.14994027694794387,
+    "display_limit": 0.14995,
+    "passes_four_decimal_guard": true,
+    "target_crossing_s": 172469.37296133794,
+    "safe_whole_minute_s": 172500.0,
+    "safe_whole_minute_h": 47.916666666666664,
+    "qualification": "conservative convergence estimate, not a rigorous a posteriori theorem"
+  }
+}
