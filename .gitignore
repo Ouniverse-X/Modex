@@ -1,0 +1,21 @@
+# 旧版本、中间计算结果与历史工程，不上传到最终仓库
+/06_其他/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# LaTeX 中间文件
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.xdv
+
+# 编辑器与系统临时文件
+.vscode/
+.DS_Store
+~$*
